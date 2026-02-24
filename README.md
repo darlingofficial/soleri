@@ -52,6 +52,12 @@ Personas are runtime context switches on a single engine process. One MCP server
 
 🚧 **Early development** — Architecture defined, implementation in progress.
 
+## Links
+
+- **Website:** [soleri.dev](https://soleri.dev)
+- **npm:** [npmjs.com/package/soleri](https://www.npmjs.com/package/soleri)
+- **GitHub:** [github.com/adrozdenko/soleri](https://github.com/adrozdenko/soleri)
+
 ## License
 
 MIT
