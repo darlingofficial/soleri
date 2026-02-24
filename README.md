@@ -3,10 +3,6 @@
 </p>
 
 <p align="center">
-  <em>AI assistants that learn, remember, and grow with you.</em>
-</p>
-
-<p align="center">
   <a href="https://github.com/adrozdenko/soleri/actions/workflows/ci.yml"><img src="https://github.com/adrozdenko/soleri/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
   <a href="https://www.npmjs.com/package/soleri"><img src="https://img.shields.io/npm/v/soleri.svg" alt="npm version"></a>
   <a href="https://github.com/adrozdenko/soleri/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/soleri.svg" alt="License"></a>
@@ -16,13 +12,51 @@
 
 ---
 
-Soleri is an open-source framework for building AI assistants — called **personas** — that maintain persistent knowledge, learn from real work sessions, and carry context across projects and conversations.
+An open-source framework for building AI assistants that **remember what you taught them**, **learn from real work sessions**, and **carry context across every project and conversation**. One engine, unlimited personas — each with its own identity, expertise, and growing knowledge base.
 
-Unlike stateless AI integrations, Soleri gives your assistants a **vault** they can write to, a **brain** that compounds learning over time, and **memory** that persists across sessions. One engine, unlimited personas — each with its own identity, expertise, and growing knowledge base.
+## Quick Start
 
-> Named after [Paolo Soleri](https://en.wikipedia.org/wiki/Paolo_Soleri), the Italian architect who coined *arcology* — self-sustaining living architecture. He believed structures should be alive, adaptive, and evolving. This framework follows the same philosophy.
+```bash
+npm install -g soleri
 
-## How It Works
+soleri forge my-assistant    # Create a persona
+soleri list                  # Show registered personas
+soleri update                # Update to latest templates
+soleri doctor                # Check system health
+```
+
+## Why Soleri
+
+AI assistants today are stateless — you explain your conventions, your architecture, your preferences, and then the session ends and it's all gone. Soleri gives assistants persistent infrastructure so knowledge compounds instead of evaporating.
+
+You build assistants called **personas**. Each persona has its own voice, domains, and growing knowledge — but they all run on a shared engine and can switch instantly.
+
+## Core Concepts
+
+**Vault** — Persistent knowledge storage. Patterns, anti-patterns, workflows, decisions — structured, searchable, always there. Your assistant's long-term memory.
+
+**Brain** — A learning loop that captures intelligence from real work. The more you use it, the sharper it gets.
+
+**Memory** — Cross-session, cross-project context. Switch conversations, switch projects — nothing is lost.
+
+**Personas** — Thin identity layers on a shared engine. Each has its own expertise and knowledge, but they share context and switch without losing state.
+
+**Forge** — CLI for the full persona lifecycle. Create, update, inspect, and manage personas with template versioning and three-way merge updates.
+
+## Official Personas
+
+| Persona | Domain | What it does |
+|---------|--------|--------------|
+| **Salvador** | Design Systems | Tokens, components, accessibility, visual validation |
+| **Gaudi** | Architecture | System design, API patterns, databases, performance |
+| **Sentinel** | Security | Vulnerability analysis, API hardening, threat modeling |
+
+> Salvador sees design. Gaudi sees architecture. Sentinel sees security.
+> **Soleri is the living foundation they all grow from.**
+
+Each ships with starter knowledge. Community personas welcome via `personas/community/`.
+
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -36,94 +70,29 @@ Unlike stateless AI integrations, Soleri gives your assistants a **vault** they 
 └─────────────────────────────────────────────────────────┘
 ```
 
-**Personas** are thin configuration layers — identity, voice, domain bindings, and intent rules. The engine does the heavy lifting. Personas are runtime context switches on a single process: one integration entry, unlimited assistants.
-
-## Features
-
-| | Feature | Description |
-|---|---------|-------------|
-| **Vault** | Persistent knowledge | Structured storage with intelligent search — patterns, anti-patterns, workflows, decisions. Your assistant's long-term memory. |
-| **Brain** | Compounding learning | Captures intelligence from real work sessions. The more you use it, the smarter it gets. |
-| **Planning** | Structured execution | Multi-step task planning with state tracking, approval gates, and progress persistence. |
-| **Memory** | Cross-session context | Remembers across sessions, projects, and conversations. No repeated explanations. |
-| **Domains** | Pluggable expertise | Modular knowledge domains (design, security, architecture, testing) that any persona can load. |
-| **Forge** | Lifecycle management | CLI to create, update, inspect, and manage personas with template versioning and three-way merge updates. |
-
-## Quick Start
-
-```bash
-# Install globally
-npm install -g soleri
-
-# Create your first persona
-soleri forge my-assistant
-
-# Manage your personas
-soleri list       # Show all registered personas
-soleri update     # Update personas to latest templates
-soleri doctor     # Check system health & compatibility
-```
-
-## Official Personas
-
-| Persona | Domain | Description |
-|---------|--------|-------------|
-| **Salvador** | Design Systems | Design system intelligence — tokens, components, accessibility, visual validation |
-| **Gaudi** | Architecture | System design, API patterns, database design, performance optimization |
-| **Sentinel** | Security | Security patterns, vulnerability analysis, API hardening, threat modeling |
-
-Each ships with a starter knowledge pack. Community personas welcome via `personas/community/`.
-
-## Architecture
-
-Soleri is designed around **separation of concerns**:
-
-- **Core** — Pure logic, zero protocol dependencies. Vault, brain, planning, memory, session management, intent routing, and persona management.
-- **Vault Backends** — Pluggable storage: local filesystem (default), git (team sharing), remote API (hosted teams). All behind a single interface.
-- **Transports** — Protocol adapters that wrap core services. MCP for Claude Code (primary), with REST and LSP planned.
-- **Domains** — Pluggable expertise modules. Official domains are maintained by core team; community domains go through a contribution and promotion process.
-- **Forge** — CLI for the full persona lifecycle: scaffolding, registry management, template updates with three-way merge, project scanning, and system diagnostics.
-
-## Project Structure
-
-```
-soleri/
-├── core/                 Pure engine logic (no protocol deps)
-├── vault-backends/       Pluggable storage (local, git, remote)
-├── transports/           Protocol adapters (MCP, REST, LSP)
-├── facades/              Generic facade layer
-├── domains/              Pluggable domain modules
-│   ├── official/         Maintained by core team
-│   └── community/        Community contributions
-├── forge/                CLI tool
-├── personas/             Reference personas
-│   ├── official/         Salvador, Gaudi, Sentinel, ...
-│   └── community/        Community contributions
-├── knowledge-packs/      Starter & community knowledge
-├── migrations/           Vault format migrations
-├── tests/                Unit, integration, search quality, snapshots
-└── docs/                 Documentation
-```
+- **Core** — Pure logic, zero protocol dependencies
+- **Transports** — MCP for Claude Code today, REST and LSP tomorrow
+- **Domains** — Pluggable expertise modules
+- **Vault Backends** — Local filesystem, git for teams, remote API for hosted teams
+- **Single process** — One engine, unlimited personas, no config bloat
 
 ## Contributing
 
-We welcome contributions at every level — from fixing typos to building new domain modules. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
-
-- **Quick fixes** — Bug fixes, docs, typos (standard PR process)
-- **Engine features** — RFC issue first, two maintainer reviews
-- **Domain modules** — Must implement `DomainModule` interface
-- **Persona templates** — Must include persona.yaml + starter vault
-- **Knowledge entries** — Community namespace first, promotion after review
+From fixing typos to building domain modules — see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Roadmap
 
-See [GitHub Milestones](https://github.com/adrozdenko/soleri/milestones) for the current plan.
+[GitHub Milestones](https://github.com/adrozdenko/soleri/milestones)
 
 ## License
 
 [Apache 2.0](LICENSE)
 
 ---
+
+<p align="center">
+  Named after <a href="https://en.wikipedia.org/wiki/Paolo_Soleri">Paolo Soleri</a>, the architect who believed structures should be alive, adaptive, and evolving.
+</p>
 
 <p align="center">
   <a href="https://soleri.ai">soleri.ai</a> · <a href="https://www.npmjs.com/package/soleri">npm</a> · <a href="https://github.com/adrozdenko/soleri/issues">Issues</a> · <a href="https://github.com/adrozdenko/soleri/discussions">Discussions</a>
