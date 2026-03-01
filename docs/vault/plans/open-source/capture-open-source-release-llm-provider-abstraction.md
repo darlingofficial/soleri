@@ -12,7 +12,7 @@ tags:
   - ollama
   - openai
   - anthropic
-knowledge_type: pattern
+knowledge_type: plan
 created: 2026-02-24
 curator_version: 1
 status: published

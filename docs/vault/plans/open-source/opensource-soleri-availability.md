@@ -10,7 +10,7 @@ tags:
   - availability
   - npm
   - github
-knowledge_type: pattern
+knowledge_type: plan
 status: archived
 created: 2026-02-24
 curator_version: 1

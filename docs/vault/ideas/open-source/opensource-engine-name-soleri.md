@@ -9,7 +9,7 @@ tags:
   - brand
   - soleri
   - engine
-knowledge_type: principle
+knowledge_type: idea
 status: archived
 created: 2026-02-24
 curator_version: 1

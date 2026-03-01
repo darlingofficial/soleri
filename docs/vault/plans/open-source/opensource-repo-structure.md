@@ -11,7 +11,7 @@ tags:
   - testing
   - ci
   - transports
-knowledge_type: architecture
+knowledge_type: plan
 status: archived
 created: 2026-02-24
 updated: 2026-02-24

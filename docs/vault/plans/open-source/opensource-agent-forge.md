@@ -10,7 +10,7 @@ tags:
   - local
   - registry
   - teams
-knowledge_type: architecture
+knowledge_type: plan
 status: active
 created: 2026-02-24
 updated: 2026-02-24

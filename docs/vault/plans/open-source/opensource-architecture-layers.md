@@ -13,7 +13,7 @@ tags:
   - transport
   - vault-backends
   - cross-persona
-knowledge_type: architecture
+knowledge_type: plan
 status: active
 created: 2026-02-24
 updated: 2026-02-24

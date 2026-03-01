@@ -13,7 +13,7 @@ tags:
   - cold-start
   - community
   - contribution
-knowledge_type: principle
+knowledge_type: idea
 status: active
 created: 2026-02-24
 updated: 2026-02-24

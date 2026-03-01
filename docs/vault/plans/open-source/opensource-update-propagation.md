@@ -11,7 +11,7 @@ tags:
   - npm
   - versioning
   - migration
-knowledge_type: pattern
+knowledge_type: plan
 status: active
 created: 2026-02-24
 updated: 2026-02-24
