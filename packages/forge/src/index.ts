@@ -7,8 +7,8 @@ import { forgeOps } from './facades/forge.facade.js';
 
 async function main(): Promise<void> {
   const server = new McpServer({
-    name: 'agent-forge',
-    version: '1.0.0',
+    name: 'soleri',
+    version: '3.0.0',
   });
 
   // Register the forge tool with op dispatch
@@ -16,7 +16,7 @@ async function main(): Promise<void> {
 
   server.tool(
     'forge',
-    `Agent Forge — create new MCP agents from Salvador's architecture.\n\nOperations: ${opNames.join(', ')}\n\nStart by calling 'guide' to get the recommended conversation flow for helping a user create an agent.`,
+    `Soleri Forge — scaffold AI agents that learn, remember, and grow.\n\nOperations: ${opNames.join(', ')}\n\nStart by calling 'guide' to get the recommended conversation flow for helping a user create an agent.`,
     {
       op: z.string().describe(`Operation: ${opNames.join(' | ')}`),
       params: z.record(z.unknown()).optional().default({}).describe('Operation parameters'),
@@ -71,15 +71,15 @@ async function main(): Promise<void> {
     },
   );
 
-  console.error('[agent-forge] Agent Forge — MCP agent scaffolding tool');
-  console.error(`[agent-forge] ${forgeOps.length} operations available`);
+  console.error('[soleri] Soleri Forge — AI agent scaffolding tool');
+  console.error(`[soleri] ${forgeOps.length} operations available`);
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('[agent-forge] Connected via stdio');
+  console.error('[soleri] Connected via stdio');
 }
 
 main().catch((err) => {
-  console.error('[agent-forge] Fatal:', err);
+  console.error('[soleri] Fatal:', err);
   process.exit(1);
 });

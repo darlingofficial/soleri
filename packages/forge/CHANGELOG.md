@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Agent Forge are documented here.
+All notable changes to Soleri Forge (formerly Agent Forge) are documented here.
 
 ## [2.1.0] - 2026-02-28
 

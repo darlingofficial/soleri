@@ -1,27 +1,19 @@
-# Agent Forge
-
-<p align="center">
-  <img src="agent_forge_logo.png" alt="Agent Forge" width="200" />
-</p>
+# @soleri/forge
 
 Create production-ready MCP agents in seconds.
 
-Agent Forge is an MCP server that scaffolds complete [Model Context Protocol](https://modelcontextprotocol.io/) agents — each with its own knowledge vault, intelligence layer, LLM client, memory system, planning engine, and activation persona. You describe what the agent should do, and Forge generates everything: source code, tests, config, and setup scripts.
+Soleri Forge is an MCP server that scaffolds complete [Model Context Protocol](https://modelcontextprotocol.io/) agents — each with its own knowledge vault, intelligence layer, LLM client, memory system, planning engine, and activation persona. You describe what the agent should do, and Forge generates everything: source code, tests, config, and setup scripts.
 
 Forge is knowledge-agnostic. It builds the infrastructure — you fill in the expertise.
 
-## Why
-
-Building an MCP agent from scratch means wiring up SQLite, FTS5 search, TF-IDF ranking, circuit breakers, key rotation, facade dispatch, test suites, persona systems, and Claude Code integration. That's hours of boilerplate before you write a single line of domain logic.
-
-Agent Forge eliminates that. One command, one agent — ready to build, test, and activate.
+Part of the [Soleri](https://soleri.dev) framework — building AI assistants that learn, remember, and grow with you.
 
 ## Quick Start
 
 ### 1. Register with Claude Code
 
 ```bash
-claude mcp add --scope user agent-forge -- node /path/to/agent-forge/dist/index.js
+claude mcp add --scope user soleri -- node /path/to/soleri/packages/forge/dist/index.js
 ```
 
 ### 2. Create an agent
@@ -58,37 +50,6 @@ Hello, Gaudi!
 
 Your agent is live.
 
-### What It Looks Like in Practice
-
-Once Gaudi is active, Claude adopts the persona and has access to all the agent's tools:
-
-```
-You:    How should I handle authentication for our REST API?
-
-Gaudi:  [searches vault for auth patterns]
-        Based on my security patterns, here's what I recommend:
-        - Use short-lived JWTs (15min) with refresh token rotation
-        - Store refresh tokens server-side, never in localStorage
-        - Add rate limiting on the token endpoint
-        I'm capturing this as a pattern for future reference.
-
-You:    We also need to add caching. Can you plan that out?
-
-Gaudi:  [creates a plan with tasks]
-        Created plan "Add Caching Layer" with 4 tasks:
-        1. Define cache invalidation strategy
-        2. Add Redis client configuration
-        3. Implement cache middleware
-        4. Add cache-related tests
-        Approve to start execution?
-
-You:    Goodbye, Gaudi!
-
-Gaudi:  Goodbye! Gaudi persona deactivated.
-```
-
-The agent remembers patterns across sessions, learns from your feedback, and builds up domain knowledge over time.
-
 ## What Gets Generated
 
 Every agent ships with a complete, tested architecture — and zero pre-loaded knowledge:
@@ -119,9 +80,7 @@ my-agent/
 | **LLM Client** | Unified OpenAI/Anthropic caller with multi-key rotation, per-key circuit breakers, model routing (optional — works without API keys) |
 | **Domain Facades** | Each knowledge domain becomes its own MCP tool with search, capture, and pattern ops |
 | **Memory System** | Persists session summaries, lessons learned, and preferences across sessions |
-| **Session Capture** | PreCompact hook auto-saves session context before Claude compacts memory |
 | **Planning Engine** | State machine for multi-step tasks: draft, approve, execute, complete |
-| **Export** | Dump vault knowledge back to JSON for version control and sharing |
 | **Activation** | Persona-based activation with `Hello!` / `Goodbye!` — injects CLAUDE.md automatically |
 
 ### Generated Operations
@@ -140,11 +99,11 @@ Each agent exposes two types of MCP tools:
 - `record_feedback` `rebuild_vocabulary` `brain_stats`
 - `llm_status`
 
-Total: `(domains × 5) + 24` operations per agent.
+Total: `(domains x 5) + 24` operations per agent.
 
 ## Forge Operations
 
-Agent Forge itself exposes one MCP tool (`forge`) with 5 ops:
+Soleri Forge exposes one MCP tool (`forge`) with 5 ops:
 
 | Op | Purpose |
 |---|---|
@@ -156,7 +115,7 @@ Agent Forge itself exposes one MCP tool (`forge`) with 5 ops:
 
 ## Installing Knowledge Packs
 
-Agents start empty — but you don't have to populate them one entry at a time. Knowledge packs are pre-built JSON bundles containing patterns, anti-patterns, and rules for specific domains. The `install_knowledge` operation installs them into any existing agent in a single step.
+Agents start empty — but you don't have to populate them one entry at a time. Knowledge packs are pre-built JSON bundles containing patterns, anti-patterns, and rules for specific domains.
 
 ```
 forge op:install_knowledge params:{
@@ -165,18 +124,7 @@ forge op:install_knowledge params:{
 }
 ```
 
-This will:
-
-1. **Validate** the agent project and all bundle files
-2. **Copy** bundle JSON files to `src/intelligence/data/`
-3. **Generate facades** for any new domains (matching the agent's architecture — vault+brain or vault-only)
-4. **Patch `src/index.ts`** with new imports and facade registrations
-5. **Patch `src/activation/claude-md-content.ts`** with new facade table rows
-6. **Rebuild** the agent (`npm run build`)
-
 ### Bundle Format
-
-Each bundle is a JSON file with this structure:
 
 ```json
 {
@@ -196,30 +144,7 @@ Each bundle is a JSON file with this structure:
 }
 ```
 
-Entry fields: `id`, `type` (pattern | anti-pattern | rule), `domain`, `title`, `severity` (critical | warning | suggestion), `description`, `tags[]`. Optional: `context`, `example`, `counterExample`, `why`, `appliesTo[]`.
-
-### Options
-
-| Param | Default | Description |
-|---|---|---|
-| `agentPath` | required | Absolute path to the target agent project |
-| `bundlePath` | required | Path to a bundles directory or a single `.json` file |
-| `generateFacades` | `true` | Generate domain facades for new domains |
-
-Set `generateFacades: false` if you only want to update data for existing domains without adding new facades.
-
-### Architecture Detection
-
-The installer automatically detects the agent's architecture:
-
-- **Vault + Brain agents** (have `src/brain/`) — facades use `brain.intelligentSearch()` and `brain.enrichAndCapture()`
-- **Vault-only agents** (no `src/brain/`) — facades use `vault.search()` and `vault.add()`
-
-Existing domains get their data files overwritten (upsert). New domains get facades generated, source files patched, and the agent rebuilt.
-
 ## Configuration
-
-Agents are defined by a simple config. Domains are free-form — use any kebab-case name that fits your agent's expertise:
 
 ```json
 {
@@ -241,59 +166,26 @@ Agents are defined by a simple config. Domains are free-form — use any kebab-c
 ## Development
 
 ```bash
+# From monorepo root
 npm install
-npm run build
-npm test              # 56 tests
-npm run test:watch    # Watch mode
+npm run build --workspace=@soleri/forge
+npm run test --workspace=@soleri/forge
+
+# Or from packages/forge
 npm run dev           # Run with tsx (no build needed)
+npm test              # Run tests
 ```
 
 ### Architecture
 
-Agent Forge is itself an MCP server built on the same patterns it generates:
+Soleri Forge is itself an MCP server built on the same patterns it generates:
 
 - **`src/index.ts`** — MCP server entry point, registers the `forge` tool
 - **`src/facades/forge.facade.ts`** — Op dispatch for all forge operations
 - **`src/scaffolder.ts`** — Core scaffolding logic (preview, create, list)
-- **`src/knowledge-installer.ts`** — Knowledge pack installer (validate, copy, generate facades, patch, build)
+- **`src/knowledge-installer.ts`** — Knowledge pack installer
 - **`src/types.ts`** — Config schema and result types (Zod-validated)
-- **`src/templates/`** — 27 template generators, each producing a complete source file
-
-### Tech Stack
-
-- TypeScript (ES2022, NodeNext)
-- MCP SDK (`@modelcontextprotocol/sdk`)
-- Zod for schema validation
-- Vitest for testing
-
-Generated agents additionally use:
-- better-sqlite3 (vault)
-- @anthropic-ai/sdk (LLM client, optional)
-
-## Roadmap
-
-Scaffolding is a one-time act, but agents can be extended post-creation. Knowledge packs (`install_knowledge`) let you inject domain expertise into existing agents. Future improvements:
-
-- **Agent Update (`forge op:update`)** — Upgrade existing agents when new Forge versions add capabilities. Additive-first: new modules (like `src/llm/`) get added without touching existing files. Dependencies get merged into `package.json`. For wired files the user likely edited (`src/index.ts`, core facade), generate an `UPGRADE.md` with exact code snippets instead of overwriting. A `.forgerc` file tracks the scaffolded version to know what's missing.
-
-### Your Agent, Your Roadmap
-
-Each generated agent ships with its own README containing an 8-item improvement roadmap. After scaffolding, the agent belongs entirely to you — no dependency on Agent Forge for future development.
-
-The roadmap covers:
-
-| Improvement | What It Adds |
-|---|---|
-| **Curator Pipeline** | Background vault maintenance — tag normalization, duplicate merging, quality scoring |
-| **Document Intake** | Ingest PDFs, markdown, and text into the vault automatically |
-| **Learning Loop** | Turn feedback into measurable improvement — preference profiles, scoring adjustments |
-| **Embeddings & Vector Search** | Semantic search via OpenAI embeddings alongside TF-IDF |
-| **Cross-Project Memory** | Share knowledge across projects — global pattern pool, unified search |
-| **Context Engine** | Intent classification, entity extraction, context-aware retrieval |
-| **Proactive Agency** | Anticipate, warn, and suggest without being asked |
-| **Plugin System** | Runtime-extensible architecture — load and hot-reload new capabilities |
-
-Each item includes **What**, **Why**, and **How** with specific module names, file paths, and architecture guidance. Your team can pick what matters and build it independently — or ask Claude to implement it using the roadmap as a spec.
+- **`src/templates/`** — 27 template generators
 
 ## Requirements
 
@@ -302,4 +194,4 @@ Each item includes **What**, **Why**, and **How** with specific module names, fi
 
 ## License
 
-MIT
+Apache-2.0
