@@ -169,7 +169,7 @@
       <main class="container">
         <header class="nav">
           <div class="brand">
-            <a href="index-solarpunk.html">
+            <a href="index.html">
               <div class="brand-top">
                 <p class="brand-name">Soleri</p>
               </div>
@@ -181,7 +181,7 @@
             <a href="teams.html">Teams</a>
             <a href="getting-started.html" aria-current="page">Get started</a>
           </nav>
-          <div class="nav-actions"><div class="lang-switcher"><a href="/en/getting-started.html" class="active">EN</a><a href="/uk/getting-started.html">UK</a><a href="/it/getting-started.html">IT</a></div>
+          <div class="nav-actions"><button class="menu-toggle" id="menu-toggle" type="button" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><div class="lang-switcher"><a href="/en/getting-started.html" class="active">EN</a><a href="/uk/getting-started.html">UK</a><a href="/it/getting-started.html">IT</a></div>
             <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle color theme">
               <span class="toggle-track">
                 <span class="toggle-thumb"></span>
@@ -377,6 +377,20 @@
             );
           });
         });
+
+        // Mobile menu toggle
+        var menuBtn = document.getElementById("menu-toggle");
+        var navLinks = document.querySelector(".nav-links");
+        if (menuBtn && navLinks) {
+          menuBtn.addEventListener("click", function () {
+            navLinks.classList.toggle("open");
+          });
+          document.addEventListener("click", function (e) {
+            if (!e.target.closest(".nav-links") && !e.target.closest(".menu-toggle")) {
+              navLinks.classList.remove("open");
+            }
+          });
+        }
       })();
     </script>
   </body>

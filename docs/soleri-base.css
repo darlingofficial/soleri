@@ -477,6 +477,29 @@ body {
   flex-wrap: wrap;
 }
 
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 0;
+  transition: color 0.15s ease;
+}
+
+.menu-toggle:hover {
+  color: var(--foreground-strong);
+}
+
+.menu-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
 .chip {
   border: none;
   border-radius: var(--radius-sm);
@@ -1033,10 +1056,6 @@ body {
   overflow: hidden;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
 
 .card-icon {
   width: 38px;
@@ -1568,6 +1587,36 @@ body {
 
   .nav-links {
     display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    flex-direction: column;
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 8px;
+    min-width: 180px;
+    box-shadow: var(--shadow-md);
+    z-index: 100;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .nav {
+    position: relative;
+  }
+
+  .menu-toggle {
+    display: flex;
   }
 }
 
