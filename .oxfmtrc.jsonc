@@ -1,0 +1,16 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  // Match existing Prettier style
+  "singleQuote": true,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "organizeImports": true,
+  "sortPackageJson": true,
+  "ignorePatterns": [
+    "dist/",
+    "node_modules/",
+    "coverage/",
+    "website/"
+  ]
+}

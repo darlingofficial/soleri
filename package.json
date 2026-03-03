@@ -35,12 +35,43 @@
     "test": "npm run test --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "dev": "npm run dev --workspace=@soleri/forge",
-    "dev:forge": "tsx packages/forge/src/index.ts"
+    "dev:forge": "tsx packages/forge/src/index.ts",
+    "lint": "oxlint packages/",
+    "lint:fix": "oxlint packages/ --fix",
+    "format": "oxfmt --config .oxfmtrc.jsonc packages/",
+    "format:check": "oxfmt --check --config .oxfmtrc.jsonc packages/",
+    "lint:md": "markdownlint-cli2",
+    "lint:spell": "cspell --no-progress",
+    "secrets:check": "secretlint \"packages/*/src/**\"",
+    "deadcode:knip": "knip",
+    "deadcode:ts-prune": "ts-prune",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "packages/*/src/**/*.ts": [
+      "oxfmt --config .oxfmtrc.jsonc",
+      "oxlint --fix",
+      "secretlint"
+    ],
+    "*.md": [
+      "markdownlint-cli2 --no-globs",
+      "cspell --no-must-find-files --no-progress"
+    ]
   },
   "devDependencies": {
-    "typescript": "^5.7.3",
-    "vitest": "^3.0.5",
+    "@secretlint/secretlint-rule-preset-recommend": "^11.3.1",
+    "@types/node": "^22.13.4",
+    "cspell": "^9.7.0",
+    "husky": "^9.1.7",
+    "knip": "^5.85.0",
+    "lint-staged": "^16.3.2",
+    "markdownlint-cli2": "^0.21.0",
+    "oxfmt": "^0.35.0",
+    "oxlint": "^1.51.0",
+    "secretlint": "^11.3.1",
+    "ts-prune": "^0.10.3",
     "tsx": "^4.19.2",
-    "@types/node": "^22.13.4"
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
   }
 }

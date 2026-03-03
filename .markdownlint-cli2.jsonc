@@ -1,0 +1,10 @@
+{
+  "globs": [
+    "README.md",
+    "CHANGELOG.md",
+    "SECURITY.md",
+    "CONTRIBUTING.md",
+    "packages/*/README.md",
+    "docs/**/*.md"
+  ]
+}

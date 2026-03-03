@@ -1,0 +1,54 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["unicorn", "typescript", "oxc"],
+  "categories": {
+    "correctness": "error",
+    "perf": "error",
+    "suspicious": "error"
+  },
+  "rules": {
+    "no-explicit-any": "error",
+    "no-unused-vars": ["error", {
+      "argsIgnorePattern": "^_",
+      "varsIgnorePattern": "^_",
+      "caughtErrorsIgnorePattern": "^_"
+    }],
+    "prefer-const": "error",
+    "no-var": "error",
+    "eqeqeq": ["error", "always"],
+    "no-console": "off",
+    "no-await-in-loop": "warn",
+    "no-shadow": "warn",
+    "preserve-caught-error": "warn",
+    "unicorn/no-array-sort": "off",
+    "unicorn/no-array-reverse": "off",
+    "unicorn/consistent-function-scoping": "off",
+    "unicorn/no-new-array": "warn",
+    "unicorn/prefer-set-has": "warn",
+    "unicorn/prefer-add-event-listener": "warn",
+    "oxc/no-async-endpoint-handlers": "off",
+    "oxc/no-map-spread": "warn"
+  },
+  "overrides": [
+    {
+      "files": ["packages/*/src/__tests__/**/*.ts"],
+      "rules": {
+        "no-explicit-any": "off",
+        "no-unused-vars": ["warn", {
+          "argsIgnorePattern": "^_",
+          "varsIgnorePattern": "^_",
+          "caughtErrorsIgnorePattern": "^_"
+        }],
+        "no-await-in-loop": "off",
+        "no-shadow": "off",
+        "no-unsafe-optional-chaining": "off",
+        "no-useless-constructor": "off",
+        "typescript/ban-ts-comment": "off",
+        "typescript/no-non-null-assertion": "off"
+      }
+    }
+  ],
+  "ignorePatterns": ["dist/**", "node_modules/**", "coverage/**", "*.config.js", "*.config.ts", "scripts/**", "website/**"],
+  "settings": { "vitest": { "typecheck": false } },
+  "env": { "builtin": true }
+}

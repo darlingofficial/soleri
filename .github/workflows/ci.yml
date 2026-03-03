@@ -20,6 +20,34 @@ jobs:
       - run: npm run test --workspace=@soleri/forge
       - run: npm run typecheck --workspace=@soleri/forge
 
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - run: npm install
+
+      - name: Lint (oxlint)
+        run: npm run lint
+
+      - name: Format check (oxfmt)
+        run: npm run format:check
+
+      - name: Secret scan
+        run: npm run secrets:check
+
+      - name: Markdown lint
+        run: npm run lint:md
+
+      - name: Spell check
+        run: npm run lint:spell
+
+      - name: Dead code (knip)
+        run: npm run deadcode:knip
+
   website:
     name: Validate Website
     runs-on: ubuntu-latest
