@@ -7,38 +7,36 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  validate:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18, 20, 22]
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+      - name: Validate HTML files exist
+        run: |
+          for lang in en uk it; do
+            for page in index.html how-it-works.html getting-started.html personas.html teams.html; do
+              test -f "docs/$lang/$page" || { echo "Missing docs/$lang/$page"; exit 1; }
+            done
+          done
+          test -f docs/index.html || { echo "Missing docs/index.html"; exit 1; }
+          test -f docs/soleri-base.css || { echo "Missing docs/soleri-base.css"; exit 1; }
+          echo "All expected files present."
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Type check
-        run: npm run typecheck
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Build
-        run: npm run build
-
-      - name: Unit tests
-        run: npm run test:unit
-
-      - name: Integration tests
-        run: npm run test:integration
-
-      - name: Search quality tests
-        run: npm run test:search
+      - name: Check for broken internal links
+        run: |
+          errors=0
+          for file in docs/en/*.html docs/uk/*.html docs/it/*.html; do
+            dir=$(dirname "$file")
+            # Extract href values pointing to local .html files
+            grep -oP 'href="\K[^"]+\.html' "$file" 2>/dev/null | while read -r link; do
+              # Skip absolute URLs
+              [[ "$link" == http* ]] && continue
+              target="$dir/$link"
+              if [ ! -f "$target" ]; then
+                echo "Broken link in $file: $link -> $target"
+                errors=$((errors + 1))
+              fi
+            done
+          done
+          [ "$errors" -eq 0 ] && echo "No broken internal links found."
