@@ -47,21 +47,21 @@ Your agent ships with starter knowledge and auto-captures patterns from your cod
 
 **Playbooks** — Multi-step validated procedures stored in the vault. Token migrations, component setup, contrast audits — each step includes validation criteria so the agent can execute and verify autonomously.
 
-### Official Agents
+### Your Agent
 
-| Agent | Domain | What it does |
-|-------|--------|--------------|
-| **Salvador** | Design Systems | Tokens, components, accessibility, visual validation |
-| **Gaudi** | Architecture | System design, API patterns, databases, performance |
-| **Sentinel** | Security | Vulnerability analysis, API hardening, threat modeling |
+Soleri is an agent forge. You create specialized agents — each with its own persona, domain expertise, and growing vault — all running on a shared engine.
 
-Each ships with starter knowledge. Community agents welcome via `personas/community/`.
+```bash
+soleri create my-agent       # Forge a new agent
+```
+
+Give it a name, a domain, a voice. It ships with starter knowledge and learns from every session.
 
 ### Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│  Agents         Salvador · Gaudi · Sentinel · yours     │
+│  Agents         yours · your team's · community          │
 ├─────────────────────────────────────────────────────────┤
 │  Domains        design · security · architecture · ...  │
 ├─────────────────────────────────────────────────────────┤
@@ -75,7 +75,7 @@ Each ships with starter knowledge. Community agents welcome via `personas/commun
 - **Transports** — MCP for Claude Code and Cursor today, REST and LSP designed into the architecture.
 - **Domains** — Pluggable expertise modules (frontend, backend, cross-cutting, and custom).
 - **Vault Backends** — Three-tier model: agent vault (personal), project vault (team conventions), team vault (shared across all projects). Local filesystem, git sync, or remote API.
-- **LLM Providers** — Anthropic, OpenAI, Ollama, or none. Works without API keys for local vault search, pattern matching, and brain tracking.
+- **Model-agnostic** — The engine runs on pure SQLite FTS5 and TF-IDF math. Works without API keys for local vault search, pattern matching, and brain tracking.
 
 ### Knowledge Packs
 
@@ -96,7 +96,6 @@ soleri packs sync
 
 - **Connected vaults** — Link agent, project, and team vaults with automatic search priority.
 - **Cross-project knowledge** — Link projects and search across them with weighted relevance.
-- **Telegram bot** — Monitor vault health, query the knowledge graph, check event logs, and manage infrastructure from mobile.
 - **Health checks** — `soleri doctor` reports engine version, domain status, vault health, brain tracking, and team sync state.
 
 ## Contributing
