@@ -5,4 +5,4 @@
  * that learn, remember, and grow with you.
  */
 
-export const VERSION = '0.0.1';
+export const VERSION = '3.0.0';

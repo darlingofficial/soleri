@@ -7,7 +7,7 @@
   },
   "buckets": {
     "html": {
-      "include": ["docs/[locale]/*.html"]
+      "include": ["website/[locale]/*.html"]
     }
   },
   "provider": {

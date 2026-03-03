@@ -1,6 +1,7 @@
 {
-  "name": "soleri",
-  "version": "0.0.1",
+  "name": "soleri-monorepo",
+  "private": true,
+  "version": "3.0.0",
   "description": "An open-source framework for building AI assistants that learn, remember, and grow with you.",
   "keywords": [
     "ai",
@@ -26,30 +27,20 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "bin": {
-    "soleri": "./dist/forge/cli.js"
-  },
-  "main": "./dist/core/index.js",
-  "types": "./dist/core/index.d.ts",
-  "exports": {
-    ".": "./dist/core/index.js",
-    "./forge": "./dist/forge/cli.js",
-    "./transports/mcp": "./dist/transports/mcp.js"
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
+  "workspaces": [
+    "packages/*"
   ],
   "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:unit": "vitest run tests/unit",
-    "test:integration": "vitest run tests/integration",
-    "test:search": "vitest run tests/search-quality",
-    "lint": "eslint . --ext .ts",
-    "typecheck": "tsc --noEmit"
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "dev": "npm run dev --workspace=@soleri/forge",
+    "dev:forge": "tsx packages/forge/src/index.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5",
+    "tsx": "^4.19.2",
+    "@types/node": "^22.13.4"
   }
 }

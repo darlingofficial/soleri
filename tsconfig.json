@@ -1,11 +1,9 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "lib": ["ES2022"],
-    "outDir": "./dist",
-    "rootDir": ".",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -15,18 +13,8 @@
     "declarationMap": true,
     "sourceMap": true
   },
-  "include": [
-    "core/**/*.ts",
-    "vault-backends/**/*.ts",
-    "transports/**/*.ts",
-    "facades/**/*.ts",
-    "domains/**/*.ts",
-    "migrations/**/*.ts",
-    "forge/**/*.ts"
+  "references": [
+    { "path": "packages/forge" }
   ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "tests"
-  ]
+  "files": []
 }
