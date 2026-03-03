@@ -7,7 +7,21 @@ on:
     branches: [main]
 
 jobs:
-  validate:
+  forge:
+    name: Build & Test Forge
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - run: npm install
+      - run: npm run build --workspace=@soleri/forge
+      - run: npm run test --workspace=@soleri/forge
+      - run: npm run typecheck --workspace=@soleri/forge
+
+  website:
+    name: Validate Website
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,9 +42,7 @@ jobs:
           errors=0
           for file in website/en/*.html website/uk/*.html website/it/*.html; do
             dir=$(dirname "$file")
-            # Extract href values pointing to local .html files
             grep -oP 'href="\K[^"]+\.html' "$file" 2>/dev/null | while read -r link; do
-              # Skip absolute URLs
               [[ "$link" == http* ]] && continue
               target="$dir/$link"
               if [ ! -f "$target" ]; then

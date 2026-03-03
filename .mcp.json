@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "soleri": {
+      "command": "node",
+      "args": ["packages/forge/dist/index.js"],
+      "cwd": "."
+    }
+  }
+}
