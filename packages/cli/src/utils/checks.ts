@@ -115,20 +115,21 @@ function checkMcpRegistration(dir?: string): CheckResult {
 }
 
 export function checkCognee(): CheckResult {
+  const url = process.env.COGNEE_URL ?? 'http://localhost:8000/';
+  let host: string;
   try {
-    const body = execFileSync('curl', ['-sf', 'http://localhost:8000/'], {
-      encoding: 'utf-8',
-      timeout: 5_000,
-    });
-    if (body.includes('alive')) {
-      return { status: 'pass', label: 'Cognee', detail: 'available at localhost:8000' };
-    }
-    return { status: 'warn', label: 'Cognee', detail: 'responded but unexpected body' };
+    host = new URL(url).host;
+  } catch {
+    return { status: 'warn', label: 'Cognee', detail: `invalid COGNEE_URL: ${url}` };
+  }
+  try {
+    execFileSync('curl', ['-fsS', '--max-time', '5', url], { stdio: 'ignore', timeout: 7_000 });
+    return { status: 'pass', label: 'Cognee', detail: `available at ${host}` };
   } catch {
     return {
       status: 'warn',
       label: 'Cognee',
-      detail: 'not running — vector search disabled (FTS5 still works)',
+      detail: `not running at ${host} — vector search disabled (FTS5 still works)`,
     };
   }
 }

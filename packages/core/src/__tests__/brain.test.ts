@@ -37,14 +37,12 @@ function makeMockCognee(
     healthCheck: vi
       .fn()
       .mockResolvedValue({ available, url: 'http://localhost:8000', latencyMs: 1 } as CogneeStatus),
-    getConfig: vi
-      .fn()
-      .mockReturnValue({
-        baseUrl: 'http://localhost:8000',
-        dataset: 'vault',
-        timeoutMs: 5000,
-        healthCacheTtlMs: 60000,
-      }),
+    getConfig: vi.fn().mockReturnValue({
+      baseUrl: 'http://localhost:8000',
+      dataset: 'vault',
+      timeoutMs: 5000,
+      healthCacheTtlMs: 60000,
+    }),
     getStatus: vi.fn().mockReturnValue(null),
   } as unknown as CogneeClient;
 }
@@ -267,11 +265,10 @@ describe('Brain', () => {
       // Both entries should be in results (hs-2 merged from Cognee even if not in FTS5)
       const ids = results.map((r) => r.entry.id);
       expect(ids).toContain('hs-1');
-      // hs-2 may or may not appear depending on FTS5, but if it does, it should have vector score
+      expect(ids).toContain('hs-2');
       const loggingResult = results.find((r) => r.entry.id === 'hs-2');
-      if (loggingResult) {
-        expect(loggingResult.breakdown.vector).toBe(0.6);
-      }
+      expect(loggingResult).toBeDefined();
+      expect(loggingResult!.breakdown.vector).toBe(0.6);
     });
 
     it('should fall back to FTS5-only on Cognee search error', async () => {

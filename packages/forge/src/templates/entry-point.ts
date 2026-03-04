@@ -71,7 +71,9 @@ async function main(): Promise<void> {
 
   // Background sync vault to Cognee if available
   if (cognee.isAvailable) {
-    brain.syncToCognee().catch(() => {});
+    brain.syncToCognee().catch((err) => {
+      console.error(\`[\${PERSONA.name.toLowerCase()}] Cognee sync failed:\`, err);
+    });
   }
 
   // Initialize LLM client (optional — works without API keys)

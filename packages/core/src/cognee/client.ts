@@ -14,6 +14,21 @@ import type { IntelligenceEntry } from '../intelligence/types.js';
 const DEFAULT_SERVICE_EMAIL = 'soleri-agent@cognee.dev';
 const DEFAULT_SERVICE_PASSWORD = 'soleri-cognee-local';
 
+/** Only allow default service credentials for local endpoints. */
+function isLocalUrl(url: string): boolean {
+  try {
+    const { hostname } = new URL(url);
+    return (
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      hostname === '::1' ||
+      hostname === '0.0.0.0'
+    );
+  } catch {
+    return false;
+  }
+}
+
 const DEFAULT_CONFIG: CogneeConfig = {
   baseUrl: 'http://localhost:8000',
   dataset: 'vault',
@@ -248,6 +263,15 @@ export class CogneeClient {
 
     const email = this.config.serviceEmail ?? DEFAULT_SERVICE_EMAIL;
     const password = this.config.servicePassword ?? DEFAULT_SERVICE_PASSWORD;
+
+    // Refuse default credentials for non-local endpoints
+    if (
+      !isLocalUrl(this.config.baseUrl) &&
+      email === DEFAULT_SERVICE_EMAIL &&
+      password === DEFAULT_SERVICE_PASSWORD
+    ) {
+      throw new Error('Explicit Cognee credentials are required for non-local endpoints');
+    }
 
     // Try login first
     const loginResp = await globalThis.fetch(`${this.config.baseUrl}/api/v1/auth/login`, {

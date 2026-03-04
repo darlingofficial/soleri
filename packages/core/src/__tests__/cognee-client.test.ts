@@ -444,6 +444,22 @@ describe('CogneeClient', () => {
       const result = await client.cognify();
       expect(result.status).toBe('ok');
     });
+
+    it('should reject default credentials for non-local endpoints', async () => {
+      const fetchMock = mockFetch(async (url, init) => {
+        if (url.includes('cognee.example.com') && url.endsWith('/'))
+          return new Response('ok', { status: 200 });
+        if (isAuthCall(url)) return new Response('fail', { status: 401 });
+        return new Response('ok', { status: 200 });
+      });
+      // Remote endpoint without explicit credentials — guard should prevent auto-register/login
+      const client = new CogneeClient({ baseUrl: 'https://cognee.example.com' });
+      await client.healthCheck();
+      await client.cognify();
+      // The guard should prevent any auth calls to the remote endpoint
+      const authCalls = fetchMock.mock.calls.filter(([url]: [string]) => isAuthCall(url));
+      expect(authCalls).toHaveLength(0);
+    });
   });
 
   // ─── Cognify debounce ─────────────────────────────────────────

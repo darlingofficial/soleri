@@ -23,7 +23,7 @@ export function generatePackageJson(config: AgentConfig): string {
     dependencies: {
       '@anthropic-ai/sdk': '^0.39.0',
       '@modelcontextprotocol/sdk': '^1.12.1',
-      '@soleri/core': '^1.0.0',
+      '@soleri/core': '^2.0.0',
       zod: '^3.24.2',
     },
     devDependencies: {

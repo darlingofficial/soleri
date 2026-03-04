@@ -457,9 +457,20 @@ export function createCoreFacade(vault: Vault, planner: Planner, brain: Brain, c
         handler: async () => {
           if (!cognee) return { available: false, message: 'Cognee not configured' };
           const status = cognee.getStatus();
+          const cfg = cognee.getConfig();
           return {
             available: cognee.isAvailable,
-            config: cognee.getConfig(),
+            config: {
+              baseUrl: cfg.baseUrl,
+              dataset: cfg.dataset,
+              timeoutMs: cfg.timeoutMs,
+              searchTimeoutMs: cfg.searchTimeoutMs,
+              healthTimeoutMs: cfg.healthTimeoutMs,
+              healthCacheTtlMs: cfg.healthCacheTtlMs,
+              cognifyDebounceMs: cfg.cognifyDebounceMs,
+              hasApiToken: Boolean(cfg.apiToken),
+              hasServiceCredentials: Boolean(cfg.serviceEmail && cfg.servicePassword),
+            },
             lastHealth: status,
           };
         },

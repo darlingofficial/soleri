@@ -311,8 +311,9 @@ export class Brain {
     const queryDomain = options?.domain;
     const now = Math.floor(Date.now() / 1000);
 
-    // Use cognee-aware weights if vector results are present
-    const activeWeights = cogneeScoreMap.size > 0 ? this.getCogneeWeights() : this.weights;
+    // Use cognee-aware weights only if at least one ranked candidate has a vector score
+    const hasVectorCandidate = rawResults.some((r) => cogneeScoreMap.has(r.entry.id));
+    const activeWeights = hasVectorCandidate ? this.getCogneeWeights() : this.weights;
 
     const ranked = rawResults.map((result) => {
       const entry = result.entry;
@@ -413,15 +414,28 @@ export class Brain {
 
   async syncToCognee(): Promise<{ synced: number; cognified: boolean }> {
     if (!this.cognee?.isAvailable) return { synced: 0, cognified: false };
-    const entries = this.vault.list({ limit: 100000 });
-    if (entries.length === 0) return { synced: 0, cognified: false };
-    const result = await this.cognee.addEntries(entries);
-    let cognified = false;
-    if (result.added > 0) {
-      const cognifyResult = await this.cognee.cognify();
-      cognified = cognifyResult.status === 'ok';
+
+    const batchSize = 1000;
+    let offset = 0;
+    let totalSynced = 0;
+
+    while (true) {
+      const batch = this.vault.list({ limit: batchSize, offset });
+      if (batch.length === 0) break;
+
+      const { added } = await this.cognee.addEntries(batch);
+      totalSynced += added;
+      offset += batch.length;
+
+      if (batch.length < batchSize) break;
     }
-    return { synced: result.added, cognified };
+
+    if (totalSynced === 0) return { synced: 0, cognified: false };
+
+    let cognified = false;
+    const cognifyResult = await this.cognee.cognify();
+    cognified = cognifyResult.status === 'ok';
+    return { synced: totalSynced, cognified };
   }
 
   rebuildVocabulary(): void {
