@@ -114,7 +114,7 @@ function checkMcpRegistration(dir?: string): CheckResult {
   }
 }
 
-export function checkCognee(): CheckResult {
+function checkCognee(): CheckResult {
   const url = process.env.COGNEE_URL ?? 'http://localhost:8000/';
   let host: string;
   try {
