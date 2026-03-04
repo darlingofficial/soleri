@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## @soleri/core@2.0.1 — 2026-03-04
+
+### Fixed
+
+- **Cognee hybrid search cross-referencing** — Vector scores were always 0.000 because Cognee assigns its own UUIDs to chunks and strips embedded metadata during chunking. Replaced naive ID mapping with 4-tier matching: `[vault-id:]` prefix extraction, title first-line match, title substring match, and FTS5 fallback.
+- Strategy 4 (FTS5 fallback) now preserves caller filters (domain/type/severity) to avoid reintroducing excluded entries
+- Title-to-ID mapping handles duplicate titles correctly via `Map<string, string[]>`
+
 ## @soleri/forge@4.2.1 — 2026-03-04
 
 ### Fixed
