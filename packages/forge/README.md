@@ -105,7 +105,7 @@ Total: `(domains x 5) + 24` operations per agent.
 
 ## Forge Operations
 
-Soleri Forge exposes one MCP tool (`forge`) with 5 ops:
+Soleri Forge exposes one MCP tool (`forge`) with 6 ops:
 
 | Op                  | Purpose                                         |
 | ------------------- | ----------------------------------------------- |
@@ -114,6 +114,7 @@ Soleri Forge exposes one MCP tool (`forge`) with 5 ops:
 | `create`            | Scaffold the complete agent project             |
 | `list_agents`       | Scan a directory for existing agents            |
 | `install_knowledge` | Install knowledge packs into an existing agent  |
+| `add_domain`        | Add a new knowledge domain to an existing agent |
 
 ## Installing Knowledge Packs
 
@@ -178,6 +179,16 @@ npm run dev           # Run with tsx (no build needed)
 npm test              # Run tests
 ```
 
+### Programmatic API
+
+Import forge functions directly without starting the MCP server:
+
+```typescript
+import { scaffold, addDomain, installKnowledge, listAgents } from '@soleri/forge/lib';
+```
+
+This is how `@soleri/cli` wraps forge under the hood.
+
 ### Architecture
 
 Soleri Forge is itself an MCP server built on the same patterns it generates:
@@ -186,6 +197,9 @@ Soleri Forge is itself an MCP server built on the same patterns it generates:
 - **`src/facades/forge.facade.ts`** — Op dispatch for all forge operations
 - **`src/scaffolder.ts`** — Core scaffolding logic (preview, create, list)
 - **`src/knowledge-installer.ts`** — Knowledge pack installer
+- **`src/domain-manager.ts`** — Domain addition logic (add to existing agents)
+- **`src/patching.ts`** — Shared source file patching utilities
+- **`src/lib.ts`** — Public API re-exports for programmatic access
 - **`src/types.ts`** — Config schema and result types (Zod-validated)
 - **`src/templates/`** — 27 template generators
 

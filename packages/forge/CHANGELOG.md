@@ -2,6 +2,21 @@
 
 All notable changes to Soleri Forge (formerly Agent Forge) are documented here.
 
+## [4.1.0] - 2026-03-04
+
+### Added
+
+- **`addDomain()` function** — Add a knowledge domain to an existing agent: creates empty bundle, generates facade, patches `src/index.ts` and `src/activation/claude-md-content.ts`, rebuilds
+- **`add_domain` forge operation** — MCP-accessible op wrapping `addDomain()` for AI-side parity
+- **`./lib` export path** — `import { scaffold, addDomain, ... } from '@soleri/forge/lib'` for programmatic access without starting the MCP server
+- **`patching.ts`** — Extracted `patchIndexTs()` and `patchClaudeMdContent()` from `knowledge-installer.ts` for reuse
+
+### Changed
+
+- `addDomain` reports failure when source file patching fails (not just build failures)
+- Malformed `package.json` in agent projects returns structured error instead of throwing
+- Forge operations: 6 (was 5)
+
 ## [2.1.0] - 2026-02-28
 
 Feature release — knowledge pack installer. Agents can now receive pre-built domain knowledge after scaffolding.
@@ -64,7 +79,7 @@ Major release. Agents now ship with an intelligence layer (Brain) and optional L
 
 ### Changed
 
-- Domain facades now use Brain for search (`intelligentSearch`) and capture (`enrichAndCapture` with auto-tags and dedup) instead of raw vault queries
+- Domain facades now use Brain for search (`intelligentSearch`) and capture (`enrichAndCapture` with auto-tags and deduplication) instead of raw vault queries
 - Core facade signature expanded: `createCoreFacade(vault, planner, brain, llmClient?, openaiKeyPool?, anthropicKeyPool?)`
 - Generated agents include `@anthropic-ai/sdk` as a dependency
 - Activation triggers normalized: "Hola/Adios" → "Hello/Goodbye"

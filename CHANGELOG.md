@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## @soleri/cli@1.0.0 — 2026-03-04
+
+Initial release of the developer CLI.
+
+### Added
+
+- **`soleri create [name]`** — Interactive wizard using @clack/prompts to scaffold new agents. Supports `--config <path>` for non-interactive mode
+- **`soleri list [dir]`** — Formatted table of agents in a directory with ID, domains, build status, and dependency status
+- **`soleri add-domain <domain>`** — Add a new knowledge domain to an existing agent (creates bundle, generates facade, patches index.ts + claude-md-content.ts, rebuilds)
+- **`soleri install-knowledge <pack>`** — Install knowledge packs from a local path into the agent in the current directory
+- **`soleri dev`** — Run the agent in development mode via `npx tsx src/index.ts` with inherited stdio
+- **`soleri doctor`** — Health check: Node.js version, npm, tsx, agent project detection, dependencies, build status, MCP registration
+- **`soleri hooks add <editor>`** — Generate editor-specific hooks/config for claude-code, cursor, windsurf, or copilot
+- **`soleri hooks remove <editor>`** — Remove editor hooks/config files
+- **`soleri hooks list`** — Show which editor hooks are currently installed
+- Input sanitization for agent IDs in shell hook commands
+- Error handling with try/catch wrappers around forge API calls
+- 51 tests across 7 test files
+
+## @soleri/forge@4.1.0 — 2026-03-04
+
+### Added
+
+- **`addDomain()` function** — Programmatic API to add a knowledge domain to an existing agent (new `domain-manager.ts`)
+- **`add_domain` forge operation** — MCP-accessible op wrapping `addDomain()` for AI-side parity
+- **`./lib` export path** — `import { scaffold, addDomain, ... } from '@soleri/forge/lib'` for programmatic access without starting the MCP server
+- **`patching.ts`** — Extracted `patchIndexTs()` and `patchClaudeMdContent()` from knowledge-installer for reuse
+
+### Changed
+
+- `addDomain` reports failure when source file patching fails (not just build failures)
+- Malformed `package.json` in agent projects returns a structured error instead of throwing
+
 ## @soleri/core@1.0.0 — 2026-03-04
 
 Initial release of the shared engine package.

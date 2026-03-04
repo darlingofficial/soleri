@@ -27,15 +27,15 @@ Instead of one generic assistant, you build specialized **agents** — each with
 ## What You Get
 
 ```bash
-npm install -g soleri
-
-soleri create my-agent       # Create an agent with starter knowledge
-soleri list                  # Show registered agents
-soleri update                # Update to latest templates
-soleri doctor                # Check system health
+npx @soleri/cli create my-agent   # Interactive wizard — scaffold a new agent
+npx @soleri/cli list              # Show agents in current directory
+npx @soleri/cli add-domain security  # Add a knowledge domain to your agent
+npx @soleri/cli dev               # Run agent locally in dev mode
+npx @soleri/cli doctor            # Check system health
+npx @soleri/cli hooks add claude-code  # Install editor hooks
 ```
 
-Your agent ships with starter knowledge and auto-captures patterns from your codebase on first run.
+Your agent ships with a complete architecture and auto-captures patterns from your sessions.
 
 ### The Engine
 
@@ -52,7 +52,7 @@ Your agent ships with starter knowledge and auto-captures patterns from your cod
 Soleri is an agent forge. You create specialized agents — each with its own persona, domain expertise, and growing vault — all running on a shared engine.
 
 ```bash
-soleri create my-agent       # Forge a new agent
+npx @soleri/cli create my-agent   # Forge a new agent
 ```
 
 Give it a name, a domain, a voice. It ships with starter knowledge and learns from every session.
@@ -85,7 +85,8 @@ Give it a name, a domain, a voice. It ships with starter knowledge and learns fr
 | Package | Version | Description |
 |---------|---------|-------------|
 | [`@soleri/core`](packages/core) | 1.0.0 | Shared engine — Vault, Brain, Planner, LLM utilities, facade infrastructure |
-| [`@soleri/forge`](packages/forge) | 4.0.0 | Agent scaffolder — generates config-driven MCP agents |
+| [`@soleri/forge`](packages/forge) | 4.1.0 | Agent scaffolder — generates config-driven MCP agents |
+| [`@soleri/cli`](packages/cli) | 1.0.0 | Developer CLI — create, manage, and develop agents from the terminal |
 
 ### Knowledge Packs
 
@@ -97,8 +98,7 @@ Install expertise in one command:
 | **Community** | npm registry | Free |
 
 ```bash
-soleri packs install community/react-patterns
-soleri packs sync
+npx @soleri/cli install-knowledge ./bundles/react-patterns
 ```
 
 ### Teams & Ops
