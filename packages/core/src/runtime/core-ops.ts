@@ -1,5 +1,5 @@
 /**
- * Generic core operations factory — 26 ops that every agent gets.
+ * Generic core operations factory — 37 ops that every agent gets.
  *
  * These ops are agent-agnostic (no persona, no activation).
  * The 5 agent-specific ops (health, identity, activate, inject_claude_md, setup)
@@ -12,13 +12,13 @@ import type { IntelligenceEntry } from '../intelligence/types.js';
 import type { AgentRuntime } from './types.js';
 
 /**
- * Create the 26 generic core operations for an agent runtime.
+ * Create the 37 generic core operations for an agent runtime.
  *
  * Groups: search/vault (4), memory (4), export (1), planning (5),
- *         brain (4), curator (8).
+ *         brain (4), brain intelligence (11), curator (8).
  */
 export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
-  const { vault, brain, planner, curator, llmClient, keyPool } = runtime;
+  const { vault, brain, brainIntelligence, planner, curator, llmClient, keyPool } = runtime;
 
   return [
     // ─── Search / Vault ──────────────────────────────────────────
@@ -358,10 +358,12 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
     {
       name: 'brain_stats',
       description:
-        'Get brain intelligence stats — vocabulary size, feedback count, current scoring weights.',
+        'Get brain intelligence stats — vocabulary size, feedback count, current scoring weights, intelligence pipeline stats.',
       auth: 'read',
       handler: async () => {
-        return brain.getStats();
+        const base = brain.getStats();
+        const intelligence = brainIntelligence.getStats();
+        return { ...base, intelligence };
       },
     },
     {
@@ -384,6 +386,165 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
           },
           routes: llmClient.getRoutes(),
         };
+      },
+    },
+
+    // ─── Brain Intelligence ───────────────────────────────────────
+    {
+      name: 'brain_session_context',
+      description:
+        'Get recent session context — sessions, tool usage frequency, file change frequency.',
+      auth: 'read',
+      schema: z.object({
+        limit: z.number().optional().describe('Number of recent sessions. Default 10.'),
+      }),
+      handler: async (params) => {
+        return brainIntelligence.getSessionContext((params.limit as number) ?? 10);
+      },
+    },
+    {
+      name: 'brain_strengths',
+      description:
+        'Get pattern strength scores. 4-signal scoring: usage (0-25) + spread (0-25) + success (0-25) + recency (0-25).',
+      auth: 'read',
+      schema: z.object({
+        domain: z.string().optional(),
+        minStrength: z.number().optional().describe('Minimum strength score (0-100).'),
+        limit: z.number().optional(),
+      }),
+      handler: async (params) => {
+        return brainIntelligence.getStrengths({
+          domain: params.domain as string | undefined,
+          minStrength: params.minStrength as number | undefined,
+          limit: (params.limit as number) ?? 50,
+        });
+      },
+    },
+    {
+      name: 'brain_global_patterns',
+      description:
+        'Get cross-domain pattern registry — patterns that appear across multiple domains.',
+      auth: 'read',
+      schema: z.object({
+        limit: z.number().optional(),
+      }),
+      handler: async (params) => {
+        return brainIntelligence.getGlobalPatterns((params.limit as number) ?? 20);
+      },
+    },
+    {
+      name: 'brain_recommend',
+      description:
+        'Get pattern recommendations for a task context. Matches domain and task terms against known strengths.',
+      auth: 'read',
+      schema: z.object({
+        domain: z.string().optional(),
+        task: z.string().optional().describe('Task description for contextual matching.'),
+        limit: z.number().optional(),
+      }),
+      handler: async (params) => {
+        return brainIntelligence.recommend({
+          domain: params.domain as string | undefined,
+          task: params.task as string | undefined,
+          limit: (params.limit as number) ?? 5,
+        });
+      },
+    },
+    {
+      name: 'brain_build_intelligence',
+      description:
+        'Run the full intelligence pipeline: compute strengths → build global registry → build domain profiles.',
+      auth: 'write',
+      handler: async () => {
+        return brainIntelligence.buildIntelligence();
+      },
+    },
+    {
+      name: 'brain_export',
+      description:
+        'Export all brain intelligence data — strengths, sessions, proposals, global patterns, domain profiles.',
+      auth: 'read',
+      handler: async () => {
+        return brainIntelligence.exportData();
+      },
+    },
+    {
+      name: 'brain_import',
+      description: 'Import brain intelligence data from a previous export.',
+      auth: 'write',
+      schema: z.object({
+        data: z.any().describe('BrainExportData object from brain_export.'),
+      }),
+      handler: async (params) => {
+        return brainIntelligence.importData(
+          params.data as import('../brain/types.js').BrainExportData,
+        );
+      },
+    },
+    {
+      name: 'brain_extract_knowledge',
+      description:
+        'Extract knowledge proposals from a session using 6 heuristic rules (repeated tools, multi-file edits, long sessions, plan outcomes, feedback ratios).',
+      auth: 'write',
+      schema: z.object({
+        sessionId: z.string().describe('Session ID to extract knowledge from.'),
+      }),
+      handler: async (params) => {
+        return brainIntelligence.extractKnowledge(params.sessionId as string);
+      },
+    },
+    {
+      name: 'brain_archive_sessions',
+      description: 'Archive (delete) completed sessions older than N days.',
+      auth: 'write',
+      schema: z.object({
+        olderThanDays: z.number().optional().describe('Days threshold. Default 30.'),
+      }),
+      handler: async (params) => {
+        return brainIntelligence.archiveSessions((params.olderThanDays as number) ?? 30);
+      },
+    },
+    {
+      name: 'brain_promote_proposals',
+      description:
+        'Promote knowledge proposals to vault entries. Creates intelligence entries from auto-extracted patterns.',
+      auth: 'write',
+      schema: z.object({
+        proposalIds: z.array(z.string()).describe('IDs of proposals to promote.'),
+      }),
+      handler: async (params) => {
+        return brainIntelligence.promoteProposals(params.proposalIds as string[]);
+      },
+    },
+    {
+      name: 'brain_lifecycle',
+      description:
+        'Start or end a brain session. Sessions track tool usage, file changes, and plan context.',
+      auth: 'write',
+      schema: z.object({
+        action: z.enum(['start', 'end']),
+        sessionId: z
+          .string()
+          .optional()
+          .describe('Required for end. Auto-generated for start if omitted.'),
+        domain: z.string().optional(),
+        context: z.string().optional(),
+        toolsUsed: z.array(z.string()).optional(),
+        filesModified: z.array(z.string()).optional(),
+        planId: z.string().optional(),
+        planOutcome: z.string().optional(),
+      }),
+      handler: async (params) => {
+        return brainIntelligence.lifecycle({
+          action: params.action as 'start' | 'end',
+          sessionId: params.sessionId as string | undefined,
+          domain: params.domain as string | undefined,
+          context: params.context as string | undefined,
+          toolsUsed: params.toolsUsed as string[] | undefined,
+          filesModified: params.filesModified as string[] | undefined,
+          planId: params.planId as string | undefined,
+          planOutcome: params.planOutcome as string | undefined,
+        });
       },
     },
 

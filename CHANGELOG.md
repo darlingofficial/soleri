@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## @soleri/core@2.1.0 — 2026-03-05
+
+### Added
+
+- **`BrainIntelligence` class** — Pattern strength scoring, session knowledge extraction, and cross-domain intelligence pipeline (`brain/intelligence.ts`)
+- **Brain types extracted** to `brain/types.ts` — all existing + 13 new intelligence types. Re-exported from `brain.ts` for backward compat
+- **11 new brain ops** in `createCoreOps()` (26 → 37 total):
+  - `brain_session_context` — Recent sessions, tool/file frequency
+  - `brain_strengths` — 4-signal pattern scoring (usage + spread + success + recency, each 0-25)
+  - `brain_global_patterns` — Cross-domain pattern registry
+  - `brain_recommend` — Context-aware pattern recommendations
+  - `brain_build_intelligence` — Full pipeline: strengths → registry → profiles
+  - `brain_export` / `brain_import` — Brain data portability
+  - `brain_extract_knowledge` — 6-rule heuristic extraction from sessions
+  - `brain_archive_sessions` — Prune old sessions
+  - `brain_promote_proposals` — Promote extracted knowledge to vault entries
+  - `brain_lifecycle` — Start/end brain sessions
+- **5 new SQLite tables**: `brain_strengths`, `brain_sessions`, `brain_proposals`, `brain_global_registry`, `brain_domain_profiles`
+- `brainIntelligence` field on `AgentRuntime` interface
+- 50+ new test cases in `brain-intelligence.test.ts`
+
 ## @soleri/core@2.0.0 — 2026-03-05
 
 ### Breaking Changes

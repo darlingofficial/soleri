@@ -34,8 +34,8 @@ describe('createCoreOps', () => {
     return op;
   }
 
-  it('should return 26 ops', () => {
-    expect(ops.length).toBe(26);
+  it('should return 37 ops', () => {
+    expect(ops.length).toBe(37);
   });
 
   it('should have all expected op names', () => {
@@ -63,6 +63,18 @@ describe('createCoreOps', () => {
     expect(names).toContain('rebuild_vocabulary');
     expect(names).toContain('brain_stats');
     expect(names).toContain('llm_status');
+    // Brain Intelligence
+    expect(names).toContain('brain_session_context');
+    expect(names).toContain('brain_strengths');
+    expect(names).toContain('brain_global_patterns');
+    expect(names).toContain('brain_recommend');
+    expect(names).toContain('brain_build_intelligence');
+    expect(names).toContain('brain_export');
+    expect(names).toContain('brain_import');
+    expect(names).toContain('brain_extract_knowledge');
+    expect(names).toContain('brain_archive_sessions');
+    expect(names).toContain('brain_promote_proposals');
+    expect(names).toContain('brain_lifecycle');
     // Curator
     expect(names).toContain('curator_status');
     expect(names).toContain('curator_detect_duplicates');

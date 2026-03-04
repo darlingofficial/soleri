@@ -39,6 +39,7 @@ export type {
 
 // ─── Brain ───────────────────────────────────────────────────────────
 export { Brain } from './brain/brain.js';
+export { BrainIntelligence } from './brain/intelligence.js';
 export type {
   ScoringWeights,
   ScoreBreakdown,
@@ -47,7 +48,20 @@ export type {
   CaptureResult,
   BrainStats,
   QueryContext,
-} from './brain/brain.js';
+  PatternStrength,
+  StrengthsQuery,
+  BrainSession,
+  SessionLifecycleInput,
+  KnowledgeProposal,
+  ExtractionResult,
+  GlobalPattern,
+  DomainProfile,
+  BuildIntelligenceResult,
+  BrainIntelligenceStats,
+  SessionContext,
+  BrainExportData,
+  BrainImportResult,
+} from './brain/types.js';
 
 // ─── Cognee ─────────────────────────────────────────────────────────
 export { CogneeClient } from './cognee/client.js';

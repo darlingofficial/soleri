@@ -152,7 +152,7 @@ ${domainDescribes}
       const facade = buildCoreFacade();
       expect(facade.name).toBe('${config.id}_core');
       const opNames = facade.ops.map((o) => o.name);
-      // Core ops (26)
+      // Core ops (37)
       expect(opNames).toContain('search');
       expect(opNames).toContain('vault_stats');
       expect(opNames).toContain('list_all');
@@ -160,14 +160,26 @@ ${domainDescribes}
       expect(opNames).toContain('llm_status');
       expect(opNames).toContain('curator_status');
       expect(opNames).toContain('curator_health_audit');
+      // Brain Intelligence ops (11)
+      expect(opNames).toContain('brain_session_context');
+      expect(opNames).toContain('brain_strengths');
+      expect(opNames).toContain('brain_global_patterns');
+      expect(opNames).toContain('brain_recommend');
+      expect(opNames).toContain('brain_build_intelligence');
+      expect(opNames).toContain('brain_export');
+      expect(opNames).toContain('brain_import');
+      expect(opNames).toContain('brain_extract_knowledge');
+      expect(opNames).toContain('brain_archive_sessions');
+      expect(opNames).toContain('brain_promote_proposals');
+      expect(opNames).toContain('brain_lifecycle');
       // Agent-specific ops (5)
       expect(opNames).toContain('health');
       expect(opNames).toContain('identity');
       expect(opNames).toContain('activate');
       expect(opNames).toContain('inject_claude_md');
       expect(opNames).toContain('setup');
-      // Total: 31
-      expect(facade.ops.length).toBe(31);
+      // Total: 42
+      expect(facade.ops.length).toBe(42);
     });
 
     it('search should query across all domains with ranked results', async () => {

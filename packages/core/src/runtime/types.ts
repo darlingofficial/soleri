@@ -1,5 +1,6 @@
 import type { Vault } from '../vault/vault.js';
 import type { Brain } from '../brain/brain.js';
+import type { BrainIntelligence } from '../brain/intelligence.js';
 import type { Planner } from '../planning/planner.js';
 import type { Curator } from '../curator/curator.js';
 import type { KeyPool } from '../llm/key-pool.js';
@@ -28,6 +29,7 @@ export interface AgentRuntime {
   config: AgentRuntimeConfig;
   vault: Vault;
   brain: Brain;
+  brainIntelligence: BrainIntelligence;
   planner: Planner;
   curator: Curator;
   keyPool: { openai: KeyPool; anthropic: KeyPool };

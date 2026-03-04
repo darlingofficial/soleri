@@ -9,61 +9,26 @@ import {
   jaccardSimilarity,
 } from '../text/similarity.js';
 import type { CogneeClient } from '../cognee/client.js';
+import type {
+  ScoringWeights,
+  ScoreBreakdown,
+  RankedResult,
+  SearchOptions,
+  CaptureResult,
+  BrainStats,
+  QueryContext,
+} from './types.js';
 
-// ─── Types ───────────────────────────────────────────────────────────
-
-export interface ScoringWeights {
-  semantic: number;
-  vector: number;
-  severity: number;
-  recency: number;
-  tagOverlap: number;
-  domainMatch: number;
-}
-
-export interface ScoreBreakdown {
-  semantic: number;
-  vector: number;
-  severity: number;
-  recency: number;
-  tagOverlap: number;
-  domainMatch: number;
-  total: number;
-}
-
-export interface RankedResult {
-  entry: IntelligenceEntry;
-  score: number;
-  breakdown: ScoreBreakdown;
-}
-
-export interface SearchOptions {
-  domain?: string;
-  type?: string;
-  severity?: string;
-  limit?: number;
-  tags?: string[];
-}
-
-export interface CaptureResult {
-  captured: boolean;
-  id: string;
-  autoTags: string[];
-  duplicate?: { id: string; similarity: number };
-  blocked?: boolean;
-}
-
-export interface BrainStats {
-  vocabularySize: number;
-  feedbackCount: number;
-  weights: ScoringWeights;
-}
-
-export interface QueryContext {
-  query: string;
-  domain?: string;
-  tags?: string[];
-}
+// Re-export types for backward compatibility
+export type {
+  ScoringWeights,
+  ScoreBreakdown,
+  RankedResult,
+  SearchOptions,
+  CaptureResult,
+  BrainStats,
+  QueryContext,
+} from './types.js';
 
 // ─── Severity scoring ──────────────────────────────────────────────
 

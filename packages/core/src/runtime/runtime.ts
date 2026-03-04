@@ -11,6 +11,7 @@ import { join } from 'node:path';
 import { homedir } from 'node:os';
 import { Vault } from '../vault/vault.js';
 import { Brain } from '../brain/brain.js';
+import { BrainIntelligence } from '../brain/intelligence.js';
 import { Planner } from '../planning/planner.js';
 import { Curator } from '../curator/curator.js';
 import { KeyPool, loadKeyPoolConfig } from '../llm/key-pool.js';
@@ -49,6 +50,9 @@ export function createAgentRuntime(config: AgentRuntimeConfig): AgentRuntime {
   // Brain — intelligence layer (TF-IDF scoring, auto-tagging, dedup)
   const brain = new Brain(vault);
 
+  // Brain Intelligence — pattern strengths, session knowledge, intelligence pipeline
+  const brainIntelligence = new BrainIntelligence(vault, brain);
+
   // Curator — vault self-maintenance (dedup, contradictions, grooming, health)
   const curator = new Curator(vault);
 
@@ -62,6 +66,7 @@ export function createAgentRuntime(config: AgentRuntimeConfig): AgentRuntime {
     config,
     vault,
     brain,
+    brainIntelligence,
     planner,
     curator,
     keyPool: { openai: openaiKeyPool, anthropic: anthropicKeyPool },

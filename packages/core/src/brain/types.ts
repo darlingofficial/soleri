@@ -1,0 +1,176 @@
+import type { IntelligenceEntry } from '../intelligence/types.js';
+
+// ─── Existing Brain Types (moved from brain.ts) ────────────────────
+
+export interface ScoringWeights {
+  semantic: number;
+  vector: number;
+  severity: number;
+  recency: number;
+  tagOverlap: number;
+  domainMatch: number;
+}
+
+export interface ScoreBreakdown {
+  semantic: number;
+  vector: number;
+  severity: number;
+  recency: number;
+  tagOverlap: number;
+  domainMatch: number;
+  total: number;
+}
+
+export interface RankedResult {
+  entry: IntelligenceEntry;
+  score: number;
+  breakdown: ScoreBreakdown;
+}
+
+export interface SearchOptions {
+  domain?: string;
+  type?: string;
+  severity?: string;
+  limit?: number;
+  tags?: string[];
+}
+
+export interface CaptureResult {
+  captured: boolean;
+  id: string;
+  autoTags: string[];
+  duplicate?: { id: string; similarity: number };
+  blocked?: boolean;
+}
+
+export interface BrainStats {
+  vocabularySize: number;
+  feedbackCount: number;
+  weights: ScoringWeights;
+}
+
+export interface QueryContext {
+  query: string;
+  domain?: string;
+  tags?: string[];
+}
+
+// ─── Brain Intelligence Types ──────────────────────────────────────
+
+export interface PatternStrength {
+  pattern: string;
+  domain: string;
+  strength: number;
+  usageScore: number;
+  spreadScore: number;
+  successScore: number;
+  recencyScore: number;
+  usageCount: number;
+  uniqueContexts: number;
+  successRate: number;
+  lastUsed: string;
+}
+
+export interface StrengthsQuery {
+  domain?: string;
+  minStrength?: number;
+  limit?: number;
+}
+
+export interface BrainSession {
+  id: string;
+  startedAt: string;
+  endedAt: string | null;
+  domain: string | null;
+  context: string | null;
+  toolsUsed: string[];
+  filesModified: string[];
+  planId: string | null;
+  planOutcome: string | null;
+}
+
+export interface SessionLifecycleInput {
+  action: 'start' | 'end';
+  sessionId?: string;
+  domain?: string;
+  context?: string;
+  toolsUsed?: string[];
+  filesModified?: string[];
+  planId?: string;
+  planOutcome?: string;
+}
+
+export interface KnowledgeProposal {
+  id: string;
+  sessionId: string;
+  rule: string;
+  type: 'pattern' | 'anti-pattern' | 'workflow';
+  title: string;
+  description: string;
+  confidence: number;
+  promoted: boolean;
+  createdAt: string;
+}
+
+export interface ExtractionResult {
+  sessionId: string;
+  proposals: KnowledgeProposal[];
+  rulesApplied: string[];
+}
+
+export interface GlobalPattern {
+  pattern: string;
+  domains: string[];
+  totalStrength: number;
+  avgStrength: number;
+  domainCount: number;
+}
+
+export interface DomainProfile {
+  domain: string;
+  topPatterns: Array<{ pattern: string; strength: number }>;
+  sessionCount: number;
+  avgSessionDuration: number;
+  lastActivity: string;
+}
+
+export interface BuildIntelligenceResult {
+  strengthsComputed: number;
+  globalPatterns: number;
+  domainProfiles: number;
+}
+
+export interface BrainIntelligenceStats {
+  strengths: number;
+  sessions: number;
+  activeSessions: number;
+  proposals: number;
+  promotedProposals: number;
+  globalPatterns: number;
+  domainProfiles: number;
+}
+
+export interface SessionContext {
+  recentSessions: BrainSession[];
+  toolFrequency: Array<{ tool: string; count: number }>;
+  fileFrequency: Array<{ file: string; count: number }>;
+}
+
+export interface BrainExportData {
+  strengths: PatternStrength[];
+  sessions: BrainSession[];
+  proposals: KnowledgeProposal[];
+  globalPatterns: GlobalPattern[];
+  domainProfiles: DomainProfile[];
+  exportedAt: string;
+}
+
+export interface BrainImportResult {
+  imported: {
+    strengths: number;
+    sessions: number;
+    proposals: number;
+    globalPatterns: number;
+    domainProfiles: number;
+  };
+}
