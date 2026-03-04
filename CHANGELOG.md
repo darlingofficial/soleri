@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## @soleri/forge@4.2.1 — 2026-03-04
+
+### Fixed
+
+- **Generated test template parameter shift** — `createCoreFacade()` calls in scaffolded agent tests were missing the `cognee` parameter (4th position), causing `llmClient` to land in the wrong slot and `llm_status` tests to fail with `isAvailable is not a function`
+- Extracted `makeCoreFacade()` helper in generated tests to prevent future signature drift
+
 ## create-soleri@1.0.0 — 2026-03-04
 
 ### Added
