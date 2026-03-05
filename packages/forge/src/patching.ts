@@ -109,12 +109,12 @@ export function patchClaudeMdContent(
   agentId: string,
   newDomains: string[],
 ): string | null {
-  const facadeId = agentId.replace(/-/g, '_');
+  const toolPrefix = agentId; // keep hyphens — matches MCP tool registration
   const bt = '`';
 
   // Filter out domains whose rows already exist (idempotent)
   const domainsToAdd = newDomains.filter((d) => {
-    const toolName = `${facadeId}_${d.replace(/-/g, '_')}`;
+    const toolName = `${toolPrefix}_${d.replace(/-/g, '_')}`;
     return !source.includes(`${toolName}`);
   });
 
@@ -136,7 +136,7 @@ export function patchClaudeMdContent(
   }
 
   const newRows = domainsToAdd.flatMap((d) => {
-    const toolName = `${facadeId}_${d.replace(/-/g, '_')}`;
+    const toolName = `${toolPrefix}_${d.replace(/-/g, '_')}`;
     return [
       `    '| ${d} patterns | ${bt}${toolName}${bt} | ${bt}get_patterns${bt} |',`,
       `    '| Search ${d} | ${bt}${toolName}${bt} | ${bt}search${bt} |',`,

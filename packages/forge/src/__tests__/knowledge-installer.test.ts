@@ -86,11 +86,11 @@ main();
     const content = `export function getClaudeMdContent(): string {
   return [
     '# Test Agent',
-    '| existing-domain patterns | \`test_agent_existing_domain\` | \`get_patterns\` |',
-    '| Search existing-domain | \`test_agent_existing_domain\` | \`search\` |',
-    '| Capture existing-domain | \`test_agent_existing_domain\` | \`capture\` |',
-    '| Memory search | \`test_agent_core\` | \`memory_search\` |',
-    '| Memory capture | \`test_agent_core\` | \`memory_capture\` |',
+    '| existing-domain patterns | \`test-agent_existing_domain\` | \`get_patterns\` |',
+    '| Search existing-domain | \`test-agent_existing_domain\` | \`search\` |',
+    '| Capture existing-domain | \`test-agent_existing_domain\` | \`capture\` |',
+    '| Memory search | \`test-agent_core\` | \`memory_search\` |',
+    '| Memory capture | \`test-agent_core\` | \`memory_capture\` |',
   ].join('\\n');
 }
 `;
@@ -478,7 +478,7 @@ import { Vault } from './vault/vault.js';
       const result = patchClaudeMdContent(sampleSource, 'my-agent', ['web-components']);
       expect(result).not.toBeNull();
 
-      expect(result).toContain('my_agent_web_components');
+      expect(result).toContain('my-agent_web_components');
     });
 
     it('should handle multiple new domains', () => {
@@ -564,7 +564,7 @@ import { Vault } from './vault/vault.js';
         'utf-8',
       );
       expect(patched).toContain('new-domain patterns');
-      expect(patched).toContain('test_agent_new_domain');
+      expect(patched).toContain('test-agent_new_domain');
     });
 
     it('should not patch source files when only updating existing domains', async () => {

@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## @soleri/cli@1.0.4 — 2026-03-05
+
+### Fixed
+
+- Tool name discrepancy — hook templates now use `{agentId}_core` (preserving hyphens) instead of converting to underscores, matching actual MCP tool registration
+
+## @soleri/forge@5.1.2 — 2026-03-05
+
+### Fixed
+
+- Tool name discrepancy in CLAUDE.md template, activate template, setup script, and patching — all now preserve hyphens in agentId to match MCP tool registration (`my-agent_core` not `my_agent_core`)
+
 ## @soleri/cli@1.0.3 — 2026-03-05
 
 ### Changed

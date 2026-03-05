@@ -45,8 +45,6 @@ function getAgentMeta(dir?: string): AgentMeta | null {
  * `then` and commands (which is a bash syntax error).
  */
 function buildAutoRouteScript(agentId: string): string {
-  const facadeId = agentId.replace(/-/g, '_');
-
   // Skip filters: each is a self-contained `if ...; then exit 0; fi`
   // so they're safe to join with &&.
   // Classification: one compound if/elif/fi block as a single string.
@@ -72,7 +70,7 @@ function buildAutoRouteScript(agentId: string): string {
       'fi',
     ].join('; '),
     'echo "[$mode] Detected intent: $intent ($matched)"',
-    `echo "Call ${facadeId}_core op:route_intent params:{ prompt: \\"<user message>\\" } to get behavior rules."`,
+    `echo "Call ${agentId}_core op:route_intent params:{ prompt: \\"<user message>\\" } to get behavior rules."`,
   ];
 
   return lines.join(' && ');
@@ -81,8 +79,6 @@ function buildAutoRouteScript(agentId: string): string {
 function generateClaudeCodeSettings(dir?: string): Record<string, string> {
   const meta = getAgentMeta(dir);
   const agentId = meta?.agentId ?? 'my-agent';
-  const facadeId = agentId.replace(/-/g, '_');
-
   const settings = JSON.stringify(
     {
       hooks: {
@@ -123,7 +119,7 @@ function generateClaudeCodeSettings(dir?: string): Record<string, string> {
             hooks: [
               {
                 type: 'command',
-                command: `echo "[${agentId}] session started — register project: ${facadeId}_core op:register params:{ projectPath: \\".\\" }" && echo "Check for active plans: ${facadeId}_core op:get_plan"`,
+                command: `echo "[${agentId}] session started — register project: ${agentId}_core op:register params:{ projectPath: \\".\\" }" && echo "Check for active plans: ${agentId}_core op:get_plan"`,
               },
             ],
           },

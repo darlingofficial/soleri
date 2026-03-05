@@ -74,7 +74,7 @@ if [ ! -f "$SETTINGS_FILE" ]; then
     "PreCompact": [
       {
         "type": "prompt",
-        "prompt": "Before context is compacted, capture a session summary by calling ${config.id.replace(/-/g, '_')}_core op:session_capture with a brief summary of what was accomplished, the topics covered, files modified, and tools used."
+        "prompt": "Before context is compacted, capture a session summary by calling ${config.id}_core op:session_capture with a brief summary of what was accomplished, the topics covered, files modified, and tools used."
       }
     ]
   }
@@ -93,7 +93,7 @@ else
       if (!settings.hooks.PreCompact) settings.hooks.PreCompact = [];
       settings.hooks.PreCompact.push({
         type: 'prompt',
-        prompt: 'Before context is compacted, capture a session summary by calling ${config.id.replace(/-/g, '_')}_core op:session_capture with a brief summary of what was accomplished, the topics covered, files modified, and tools used.'
+        prompt: 'Before context is compacted, capture a session summary by calling ${config.id}_core op:session_capture with a brief summary of what was accomplished, the topics covered, files modified, and tools used.'
       });
       fs.writeFileSync('$SETTINGS_FILE', JSON.stringify(settings, null, 2) + '\\n');
     "

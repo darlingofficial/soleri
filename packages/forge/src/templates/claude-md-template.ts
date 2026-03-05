@@ -10,7 +10,7 @@ import type { AgentConfig } from '../types.js';
  * backtick/template-literal escaping nightmares entirely.
  */
 export function generateClaudeMdTemplate(config: AgentConfig): string {
-  const facadeId = config.id.replace(/-/g, '_');
+  const toolPrefix = config.id; // keep hyphens — matches MCP tool registration
   const marker = `${config.id}:mode`;
   const bt = '`'; // backtick — keeps template clean
 
@@ -22,28 +22,28 @@ export function generateClaudeMdTemplate(config: AgentConfig): string {
     '',
     `## ${config.name} Integration`,
     '',
-    `**Activate:** "Hello, ${config.name}!" \u2192 ${bt}${facadeId}_core op:activate params:{ projectPath: "." }${bt}`,
-    `**Deactivate:** "Goodbye, ${config.name}!" \u2192 ${bt}${facadeId}_core op:activate params:{ deactivate: true }${bt}`,
+    `**Activate:** "Hello, ${config.name}!" \u2192 ${bt}${toolPrefix}_core op:activate params:{ projectPath: "." }${bt}`,
+    `**Deactivate:** "Goodbye, ${config.name}!" \u2192 ${bt}${toolPrefix}_core op:activate params:{ deactivate: true }${bt}`,
     '',
     'On activation, adopt the returned persona. Stay in character until deactivated.',
     '',
     '## Session Start',
     '',
-    `On every new session: ${bt}${facadeId}_core op:register params:{ projectPath: "." }${bt}`,
+    `On every new session: ${bt}${toolPrefix}_core op:register params:{ projectPath: "." }${bt}`,
     '',
     '## Facades',
     '',
     '| Need | Facade | Op |',
     '|------|--------|----|',
-    `| Health check | ${bt}${facadeId}_core${bt} | ${bt}health${bt} |`,
-    `| Search all | ${bt}${facadeId}_core${bt} | ${bt}search${bt} |`,
-    `| Vault stats | ${bt}${facadeId}_core${bt} | ${bt}vault_stats${bt} |`,
-    `| Identity | ${bt}${facadeId}_core${bt} | ${bt}identity${bt} |`,
+    `| Health check | ${bt}${toolPrefix}_core${bt} | ${bt}health${bt} |`,
+    `| Search all | ${bt}${toolPrefix}_core${bt} | ${bt}search${bt} |`,
+    `| Vault stats | ${bt}${toolPrefix}_core${bt} | ${bt}vault_stats${bt} |`,
+    `| Identity | ${bt}${toolPrefix}_core${bt} | ${bt}identity${bt} |`,
   ];
 
   // Domain-specific facade rows
   for (const d of config.domains) {
-    const toolName = `${facadeId}_${d.replace(/-/g, '_')}`;
+    const toolName = `${toolPrefix}_${d.replace(/-/g, '_')}`;
     mdLines.push(`| ${d} patterns | ${bt}${toolName}${bt} | ${bt}get_patterns${bt} |`);
     mdLines.push(`| Search ${d} | ${bt}${toolName}${bt} | ${bt}search${bt} |`);
     mdLines.push(`| Capture ${d} | ${bt}${toolName}${bt} | ${bt}capture${bt} |`);
@@ -51,28 +51,28 @@ export function generateClaudeMdTemplate(config: AgentConfig): string {
 
   // Memory + Session + Export + Brain + Planning rows
   mdLines.push(
-    `| Memory search | ${bt}${facadeId}_core${bt} | ${bt}memory_search${bt} |`,
-    `| Memory capture | ${bt}${facadeId}_core${bt} | ${bt}memory_capture${bt} |`,
-    `| Memory list | ${bt}${facadeId}_core${bt} | ${bt}memory_list${bt} |`,
-    `| Session capture | ${bt}${facadeId}_core${bt} | ${bt}session_capture${bt} |`,
-    `| Export knowledge | ${bt}${facadeId}_core${bt} | ${bt}export${bt} |`,
-    `| Record feedback | ${bt}${facadeId}_core${bt} | ${bt}record_feedback${bt} |`,
-    `| Rebuild vocabulary | ${bt}${facadeId}_core${bt} | ${bt}rebuild_vocabulary${bt} |`,
-    `| Brain stats | ${bt}${facadeId}_core${bt} | ${bt}brain_stats${bt} |`,
-    `| LLM status | ${bt}${facadeId}_core${bt} | ${bt}llm_status${bt} |`,
-    `| Create plan | ${bt}${facadeId}_core${bt} | ${bt}create_plan${bt} |`,
-    `| Get plan | ${bt}${facadeId}_core${bt} | ${bt}get_plan${bt} |`,
-    `| Approve plan | ${bt}${facadeId}_core${bt} | ${bt}approve_plan${bt} |`,
-    `| Update task | ${bt}${facadeId}_core${bt} | ${bt}update_task${bt} |`,
-    `| Complete plan | ${bt}${facadeId}_core${bt} | ${bt}complete_plan${bt} |`,
-    `| Route intent | ${bt}${facadeId}_core${bt} | ${bt}route_intent${bt} |`,
-    `| Morph mode | ${bt}${facadeId}_core${bt} | ${bt}morph${bt} |`,
-    `| Get behavior rules | ${bt}${facadeId}_core${bt} | ${bt}get_behavior_rules${bt} |`,
-    `| Get identity | ${bt}${facadeId}_core${bt} | ${bt}get_identity${bt} |`,
-    `| Update identity | ${bt}${facadeId}_core${bt} | ${bt}update_identity${bt} |`,
-    `| Add guideline | ${bt}${facadeId}_core${bt} | ${bt}add_guideline${bt} |`,
-    `| Remove guideline | ${bt}${facadeId}_core${bt} | ${bt}remove_guideline${bt} |`,
-    `| Rollback identity | ${bt}${facadeId}_core${bt} | ${bt}rollback_identity${bt} |`,
+    `| Memory search | ${bt}${toolPrefix}_core${bt} | ${bt}memory_search${bt} |`,
+    `| Memory capture | ${bt}${toolPrefix}_core${bt} | ${bt}memory_capture${bt} |`,
+    `| Memory list | ${bt}${toolPrefix}_core${bt} | ${bt}memory_list${bt} |`,
+    `| Session capture | ${bt}${toolPrefix}_core${bt} | ${bt}session_capture${bt} |`,
+    `| Export knowledge | ${bt}${toolPrefix}_core${bt} | ${bt}export${bt} |`,
+    `| Record feedback | ${bt}${toolPrefix}_core${bt} | ${bt}record_feedback${bt} |`,
+    `| Rebuild vocabulary | ${bt}${toolPrefix}_core${bt} | ${bt}rebuild_vocabulary${bt} |`,
+    `| Brain stats | ${bt}${toolPrefix}_core${bt} | ${bt}brain_stats${bt} |`,
+    `| LLM status | ${bt}${toolPrefix}_core${bt} | ${bt}llm_status${bt} |`,
+    `| Create plan | ${bt}${toolPrefix}_core${bt} | ${bt}create_plan${bt} |`,
+    `| Get plan | ${bt}${toolPrefix}_core${bt} | ${bt}get_plan${bt} |`,
+    `| Approve plan | ${bt}${toolPrefix}_core${bt} | ${bt}approve_plan${bt} |`,
+    `| Update task | ${bt}${toolPrefix}_core${bt} | ${bt}update_task${bt} |`,
+    `| Complete plan | ${bt}${toolPrefix}_core${bt} | ${bt}complete_plan${bt} |`,
+    `| Route intent | ${bt}${toolPrefix}_core${bt} | ${bt}route_intent${bt} |`,
+    `| Morph mode | ${bt}${toolPrefix}_core${bt} | ${bt}morph${bt} |`,
+    `| Get behavior rules | ${bt}${toolPrefix}_core${bt} | ${bt}get_behavior_rules${bt} |`,
+    `| Get identity | ${bt}${toolPrefix}_core${bt} | ${bt}get_identity${bt} |`,
+    `| Update identity | ${bt}${toolPrefix}_core${bt} | ${bt}update_identity${bt} |`,
+    `| Add guideline | ${bt}${toolPrefix}_core${bt} | ${bt}add_guideline${bt} |`,
+    `| Remove guideline | ${bt}${toolPrefix}_core${bt} | ${bt}remove_guideline${bt} |`,
+    `| Rollback identity | ${bt}${toolPrefix}_core${bt} | ${bt}rollback_identity${bt} |`,
   );
 
   mdLines.push(
@@ -82,7 +82,7 @@ export function generateClaudeMdTemplate(config: AgentConfig): string {
     'A UserPromptSubmit hook auto-classifies every prompt via keyword matching.',
     `When you see a ${bt}[MODE-NAME]${bt} indicator in the system context:`,
     '',
-    `1. Call ${bt}${facadeId}_core op:route_intent params:{ prompt: "<user message>" }${bt} to get full behavior rules`,
+    `1. Call ${bt}${toolPrefix}_core op:route_intent params:{ prompt: "<user message>" }${bt} to get full behavior rules`,
     '2. Follow the returned behavior rules for the detected mode',
     '3. Briefly acknowledge mode changes in your response (e.g., "Switching to FIX-MODE")',
     '',
@@ -103,7 +103,7 @@ export function generateClaudeMdTemplate(config: AgentConfig): string {
     '',
     'When seeking guidance: vault before codebase before web.',
     '',
-    `1. Search vault \u2014 ${bt}${facadeId}_core op:search${bt}`,
+    `1. Search vault \u2014 ${bt}${toolPrefix}_core op:search${bt}`,
     '2. Codebase \u2014 only if vault has nothing',
     '3. Web \u2014 last resort',
     '',
@@ -115,15 +115,15 @@ export function generateClaudeMdTemplate(config: AgentConfig): string {
     '',
     'A PreCompact hook is configured to call `session_capture` before context compaction.',
     'This automatically preserves session summaries as memories for future sessions.',
-    `To manually capture: ${bt}${facadeId}_core op:session_capture params:{ summary: "..." }${bt}`,
+    `To manually capture: ${bt}${toolPrefix}_core op:session_capture params:{ summary: "..." }${bt}`,
     '',
     '## Planning',
     '',
     'For multi-step tasks, use the planning system:',
-    `1. Create: ${bt}${facadeId}_core op:create_plan params:{ objective: "...", scope: "...", tasks: [...] }${bt}`,
-    `2. Approve: ${bt}${facadeId}_core op:approve_plan params:{ planId: "...", startExecution: true }${bt}`,
-    `3. Track: ${bt}${facadeId}_core op:update_task params:{ planId: "...", taskId: "...", status: "completed" }${bt}`,
-    `4. Complete: ${bt}${facadeId}_core op:complete_plan params:{ planId: "..." }${bt}`,
+    `1. Create: ${bt}${toolPrefix}_core op:create_plan params:{ objective: "...", scope: "...", tasks: [...] }${bt}`,
+    `2. Approve: ${bt}${toolPrefix}_core op:approve_plan params:{ planId: "...", startExecution: true }${bt}`,
+    `3. Track: ${bt}${toolPrefix}_core op:update_task params:{ planId: "...", taskId: "...", status: "completed" }${bt}`,
+    `4. Complete: ${bt}${toolPrefix}_core op:complete_plan params:{ planId: "..." }${bt}`,
     '',
     'Check activation response for recovered plans in `executing` state — remind the user.',
     '',

@@ -8,13 +8,13 @@ import type { AgentConfig } from '../types.js';
  * Uses array-joined pattern because generated code contains template literals.
  */
 export function generateActivate(config: AgentConfig): string {
-  const facadeId = config.id.replace(/-/g, '_');
+  const toolPrefix = config.id; // keep hyphens — matches MCP tool registration
   const _marker = `${config.id}:mode`;
 
   // Build tool recommendations from config domains
   const toolRecLines: string[] = [];
   for (const d of config.domains) {
-    const toolName = `${facadeId}_${d.replace(/-/g, '_')}`;
+    const toolName = `${toolPrefix}_${d.replace(/-/g, '_')}`;
     toolRecLines.push(`      { intent: 'search ${d}', facade: '${toolName}', op: 'search' },`);
     toolRecLines.push(
       `      { intent: '${d} patterns', facade: '${toolName}', op: 'get_patterns' },`,
@@ -114,9 +114,9 @@ export function generateActivate(config: AgentConfig): string {
     guidelineLines,
     '    ],',
     '    tool_recommendations: [',
-    `      { intent: 'health check', facade: '${facadeId}_core', op: 'health' },`,
-    `      { intent: 'search all', facade: '${facadeId}_core', op: 'search' },`,
-    `      { intent: 'vault stats', facade: '${facadeId}_core', op: 'vault_stats' },`,
+    `      { intent: 'health check', facade: '${toolPrefix}_core', op: 'health' },`,
+    `      { intent: 'search all', facade: '${toolPrefix}_core', op: 'search' },`,
+    `      { intent: 'vault stats', facade: '${toolPrefix}_core', op: 'vault_stats' },`,
     ...toolRecLines,
     '    ],',
     `    session_instruction: 'You are now ' + PERSONA.name + ', a ' + PERSONA.role + '. Stay in character for the ENTIRE session. ' +`,
