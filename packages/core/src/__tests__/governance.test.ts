@@ -287,6 +287,27 @@ describe('Governance', () => {
       expect(modified!.proposedData.severity).toBe('critical');
     });
 
+    it('should auto-capture into vault on modify with merged data', () => {
+      const id = runtime.governance.propose('/test', {
+        entryId: 'mod-cap-1',
+        title: 'Modify me',
+        type: 'pattern',
+        category: 'testing',
+        data: { severity: 'warning', description: 'Original desc', tags: ['test'] },
+      });
+
+      // Before modify — not in vault
+      expect(runtime.vault.get('mod-cap-1')).toBeNull();
+
+      runtime.governance.modifyProposal(id, { description: 'Improved desc' }, 'editor');
+
+      // After modify — captured with merged data
+      const entry = runtime.vault.get('mod-cap-1');
+      expect(entry).not.toBeNull();
+      expect(entry!.description).toBe('Improved desc');
+      expect(entry!.domain).toBe('testing');
+    });
+
     it('should return null when approving nonexistent proposal', () => {
       const result = runtime.governance.approveProposal(999);
       expect(result).toBeNull();

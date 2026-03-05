@@ -430,24 +430,7 @@ export class Governance {
   approveProposal(proposalId: number, decidedBy?: string): Proposal | null {
     const proposal = this.resolveProposal(proposalId, 'approved', decidedBy);
     if (!proposal) return null;
-
-    // Auto-capture into vault from proposal data
-    const data = proposal.proposedData as Record<string, unknown>;
-    const entryId = proposal.entryId ?? `proposal-${proposal.id}`;
-    this.vault.add({
-      id: entryId,
-      type: (proposal.type as 'pattern' | 'anti-pattern' | 'rule') ?? 'pattern',
-      domain: proposal.category,
-      title: proposal.title,
-      severity: (data.severity as 'critical' | 'warning' | 'suggestion') ?? 'warning',
-      description: (data.description as string) ?? proposal.title,
-      context: data.context as string | undefined,
-      example: data.example as string | undefined,
-      counterExample: data.counterExample as string | undefined,
-      why: data.why as string | undefined,
-      tags: (data.tags as string[]) ?? [],
-    });
-
+    this.captureFromProposal(proposal);
     return proposal;
   }
 
@@ -479,7 +462,9 @@ export class Governance {
       proposalId,
     );
 
-    return this.getProposalById(proposalId);
+    const proposal = this.getProposalById(proposalId);
+    if (proposal) this.captureFromProposal(proposal);
+    return proposal;
   }
 
   listPendingProposals(projectPath?: string, limit?: number): Proposal[] {
@@ -630,6 +615,24 @@ export class Governance {
       )
       .get(projectPath) as { count: number };
     return row.count;
+  }
+
+  private captureFromProposal(proposal: Proposal): void {
+    const data = proposal.proposedData as Record<string, unknown>;
+    const entryId = proposal.entryId ?? `proposal-${proposal.id}`;
+    this.vault.add({
+      id: entryId,
+      type: (proposal.type as 'pattern' | 'anti-pattern' | 'rule') ?? 'pattern',
+      domain: proposal.category,
+      title: proposal.title,
+      severity: (data.severity as 'critical' | 'warning' | 'suggestion') ?? 'warning',
+      description: (data.description as string) ?? proposal.title,
+      context: data.context as string | undefined,
+      example: data.example as string | undefined,
+      counterExample: data.counterExample as string | undefined,
+      why: data.why as string | undefined,
+      tags: (data.tags as string[]) ?? [],
+    });
   }
 
   private resolveProposal(
