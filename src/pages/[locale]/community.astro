@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import type { Locale } from '../../i18n/types';
+import { locales } from '../../i18n/types';
+import { communityContent } from '../../i18n/pages/community';
+import '../../styles/community.css';
+
+export function getStaticPaths() {
+  return locales.map((l) => ({ params: { locale: l } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const c = communityContent(locale);
+
+const iconPaths: Record<string, string> = {
+  github: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22',
+  discord: 'M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z',
+  email: '',
+};
+---
+<BaseLayout
+  title={c.title}
+  description={c.description}
+  lang={locale}
+  locale={locale}
+  isRoot={false}
+>
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="soleri-mark mark-hero"></div>
+    <p class="eyebrow">{c.eyebrow}</p>
+    <h1>{c.heading}</h1>
+    <p class="hero-subtitle">{c.subtitle}</p>
+  </section>
+
+  <!-- CHANNELS -->
+  <div class="channels">
+    {c.channels.map(ch => (
+      <a class="channel-card" href={ch.href} target="_blank" rel="noreferrer">
+        {ch.icon === 'email' ? (
+          <svg class="channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        ) : ch.icon === 'discord' ? (
+          <svg class="channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d={iconPaths.discord}/></svg>
+        ) : (
+          <svg class="channel-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={iconPaths.github}/></svg>
+        )}
+        <span class="channel-name">{ch.name}</span>
+        <span class="channel-desc">{ch.desc}</span>
+        <span class="channel-action" set:html={ch.action} />
+      </a>
+    ))}
+  </div>
+
+  <!-- WAYS TO CONTRIBUTE -->
+  <section class="ways-section">
+    <h2>{c.contributeTitle}</h2>
+    <p>{c.contributeSubtitle}</p>
+
+    <div class="ways-grid">
+      {c.contributeCards.map(card => (
+        <div class="way-card">
+          <h3>{card.title}</h3>
+          <p>{card.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ANNOUNCEMENTS -->
+  <section class="announcements-section">
+    <h2>{c.announcementsTitle}</h2>
+    <p>{c.announcementsSubtitle}</p>
+    <div id="announcements-container">
+      <div class="announcements-loading">{c.announcementsLoading}</div>
+    </div>
+    <a class="announcements-all" href="https://github.com/adrozdenko/soleri/discussions/categories/announcements" target="_blank" rel="noreferrer">{c.announcementsAll}</a>
+  </section>
+
+  <div class="soleri-mark mark-section" style="margin-top:48px;"></div>
+  <CTA locale={locale} />
+</BaseLayout>
+
+<script define:vars={{ emptyText: c.announcementsEmpty, readText: c.announcementsRead, lang: locale }}>
+  var container = document.getElementById("announcements-container");
+
+  function showEmpty() {
+    container.textContent = "";
+    var p = document.createElement("p");
+    p.className = "announcements-empty";
+    p.textContent = emptyText;
+    container.appendChild(p);
+  }
+
+  fetch("/api/discussions")
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (!data.discussions || data.discussions.length === 0) {
+        showEmpty();
+        return;
+      }
+
+      var dateLang = lang === "uk" ? "uk-UA" : lang === "it" ? "it-IT" : "en-US";
+
+      container.textContent = "";
+      var grid = document.createElement("div");
+      grid.className = "announcements-grid";
+
+      data.discussions.forEach(function (d) {
+        var date = new Date(d.createdAt);
+        var formatted = date.toLocaleDateString(dateLang, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        var card = document.createElement("a");
+        card.className = "announcement-card";
+        card.href = d.url;
+        card.target = "_blank";
+        card.rel = "noreferrer";
+
+        var dateEl = document.createElement("span");
+        dateEl.className = "announcement-date";
+        dateEl.textContent = formatted;
+        card.appendChild(dateEl);
+
+        var titleEl = document.createElement("span");
+        titleEl.className = "announcement-title";
+        titleEl.textContent = d.title;
+        card.appendChild(titleEl);
+
+        if (d.excerpt) {
+          var excerptEl = document.createElement("span");
+          excerptEl.className = "announcement-excerpt";
+          excerptEl.textContent = d.excerpt.length >= 197 ? d.excerpt + "..." : d.excerpt;
+          card.appendChild(excerptEl);
+        }
+
+        if (d.labels && d.labels.length > 0) {
+          var labelsEl = document.createElement("div");
+          labelsEl.className = "announcement-labels";
+          d.labels.forEach(function (l) {
+            var tag = document.createElement("span");
+            tag.className = "announcement-label";
+            tag.style.backgroundColor = "#" + l.color + "22";
+            tag.style.color = "#" + l.color;
+            tag.textContent = l.name;
+            labelsEl.appendChild(tag);
+          });
+          card.appendChild(labelsEl);
+        }
+
+        var readEl = document.createElement("span");
+        readEl.className = "announcement-read";
+        readEl.textContent = readText;
+        card.appendChild(readEl);
+
+        grid.appendChild(card);
+      });
+
+      container.appendChild(grid);
+    })
+    .catch(function () {
+      showEmpty();
+    });
+</script>

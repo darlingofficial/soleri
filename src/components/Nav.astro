@@ -1,0 +1,45 @@
+---
+import type { Locale } from '../i18n/types';
+import { locales, localeLabels } from '../i18n/types';
+import { t, getNavLinks } from '../i18n/ui';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  locale: Locale;
+  isRoot?: boolean;
+}
+
+const { locale, isRoot = false } = Astro.props;
+const navLinks = getNavLinks(locale);
+const brandHref = isRoot ? 'en/' : 'index.html';
+---
+<header class="nav">
+  <div class="brand">
+    <a href={brandHref}>
+      <div class="brand-top">
+        <p class="brand-name">Soleri</p>
+      </div>
+    </a>
+  </div>
+  <nav class="nav-links" aria-label="Main navigation">
+    {navLinks.map(link => (
+      <a href={isRoot ? link.href.slice(1) : link.href.split('/').pop()}>{link.label}</a>
+    ))}
+  </nav>
+  <div class="nav-actions">
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="lang-switcher">
+      {locales.map(l => (
+        <a href={`/${l}/`} class={l === locale ? 'active' : ''}>{localeLabels[l]}</a>
+      ))}
+    </div>
+    <ThemeToggle />
+  </div>
+</header>
+<p class="brand-meta">{t(locale, 'brand.meta')}</p>

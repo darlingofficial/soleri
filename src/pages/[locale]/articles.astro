@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import type { Locale } from '../../i18n/types';
+import { locales } from '../../i18n/types';
+import { articlesContent } from '../../i18n/pages/articles';
+import '../../styles/articles.css';
+
+export function getStaticPaths() {
+  return locales.map((l) => ({ params: { locale: l } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const c = articlesContent(locale);
+---
+<BaseLayout
+  title={c.title}
+  description={c.description}
+  lang={locale}
+  locale={locale}
+  isRoot={false}
+>
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="soleri-mark mark-hero"></div>
+    <p class="eyebrow">{c.eyebrow}</p>
+    <h1>{c.heading}</h1>
+    <p class="hero-subtitle">{c.subtitle}</p>
+  </section>
+
+  <!-- ARTICLES -->
+  <div id="articles-container">
+    <div class="articles-loading">{c.loading}</div>
+  </div>
+
+  <!-- SUBSCRIBE -->
+  <div class="subscribe-bar">
+    <p>{c.subscribeText}</p>
+    <a href="https://drozdnco.substack.com" target="_blank" rel="noreferrer">{c.subscribeLink}</a>
+  </div>
+
+  <div class="soleri-mark mark-section" style="margin-top:48px;"></div>
+  <CTA locale={locale} />
+</BaseLayout>
+
+<script define:vars={{ emptyText: c.empty, emptyLinkText: c.emptyLink, readLinkText: c.readLink, errorText: c.errorLoading, lang: locale }}>
+  var container = document.getElementById("articles-container");
+
+  function showEmpty(message) {
+    container.textContent = "";
+    var div = document.createElement("div");
+    div.className = "articles-empty";
+    var p = document.createElement("p");
+    p.textContent = message;
+    div.appendChild(p);
+    var link = document.createElement("a");
+    link.className = "subscribe-link";
+    link.href = "https://drozdnco.substack.com";
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    link.textContent = emptyLinkText;
+    div.appendChild(link);
+    container.appendChild(div);
+  }
+
+  fetch("/api/feed")
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (!data.articles || data.articles.length === 0) {
+        showEmpty(emptyText);
+        return;
+      }
+
+      container.textContent = "";
+      var grid = document.createElement("div");
+      grid.className = "articles-grid";
+
+      var dateLang = lang === "uk" ? "uk-UA" : lang === "it" ? "it-IT" : "en-US";
+
+      data.articles.forEach(function (a) {
+        var date = new Date(a.pubDate);
+        var formatted = date.toLocaleDateString(dateLang, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+        var excerpt = a.description || "";
+        if (excerpt.length >= 277) excerpt = excerpt + "...";
+
+        var card = document.createElement("a");
+        card.className = "article-card";
+        card.href = a.link;
+        card.target = "_blank";
+        card.rel = "noreferrer";
+
+        if (a.coverImage) {
+          var img = document.createElement("img");
+          img.className = "article-image";
+          img.src = a.coverImage;
+          img.alt = a.title;
+          img.loading = "lazy";
+          card.appendChild(img);
+        }
+
+        var body = document.createElement("div");
+        body.className = "article-body";
+
+        var dateEl = document.createElement("span");
+        dateEl.className = "article-date";
+        dateEl.textContent = formatted;
+        body.appendChild(dateEl);
+
+        var titleEl = document.createElement("span");
+        titleEl.className = "article-title";
+        titleEl.textContent = a.title;
+        body.appendChild(titleEl);
+
+        var excerptEl = document.createElement("span");
+        excerptEl.className = "article-excerpt";
+        excerptEl.textContent = excerpt;
+        body.appendChild(excerptEl);
+
+        var readEl = document.createElement("span");
+        readEl.className = "article-read";
+        readEl.textContent = readLinkText;
+        body.appendChild(readEl);
+
+        card.appendChild(body);
+        grid.appendChild(card);
+      });
+
+      container.appendChild(grid);
+    })
+    .catch(function () {
+      showEmpty(errorText);
+    });
+</script>

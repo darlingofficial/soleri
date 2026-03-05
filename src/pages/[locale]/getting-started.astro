@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import { t } from '../../i18n/ui';
+import { locales } from '../../i18n/types';
+import type { Locale } from '../../i18n/types';
+import { gettingStartedContent } from '../../i18n/pages/getting-started';
+import '../../styles/getting-started.css';
+
+export function getStaticPaths() {
+  return locales.map(locale => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+const c = gettingStartedContent(locale);
+---
+<BaseLayout
+  title={c.title}
+  description={c.description}
+  lang={locale}
+  locale={locale}
+>
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="soleri-mark mark-hero"></div>
+    <p class="eyebrow">{c.eyebrow}</p>
+    <h1>{c.heroTitle}</h1>
+    <p class="hero-subtitle">{c.heroSubtitle}</p>
+  </section>
+
+  <!-- STEPS -->
+  <div class="steps">
+    {c.steps.map((step, i) => (
+      <div class="step">
+        <div class="step-number">{i + 1}</div>
+        <div class="step-content">
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+          {step.isInstallCmd ? (
+            <div class="install-cmd" set:html={step.code} />
+          ) : (
+            <div class="feature-code" set:html={step.code} />
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="soleri-mark mark-section"></div>
+
+  <!-- NEXT STEPS -->
+  <section class="section spacious">
+    <div class="section-header">
+      <h2 class="section-title">{c.nextTitle}</h2>
+    </div>
+    <div class="next-links">
+      {c.nextLinks.map(link => (
+        <a class="next-link" href={link.href}>
+          <span class="next-link-title">{link.title}</span>
+          <span class="next-link-desc" set:html={link.desc} />
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <div class="soleri-mark mark-section"></div>
+
+  <CTA locale={locale} />
+</BaseLayout>

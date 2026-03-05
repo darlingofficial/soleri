@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import { t } from '../../i18n/ui';
+import { locales } from '../../i18n/types';
+import type { Locale } from '../../i18n/types';
+import { homeContent } from '../../i18n/pages/home';
+
+export function getStaticPaths() {
+  return locales.map(locale => ({ params: { locale }, props: { locale } }));
+}
+
+const { locale } = Astro.props as { locale: Locale };
+const c = homeContent(locale);
+---
+<BaseLayout
+  title={t(locale, 'site.title')}
+  description={t(locale, 'site.description')}
+  lang={locale}
+  locale={locale}
+>
+  <section class="hero">
+    <div class="hero-image" id="hero-image">
+      <img src="/solar_punk.png" alt={t(locale, 'hero.img.alt')} loading="eager" fetchpriority="high" />
+      <div class="hero-overlay">
+        <p class="eyebrow">{t(locale, 'hero.eyebrow')}</p>
+        <h1 class="hero-title" set:html={c.heroTitle} />
+        <p class="hero-text">{c.heroText}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://github.com/adrozdenko/soleri" target="_blank" rel="noreferrer">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            {t(locale, 'hero.btn.github')}
+          </a>
+          <a class="btn btn-secondary" href="#how-section">{t(locale, 'hero.btn.how')}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title" style="margin-bottom: 20px;">{c.principleTitle}</h2>
+    <div class="compare">
+      <div class="compare-panel">
+        <div class="compare-label before">{c.compareBeforeLabel}</div>
+        <div class="compare-content" set:html={c.compareBefore} />
+      </div>
+      <div class="compare-panel">
+        <div class="compare-label after">{c.compareAfterLabel}</div>
+        <div class="compare-content" set:html={c.compareAfter} />
+      </div>
+    </div>
+  </section>
+
+  <section class="how-section" id="how-section">
+    <div class="how-grid">
+      <div class="how-left">
+        <h2 class="how-title" set:html={c.howTitle} />
+        <p class="how-text" set:html={c.howText} />
+        <div class="engine-row">
+          {c.engineTags.map(tag => <span class="engine-tag">{tag}</span>)}
+        </div>
+      </div>
+      <div class="how-right">
+        {c.features.map(f => (
+          <div class="feature-item">
+            <h3 set:html={f.title} />
+            <p>{f.text}</p>
+            <div class="feature-code" set:html={f.code} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section spacious">
+    <div class="section-header">
+      <h2 class="section-title">{c.cardsTitle}</h2>
+    </div>
+    <div class="persona-cards">
+      {c.cards.map(card => (
+        <article class={`persona-card ${card.cls}`}>
+          <h3>{card.title}</h3>
+          <p class="persona-domain">{card.domain}</p>
+          <ul class="persona-capabilities">
+            {card.capabilities.map(cap => <li>{cap}</li>)}
+          </ul>
+          <p class="persona-ships">{card.ships}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section tight">
+    <aside class="terminal">
+      <div class="terminal-header">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-title">{c.terminalTitle}</span>
+      </div>
+      <pre class="terminal-code" set:html={c.terminalCode} />
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">{c.archTitle}</h2>
+      <p class="section-subtitle">{c.archSubtitle}</p>
+    </div>
+    <div class="architecture">
+      {c.layers.map(layer => (
+        <div class="layer">
+          <p class="layer-label"><span class="layer-bar"></span> {layer.label}</p>
+          <p class="layer-value" set:html={layer.text} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <div class="soleri-mark mark-section"></div>
+  <CTA locale={locale} />
+</BaseLayout>

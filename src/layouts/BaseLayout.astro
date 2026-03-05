@@ -1,0 +1,180 @@
+---
+import type { Locale } from '../i18n/types';
+import { locales, hreflangMap, SITE_URL } from '../i18n/types';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/base.css';
+import '../styles/globals.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: string;
+  locale: Locale;
+  isRoot?: boolean;
+  ogImage?: string;
+}
+
+const { title, description, lang, locale, isRoot = false, ogImage = '/solar_punk.png' } = Astro.props;
+
+// Build canonical and hreflang URLs
+const pagePath = isRoot ? '' : Astro.url.pathname.replace(`/${locale}/`, '');
+const canonicalUrl = `${SITE_URL}/${locale}/${pagePath}`;
+const hreflangUrls = locales.map(l => ({
+  locale: l,
+  hreflang: hreflangMap[l],
+  url: `${SITE_URL}/${l}/${pagePath}`,
+}));
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${SITE_URL}${ogImage}`;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Canonical + hreflang -->
+    <link rel="canonical" href={canonicalUrl} />
+    {hreflangUrls.map(h => (
+      <link rel="alternate" hreflang={h.hreflang} href={h.url} />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={`${SITE_URL}/en/`} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={lang} />
+    <meta property="og:site_name" content="Soleri" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'Soleri',
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'Cross-platform',
+      description: 'Open-source framework for persistent memory, structured knowledge, and context that compounds over time.',
+      url: SITE_URL,
+      license: 'https://opensource.org/licenses/Apache-2.0',
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+      author: { '@type': 'Organization', name: 'Drozd&Co', url: SITE_URL },
+    })} />
+  </head>
+  <body data-theme="light">
+    <div class="page">
+      <!-- Ambient solarpunk glow orbs -->
+      <div class="glow glow-amber"></div>
+      <div class="glow glow-green"></div>
+      <div class="glow glow-teal"></div>
+      <div class="grid-bg"></div>
+      <div class="grid-rays">
+        <div class="ray ray-h"          style="top:154px; --anim:chase-h-a; --dur:40s; --del:0s;"></div>
+        <div class="ray ray-h ray-teal" style="top:440px; --anim:chase-h-b; --dur:35s; --del:3s;"></div>
+        <div class="ray ray-h"          style="top:770px; --anim:chase-h-c; --dur:45s; --del:8s;"></div>
+        <div class="ray ray-h ray-teal" style="top:1100px;--anim:chase-h-a; --dur:38s; --del:12s;"></div>
+        <div class="ray ray-h"          style="top:1474px;--anim:chase-h-b; --dur:42s; --del:5s;"></div>
+        <div class="ray ray-h ray-teal" style="top:1870px;--anim:chase-h-c; --dur:36s; --del:18s;"></div>
+        <div class="ray ray-h"          style="top:2200px;--anim:chase-h-a; --dur:44s; --del:10s;"></div>
+        <div class="ray ray-h ray-teal" style="top:2640px;--anim:chase-h-b; --dur:40s; --del:22s;"></div>
+        <div class="ray ray-h"          style="top:3080px;--anim:chase-h-c; --dur:38s; --del:15s;"></div>
+      </div>
+
+      <main class="container">
+        <Nav locale={locale} isRoot={isRoot} />
+
+        <slot />
+
+        <Footer locale={locale} />
+      </main>
+    </div>
+
+    <script is:inline>
+      (function () {
+        var body = document.body;
+        var btn = document.getElementById("theme-toggle");
+
+        function setTheme(t) {
+          body.setAttribute("data-theme", t);
+          btn.setAttribute("aria-label", t === "dark" ? "Switch to light theme" : "Switch to dark theme");
+          localStorage.setItem("soleri-theme", t);
+        }
+
+        // Initial theme — no transition
+        var saved = localStorage.getItem("soleri-theme");
+        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        setTheme(saved || (prefersDark ? "dark" : "light"));
+
+        btn.addEventListener("click", function () {
+          var next = body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+
+          // Fallback for browsers without View Transitions API
+          if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            setTheme(next);
+            return;
+          }
+
+          var transition = document.startViewTransition(function () {
+            setTheme(next);
+          });
+
+          transition.ready.then(function () {
+            var rect = btn.getBoundingClientRect();
+            var x = rect.left + rect.width / 2;
+            var y = rect.top + rect.height / 2;
+            var radius = Math.hypot(
+              Math.max(x, window.innerWidth - x),
+              Math.max(y, window.innerHeight - y)
+            );
+
+            document.documentElement.animate(
+              {
+                clipPath: [
+                  "circle(0px at " + x + "px " + y + "px)",
+                  "circle(" + radius + "px at " + x + "px " + y + "px)"
+                ]
+              },
+              {
+                duration: 600,
+                easing: "ease-in-out",
+                pseudoElement: "::view-transition-new(root)"
+              }
+            );
+          });
+        });
+
+        // Mobile menu toggle
+        var menuBtn = document.getElementById("menu-toggle");
+        var navLinks = document.querySelector(".nav-links");
+        if (menuBtn && navLinks) {
+          menuBtn.addEventListener("click", function () {
+            navLinks.classList.toggle("open");
+          });
+          document.addEventListener("click", function (e) {
+            if (!e.target.closest(".nav-links") && !e.target.closest(".menu-toggle")) {
+              navLinks.classList.remove("open");
+            }
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
