@@ -1,6 +1,10 @@
 /**
  * Generate a domain-specific facade for the agent.
  * Each domain gets a facade with search, get_patterns, and list ops.
+ *
+ * @deprecated v4 legacy only — v5 agents use createDomainFacade() from
+ * @soleri/core which includes governance gating. This template is only
+ * used by domain-manager.ts for pre-v5 agents.
  */
 export function generateDomainFacade(agentId: string, domain: string): string {
   const facadeName = `${agentId}_${domain.replace(/-/g, '_')}`;
