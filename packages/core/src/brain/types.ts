@@ -55,6 +55,43 @@ export interface QueryContext {
   tags?: string[];
 }
 
+// ─── Feedback Types ───────────────────────────────────────────────
+
+export type FeedbackType = 'accepted' | 'dismissed' | 'modified' | 'failed';
+export type FeedbackSource = 'search' | 'recommendation' | 'tool-execution' | 'explicit';
+
+export interface FeedbackInput {
+  query: string;
+  entryId: string;
+  action: FeedbackType;
+  source?: FeedbackSource;
+  confidence?: number;
+  duration?: number;
+  context?: string;
+  reason?: string;
+}
+
+export interface FeedbackEntry {
+  id: number;
+  query: string;
+  entryId: string;
+  action: FeedbackType;
+  source: FeedbackSource;
+  confidence: number;
+  duration: number | null;
+  context: string;
+  reason: string | null;
+  createdAt: number;
+}
+
+export interface FeedbackStats {
+  total: number;
+  byAction: Record<string, number>;
+  bySource: Record<string, number>;
+  acceptanceRate: number;
+  averageConfidence: number;
+}
+
 // ─── Brain Intelligence Types ──────────────────────────────────────
 
 export interface PatternStrength {
@@ -87,6 +124,7 @@ export interface BrainSession {
   filesModified: string[];
   planId: string | null;
   planOutcome: string | null;
+  extractedAt: string | null;
 }
 
 export interface SessionLifecycleInput {

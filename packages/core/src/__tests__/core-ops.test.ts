@@ -34,8 +34,8 @@ describe('createCoreOps', () => {
     return op;
   }
 
-  it('should return 45 ops', () => {
-    expect(ops.length).toBe(45);
+  it('should return 48 ops', () => {
+    expect(ops.length).toBe(48);
   });
 
   it('should have all expected op names', () => {
@@ -60,6 +60,8 @@ describe('createCoreOps', () => {
     expect(names).toContain('complete_plan');
     // Brain
     expect(names).toContain('record_feedback');
+    expect(names).toContain('brain_feedback');
+    expect(names).toContain('brain_feedback_stats');
     expect(names).toContain('rebuild_vocabulary');
     expect(names).toContain('brain_stats');
     expect(names).toContain('llm_status');
@@ -75,6 +77,7 @@ describe('createCoreOps', () => {
     expect(names).toContain('brain_archive_sessions');
     expect(names).toContain('brain_promote_proposals');
     expect(names).toContain('brain_lifecycle');
+    expect(names).toContain('brain_reset_extracted');
     // Curator
     expect(names).toContain('curator_status');
     expect(names).toContain('curator_detect_duplicates');
@@ -203,6 +206,47 @@ describe('createCoreOps', () => {
       query: 'core ops memory',
     })) as unknown[];
     expect(results.length).toBeGreaterThan(0);
+  });
+
+  it('brain_feedback should record enhanced feedback', async () => {
+    runtime.vault.seed([
+      {
+        id: 'bf-1',
+        type: 'pattern',
+        domain: 'testing',
+        title: 'Brain feedback test',
+        severity: 'warning',
+        description: 'Test.',
+        tags: ['test'],
+      },
+    ]);
+    ops = createCoreOps(runtime);
+    const result = (await findOp('brain_feedback').handler({
+      query: 'test',
+      entryId: 'bf-1',
+      action: 'modified',
+      source: 'recommendation',
+      confidence: 0.8,
+    })) as { id: number; action: string; source: string };
+    expect(result.id).toBeGreaterThan(0);
+    expect(result.action).toBe('modified');
+    expect(result.source).toBe('recommendation');
+  });
+
+  it('brain_feedback_stats should return stats', async () => {
+    const stats = (await findOp('brain_feedback_stats').handler({})) as {
+      total: number;
+      acceptanceRate: number;
+    };
+    expect(typeof stats.total).toBe('number');
+    expect(typeof stats.acceptanceRate).toBe('number');
+  });
+
+  it('brain_reset_extracted should return reset count', async () => {
+    const result = (await findOp('brain_reset_extracted').handler({ all: true })) as {
+      reset: number;
+    };
+    expect(typeof result.reset).toBe('number');
   });
 
   it('export should return bundles', async () => {

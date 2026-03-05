@@ -121,11 +121,75 @@ export class Vault {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         query TEXT NOT NULL,
         entry_id TEXT NOT NULL,
-        action TEXT NOT NULL CHECK(action IN ('accepted', 'dismissed')),
+        action TEXT NOT NULL CHECK(action IN ('accepted', 'dismissed', 'modified', 'failed')),
+        source TEXT NOT NULL DEFAULT 'search',
+        confidence REAL NOT NULL DEFAULT 0.6,
+        duration INTEGER,
+        context TEXT NOT NULL DEFAULT '{}',
+        reason TEXT,
         created_at INTEGER NOT NULL DEFAULT (unixepoch())
       );
       CREATE INDEX IF NOT EXISTS idx_brain_feedback_query ON brain_feedback(query);
     `);
+    this.migrateBrainSchema();
+  }
+
+  /**
+   * Migrate brain_feedback table from old schema (accepted/dismissed only)
+   * to new schema with source, confidence, duration, context, reason columns.
+   * Also adds extracted_at to brain_sessions if it exists.
+   */
+  private migrateBrainSchema(): void {
+    // Check if brain_feedback needs migration (old schema lacks 'source' column)
+    const columns = this.db.prepare('PRAGMA table_info(brain_feedback)').all() as Array<{
+      name: string;
+    }>;
+    const hasSource = columns.some((c) => c.name === 'source');
+
+    if (!hasSource && columns.length > 0) {
+      // Old table exists without new columns — rebuild with expanded schema
+      this.db.transaction(() => {
+        this.db
+          .prepare(`
+          CREATE TABLE brain_feedback_new (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            query TEXT NOT NULL,
+            entry_id TEXT NOT NULL,
+            action TEXT NOT NULL CHECK(action IN ('accepted', 'dismissed', 'modified', 'failed')),
+            source TEXT NOT NULL DEFAULT 'search',
+            confidence REAL NOT NULL DEFAULT 0.6,
+            duration INTEGER,
+            context TEXT NOT NULL DEFAULT '{}',
+            reason TEXT,
+            created_at INTEGER NOT NULL DEFAULT (unixepoch())
+          )
+        `)
+          .run();
+        this.db
+          .prepare(`
+          INSERT INTO brain_feedback_new (id, query, entry_id, action, created_at)
+            SELECT id, query, entry_id, action, created_at FROM brain_feedback
+        `)
+          .run();
+        this.db.prepare('DROP TABLE brain_feedback').run();
+        this.db.prepare('ALTER TABLE brain_feedback_new RENAME TO brain_feedback').run();
+        this.db
+          .prepare('CREATE INDEX IF NOT EXISTS idx_brain_feedback_query ON brain_feedback(query)')
+          .run();
+      })();
+    }
+
+    // Add extracted_at to brain_sessions if it exists but lacks the column
+    try {
+      const sessionCols = this.db.prepare('PRAGMA table_info(brain_sessions)').all() as Array<{
+        name: string;
+      }>;
+      if (sessionCols.length > 0 && !sessionCols.some((c) => c.name === 'extracted_at')) {
+        this.db.prepare('ALTER TABLE brain_sessions ADD COLUMN extracted_at TEXT').run();
+      }
+    } catch {
+      // brain_sessions table doesn't exist yet — BrainIntelligence will create it
+    }
   }
 
   seed(entries: IntelligenceEntry[]): number {

@@ -13,10 +13,10 @@ import type { AgentRuntime } from './types.js';
 import type { GuidelineCategory, OperationalMode } from '../control/types.js';
 
 /**
- * Create the 45 generic core operations for an agent runtime.
+ * Create the 48 generic core operations for an agent runtime.
  *
  * Groups: search/vault (4), memory (4), export (1), planning (5),
- *         brain (4), brain intelligence (11), curator (8), control (8).
+ *         brain (7), brain intelligence (11), curator (8), control (8).
  */
 export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
   const {
@@ -358,6 +358,52 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
       },
     },
     {
+      name: 'brain_feedback',
+      description:
+        'Enhanced feedback with typed actions (accepted/dismissed/modified/failed), source tracking, confidence, duration, and reason.',
+      auth: 'write',
+      schema: z.object({
+        query: z.string().describe('The original search query'),
+        entryId: z.string().describe('The entry ID'),
+        action: z.enum(['accepted', 'dismissed', 'modified', 'failed']),
+        source: z
+          .enum(['search', 'recommendation', 'tool-execution', 'explicit'])
+          .optional()
+          .describe("Feedback source. Default 'search'."),
+        confidence: z.number().optional().describe('Confidence 0-1. Default 0.6.'),
+        duration: z.number().optional().describe('Duration in ms.'),
+        context: z.string().optional().describe("JSON context string. Default '{}'."),
+        reason: z.string().optional().describe('Human-readable reason.'),
+      }),
+      handler: async (params) => {
+        const entry = brain.recordFeedback({
+          query: params.query as string,
+          entryId: params.entryId as string,
+          action: params.action as 'accepted' | 'dismissed' | 'modified' | 'failed',
+          source: params.source as
+            | 'search'
+            | 'recommendation'
+            | 'tool-execution'
+            | 'explicit'
+            | undefined,
+          confidence: params.confidence as number | undefined,
+          duration: params.duration as number | undefined,
+          context: params.context as string | undefined,
+          reason: params.reason as string | undefined,
+        });
+        return entry;
+      },
+    },
+    {
+      name: 'brain_feedback_stats',
+      description:
+        'Feedback statistics — counts by action and source, acceptance rate, average confidence.',
+      auth: 'read',
+      handler: async () => {
+        return brain.getFeedbackStats();
+      },
+    },
+    {
       name: 'rebuild_vocabulary',
       description: 'Force rebuild the TF-IDF vocabulary from all vault entries.',
       auth: 'write',
@@ -555,6 +601,25 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
           filesModified: params.filesModified as string[] | undefined,
           planId: params.planId as string | undefined,
           planOutcome: params.planOutcome as string | undefined,
+        });
+      },
+    },
+
+    {
+      name: 'brain_reset_extracted',
+      description:
+        'Reset extraction status on brain sessions, allowing re-extraction. Filter by sessionId, since date, or all.',
+      auth: 'write',
+      schema: z.object({
+        sessionId: z.string().optional().describe('Reset a specific session.'),
+        since: z.string().optional().describe('Reset sessions extracted since this ISO date.'),
+        all: z.boolean().optional().describe('Reset all extracted sessions.'),
+      }),
+      handler: async (params) => {
+        return brainIntelligence.resetExtracted({
+          sessionId: params.sessionId as string | undefined,
+          since: params.since as string | undefined,
+          all: params.all as boolean | undefined,
         });
       },
     },

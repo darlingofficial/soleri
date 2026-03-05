@@ -741,6 +741,137 @@ describe('Brain', () => {
     });
   });
 
+  // ─── Enhanced Feedback ─────────────────────────────────────
+
+  describe('enhanced feedback', () => {
+    beforeEach(() => {
+      vault.seed([makeEntry({ id: 'fb-1', title: 'Feedback test pattern', tags: ['feedback'] })]);
+      brain = new Brain(vault);
+    });
+
+    it('should accept legacy 3-arg form (backward compat)', () => {
+      brain.recordFeedback('test query', 'fb-1', 'accepted');
+      const stats = brain.getFeedbackStats();
+      expect(stats.total).toBe(1);
+      expect(stats.byAction['accepted']).toBe(1);
+    });
+
+    it('should accept FeedbackInput and return FeedbackEntry', () => {
+      const entry = brain.recordFeedback({
+        query: 'test query',
+        entryId: 'fb-1',
+        action: 'modified',
+        source: 'recommendation',
+        confidence: 0.85,
+        duration: 1200,
+        reason: 'adjusted wording',
+      });
+      expect(entry).toBeDefined();
+      expect(entry.action).toBe('modified');
+      expect(entry.source).toBe('recommendation');
+      expect(entry.confidence).toBe(0.85);
+      expect(entry.duration).toBe(1200);
+      expect(entry.reason).toBe('adjusted wording');
+      expect(entry.id).toBeGreaterThan(0);
+    });
+
+    it('should accept modified and failed action types', () => {
+      brain.recordFeedback({ query: 'q1', entryId: 'fb-1', action: 'modified' });
+      brain.recordFeedback({ query: 'q2', entryId: 'fb-1', action: 'failed' });
+      const stats = brain.getFeedbackStats();
+      expect(stats.total).toBe(2);
+      expect(stats.byAction['modified']).toBe(1);
+      expect(stats.byAction['failed']).toBe(1);
+    });
+
+    it('should use default source and confidence when not provided', () => {
+      const entry = brain.recordFeedback({ query: 'q1', entryId: 'fb-1', action: 'accepted' });
+      expect(entry.source).toBe('search');
+      expect(entry.confidence).toBe(0.6);
+    });
+  });
+
+  // ─── Feedback Stats ───────────────────────────────────────
+
+  describe('getFeedbackStats', () => {
+    beforeEach(() => {
+      vault.seed([makeEntry({ id: 'fs-1', tags: ['stats'] })]);
+      brain = new Brain(vault);
+    });
+
+    it('should return zero stats on empty feedback', () => {
+      const stats = brain.getFeedbackStats();
+      expect(stats.total).toBe(0);
+      expect(stats.acceptanceRate).toBe(0);
+      expect(stats.averageConfidence).toBe(0);
+    });
+
+    it('should compute acceptance rate correctly', () => {
+      brain.recordFeedback('q1', 'fs-1', 'accepted');
+      brain.recordFeedback('q2', 'fs-1', 'dismissed');
+      brain.recordFeedback('q3', 'fs-1', 'accepted');
+      const stats = brain.getFeedbackStats();
+      expect(stats.total).toBe(3);
+      expect(stats.acceptanceRate).toBeCloseTo(2 / 3, 2);
+    });
+
+    it('should group by action and source', () => {
+      brain.recordFeedback({ query: 'q1', entryId: 'fs-1', action: 'accepted', source: 'search' });
+      brain.recordFeedback({
+        query: 'q2',
+        entryId: 'fs-1',
+        action: 'modified',
+        source: 'recommendation',
+      });
+      brain.recordFeedback({
+        query: 'q3',
+        entryId: 'fs-1',
+        action: 'failed',
+        source: 'tool-execution',
+      });
+      const stats = brain.getFeedbackStats();
+      expect(stats.byAction['accepted']).toBe(1);
+      expect(stats.byAction['modified']).toBe(1);
+      expect(stats.byAction['failed']).toBe(1);
+      expect(stats.bySource['search']).toBe(1);
+      expect(stats.bySource['recommendation']).toBe(1);
+      expect(stats.bySource['tool-execution']).toBe(1);
+    });
+
+    it('should compute average confidence', () => {
+      brain.recordFeedback({ query: 'q1', entryId: 'fs-1', action: 'accepted', confidence: 0.9 });
+      brain.recordFeedback({ query: 'q2', entryId: 'fs-1', action: 'dismissed', confidence: 0.3 });
+      const stats = brain.getFeedbackStats();
+      expect(stats.averageConfidence).toBeCloseTo(0.6, 2);
+    });
+  });
+
+  // ─── Recompute Weights with Modified/Failed ──────────────
+
+  describe('recomputeWeights with modified/failed', () => {
+    beforeEach(() => {
+      vault.seed([makeEntry({ id: 'rw-1', tags: ['weights'] })]);
+      brain = new Brain(vault);
+    });
+
+    it('should exclude failed from weight computation', () => {
+      // Add enough feedback to exceed threshold (30)
+      for (let i = 0; i < 20; i++) {
+        brain.recordFeedback('q', 'rw-1', 'accepted');
+      }
+      for (let i = 0; i < 10; i++) {
+        brain.recordFeedback({ query: 'q', entryId: 'rw-1', action: 'failed' });
+      }
+      // Failed entries should not count toward total for weight adaptation
+      // 20 accepted out of 20 relevant = 100% accept rate
+      const stats = brain.getStats();
+      // Weights should have adapted since we have 30+ total but only 20 non-failed
+      // (threshold is 30, total is 30, but only 20 are non-failed so threshold not met)
+      // The recomputeWeights() counts non-failed, which is 20 < 30, so weights stay default
+      expect(stats.weights.semantic).toBeCloseTo(0.4, 2);
+    });
+  });
+
   // ─── Graceful Degradation ───────────────────────────────────
 
   describe('graceful degradation', () => {

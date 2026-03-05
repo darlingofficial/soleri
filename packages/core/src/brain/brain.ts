@@ -17,6 +17,9 @@ import type {
   CaptureResult,
   BrainStats,
   QueryContext,
+  FeedbackInput,
+  FeedbackEntry,
+  FeedbackStats,
 } from './types.js';
 
 // Re-export types for backward compatibility
@@ -268,14 +271,109 @@ export class Brain {
     return result;
   }
 
-  recordFeedback(query: string, entryId: string, action: 'accepted' | 'dismissed'): void {
+  recordFeedback(query: string, entryId: string, action: 'accepted' | 'dismissed'): void;
+  recordFeedback(input: FeedbackInput): FeedbackEntry;
+  recordFeedback(
+    queryOrInput: string | FeedbackInput,
+    entryId?: string,
+    action?: 'accepted' | 'dismissed',
+  ): void | FeedbackEntry {
     const db = this.vault.getDb();
-    db.prepare('INSERT INTO brain_feedback (query, entry_id, action) VALUES (?, ?, ?)').run(
-      query,
-      entryId,
-      action,
+
+    // Normalize to FeedbackInput
+    const input: FeedbackInput =
+      typeof queryOrInput === 'string'
+        ? { query: queryOrInput, entryId: entryId!, action: action! }
+        : queryOrInput;
+
+    db.prepare(
+      `INSERT INTO brain_feedback (query, entry_id, action, source, confidence, duration, context, reason)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    ).run(
+      input.query,
+      input.entryId,
+      input.action,
+      input.source ?? 'search',
+      input.confidence ?? 0.6,
+      input.duration ?? null,
+      input.context ?? '{}',
+      input.reason ?? null,
     );
     this.recomputeWeights();
+
+    // Return FeedbackEntry only for the object overload
+    if (typeof queryOrInput !== 'string') {
+      const row = db
+        .prepare(
+          'SELECT * FROM brain_feedback WHERE query = ? AND entry_id = ? ORDER BY id DESC LIMIT 1',
+        )
+        .get(input.query, input.entryId) as {
+        id: number;
+        query: string;
+        entry_id: string;
+        action: string;
+        source: string;
+        confidence: number;
+        duration: number | null;
+        context: string;
+        reason: string | null;
+        created_at: number;
+      };
+      return {
+        id: row.id,
+        query: row.query,
+        entryId: row.entry_id,
+        action: row.action as FeedbackEntry['action'],
+        source: row.source as FeedbackEntry['source'],
+        confidence: row.confidence,
+        duration: row.duration,
+        context: row.context,
+        reason: row.reason,
+        createdAt: row.created_at,
+      };
+    }
+  }
+
+  getFeedbackStats(): FeedbackStats {
+    const db = this.vault.getDb();
+
+    const total = (
+      db.prepare('SELECT COUNT(*) as count FROM brain_feedback').get() as { count: number }
+    ).count;
+
+    const byAction: Record<string, number> = {};
+    const actionRows = db
+      .prepare('SELECT action, COUNT(*) as count FROM brain_feedback GROUP BY action')
+      .all() as Array<{ action: string; count: number }>;
+    for (const row of actionRows) {
+      byAction[row.action] = row.count;
+    }
+
+    const bySource: Record<string, number> = {};
+    const sourceRows = db
+      .prepare('SELECT source, COUNT(*) as count FROM brain_feedback GROUP BY source')
+      .all() as Array<{ source: string; count: number }>;
+    for (const row of sourceRows) {
+      bySource[row.source] = row.count;
+    }
+
+    const accepted = byAction['accepted'] ?? 0;
+    const acceptanceRate = total > 0 ? accepted / total : 0;
+
+    const avgConf =
+      (
+        db.prepare('SELECT AVG(confidence) as avg FROM brain_feedback').get() as {
+          avg: number | null;
+        }
+      ).avg ?? 0;
+
+    return {
+      total,
+      byAction,
+      bySource,
+      acceptanceRate,
+      averageConfidence: avgConf,
+    };
   }
 
   async getRelevantPatterns(context: QueryContext): Promise<RankedResult[]> {
@@ -503,8 +601,11 @@ export class Brain {
 
   private recomputeWeights(): void {
     const db = this.vault.getDb();
+    // Exclude 'failed' from weight computation — system errors don't indicate relevance
     const feedbackCount = (
-      db.prepare('SELECT COUNT(*) as count FROM brain_feedback').get() as { count: number }
+      db.prepare("SELECT COUNT(*) as count FROM brain_feedback WHERE action != 'failed'").get() as {
+        count: number;
+      }
     ).count;
     if (feedbackCount < FEEDBACK_THRESHOLD) {
       this.weights = { ...DEFAULT_WEIGHTS };
@@ -516,7 +617,13 @@ export class Brain {
         .prepare("SELECT COUNT(*) as count FROM brain_feedback WHERE action = 'accepted'")
         .get() as { count: number }
     ).count;
-    const acceptRate = feedbackCount > 0 ? accepted / feedbackCount : 0.5;
+    // 'modified' counts as 0.5 positive — user adjusted but didn't dismiss
+    const modified = (
+      db
+        .prepare("SELECT COUNT(*) as count FROM brain_feedback WHERE action = 'modified'")
+        .get() as { count: number }
+    ).count;
+    const acceptRate = feedbackCount > 0 ? (accepted + modified * 0.5) / feedbackCount : 0.5;
 
     const semanticDelta = (acceptRate - 0.5) * WEIGHT_BOUND * 2;
 

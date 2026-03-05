@@ -557,6 +557,7 @@ describe('BrainIntelligence', () => {
           filesModified: [],
           planId: null,
           planOutcome: null,
+          extractedAt: null,
         },
       ],
       proposals: [],
@@ -609,6 +610,7 @@ describe('BrainIntelligence', () => {
           filesModified: [],
           planId: null,
           planOutcome: null,
+          extractedAt: null,
         },
       ],
       proposals: [],
@@ -619,5 +621,129 @@ describe('BrainIntelligence', () => {
 
     const result = runtime.brainIntelligence.importData(data);
     expect(result.imported.sessions).toBe(0); // Duplicate ignored
+  });
+
+  // ─── extractedAt Tracking ──────────────────────────────────
+
+  it('should set extractedAt when extractKnowledge is called', () => {
+    const session = runtime.brainIntelligence.lifecycle({
+      action: 'start',
+      sessionId: 'ext-1',
+      domain: 'testing',
+      toolsUsed: ['search', 'search', 'search', 'search'],
+    });
+    runtime.brainIntelligence.lifecycle({
+      action: 'end',
+      sessionId: 'ext-1',
+    });
+
+    // Before extraction, extractedAt should be null
+    const ctx = runtime.brainIntelligence.getSessionContext(10);
+    const before = ctx.recentSessions.find((s) => s.id === 'ext-1');
+    expect(before?.extractedAt).toBeNull();
+
+    // Extract knowledge
+    runtime.brainIntelligence.extractKnowledge('ext-1');
+
+    // After extraction, extractedAt should be set
+    const ctx2 = runtime.brainIntelligence.getSessionContext(10);
+    const after = ctx2.recentSessions.find((s) => s.id === 'ext-1');
+    expect(after?.extractedAt).not.toBeNull();
+  });
+
+  // ─── resetExtracted ────────────────────────────────────────
+
+  it('should reset extractedAt for a specific session', () => {
+    runtime.brainIntelligence.lifecycle({
+      action: 'start',
+      sessionId: 'reset-1',
+      toolsUsed: ['a', 'a', 'a'],
+    });
+    runtime.brainIntelligence.lifecycle({ action: 'end', sessionId: 'reset-1' });
+    runtime.brainIntelligence.extractKnowledge('reset-1');
+
+    const result = runtime.brainIntelligence.resetExtracted({ sessionId: 'reset-1' });
+    expect(result.reset).toBe(1);
+
+    const ctx = runtime.brainIntelligence.getSessionContext(10);
+    const session = ctx.recentSessions.find((s) => s.id === 'reset-1');
+    expect(session?.extractedAt).toBeNull();
+  });
+
+  it('should reset all extracted sessions', () => {
+    runtime.brainIntelligence.lifecycle({
+      action: 'start',
+      sessionId: 'reset-a',
+      toolsUsed: ['a', 'a', 'a'],
+    });
+    runtime.brainIntelligence.lifecycle({ action: 'end', sessionId: 'reset-a' });
+    runtime.brainIntelligence.extractKnowledge('reset-a');
+
+    runtime.brainIntelligence.lifecycle({
+      action: 'start',
+      sessionId: 'reset-b',
+      toolsUsed: ['b', 'b', 'b'],
+    });
+    runtime.brainIntelligence.lifecycle({ action: 'end', sessionId: 'reset-b' });
+    runtime.brainIntelligence.extractKnowledge('reset-b');
+
+    const result = runtime.brainIntelligence.resetExtracted({ all: true });
+    expect(result.reset).toBe(2);
+  });
+
+  it('should return 0 when nothing to reset', () => {
+    const result = runtime.brainIntelligence.resetExtracted({ all: true });
+    expect(result.reset).toBe(0);
+  });
+
+  it('should return 0 when no filter is provided', () => {
+    const result = runtime.brainIntelligence.resetExtracted();
+    expect(result.reset).toBe(0);
+  });
+
+  it('should allow re-extraction after reset', () => {
+    runtime.brainIntelligence.lifecycle({
+      action: 'start',
+      sessionId: 'reext-1',
+      toolsUsed: ['search', 'search', 'search'],
+    });
+    runtime.brainIntelligence.lifecycle({ action: 'end', sessionId: 'reext-1' });
+
+    const first = runtime.brainIntelligence.extractKnowledge('reext-1');
+    expect(first.proposals.length).toBeGreaterThan(0);
+
+    runtime.brainIntelligence.resetExtracted({ sessionId: 'reext-1' });
+
+    const second = runtime.brainIntelligence.extractKnowledge('reext-1');
+    expect(second.proposals.length).toBeGreaterThan(0);
+  });
+
+  // ─── computeStrengths with modified feedback ───────────────
+
+  it('should weight modified feedback at 0.5 in computeStrengths', () => {
+    // Seed an entry for feedback to reference
+    runtime.vault.seed([
+      {
+        id: 'str-1',
+        type: 'pattern',
+        domain: 'testing',
+        title: 'Strength test pattern',
+        severity: 'warning',
+        description: 'Testing strength computation with modified feedback.',
+        tags: ['test'],
+      },
+    ]);
+
+    // Record feedback: 1 accepted, 1 modified, 1 failed
+    runtime.brain.recordFeedback({ query: 'q1', entryId: 'str-1', action: 'accepted' });
+    runtime.brain.recordFeedback({ query: 'q2', entryId: 'str-1', action: 'modified' });
+    runtime.brain.recordFeedback({ query: 'q3', entryId: 'str-1', action: 'failed' });
+
+    const strengths = runtime.brainIntelligence.computeStrengths();
+    const s = strengths.find((p) => p.pattern === 'Strength test pattern');
+    expect(s).toBeDefined();
+
+    // successRate = (1 + 0.5) / (3 - 1) = 1.5/2 = 0.75
+    expect(s!.successRate).toBeCloseTo(0.75, 2);
   });
 });

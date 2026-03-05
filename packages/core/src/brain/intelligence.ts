@@ -77,7 +77,8 @@ export class BrainIntelligence {
         tools_used TEXT NOT NULL DEFAULT '[]',
         files_modified TEXT NOT NULL DEFAULT '[]',
         plan_id TEXT,
-        plan_outcome TEXT
+        plan_outcome TEXT,
+        extracted_at TEXT
       );
 
       CREATE TABLE IF NOT EXISTS brain_proposals (
@@ -179,6 +180,7 @@ export class BrainIntelligence {
       files_modified: string;
       plan_id: string | null;
       plan_outcome: string | null;
+      extracted_at: string | null;
     }>;
 
     const sessions = rows.map((r) => this.rowToSession(r));
@@ -230,6 +232,8 @@ export class BrainIntelligence {
                 COUNT(*) as total,
                 SUM(CASE WHEN action = 'accepted' THEN 1 ELSE 0 END) as accepted,
                 SUM(CASE WHEN action = 'dismissed' THEN 1 ELSE 0 END) as dismissed,
+                SUM(CASE WHEN action = 'modified' THEN 1 ELSE 0 END) as modified,
+                SUM(CASE WHEN action = 'failed' THEN 1 ELSE 0 END) as failed,
                 MAX(created_at) as last_used
          FROM brain_feedback
          GROUP BY entry_id`,
@@ -239,6 +243,8 @@ export class BrainIntelligence {
       total: number;
       accepted: number;
       dismissed: number;
+      modified: number;
+      failed: number;
       last_used: string;
     }>;
 
@@ -265,7 +271,10 @@ export class BrainIntelligence {
       const spreadScore = Math.min(25, (uniqueContexts / SPREAD_MAX) * 25);
 
       // Success score: 25 * successRate
-      const successRate = row.total > 0 ? row.accepted / row.total : 0;
+      // modified = 0.5 positive, failed = excluded (system error, not relevance)
+      const relevantTotal = row.total - row.failed;
+      const successRate =
+        relevantTotal > 0 ? (row.accepted + row.modified * 0.5) / relevantTotal : 0;
       const successScore = 25 * successRate;
 
       // Recency score: max(0, 25 * (1 - daysSince / RECENCY_DECAY_DAYS))
@@ -510,11 +519,47 @@ export class BrainIntelligence {
       }
     }
 
+    // Mark session as extracted
+    db.prepare("UPDATE brain_sessions SET extracted_at = datetime('now') WHERE id = ?").run(
+      sessionId,
+    );
+
     return {
       sessionId,
       proposals,
       rulesApplied: [...new Set(rulesApplied)],
     };
+  }
+
+  resetExtracted(options?: { sessionId?: string; since?: string; all?: boolean }): {
+    reset: number;
+  } {
+    const db = this.vault.getDb();
+
+    if (options?.sessionId) {
+      const info = db
+        .prepare(
+          'UPDATE brain_sessions SET extracted_at = NULL WHERE id = ? AND extracted_at IS NOT NULL',
+        )
+        .run(options.sessionId);
+      return { reset: info.changes };
+    }
+
+    if (options?.since) {
+      const info = db
+        .prepare('UPDATE brain_sessions SET extracted_at = NULL WHERE extracted_at >= ?')
+        .run(options.since);
+      return { reset: info.changes };
+    }
+
+    if (options?.all) {
+      const info = db
+        .prepare('UPDATE brain_sessions SET extracted_at = NULL WHERE extracted_at IS NOT NULL')
+        .run();
+      return { reset: info.changes };
+    }
+
+    return { reset: 0 };
   }
 
   getProposals(options?: {
@@ -725,6 +770,7 @@ export class BrainIntelligence {
       files_modified: string;
       plan_id: string | null;
       plan_outcome: string | null;
+      extracted_at: string | null;
     }>;
     const sessions = sessionRows.map((r) => this.rowToSession(r));
 
@@ -790,8 +836,8 @@ export class BrainIntelligence {
       // Import sessions
       const insertSession = db.prepare(
         `INSERT OR IGNORE INTO brain_sessions
-         (id, started_at, ended_at, domain, context, tools_used, files_modified, plan_id, plan_outcome)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+         (id, started_at, ended_at, domain, context, tools_used, files_modified, plan_id, plan_outcome, extracted_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       );
       for (const s of data.sessions) {
         const changes = insertSession.run(
@@ -804,6 +850,7 @@ export class BrainIntelligence {
           JSON.stringify(s.filesModified),
           s.planId,
           s.planOutcome,
+          s.extractedAt ?? null,
         );
         if (changes.changes > 0) result.imported.sessions++;
       }
@@ -883,6 +930,7 @@ export class BrainIntelligence {
           files_modified: string;
           plan_id: string | null;
           plan_outcome: string | null;
+          extracted_at: string | null;
         }
       | undefined;
 
@@ -900,6 +948,7 @@ export class BrainIntelligence {
     files_modified: string;
     plan_id: string | null;
     plan_outcome: string | null;
+    extracted_at: string | null;
   }): BrainSession {
     return {
       id: row.id,
@@ -911,6 +960,7 @@ export class BrainIntelligence {
       filesModified: JSON.parse(row.files_modified) as string[],
       planId: row.plan_id,
       planOutcome: row.plan_outcome,
+      extractedAt: row.extracted_at,
     };
   }
 

@@ -196,6 +196,10 @@ ${domainDescribes}
       expect(opNames).toContain('brain_archive_sessions');
       expect(opNames).toContain('brain_promote_proposals');
       expect(opNames).toContain('brain_lifecycle');
+      // Enhanced brain ops (3)
+      expect(opNames).toContain('brain_feedback');
+      expect(opNames).toContain('brain_feedback_stats');
+      expect(opNames).toContain('brain_reset_extracted');
       // Agent-specific ops (5)
       expect(opNames).toContain('health');
       expect(opNames).toContain('identity');
@@ -211,8 +215,8 @@ ${domainDescribes}
       expect(opNames).toContain('route_intent');
       expect(opNames).toContain('morph');
       expect(opNames).toContain('get_behavior_rules');
-      // Total: 50
-      expect(facade.ops.length).toBe(50);
+      // Total: 53
+      expect(facade.ops.length).toBe(53);
     });
 
     it('search should query across all domains with ranked results', async () => {
