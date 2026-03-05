@@ -1,0 +1,116 @@
+/* ============================================
+ * PRIMITIVES — Soleri Solarpunk Color Scales
+ * Single source of truth for raw color values.
+ * ============================================ */
+:root {
+  /* Primary (Amber/Gold) */
+  --color-primary-25: #FBF6ED;
+  --color-primary-50: #F9EAD6;
+  --color-primary-100: #FADFBD;
+  --color-primary-200: #F6D09D;
+  --color-primary-300: #EFBC75;
+  --color-primary-400: #E8A847;
+  --color-primary-500: #C88F37;
+  --color-primary-600: #6D4300;
+  --color-primary-700: #5E3D03;
+  --color-primary-800: #4F3816;
+  --color-primary-900: #41321F;
+
+  /* Secondary (Teal/Cyan) */
+  --color-secondary-50: #D7E2E7;
+  --color-secondary-100: #C1DDE9;
+  --color-secondary-200: #A3D4E7;
+  --color-secondary-300: #78C4E1;
+  --color-secondary-400: #50B1D3;
+  --color-secondary-500: #239DC3;
+  --color-secondary-600: #005774;
+  --color-secondary-700: #004A62;
+  --color-secondary-800: #023E50;
+  --color-secondary-900: #0F323F;
+
+  /* Tertiary (Green/Leaf) */
+  --color-tertiary-50: #E4F1DD;
+  --color-tertiary-100: #D5EDC9;
+  --color-tertiary-200: #C1E3AF;
+  --color-tertiary-300: #A9D68F;
+  --color-tertiary-400: #91C96E;
+  --color-tertiary-500: #7AAC5B;
+  --color-tertiary-600: #345918;
+  --color-tertiary-700: #324E1F;
+  --color-tertiary-800: #304423;
+  --color-tertiary-900: #2D3A26;
+
+  /* Neutral (Slate/Steel) */
+  --color-neutral-50: #D9DCDF;
+  --color-neutral-100: #CED4DB;
+  --color-neutral-200: #BFC7D3;
+  --color-neutral-300: #A9B4C5;
+  --color-neutral-400: #919EB2;
+  --color-neutral-500: #7A899F;
+  --color-neutral-550: #5C6B7F;
+  --color-neutral-600: #3F4E63;
+  --color-neutral-700: #374253;
+  --color-neutral-800: #2E3744;
+  --color-neutral-900: #252C36;
+  --color-neutral-950: #1A1F26;
+  --color-neutral-975: #151A21;
+
+  /* Neutral extended */
+  --color-neutral-940: #1E2530;
+
+  /* Absolutes */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  /* Toggle (Zinc scale) */
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-950: #09090b;
+
+  /* Status */
+  --color-error-500: #FF5F57;
+  --color-error-600: #C05050;
+
+  /* RGB channels — for alpha compositing: rgb(var(--x-rgb) / alpha) */
+  --color-primary-400-rgb: 232 168 71;
+  --color-primary-500-rgb: 200 143 55;
+  --color-primary-900-rgb: 65 50 31;
+  --color-secondary-500-rgb: 35 157 195;
+  --color-secondary-900-rgb: 15 50 63;
+  --color-tertiary-400-rgb: 145 201 110;
+  --color-tertiary-500-rgb: 122 172 91;
+  --color-tertiary-900-rgb: 45 58 38;
+  --color-neutral-200-rgb: 191 199 211;
+  --color-neutral-700-rgb: 55 66 83;
+  --color-neutral-800-rgb: 46 55 68;
+  --color-neutral-900-rgb: 37 44 54;
+  --color-error-600-rgb: 200 80 80;
+  --color-white-rgb: 255 255 255;
+  --color-black-rgb: 0 0 0;
+
+  /* Ray glow derived colors (ambient light particles) */
+  --color-ray-amber-soft-rgb: 255 220 140;
+  --color-ray-amber-tip-rgb: 255 240 180;
+  --color-ray-amber-halo-rgb: 255 230 160;
+  --color-ray-teal-mid-rgb: 120 200 230;
+  --color-ray-teal-tip-rgb: 180 230 250;
+  --color-ray-teal-halo-rgb: 160 220 240;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px 0 rgb(var(--color-black-rgb) / 0.06);
+  --shadow-md: 0 8px 24px -8px rgb(var(--color-black-rgb) / 0.12);
+  --shadow-lg: 0 16px 48px -12px rgb(var(--color-black-rgb) / 0.15);
+  --shadow-glow-amber: 0 0 60px -12px rgb(var(--color-primary-400-rgb) / 0.2);
+  --shadow-glow-teal: 0 0 60px -12px rgb(var(--color-secondary-500-rgb) / 0.15);
+  --shadow-glow-green: 0 0 60px -12px rgb(var(--color-tertiary-400-rgb) / 0.15);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+}

@@ -1,0 +1,69 @@
+/* ============================================
+ * LIGHT THEME — warm, sunlit solarpunk
+ * Pure token references — zero raw hex or RGB.
+ * ============================================ */
+[data-theme="light"] {
+  --bg: var(--color-white);
+  --bg-warm: var(--color-primary-25);
+  --surface: color-mix(in srgb, var(--color-white) 92%, var(--color-secondary-300) 8%);
+  --surface-glass: rgb(var(--color-white-rgb) / 0.78);
+  --surface-elevated: var(--color-white);
+  --foreground: var(--color-primary-700);
+  --foreground-strong: var(--color-primary-800);
+  --muted: var(--color-neutral-550);
+  --border: var(--color-neutral-200);
+  --border-subtle: rgb(var(--color-neutral-200-rgb) / 0.4);
+  --accent-primary: var(--color-primary-400);
+  --accent-teal: var(--color-secondary-600);
+  --accent-green: var(--color-tertiary-600);
+  --ring: var(--color-secondary-500);
+  --code-bg: color-mix(in srgb, var(--color-primary-50) 60%, var(--color-white) 40%);
+  --code-fg: var(--color-neutral-800);
+  --hero-gradient: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--color-white) 92%, var(--color-secondary-300) 8%) 0%,
+    color-mix(in srgb, var(--color-white) 94%, var(--color-tertiary-300) 6%) 100%
+  );
+  --card-gradient: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-white) 95%, var(--color-secondary-300) 5%) 0%,
+    color-mix(in srgb, var(--color-white) 92%, var(--color-primary-100) 8%) 100%
+  );
+  --glow-amber-opacity: 0.4;
+  --glow-green-opacity: 0.3;
+  --glow-teal-opacity: 0.25;
+  --botanical-opacity: 0.05;
+  --code-border: var(--border);
+  --code-prompt: var(--color-tertiary-600);
+  --code-cmd: var(--color-secondary-600);
+  --code-arg: var(--color-primary-600);
+  --code-comment: var(--color-neutral-500);
+  --code-key: var(--color-secondary-600);
+  --code-val: var(--color-primary-600);
+  --code-ok: var(--color-tertiary-600);
+
+  /* Alpha variants for page CSS */
+  --accent-primary-15: rgb(var(--color-primary-400-rgb) / 0.15);
+  --accent-primary-12: rgb(var(--color-primary-400-rgb) / 0.12);
+  --accent-primary-10: rgb(var(--color-primary-400-rgb) / 0.1);
+  --accent-teal-15: rgb(var(--color-secondary-500-rgb) / 0.15);
+  --accent-teal-10: rgb(var(--color-secondary-500-rgb) / 0.1);
+  --accent-teal-08: rgb(var(--color-secondary-500-rgb) / 0.08);
+  --accent-teal-06: rgb(var(--color-secondary-500-rgb) / 0.06);
+  --accent-teal-03: rgb(var(--color-secondary-500-rgb) / 0.03);
+  --accent-teal-02: rgb(var(--color-secondary-500-rgb) / 0.02);
+  --accent-green-15: rgb(var(--color-tertiary-400-rgb) / 0.15);
+  --accent-green-12: rgb(var(--color-tertiary-400-rgb) / 0.12);
+  --accent-green-10: rgb(var(--color-tertiary-400-rgb) / 0.1);
+  --accent-green-06: rgb(var(--color-tertiary-400-rgb) / 0.06);
+  --neutral-700-80: rgb(var(--color-neutral-700-rgb) / 0.8);
+  --neutral-700-60: rgb(var(--color-neutral-700-rgb) / 0.6);
+  --neutral-700-50: rgb(var(--color-neutral-700-rgb) / 0.5);
+
+  /* Toggle tokens */
+  --toggle-track-bg: var(--color-white);
+  --toggle-track-border: var(--color-zinc-200);
+  --toggle-thumb-bg: var(--color-zinc-200);
+  --toggle-icon-fg: var(--color-zinc-700);
+  --toggle-bg-icon: var(--color-zinc-600);
+}

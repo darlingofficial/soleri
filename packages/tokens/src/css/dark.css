@@ -1,0 +1,70 @@
+/* ============================================
+ * DARK THEME — deep, bioluminescent
+ * Pure token references — zero raw hex or RGB.
+ * ============================================ */
+[data-theme="dark"] {
+  --bg: var(--color-neutral-950);
+  --bg-warm: var(--color-neutral-940);
+  --surface: rgb(var(--color-neutral-800-rgb) / 0.7);
+  --surface-glass: rgb(var(--color-neutral-800-rgb) / 0.55);
+  --surface-elevated: var(--color-neutral-800);
+  --foreground: var(--color-neutral-100);
+  --foreground-strong: var(--color-neutral-50);
+  --muted: var(--color-neutral-400);
+  --border: rgb(var(--color-neutral-700-rgb) / 0.8);
+  --border-subtle: rgb(var(--color-neutral-700-rgb) / 0.5);
+  --accent-primary: var(--color-primary-400);
+  --accent-teal: var(--color-secondary-400);
+  --accent-green: var(--color-tertiary-400);
+  --ring: var(--color-secondary-400);
+  --code-bg: var(--color-neutral-975);
+  --code-fg: var(--color-neutral-100);
+  --hero-gradient: linear-gradient(
+    160deg,
+    rgb(var(--color-primary-400-rgb) / 0.06) 0%,
+    rgb(var(--color-secondary-500-rgb) / 0.04) 40%,
+    rgb(var(--color-tertiary-400-rgb) / 0.04) 100%
+  );
+  --card-gradient: linear-gradient(
+    180deg,
+    rgb(var(--color-neutral-800-rgb) / 0.6) 0%,
+    rgb(var(--color-neutral-900-rgb) / 0.4) 100%
+  );
+  --glow-amber-opacity: 0.14;
+  --glow-green-opacity: 0.1;
+  --glow-teal-opacity: 0.08;
+  --botanical-opacity: 0.04;
+  --code-border: rgb(var(--color-neutral-700-rgb) / 0.5);
+  --code-prompt: var(--color-tertiary-400);
+  --code-cmd: var(--color-secondary-300);
+  --code-arg: var(--color-primary-300);
+  --code-comment: var(--color-neutral-500);
+  --code-key: var(--color-secondary-300);
+  --code-val: var(--color-primary-300);
+  --code-ok: var(--color-tertiary-300);
+
+  /* Alpha variants for page CSS */
+  --accent-primary-15: rgb(var(--color-primary-400-rgb) / 0.15);
+  --accent-primary-12: rgb(var(--color-primary-400-rgb) / 0.12);
+  --accent-primary-10: rgb(var(--color-primary-400-rgb) / 0.1);
+  --accent-teal-15: rgb(var(--color-secondary-500-rgb) / 0.15);
+  --accent-teal-10: rgb(var(--color-secondary-500-rgb) / 0.1);
+  --accent-teal-08: rgb(var(--color-secondary-500-rgb) / 0.08);
+  --accent-teal-06: rgb(var(--color-secondary-500-rgb) / 0.06);
+  --accent-teal-03: rgb(var(--color-secondary-500-rgb) / 0.03);
+  --accent-teal-02: rgb(var(--color-secondary-500-rgb) / 0.02);
+  --accent-green-15: rgb(var(--color-tertiary-400-rgb) / 0.15);
+  --accent-green-12: rgb(var(--color-tertiary-400-rgb) / 0.12);
+  --accent-green-10: rgb(var(--color-tertiary-400-rgb) / 0.1);
+  --accent-green-06: rgb(var(--color-tertiary-400-rgb) / 0.06);
+  --neutral-700-80: rgb(var(--color-neutral-700-rgb) / 0.8);
+  --neutral-700-60: rgb(var(--color-neutral-700-rgb) / 0.6);
+  --neutral-700-50: rgb(var(--color-neutral-700-rgb) / 0.5);
+
+  /* Toggle tokens */
+  --toggle-track-bg: var(--color-zinc-950);
+  --toggle-track-border: var(--color-zinc-800);
+  --toggle-thumb-bg: var(--color-zinc-800);
+  --toggle-icon-fg: var(--color-white);
+  --toggle-bg-icon: var(--color-zinc-600);
+}

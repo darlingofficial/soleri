@@ -1,0 +1,48 @@
+{
+  "name": "@soleri/tokens",
+  "version": "1.0.0",
+  "description": "Solarpunk design tokens — primitives, semantic themes, and Tailwind preset for the Soleri design system.",
+  "keywords": ["design-tokens", "solarpunk", "tailwind", "css", "theme"],
+  "homepage": "https://soleri.dev",
+  "license": "Apache-2.0",
+  "author": "adrozdenko",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adrozdenko/soleri.git",
+    "directory": "packages/tokens"
+  },
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tailwind": {
+      "types": "./dist/tailwind.d.ts",
+      "import": "./dist/tailwind.js",
+      "default": "./dist/tailwind.js"
+    },
+    "./css": "./src/css/tokens.css",
+    "./css/primitives": "./src/css/primitives.css",
+    "./css/light": "./src/css/light.css",
+    "./css/dark": "./src/css/dark.css"
+  },
+  "files": ["dist", "src/css"],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
