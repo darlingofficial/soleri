@@ -162,7 +162,32 @@ export class BrainIntelligence {
     values.push(sessionId);
     db.prepare(`UPDATE brain_sessions SET ${updates.join(', ')} WHERE id = ?`).run(...values);
 
+    // Auto-extract knowledge if session has enough signal
+    this.autoExtractIfReady(this.getSession(sessionId)!);
+
+    // Return fresh session (extractedAt may have been set by auto-extract)
     return this.getSession(sessionId)!;
+  }
+
+  /**
+   * Attempt auto-extraction after session end if the session has enough signal.
+   * Gate: at least 1 tool used OR 1 file modified OR a plan was associated.
+   * Silently skips if already extracted or insufficient data.
+   */
+  private autoExtractIfReady(session: BrainSession): void {
+    if (!session.endedAt) return;
+    if (session.extractedAt) return;
+
+    const hasSignal =
+      session.toolsUsed.length > 0 || session.filesModified.length > 0 || session.planId !== null;
+
+    if (!hasSignal) return;
+
+    try {
+      this.extractKnowledge(session.id);
+    } catch {
+      // Non-critical — don't break session end
+    }
   }
 
   getSessionContext(limit = 10): SessionContext {
@@ -373,12 +398,17 @@ export class BrainIntelligence {
     }));
   }
 
-  recommend(context: { domain?: string; task?: string; limit?: number }): PatternStrength[] {
+  recommend(context: {
+    domain?: string;
+    task?: string;
+    source?: string;
+    limit?: number;
+  }): PatternStrength[] {
     const limit = context.limit ?? 5;
     const strengths = this.getStrengths({
       domain: context.domain,
       minStrength: 30,
-      limit: limit * 2,
+      limit: limit * 3,
     });
 
     // If task context provided, boost patterns with matching terms
@@ -392,9 +422,36 @@ export class BrainIntelligence {
           (s as { strength: number }).strength += overlap * 5;
         }
       }
-      strengths.sort((a, b) => b.strength - a.strength);
     }
 
+    // Boost patterns with high source-specific acceptance rates
+    if (context.source) {
+      const db = this.vault.getDb();
+      for (const s of strengths) {
+        const row = db
+          .prepare(
+            `SELECT COUNT(*) as total,
+                    SUM(CASE WHEN action = 'accepted' THEN 1 ELSE 0 END) as accepted,
+                    SUM(CASE WHEN action = 'modified' THEN 1 ELSE 0 END) as modified
+             FROM brain_feedback
+             WHERE entry_id = (SELECT id FROM entries WHERE title = ? LIMIT 1)
+               AND source = ?`,
+          )
+          .get(s.pattern, context.source) as {
+          total: number;
+          accepted: number;
+          modified: number;
+        };
+
+        if (row.total >= 3) {
+          const sourceRate = (row.accepted + row.modified * 0.5) / row.total;
+          // Boost up to +10 points for high source-specific acceptance
+          (s as { strength: number }).strength += sourceRate * 10;
+        }
+      }
+    }
+
+    strengths.sort((a, b) => b.strength - a.strength);
     return strengths.slice(0, limit);
   }
 

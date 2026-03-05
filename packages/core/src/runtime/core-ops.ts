@@ -492,17 +492,24 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
     {
       name: 'brain_recommend',
       description:
-        'Get pattern recommendations for a task context. Matches domain and task terms against known strengths.',
+        'Get pattern recommendations for a task context. Matches domain, task terms, and source-specific acceptance rates against known strengths.',
       auth: 'read',
       schema: z.object({
         domain: z.string().optional(),
         task: z.string().optional().describe('Task description for contextual matching.'),
+        source: z
+          .string()
+          .optional()
+          .describe(
+            'Feedback source to boost by (search, recommendation, tool-execution, explicit).',
+          ),
         limit: z.number().optional(),
       }),
       handler: async (params) => {
         return brainIntelligence.recommend({
           domain: params.domain as string | undefined,
           task: params.task as string | undefined,
+          source: params.source as string | undefined,
           limit: (params.limit as number) ?? 5,
         });
       },

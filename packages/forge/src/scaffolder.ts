@@ -92,7 +92,7 @@ export function previewScaffold(config: AgentConfig): ScaffoldPreview {
     {
       name: `${config.id}_core`,
       ops: [
-        // From createCoreOps() — 26 generic ops
+        // From createCoreOps() — 48 generic ops
         'search',
         'vault_stats',
         'list_all',
@@ -108,9 +108,23 @@ export function previewScaffold(config: AgentConfig): ScaffoldPreview {
         'update_task',
         'complete_plan',
         'record_feedback',
+        'brain_feedback',
+        'brain_feedback_stats',
         'rebuild_vocabulary',
         'brain_stats',
         'llm_status',
+        'brain_session_context',
+        'brain_strengths',
+        'brain_global_patterns',
+        'brain_recommend',
+        'brain_build_intelligence',
+        'brain_export',
+        'brain_import',
+        'brain_extract_knowledge',
+        'brain_archive_sessions',
+        'brain_promote_proposals',
+        'brain_lifecycle',
+        'brain_reset_extracted',
         'curator_status',
         'curator_detect_duplicates',
         'curator_contradictions',
@@ -119,6 +133,14 @@ export function previewScaffold(config: AgentConfig): ScaffoldPreview {
         'curator_groom_all',
         'curator_consolidate',
         'curator_health_audit',
+        'get_identity',
+        'update_identity',
+        'add_guideline',
+        'remove_guideline',
+        'rollback_identity',
+        'route_intent',
+        'morph',
+        'get_behavior_rules',
         // Agent-specific ops — 5
         'health',
         'identity',
@@ -222,7 +244,7 @@ export function scaffold(config: AgentConfig): ScaffoldResult {
     filesCreated.push(path);
   }
 
-  const totalOps = config.domains.length * 5 + 31; // 5 per domain + 26 core (from createCoreOps) + 5 agent-specific
+  const totalOps = config.domains.length * 5 + 53; // 5 per domain + 48 core (from createCoreOps) + 5 agent-specific
 
   // Register the agent as an MCP server in ~/.claude.json
   const mcpReg = registerMcpServer(config.id, agentDir);

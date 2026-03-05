@@ -59,9 +59,9 @@ describe('Scaffolder', () => {
       expect(preview.facades).toHaveLength(4); // 3 domains + core
       expect(preview.facades[0].name).toBe('atlas_data_pipelines');
 
-      // Core facade should list all 31 ops
+      // Core facade should list all 53 ops
       const coreFacade = preview.facades.find((f) => f.name === 'atlas_core')!;
-      expect(coreFacade.ops.length).toBe(31);
+      expect(coreFacade.ops.length).toBe(53);
       expect(coreFacade.ops).toContain('curator_status');
       expect(coreFacade.ops).toContain('health');
 

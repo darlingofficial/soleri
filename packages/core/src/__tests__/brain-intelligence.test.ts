@@ -623,26 +623,70 @@ describe('BrainIntelligence', () => {
     expect(result.imported.sessions).toBe(0); // Duplicate ignored
   });
 
+  // ─── Auto-extraction on session end ─────────────────────────
+
+  it('should auto-extract when session ends with tools used', () => {
+    runtime.brainIntelligence.lifecycle({
+      action: 'start',
+      sessionId: 'auto-1',
+      domain: 'testing',
+      toolsUsed: ['search', 'search', 'search'],
+    });
+    const session = runtime.brainIntelligence.lifecycle({
+      action: 'end',
+      sessionId: 'auto-1',
+    });
+    // extractedAt should be set automatically
+    expect(session.extractedAt).not.toBeNull();
+  });
+
+  it('should not auto-extract when session has no signal', () => {
+    runtime.brainIntelligence.lifecycle({
+      action: 'start',
+      sessionId: 'auto-2',
+    });
+    const session = runtime.brainIntelligence.lifecycle({
+      action: 'end',
+      sessionId: 'auto-2',
+    });
+    // No tools, no files, no plan — should not extract
+    expect(session.extractedAt).toBeNull();
+  });
+
+  it('should auto-extract when session has a plan', () => {
+    runtime.brainIntelligence.lifecycle({
+      action: 'start',
+      sessionId: 'auto-3',
+      planId: 'plan-123',
+    });
+    const session = runtime.brainIntelligence.lifecycle({
+      action: 'end',
+      sessionId: 'auto-3',
+      planOutcome: 'completed',
+    });
+    expect(session.extractedAt).not.toBeNull();
+  });
+
   // ─── extractedAt Tracking ──────────────────────────────────
 
-  it('should set extractedAt when extractKnowledge is called', () => {
-    const session = runtime.brainIntelligence.lifecycle({
+  it('should set extractedAt when extractKnowledge is called manually', () => {
+    // Use a session with no tools/files/plan so auto-extraction doesn't fire
+    runtime.brainIntelligence.lifecycle({
       action: 'start',
       sessionId: 'ext-1',
       domain: 'testing',
-      toolsUsed: ['search', 'search', 'search', 'search'],
     });
     runtime.brainIntelligence.lifecycle({
       action: 'end',
       sessionId: 'ext-1',
     });
 
-    // Before extraction, extractedAt should be null
+    // Before manual extraction, extractedAt should be null (no auto-extract — no signal)
     const ctx = runtime.brainIntelligence.getSessionContext(10);
     const before = ctx.recentSessions.find((s) => s.id === 'ext-1');
     expect(before?.extractedAt).toBeNull();
 
-    // Extract knowledge
+    // Manual extract
     runtime.brainIntelligence.extractKnowledge('ext-1');
 
     // After extraction, extractedAt should be set
