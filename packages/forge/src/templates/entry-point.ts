@@ -62,9 +62,13 @@ async function main(): Promise<void> {
     },
     {
       name: 'identity',
-      description: 'Get agent identity — name, role, principles.',
+      description: 'Get agent identity — name, role, principles. Uses IdentityManager with PERSONA fallback.',
       auth: 'read',
-      handler: async () => PERSONA,
+      handler: async () => {
+        const identity = runtime.identityManager.getIdentity('${config.id}');
+        if (identity) return identity;
+        return PERSONA;
+      },
     },
     {
       name: 'activate',
@@ -77,6 +81,17 @@ async function main(): Promise<void> {
       handler: async (params) => {
         if (params.deactivate) {
           return deactivateAgent();
+        }
+        // Seed identity from PERSONA on first activation
+        if (!runtime.identityManager.getIdentity('${config.id}')) {
+          runtime.identityManager.setIdentity('${config.id}', {
+            name: PERSONA.name,
+            role: PERSONA.role,
+            description: PERSONA.description ?? '',
+            personality: PERSONA.principles ?? [],
+            changedBy: 'system',
+            changeReason: 'Initial identity seeded from PERSONA',
+          });
         }
         return activateAgent(runtime.vault, (params.projectPath as string) ?? '.', runtime.planner);
       },

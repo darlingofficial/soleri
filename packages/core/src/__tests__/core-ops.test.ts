@@ -34,8 +34,8 @@ describe('createCoreOps', () => {
     return op;
   }
 
-  it('should return 37 ops', () => {
-    expect(ops.length).toBe(37);
+  it('should return 45 ops', () => {
+    expect(ops.length).toBe(45);
   });
 
   it('should have all expected op names', () => {
@@ -84,6 +84,15 @@ describe('createCoreOps', () => {
     expect(names).toContain('curator_groom_all');
     expect(names).toContain('curator_consolidate');
     expect(names).toContain('curator_health_audit');
+    // Control
+    expect(names).toContain('get_identity');
+    expect(names).toContain('update_identity');
+    expect(names).toContain('add_guideline');
+    expect(names).toContain('remove_guideline');
+    expect(names).toContain('rollback_identity');
+    expect(names).toContain('route_intent');
+    expect(names).toContain('morph');
+    expect(names).toContain('get_behavior_rules');
   });
 
   it('search should query vault via brain', async () => {

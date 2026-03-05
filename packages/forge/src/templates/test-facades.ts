@@ -178,8 +178,17 @@ ${domainDescribes}
       expect(opNames).toContain('activate');
       expect(opNames).toContain('inject_claude_md');
       expect(opNames).toContain('setup');
-      // Total: 42
-      expect(facade.ops.length).toBe(42);
+      // Control ops (8)
+      expect(opNames).toContain('get_identity');
+      expect(opNames).toContain('update_identity');
+      expect(opNames).toContain('add_guideline');
+      expect(opNames).toContain('remove_guideline');
+      expect(opNames).toContain('rollback_identity');
+      expect(opNames).toContain('route_intent');
+      expect(opNames).toContain('morph');
+      expect(opNames).toContain('get_behavior_rules');
+      // Total: 50
+      expect(facade.ops.length).toBe(50);
     });
 
     it('search should query across all domains with ranked results', async () => {

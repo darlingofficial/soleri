@@ -122,6 +122,23 @@ export type {
 // ─── LLM Client ─────────────────────────────────────────────────────
 export { LLMClient } from './llm/llm-client.js';
 
+// ─── Control ────────────────────────────────────────────────────────
+export { IdentityManager } from './control/identity-manager.js';
+export { IntentRouter } from './control/intent-router.js';
+export type {
+  GuidelineCategory,
+  Guideline,
+  AgentIdentity,
+  IdentityVersion,
+  IdentityUpdateInput,
+  GuidelineInput,
+  IntentType,
+  OperationalMode,
+  IntentClassification,
+  ModeConfig,
+  MorphResult,
+} from './control/types.js';
+
 // ─── Runtime Factory ────────────────────────────────────────────────
 export { createAgentRuntime } from './runtime/runtime.js';
 export { createCoreOps } from './runtime/core-ops.js';

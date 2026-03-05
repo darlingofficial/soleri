@@ -5,6 +5,8 @@ import type { Planner } from '../planning/planner.js';
 import type { Curator } from '../curator/curator.js';
 import type { KeyPool } from '../llm/key-pool.js';
 import type { LLMClient } from '../llm/llm-client.js';
+import type { IdentityManager } from '../control/identity-manager.js';
+import type { IntentRouter } from '../control/intent-router.js';
 
 /**
  * Configuration for creating an agent runtime.
@@ -32,6 +34,8 @@ export interface AgentRuntime {
   brainIntelligence: BrainIntelligence;
   planner: Planner;
   curator: Curator;
+  identityManager: IdentityManager;
+  intentRouter: IntentRouter;
   keyPool: { openai: KeyPool; anthropic: KeyPool };
   llmClient: LLMClient;
   /** Close the vault database connection. Call on shutdown. */

@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## @soleri/forge@5.1.0 — 2026-03-05
+
+### Changed
+
+- Updated `identity` op in entry-point template to delegate to `IdentityManager` with PERSONA fallback
+- Updated `activate` op to seed identity from PERSONA on first activation
+- Updated test template op count 42 → 50 to match `@soleri/core@2.2.0` control ops
+
+## @soleri/core@2.2.0 — 2026-03-05
+
+### Added
+
+- **`IdentityManager` class** — Agent identity CRUD with versioning and rollback (`control/identity-manager.ts`)
+- **`IntentRouter` class** — Keyword-based intent classification and operational mode management (`control/intent-router.ts`)
+- **Control types** extracted to `control/types.ts` — identity, guideline, intent, and mode types
+- **8 new control ops** in `createCoreOps()` (37 → 45 total):
+  - `get_identity` — Get current agent identity with guidelines
+  - `update_identity` — Update identity fields with auto-versioning
+  - `add_guideline` — Add behavioral guideline (behavior/preference/restriction/style)
+  - `remove_guideline` — Remove a guideline by ID
+  - `rollback_identity` — Restore a previous identity version
+  - `route_intent` — Classify prompt into intent + mode via keyword matching
+  - `morph` — Switch operational mode manually
+  - `get_behavior_rules` — Get behavior rules for current or specified mode
+- **5 new SQLite tables**: `agent_identity`, `agent_identity_versions`, `agent_guidelines`, `agent_modes`, `agent_routing_log`
+- **10 default operational modes** seeded on first use (BUILD, FIX, VALIDATE, DESIGN, IMPROVE, DELIVER, EXPLORE, PLAN, REVIEW, GENERAL)
+
 ## @soleri/forge@5.0.1 — 2026-03-05
 
 ### Changed
