@@ -33,10 +33,6 @@
   --sl-color-red: var(--color-error-500);
   --sl-color-red-high: hsl(339, 82%, 87%);
 
-  /* Typography */
-  --sl-font: "Sora", "Segoe UI", system-ui, sans-serif;
-  --sl-font-mono: "JetBrains Mono", ui-monospace, monospace;
-
   /* Shadows from Soleri tokens */
   --sl-shadow-sm: var(--shadow-sm);
   --sl-shadow-md: var(--shadow-md);
@@ -45,7 +41,6 @@
 
 /* ── Light mode ── */
 :root[data-theme='light'] {
-  /* In Starlight light mode, "white" = darkest text, "black" = lightest bg */
   --sl-color-white: var(--color-primary-800);
   --sl-color-gray-1: var(--color-primary-700);
   --sl-color-gray-2: var(--color-neutral-600);
@@ -70,83 +65,10 @@
   --sl-color-orange-high: var(--color-primary-700);
 }
 
-/* ============================================
- * LAYOUT — constrain to website width (1120px)
- * ============================================ */
-
-/* Header bar — constrain inner content, keep full-width bg */
-.header {
-  padding-inline: 24px !important;
-}
-
-/* The main page frame — constrain total width */
-.page {
-  max-width: 1120px;
-  margin: 0 auto;
-}
-
-/* Sidebar: narrower to match website proportions */
-:root {
-  --sl-sidebar-width: 14rem;
-  --sl-content-width: 42rem;
-  --sl-nav-pad-x: 24px;
-}
-
-/* ============================================
- * GLOBAL REFINEMENTS
- * ============================================ */
-
-/* Code blocks: match website terminal aesthetic */
+/* ── Code blocks ── */
 :root {
   --sl-color-bg-inline-code: var(--color-neutral-800);
 }
 :root[data-theme='light'] {
   --sl-color-bg-inline-code: color-mix(in srgb, var(--color-primary-50) 60%, var(--color-white) 40%);
-}
-
-/* Sidebar active link — teal accent glow */
-nav[aria-label="Main"] a[aria-current="page"] {
-  background: rgb(var(--color-secondary-500-rgb) / 0.08);
-  border-radius: var(--radius-sm);
-}
-:root[data-theme='light'] nav[aria-label="Main"] a[aria-current="page"] {
-  background: rgb(var(--color-secondary-500-rgb) / 0.06);
-}
-
-/* Table styling — cleaner borders like website cards */
-table {
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-th {
-  font-weight: 700;
-  letter-spacing: 0.01em;
-}
-
-/* Heading styling — match website typographic feel */
-.sl-markdown-content h1 {
-  letter-spacing: -0.025em;
-  font-weight: 800;
-}
-
-.sl-markdown-content h2,
-.sl-markdown-content h3 {
-  letter-spacing: -0.015em;
-}
-
-/* Hero/splash page refinement */
-.hero > img {
-  border-radius: var(--radius-xl);
-}
-
-/* Search dialog — match Soleri glass surface */
-dialog {
-  border-radius: var(--radius-xl) !important;
-}
-
-/* Header background — match website feel */
-header.header {
-  background-color: var(--sl-color-bg) !important;
-  border-bottom: 1px solid var(--sl-color-gray-5) !important;
 }

@@ -46,14 +46,6 @@ export default defineConfig({
           ],
         },
       ],
-      components: {
-        Header: './src/components/starlight/Header.astro',
-      },
-      head: [
-        { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.googleapis.com' } },
-        { tag: 'link', attrs: { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true } },
-        { tag: 'link', attrs: { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600;700;800&display=swap' } },
-      ],
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/adrozdenko/soleri' },
       ],
