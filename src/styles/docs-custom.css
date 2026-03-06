@@ -18,9 +18,9 @@
   --sl-color-black: var(--color-neutral-950);
 
   /* Accent: teal/secondary */
-  --sl-color-accent-low: var(--color-secondary-900);
+  --sl-color-accent-low: var(--color-secondary-800);
   --sl-color-accent: var(--color-secondary-400);
-  --sl-color-accent-high: var(--color-secondary-200);
+  --sl-color-accent-high: var(--color-secondary-300);
 
   /* Status colors mapped to Soleri palette */
   --sl-color-green-low: var(--color-tertiary-900);
