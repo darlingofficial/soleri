@@ -41,7 +41,7 @@ function getCoreVersion(): string {
  * Groups: health (1), introspection (4), diagnostics (2), mutation (1).
  */
 export function createAdminOps(runtime: AgentRuntime): OpDefinition[] {
-  const { vault, brain, brainIntelligence, cognee, llmClient, keyPool, curator } = runtime;
+  const { vault, brain, brainIntelligence, cognee, llmClient, curator } = runtime;
 
   return [
     // ─── Health ──────────────────────────────────────────────────────
@@ -61,7 +61,10 @@ export function createAdminOps(runtime: AgentRuntime): OpDefinition[] {
           vault: { entries: vaultStats.totalEntries, domains: Object.keys(vaultStats.byDomain) },
           cognee: { available: cogneeStatus?.available ?? false },
           llm: llmAvailable,
-          brain: { vocabularySize: brainStats.vocabularySize, feedbackCount: brainStats.feedbackCount },
+          brain: {
+            vocabularySize: brainStats.vocabularySize,
+            feedbackCount: brainStats.feedbackCount,
+          },
           curator: { initialized: curatorStatus.initialized },
         };
       },
@@ -75,7 +78,9 @@ export function createAdminOps(runtime: AgentRuntime): OpDefinition[] {
       handler: async (params) => {
         // The caller can pass in the full ops list via `_allOps` (injected by
         // the facade builder). If not provided, we return only admin ops.
-        const allOps = params._allOps as Array<{ name: string; description: string; auth: string }> | undefined;
+        const allOps = params._allOps as
+          | Array<{ name: string; description: string; auth: string }>
+          | undefined;
         if (allOps) {
           return {
             count: allOps.length,
@@ -119,7 +124,8 @@ export function createAdminOps(runtime: AgentRuntime): OpDefinition[] {
     },
     {
       name: 'admin_vault_size',
-      description: 'Get vault database file size on disk (bytes). Returns null for in-memory vaults.',
+      description:
+        'Get vault database file size on disk (bytes). Returns null for in-memory vaults.',
       auth: 'read',
       handler: async () => {
         const dbPath = runtime.config.vaultPath;
@@ -168,7 +174,8 @@ export function createAdminOps(runtime: AgentRuntime): OpDefinition[] {
     // ─── Mutation ────────────────────────────────────────────────────
     {
       name: 'admin_reset_cache',
-      description: 'Clear all caches — brain vocabulary and cognee health cache. Forces fresh data on next access.',
+      description:
+        'Clear all caches — brain vocabulary and cognee health cache. Forces fresh data on next access.',
       auth: 'write',
       handler: async () => {
         // Rebuild brain vocabulary (clears old TF-IDF state, rebuilds from vault)
@@ -247,7 +254,11 @@ export function createAdminOps(runtime: AgentRuntime): OpDefinition[] {
         try {
           const cogneeStatus = cognee.getStatus();
           if (cogneeStatus?.available) {
-            checks.push({ name: 'cognee', status: 'ok', detail: `Connected to ${cogneeStatus.url}` });
+            checks.push({
+              name: 'cognee',
+              status: 'ok',
+              detail: `Connected to ${cogneeStatus.url}`,
+            });
           } else {
             checks.push({
               name: 'cognee',

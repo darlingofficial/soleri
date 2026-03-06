@@ -102,9 +102,9 @@ export function createAdminExtraOps(runtime: AgentRuntime): OpDefinition[] {
             '90d+': 0,
           };
 
-          const rows = db
-            .prepare('SELECT created_at FROM entries')
-            .all() as Array<{ created_at: number }>;
+          const rows = db.prepare('SELECT created_at FROM entries').all() as Array<{
+            created_at: number;
+          }>;
 
           for (const row of rows) {
             const ageSeconds = now - row.created_at;
@@ -115,9 +115,7 @@ export function createAdminExtraOps(runtime: AgentRuntime): OpDefinition[] {
           }
 
           // Average tags per entry
-          const tagRows = db
-            .prepare('SELECT tags FROM entries')
-            .all() as Array<{ tags: string }>;
+          const tagRows = db.prepare('SELECT tags FROM entries').all() as Array<{ tags: string }>;
 
           let totalTags = 0;
           let noTags = 0;
@@ -135,7 +133,9 @@ export function createAdminExtraOps(runtime: AgentRuntime): OpDefinition[] {
 
           // Entries without descriptions
           const noDescResult = db
-            .prepare("SELECT COUNT(*) as count FROM entries WHERE description IS NULL OR description = ''")
+            .prepare(
+              "SELECT COUNT(*) as count FROM entries WHERE description IS NULL OR description = ''",
+            )
             .get() as { count: number } | undefined;
           noDescription = noDescResult?.count ?? 0;
 
@@ -146,12 +146,16 @@ export function createAdminExtraOps(runtime: AgentRuntime): OpDefinition[] {
             byDomain: Object.fromEntries(byDomain.map((r) => [r.domain, r.count])),
             byType: Object.fromEntries(byType.map((r) => [r.type, r.count])),
             byAge: ageBuckets,
-            avgTagsPerEntry: totalEntries > 0 ? Math.round((totalTags / totalEntries) * 10) / 10 : 0,
+            avgTagsPerEntry:
+              totalEntries > 0 ? Math.round((totalTags / totalEntries) * 10) / 10 : 0,
             entriesWithoutTags: noTags,
             entriesWithoutDescription: noDescription,
           };
         } catch (err) {
-          return { error: 'Failed to compute vault analytics', detail: err instanceof Error ? err.message : String(err) };
+          return {
+            error: 'Failed to compute vault analytics',
+            detail: err instanceof Error ? err.message : String(err),
+          };
         }
       },
     },
@@ -185,7 +189,7 @@ export function createAdminExtraOps(runtime: AgentRuntime): OpDefinition[] {
             topMissedQueries: missedQueries,
             byAction: feedbackStats.byAction,
           };
-        } catch (err) {
+        } catch {
           return {
             totalFeedback: 0,
             missRate: 0,
