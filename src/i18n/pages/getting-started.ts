@@ -5,7 +5,8 @@ export const gettingStartedContent = (locale: Locale) => content[locale];
 const content: Record<Locale, GettingStartedContent> = {
   en: {
     title: 'Getting Started - Soleri',
-    description: 'From zero to a learning system in five minutes. Install Soleri, create your first agent, and start compounding knowledge.',
+    description:
+      'From zero to a learning system in five minutes. Install Soleri, create your first agent, and start compounding knowledge.',
     eyebrow: 'From zero to a learning system in five minutes',
     heroTitle: 'Your first agent starts smart. It only gets smarter.',
     heroSubtitle: 'Five steps. No configuration files to write. No API keys required.',
@@ -34,7 +35,7 @@ const content: Record<Locale, GettingStartedContent> = {
       },
       {
         title: 'Feed it knowledge',
-        text: 'Add knowledge to your agent\'s vault. Install community packs, connect a team vault, or let the brain capture patterns from your work.',
+        text: "Add knowledge to your agent's vault. Install community packs, connect a team vault, or let the brain capture patterns from your work.",
         code: `<span class="cmt"># Add a community knowledge pack</span>
 <span class="prompt">$</span> <span class="cmd">soleri packs</span> <span class="arg">install community/react-patterns</span>
 
@@ -51,7 +52,7 @@ const content: Record<Locale, GettingStartedContent> = {
       },
       {
         title: 'Extend',
-        text: 'Connect your team\'s shared vault or add more knowledge packs. Knowledge stacks.',
+        text: "Connect your team's shared vault or add more knowledge packs. Knowledge stacks.",
         code: `<span class="cmt"># Connect your team's shared vault</span>
 <span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">connect git@github.com:team/vault.git</span>
 
@@ -83,17 +84,30 @@ const content: Record<Locale, GettingStartedContent> = {
     ],
     nextTitle: 'Keep going',
     nextLinks: [
-      { title: 'How it works', desc: 'Vault, brain, and transport architecture explained.', href: 'how-it-works.html' },
-      { title: 'Your Agent', desc: 'Create, configure, and grow your agent\'s knowledge.', href: 'personas.html' },
-      { title: 'Teams &amp; Ops', desc: 'Shared vaults, knowledge packs, and Telegram bot.', href: 'teams.html' },
+      {
+        title: 'How it works',
+        desc: 'Vault, brain, and transport architecture explained.',
+        href: 'how-it-works.html',
+      },
+      {
+        title: 'Your Agent',
+        desc: "Create, configure, and grow your agent's knowledge.",
+        href: 'personas.html',
+      },
+      {
+        title: 'Teams &amp; Ops',
+        desc: 'Shared vaults, knowledge packs, and Telegram bot.',
+        href: 'teams.html',
+      },
     ],
   },
   uk: {
     title: 'Початок роботи - Soleri',
-    description: 'Від нуля до навчальної системи за п\'ять хвилин. Встановіть Soleri, створіть першого агента та починайте накопичувати знання.',
-    eyebrow: 'Від нуля до навчальної системи за п\'ять хвилин',
+    description:
+      "Від нуля до навчальної системи за п'ять хвилин. Встановіть Soleri, створіть першого агента та починайте накопичувати знання.",
+    eyebrow: "Від нуля до навчальної системи за п'ять хвилин",
     heroTitle: 'Ваш перший агент починає розумним. Далі стає лише розумнішим.',
-    heroSubtitle: 'П\'ять кроків. Жодних файлів конфігурації. Жодних API-ключів.',
+    heroSubtitle: "П'ять кроків. Жодних файлів конфігурації. Жодних API-ключів.",
     steps: [
       {
         title: 'Встановіть',
@@ -168,17 +182,31 @@ const content: Record<Locale, GettingStartedContent> = {
     ],
     nextTitle: 'Продовжуйте',
     nextLinks: [
-      { title: 'Як це працює', desc: 'Пояснення архітектури сховища, мозку та транспорту.', href: 'how-it-works.html' },
-      { title: 'Ваш Агент', desc: 'Створюйте, налаштовуйте та розширюйте знання твого агента.', href: 'personas.html' },
-      { title: 'Команди та Опс', desc: 'Спільні сховища, пакети знань та бот у Telegram.', href: 'teams.html' },
+      {
+        title: 'Як це працює',
+        desc: 'Пояснення архітектури сховища, мозку та транспорту.',
+        href: 'how-it-works.html',
+      },
+      {
+        title: 'Ваш Агент',
+        desc: 'Створюйте, налаштовуйте та розширюйте знання твого агента.',
+        href: 'personas.html',
+      },
+      {
+        title: 'Команди та Опс',
+        desc: 'Спільні сховища, пакети знань та бот у Telegram.',
+        href: 'teams.html',
+      },
     ],
   },
   it: {
     title: 'Inizia - Soleri',
-    description: 'Da zero a un sistema di apprendimento in cinque minuti. Installa Soleri, crea il tuo primo agente e inizia ad accumulare conoscenza.',
+    description:
+      'Da zero a un sistema di apprendimento in cinque minuti. Installa Soleri, crea il tuo primo agente e inizia ad accumulare conoscenza.',
     eyebrow: 'Da zero a un sistema di apprendimento in cinque minuti',
     heroTitle: 'Il tuo primo agente parte intelligente. Diventa solo più intelligente.',
-    heroSubtitle: 'Cinque passaggi. Nessun file di configurazione da scrivere. Nessuna chiave API richiesta.',
+    heroSubtitle:
+      'Cinque passaggi. Nessun file di configurazione da scrivere. Nessuna chiave API richiesta.',
     steps: [
       {
         title: 'Installa',
@@ -253,9 +281,21 @@ const content: Record<Locale, GettingStartedContent> = {
     ],
     nextTitle: 'Continua',
     nextLinks: [
-      { title: 'Come funziona', desc: 'Vault, cervello e architettura di trasporto.', href: 'how-it-works.html' },
-      { title: 'Il tuo agente', desc: 'Crea, configura e sviluppa le conoscenze del tuo agente.', href: 'personas.html' },
-      { title: 'Team e Ops', desc: 'Vault condivisi, pacchetti di conoscenza e bot Telegram.', href: 'teams.html' },
+      {
+        title: 'Come funziona',
+        desc: 'Vault, cervello e architettura di trasporto.',
+        href: 'how-it-works.html',
+      },
+      {
+        title: 'Il tuo agente',
+        desc: 'Crea, configura e sviluppa le conoscenze del tuo agente.',
+        href: 'personas.html',
+      },
+      {
+        title: 'Team e Ops',
+        desc: 'Vault condivisi, pacchetti di conoscenza e bot Telegram.',
+        href: 'teams.html',
+      },
     ],
   },
 };

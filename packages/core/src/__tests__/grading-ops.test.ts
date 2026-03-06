@@ -56,7 +56,12 @@ describe('Grading Ops', () => {
       const check = (await findOp('plan_grade').handler({ planId })) as {
         score: number;
         grade: string;
-        gaps: Array<{ severity: string; category: string; description: string; recommendation: string }>;
+        gaps: Array<{
+          severity: string;
+          category: string;
+          description: string;
+          recommendation: string;
+        }>;
         iteration: number;
       };
       // 3 critical gaps: no objective, no scope, no tasks = -90
@@ -77,9 +82,15 @@ describe('Grading Ops', () => {
           'Set TTL to 5 minutes since average data freshness requirement is 10 minutes',
         ],
         tasks: [
-          { title: 'Setup Redis client', description: 'Install and configure Redis connection pool' },
+          {
+            title: 'Setup Redis client',
+            description: 'Install and configure Redis connection pool',
+          },
           { title: 'Add middleware', description: 'Express transparent caching middleware layer' },
-          { title: 'Add invalidation', description: 'Cache invalidation on writes for consistency' },
+          {
+            title: 'Add invalidation',
+            description: 'Cache invalidation on writes for consistency',
+          },
           { title: 'Add tests', description: 'Integration tests for cache hit/miss scenarios' },
           { title: 'Add metrics', description: 'Track and verify cache hit rate monitoring' },
         ],
@@ -97,7 +108,9 @@ describe('Grading Ops', () => {
       const planId = await createPlan({
         objective: 'Test duplicate title detection in the grading engine',
         scope: 'Testing only, does not include production changes',
-        decisions: ['Use assertions because they provide clear error messages due to descriptive output'],
+        decisions: [
+          'Use assertions because they provide clear error messages due to descriptive output',
+        ],
         tasks: [
           { title: 'Same name', description: 'First task implementation' },
           { title: 'Same name', description: 'Second task implementation' },
@@ -228,7 +241,9 @@ describe('Grading Ops', () => {
       const planId = await createPlan({
         objective: 'Build a comprehensive feature for the testing module',
         scope: 'Testing module only, does not include deployment or infrastructure',
-        decisions: ['Use vitest because it integrates natively with TypeScript due to built-in support'],
+        decisions: [
+          'Use vitest because it integrates natively with TypeScript due to built-in support',
+        ],
         tasks: [
           { title: 'Write unit tests', description: 'Cover all edge cases in the module' },
           { title: 'Write integration tests', description: 'End-to-end API tests for the flow' },
@@ -262,7 +277,10 @@ describe('Grading Ops', () => {
         score: number;
         iteration: number;
         totalGaps: number;
-        gapsBySeverity: Record<string, Array<{ category: string; description: string; recommendation: string }>>;
+        gapsBySeverity: Record<
+          string,
+          Array<{ category: string; description: string; recommendation: string }>
+        >;
         nextAction: string;
       };
       expect(result.score).toBeLessThan(100);
@@ -285,7 +303,10 @@ describe('Grading Ops', () => {
         tasks: [
           { title: 'Setup Redis', description: 'Install and configure Redis connection pool' },
           { title: 'Add middleware', description: 'Express transparent caching middleware layer' },
-          { title: 'Add invalidation', description: 'Cache invalidation on writes for consistency' },
+          {
+            title: 'Add invalidation',
+            description: 'Cache invalidation on writes for consistency',
+          },
           { title: 'Add tests', description: 'Integration tests for cache hit/miss scenarios' },
           { title: 'Add metrics', description: 'Track and verify cache hit rate monitoring' },
         ],

@@ -64,7 +64,10 @@ export function createMemoryExtraOps(runtime: AgentRuntime): OpDefinition[] {
       auth: 'read',
       schema: z.object({
         projectPath: z.string().optional().describe('Filter to a specific project'),
-        type: z.enum(['session', 'lesson', 'preference']).optional().describe('Filter by memory type'),
+        type: z
+          .enum(['session', 'lesson', 'preference'])
+          .optional()
+          .describe('Filter by memory type'),
         includeArchived: z
           .boolean()
           .optional()
@@ -126,10 +129,7 @@ export function createMemoryExtraOps(runtime: AgentRuntime): OpDefinition[] {
         'Delete non-archived memories older than N days. Destructive — cannot be undone.',
       auth: 'admin',
       schema: z.object({
-        olderThanDays: z
-          .number()
-          .min(1)
-          .describe('Delete memories older than this many days'),
+        olderThanDays: z.number().min(1).describe('Delete memories older than this many days'),
       }),
       handler: async (params) => {
         const days = params.olderThanDays as number;

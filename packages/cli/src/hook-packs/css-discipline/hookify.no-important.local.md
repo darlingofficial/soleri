@@ -12,7 +12,7 @@ conditions:
     pattern: \.(tsx?|jsx?|css)$
   - field: content
     operator: regex_match
-    pattern: "!important"
+    pattern: '!important'
 ---
 
 🚫 **!important blocked.** Fix specificity instead. Use Tailwind `!` prefix (`!text-error`) only if needed.

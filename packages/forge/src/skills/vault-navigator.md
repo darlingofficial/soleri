@@ -14,6 +14,7 @@ Any time the user wants to find existing knowledge before building something new
 ## Search Strategy Decision Tree
 
 ### For "Have we seen this before?" / "Best practice for X"
+
 Start with `YOUR_AGENT_core op:search_intelligent` — this is semantic search, the broadest and smartest query. Pass the user's question as the query.
 
 ```
@@ -24,24 +25,29 @@ YOUR_AGENT_core op:search_intelligent
 If results are weak (low scores or few matches), fall back to `YOUR_AGENT_core op:search` with explicit filters (type, category, tags, severity). This is structured search — narrower but more precise.
 
 ### For "Show me everything about X" (Exploration)
+
 Use tag-based and domain-based browsing for broader exploration:
 
 ```
 YOUR_AGENT_core op:vault_tags
 ```
+
 Lists all tags in the vault — helps discover what topics are covered.
 
 ```
 YOUR_AGENT_core op:vault_domains
 ```
+
 Lists all domains — shows the knowledge landscape at a glance.
 
 ```
 YOUR_AGENT_core op:vault_recent
 ```
+
 Shows recently added or modified entries — what's fresh in the vault.
 
 ### For "What's stale?" / "What needs updating?"
+
 Run an age report to find outdated knowledge:
 
 ```
@@ -51,6 +57,7 @@ YOUR_AGENT_core op:vault_age_report
 Present entries that haven't been updated recently — these are candidates for review, refresh, or removal.
 
 ### For "What do other projects do?"
+
 Call `YOUR_AGENT_core op:memory_cross_project_search` with `crossProject: true`. This searches across all linked projects, not just the current one.
 
 ```
@@ -65,6 +72,7 @@ YOUR_AGENT_core op:project_linked_projects
 ```
 
 ### For "Has brain learned anything about X?"
+
 Call `YOUR_AGENT_core op:brain_strengths` to see which patterns have proven strength. Then call `YOUR_AGENT_core op:brain_global_patterns` with a domain or tag filter to find cross-project patterns.
 
 ```
@@ -74,6 +82,7 @@ YOUR_AGENT_core op:brain_global_patterns
 ```
 
 ### For "What do I know about X?" (broad exploration)
+
 Chain multiple strategies for comprehensive results:
 
 1. `search_intelligent` → semantic vault search
@@ -86,6 +95,7 @@ Present all findings with source labels so the user knows where each insight cam
 ## Presenting Results
 
 Always include:
+
 - **Source**: Which search found it (vault, memory, brain, tags, domains)
 - **Confidence**: Score or strength rating
 - **Relevance**: Why this result matches the query
@@ -94,6 +104,7 @@ Always include:
 ## Fallback: Web Search
 
 If all vault strategies return no results, search the web for the user's question before saying "nothing found." The web may have:
+
 - Documentation, articles, or guides on the topic
 - Community patterns and best practices
 - Library-specific solutions
@@ -114,16 +125,16 @@ Search is complete when at least one search strategy has been tried and results 
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `search_intelligent` | Default semantic search — broadest and smartest |
-| `search` | Structured search with filters (type, tags, category) |
-| `vault_tags` | Browse all tags — discover knowledge landscape |
-| `vault_domains` | Browse all domains — see what areas are covered |
-| `vault_recent` | Recently modified entries — what's fresh |
-| `vault_age_report` | Find stale entries needing refresh |
-| `memory_cross_project_search` | Search across linked projects |
-| `project_linked_projects` | See what projects are connected |
-| `brain_strengths` | Proven patterns ranked by success |
-| `brain_global_patterns` | Cross-project patterns from global pool |
-| `capture_quick` | Capture web findings to vault for next time |
+| Op                            | When to Use                                           |
+| ----------------------------- | ----------------------------------------------------- |
+| `search_intelligent`          | Default semantic search — broadest and smartest       |
+| `search`                      | Structured search with filters (type, tags, category) |
+| `vault_tags`                  | Browse all tags — discover knowledge landscape        |
+| `vault_domains`               | Browse all domains — see what areas are covered       |
+| `vault_recent`                | Recently modified entries — what's fresh              |
+| `vault_age_report`            | Find stale entries needing refresh                    |
+| `memory_cross_project_search` | Search across linked projects                         |
+| `project_linked_projects`     | See what projects are connected                       |
+| `brain_strengths`             | Proven patterns ranked by success                     |
+| `brain_global_patterns`       | Cross-project patterns from global pool               |
+| `capture_quick`               | Capture web findings to vault for next time           |

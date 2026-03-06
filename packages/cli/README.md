@@ -14,21 +14,21 @@ The interactive wizard walks you through agent configuration: name, role, domain
 
 ## Commands
 
-| Command                           | Description                                            |
-| --------------------------------- | ------------------------------------------------------ |
-| `soleri create [name]`            | Interactive wizard to scaffold a new agent             |
-| `soleri list [dir]`               | Show agents in a directory                             |
-| `soleri add-domain <domain>`      | Add a knowledge domain to the agent in cwd             |
-| `soleri install-knowledge <pack>` | Install knowledge packs from a local path              |
-| `soleri dev`                      | Run agent in development mode (stdio MCP server)       |
-| `soleri doctor`                   | Health check — Node, npm, tsx, agent, deps, build, MCP |
-| `soleri hooks add <editor>`       | Generate editor hooks/config files                     |
-| `soleri hooks remove <editor>`    | Remove editor hooks/config files                       |
-| `soleri hooks list`               | Show installed editor hooks                            |
-| `soleri hooks add-pack <pack>`    | Install a hook pack globally (~/.claude/)               |
-| `soleri hooks remove-pack <pack>` | Remove a hook pack                                     |
-| `soleri hooks list-packs`         | Show available hook packs and their status              |
-| `soleri hooks upgrade-pack <pack>`| Upgrade a hook pack to the latest version              |
+| Command                            | Description                                            |
+| ---------------------------------- | ------------------------------------------------------ |
+| `soleri create [name]`             | Interactive wizard to scaffold a new agent             |
+| `soleri list [dir]`                | Show agents in a directory                             |
+| `soleri add-domain <domain>`       | Add a knowledge domain to the agent in cwd             |
+| `soleri install-knowledge <pack>`  | Install knowledge packs from a local path              |
+| `soleri dev`                       | Run agent in development mode (stdio MCP server)       |
+| `soleri doctor`                    | Health check — Node, npm, tsx, agent, deps, build, MCP |
+| `soleri hooks add <editor>`        | Generate editor hooks/config files                     |
+| `soleri hooks remove <editor>`     | Remove editor hooks/config files                       |
+| `soleri hooks list`                | Show installed editor hooks                            |
+| `soleri hooks add-pack <pack>`     | Install a hook pack globally (~/.claude/)              |
+| `soleri hooks remove-pack <pack>`  | Remove a hook pack                                     |
+| `soleri hooks list-packs`          | Show available hook packs and their status             |
+| `soleri hooks upgrade-pack <pack>` | Upgrade a hook pack to the latest version              |
 
 ### Create
 
@@ -62,13 +62,13 @@ Hook packs are curated sets of quality gate rules that install as hookify files 
 
 **Built-in packs:**
 
-| Pack | Hooks | Description |
-|------|-------|-------------|
-| `typescript-safety` | no-any-types, no-console-log | Block unsafe TS patterns |
-| `a11y` | semantic-html, focus-ring-required, ux-touch-targets | Accessibility enforcement |
-| `css-discipline` | no-important, no-inline-styles | CSS best practices |
-| `clean-commits` | no-ai-attribution | No AI attribution in git |
-| `full` | All 8 hooks | Complete quality suite |
+| Pack                | Hooks                                                | Description               |
+| ------------------- | ---------------------------------------------------- | ------------------------- |
+| `typescript-safety` | no-any-types, no-console-log                         | Block unsafe TS patterns  |
+| `a11y`              | semantic-html, focus-ring-required, ux-touch-targets | Accessibility enforcement |
+| `css-discipline`    | no-important, no-inline-styles                       | CSS best practices        |
+| `clean-commits`     | no-ai-attribution                                    | No AI attribution in git  |
+| `full`              | All 8 hooks                                          | Complete quality suite    |
 
 ```bash
 soleri hooks list-packs                    # See available packs

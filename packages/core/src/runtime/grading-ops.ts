@@ -35,7 +35,8 @@ export function createGradingOps(runtime: AgentRuntime): OpDefinition[] {
 
     {
       name: 'plan_check_history',
-      description: 'Get all grading checks for a plan (history). Shows score progression across iterations.',
+      description:
+        'Get all grading checks for a plan (history). Shows score progression across iterations.',
       auth: 'read',
       schema: z.object({
         planId: z.string().describe('The plan ID.'),
@@ -96,7 +97,15 @@ export function createGradingOps(runtime: AgentRuntime): OpDefinition[] {
         );
 
         // Group by severity for structured output
-        const grouped: Record<string, Array<{ category: string; description: string; recommendation: string; location?: string }>> = {};
+        const grouped: Record<
+          string,
+          Array<{
+            category: string;
+            description: string;
+            recommendation: string;
+            location?: string;
+          }>
+        > = {};
         for (const g of sortedGaps) {
           if (!grouped[g.severity]) grouped[g.severity] = [];
           grouped[g.severity].push({

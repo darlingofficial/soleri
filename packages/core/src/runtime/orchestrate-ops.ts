@@ -31,7 +31,10 @@ export function createOrchestrateOps(runtime: AgentRuntime): OpDefinition[] {
       schema: z.object({
         objective: z.string().describe('What the plan aims to achieve'),
         scope: z.string().describe('Boundaries of the work'),
-        domain: z.string().optional().describe('Domain for brain recommendations (e.g. "component", "styling")'),
+        domain: z
+          .string()
+          .optional()
+          .describe('Domain for brain recommendations (e.g. "component", "styling")'),
         tasks: z
           .array(z.object({ title: z.string(), description: z.string() }))
           .optional()
@@ -168,7 +171,10 @@ export function createOrchestrateOps(runtime: AgentRuntime): OpDefinition[] {
       auth: 'read',
       schema: z.object({
         domain: z.string().optional().describe('Filter recommendations by domain'),
-        sessionLimit: z.number().optional().describe('Number of recent sessions to include (default 5)'),
+        sessionLimit: z
+          .number()
+          .optional()
+          .describe('Number of recent sessions to include (default 5)'),
       }),
       handler: async (params) => {
         const domain = params.domain as string | undefined;

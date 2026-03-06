@@ -125,7 +125,9 @@ describe('Memory Cross-Project Ops', () => {
 
       const project = runtime.projectRegistry.getByPath('/test/project-b');
       expect(project!.metadata.custom).toBe('value');
-      expect((project!.metadata.memoryConfig as Record<string, unknown>).crossProjectEnabled).toBe(false);
+      expect((project!.metadata.memoryConfig as Record<string, unknown>).crossProjectEnabled).toBe(
+        false,
+      );
     });
   });
 

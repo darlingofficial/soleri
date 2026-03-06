@@ -13,13 +13,13 @@ The vault is your agent's long-term memory. It stores **knowledge entries** — 
 
 Every entry has:
 
-| Field | Purpose |
-|-------|---------|
-| **Type** | `pattern`, `anti-pattern`, `principle`, `concept`, `workflow`, `reference`, `rule`, `playbook` |
-| **Domain** | Knowledge area — `frontend`, `backend`, `security`, or your custom domains |
-| **Severity** | `critical` (must follow), `warning` (should follow), `suggestion` (nice to have) |
-| **Tags** | Free-form labels for discovery |
-| **Confidence** | Score that tracks how often this knowledge proves useful |
+| Field          | Purpose                                                                                        |
+| -------------- | ---------------------------------------------------------------------------------------------- |
+| **Type**       | `pattern`, `anti-pattern`, `principle`, `concept`, `workflow`, `reference`, `rule`, `playbook` |
+| **Domain**     | Knowledge area — `frontend`, `backend`, `security`, or your custom domains                     |
+| **Severity**   | `critical` (must follow), `warning` (should follow), `suggestion` (nice to have)               |
+| **Tags**       | Free-form labels for discovery                                                                 |
+| **Confidence** | Score that tracks how often this knowledge proves useful                                       |
 
 ### Searching the Vault
 
@@ -167,12 +167,12 @@ You don't need to invoke this manually — it activates automatically for multi-
 
 This is what makes Soleri agents different from stateless AI assistants:
 
-| Session | What happens |
-|---------|-------------|
-| **Session 1** | Agent starts with starter knowledge. You capture 3 patterns. |
-| **Session 5** | Agent has 20+ patterns. Searches return relevant results. Brain tracks what works. |
-| **Session 20** | Agent has 100+ patterns. Strong patterns surface first. Anti-patterns are flagged automatically. |
-| **Session 50** | Agent knows your codebase conventions, your team's decisions, your architecture patterns. It's not generic — it's *yours*. |
+| Session        | What happens                                                                                                               |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **Session 1**  | Agent starts with starter knowledge. You capture 3 patterns.                                                               |
+| **Session 5**  | Agent has 20+ patterns. Searches return relevant results. Brain tracks what works.                                         |
+| **Session 20** | Agent has 100+ patterns. Strong patterns surface first. Anti-patterns are flagged automatically.                           |
+| **Session 50** | Agent knows your codebase conventions, your team's decisions, your architecture patterns. It's not generic — it's _yours_. |
 
 The more you use it, the sharper it gets. Knowledge compounds.
 

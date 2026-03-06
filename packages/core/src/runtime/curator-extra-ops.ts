@@ -27,7 +27,7 @@ export function createCuratorExtraOps(runtime: AgentRuntime): OpDefinition[] {
     },
     {
       name: 'curator_record_snapshot',
-      description: 'Manually record a snapshot of an entry\'s current state.',
+      description: "Manually record a snapshot of an entry's current state.",
       auth: 'write',
       schema: z.object({
         entryId: z.string().describe('Entry ID to snapshot.'),

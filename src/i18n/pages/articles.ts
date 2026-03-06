@@ -5,7 +5,8 @@ export const articlesContent = (locale: Locale) => content[locale];
 const content: Record<Locale, ArticlesContent> = {
   en: {
     title: 'Articles - Soleri',
-    description: 'Articles about building AI agents that learn, remember, and grow. Knowledge compounding, vault architecture, and the philosophy behind Soleri.',
+    description:
+      'Articles about building AI agents that learn, remember, and grow. Knowledge compounding, vault architecture, and the philosophy behind Soleri.',
     eyebrow: 'From the team behind Soleri',
     heading: 'Articles',
     subtitle: 'On knowledge compounding, agent architecture, and building AI that learns.',
@@ -19,7 +20,8 @@ const content: Record<Locale, ArticlesContent> = {
   },
   uk: {
     title: 'Статті - Soleri',
-    description: 'Статті про створення AI-агентів, які навчаються, запам\'ятовують і зростають. Накопичення знань, архітектура сховища та філософія Soleri.',
+    description:
+      "Статті про створення AI-агентів, які навчаються, запам'ятовують і зростають. Накопичення знань, архітектура сховища та філософія Soleri.",
     eyebrow: 'Від команди Soleri',
     heading: 'Статті',
     subtitle: 'Про накопичення знань, архітектуру агентів і AI, що вчиться.',
@@ -33,10 +35,11 @@ const content: Record<Locale, ArticlesContent> = {
   },
   it: {
     title: 'Articoli - Soleri',
-    description: 'Articoli sulla creazione di agenti AI che apprendono, ricordano e crescono. Accumulo di conoscenze, architettura del vault e filosofia di Soleri.',
+    description:
+      'Articoli sulla creazione di agenti AI che apprendono, ricordano e crescono. Accumulo di conoscenze, architettura del vault e filosofia di Soleri.',
     eyebrow: 'Dal team di Soleri',
     heading: 'Articoli',
-    subtitle: 'Sull\'accumulo di conoscenza, l\'architettura degli agenti e l\'AI che impara.',
+    subtitle: "Sull'accumulo di conoscenza, l'architettura degli agenti e l'AI che impara.",
     subscribeText: 'Ricevi i nuovi articoli nella tua casella di posta.',
     subscribeLink: 'Iscriviti su Substack',
     loading: 'Caricamento degli articoli...',

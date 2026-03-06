@@ -5,6 +5,7 @@ A collection of patterns and anti-patterns specific to this codebase, designed t
 ## Purpose
 
 This vault serves as:
+
 1. **Documentation** - Human-readable guides for developers
 2. **Training Data** - Machine-parseable patterns for AI agents
 3. **Rule Source** - Foundation for automated linting rules and hooks
@@ -21,11 +22,11 @@ docs/vault/
 
 ## Severity Levels
 
-| Severity | Meaning |
-|----------|---------|
-| `critical` | Will cause build failures or runtime errors |
-| `warning` | May cause subtle bugs or maintenance issues |
-| `suggestion` | Recommended for consistency or performance |
+| Severity     | Meaning                                     |
+| ------------ | ------------------------------------------- |
+| `critical`   | Will cause build failures or runtime errors |
+| `warning`    | May cause subtle bugs or maintenance issues |
+| `suggestion` | Recommended for consistency or performance  |
 
 ## Categories
 

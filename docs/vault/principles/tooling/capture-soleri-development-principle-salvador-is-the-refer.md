@@ -1,6 +1,6 @@
 ---
 id: principle-tooling-capture-soleri-development-principle-salvador-is-the-refer
-title: "Soleri Development Principle: Salvador is the Reference Implementation"
+title: 'Soleri Development Principle: Salvador is the Reference Implementation'
 category: tooling
 severity: critical
 tier: captured

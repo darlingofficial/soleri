@@ -86,21 +86,21 @@ Give it a name, a domain, a voice. It ships with starter knowledge and learns fr
 
 ### Packages
 
-| Package | Version | Description |
-|---------|---------|-------------|
-| [`@soleri/core`](packages/core) | 2.2.0 | Shared engine — Vault, Brain, Planner, LLM utilities, facade infrastructure, Cognee hybrid search |
-| [`@soleri/forge`](packages/forge) | 5.2.0 | Agent scaffolder — generates config-driven MCP agents with optional Cognee integration |
-| [`@soleri/cli`](packages/cli) | 1.3.0 | Developer CLI — create, manage, develop agents, and install hook packs |
-| [`create-soleri`](packages/create-soleri) | 1.0.0 | `npm create soleri` shorthand — delegates to `@soleri/cli` |
+| Package                                   | Version | Description                                                                                       |
+| ----------------------------------------- | ------- | ------------------------------------------------------------------------------------------------- |
+| [`@soleri/core`](packages/core)           | 2.2.0   | Shared engine — Vault, Brain, Planner, LLM utilities, facade infrastructure, Cognee hybrid search |
+| [`@soleri/forge`](packages/forge)         | 5.2.0   | Agent scaffolder — generates config-driven MCP agents with optional Cognee integration            |
+| [`@soleri/cli`](packages/cli)             | 1.3.0   | Developer CLI — create, manage, develop agents, and install hook packs                            |
+| [`create-soleri`](packages/create-soleri) | 1.0.0   | `npm create soleri` shorthand — delegates to `@soleri/cli`                                        |
 
 ### Knowledge Packs
 
 Install expertise in one command:
 
-| Tier | Source | Cost |
-|------|--------|------|
-| **Starter** | Ships with agent | Free |
-| **Community** | npm registry | Free |
+| Tier          | Source           | Cost |
+| ------------- | ---------------- | ---- |
+| **Starter**   | Ships with agent | Free |
+| **Community** | npm registry     | Free |
 
 ```bash
 npx @soleri/cli install-knowledge ./bundles/react-patterns

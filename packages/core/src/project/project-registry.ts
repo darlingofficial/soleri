@@ -42,7 +42,11 @@ interface LinkRow {
  * Generate a deterministic project ID from a filesystem path.
  */
 function pathToId(path: string): string {
-  return path.replace(/[^a-z0-9]/gi, '-').toLowerCase().replace(/-+/g, '-').replace(/^-|-$/g, '');
+  return path
+    .replace(/[^a-z0-9]/gi, '-')
+    .toLowerCase()
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
 }
 
 function rowToProject(row: ProjectRow): RegisteredProject {
@@ -124,16 +128,18 @@ export class ProjectRegistry {
     const id = pathToId(path);
     const now = Date.now();
 
-    const existing = this.db
-      .prepare('SELECT * FROM registered_projects WHERE id = ?')
-      .get(id) as ProjectRow | undefined;
+    const existing = this.db.prepare('SELECT * FROM registered_projects WHERE id = ?').get(id) as
+      | ProjectRow
+      | undefined;
 
     if (existing) {
       // Update lastAccessedAt, and optionally name/metadata if provided
       const newName = name ?? existing.name;
       const newMetadata = metadata ? JSON.stringify(metadata) : existing.metadata;
       this.db
-        .prepare('UPDATE registered_projects SET last_accessed_at = ?, name = ?, metadata = ? WHERE id = ?')
+        .prepare(
+          'UPDATE registered_projects SET last_accessed_at = ?, name = ?, metadata = ? WHERE id = ?',
+        )
         .run(now, newName, newMetadata, id);
       return rowToProject({
         ...existing,
@@ -164,9 +170,9 @@ export class ProjectRegistry {
    * Get a project by ID.
    */
   get(projectId: string): RegisteredProject | null {
-    const row = this.db
-      .prepare('SELECT * FROM registered_projects WHERE id = ?')
-      .get(projectId) as ProjectRow | undefined;
+    const row = this.db.prepare('SELECT * FROM registered_projects WHERE id = ?').get(projectId) as
+      | ProjectRow
+      | undefined;
     return row ? rowToProject(row) : null;
   }
 
@@ -174,9 +180,9 @@ export class ProjectRegistry {
    * Get a project by its filesystem path.
    */
   getByPath(path: string): RegisteredProject | null {
-    const row = this.db
-      .prepare('SELECT * FROM registered_projects WHERE path = ?')
-      .get(path) as ProjectRow | undefined;
+    const row = this.db.prepare('SELECT * FROM registered_projects WHERE path = ?').get(path) as
+      | ProjectRow
+      | undefined;
     return row ? rowToProject(row) : null;
   }
 
@@ -199,7 +205,9 @@ export class ProjectRegistry {
       this.db
         .prepare('DELETE FROM project_links WHERE source_project_id = ? OR target_project_id = ?')
         .run(projectId, projectId);
-      return this.db.prepare('DELETE FROM registered_projects WHERE id = ?').run(projectId).changes > 0;
+      return (
+        this.db.prepare('DELETE FROM registered_projects WHERE id = ?').run(projectId).changes > 0
+      );
     })();
     return result;
   }
@@ -245,7 +253,9 @@ export class ProjectRegistry {
    */
   getRules(projectId: string): ProjectRule[] {
     const rows = this.db
-      .prepare('SELECT * FROM project_rules WHERE project_id = ? ORDER BY priority DESC, created_at ASC')
+      .prepare(
+        'SELECT * FROM project_rules WHERE project_id = ? ORDER BY priority DESC, created_at ASC',
+      )
       .all(projectId) as RuleRow[];
     return rows.map(rowToRule);
   }
@@ -313,9 +323,7 @@ export class ProjectRegistry {
         .run(sourceId, targetId, linkType).changes;
     }
     return this.db
-      .prepare(
-        'DELETE FROM project_links WHERE source_project_id = ? AND target_project_id = ?',
-      )
+      .prepare('DELETE FROM project_links WHERE source_project_id = ? AND target_project_id = ?')
       .run(sourceId, targetId).changes;
   }
 
@@ -338,7 +346,11 @@ export class ProjectRegistry {
     projectId: string,
   ): Array<{ project: RegisteredProject; linkType: LinkType; direction: 'outgoing' | 'incoming' }> {
     const links = this.getLinks(projectId);
-    const results: Array<{ project: RegisteredProject; linkType: LinkType; direction: 'outgoing' | 'incoming' }> = [];
+    const results: Array<{
+      project: RegisteredProject;
+      linkType: LinkType;
+      direction: 'outgoing' | 'incoming';
+    }> = [];
 
     for (const link of links) {
       const isOutgoing = link.sourceProjectId === projectId;

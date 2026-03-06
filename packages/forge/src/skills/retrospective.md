@@ -20,52 +20,62 @@ Generate a retrospective from actual session data, vault captures, plan outcomes
 ### Step 1: Gather the Data
 
 **Brain stats — the big picture:**
+
 ```
 YOUR_AGENT_core op:brain_stats
 ```
 
 **Recent brain stats — compare velocity:**
+
 ```
 YOUR_AGENT_core op:brain_stats
   params: { since: "<start of period>" }
 ```
 
 **Pattern strengths — what's proven:**
+
 ```
 YOUR_AGENT_core op:brain_strengths
 ```
 
 **Recent vault captures — what was learned:**
+
 ```
 YOUR_AGENT_core op:vault_recent
 ```
 
 **Memory topics — where knowledge clusters:**
+
 ```
 YOUR_AGENT_core op:memory_topics
 ```
 
 **Memory stats — volume and health:**
+
 ```
 YOUR_AGENT_core op:memory_stats
 ```
 
 **Plan stats — execution track record:**
+
 ```
 YOUR_AGENT_core op:plan_stats
 ```
 
 **Loop history — iterative workflow outcomes:**
+
 ```
 YOUR_AGENT_core op:loop_history
 ```
 
 **Search insights — what people looked for but didn't find:**
+
 ```
 YOUR_AGENT_core op:admin_search_insights
 ```
 
 **Vault analytics — knowledge quality:**
+
 ```
 YOUR_AGENT_core op:admin_vault_analytics
 ```
@@ -73,21 +83,25 @@ YOUR_AGENT_core op:admin_vault_analytics
 ### Step 2: Analyze Patterns
 
 **Stale knowledge needing refresh:**
+
 ```
 YOUR_AGENT_core op:vault_age_report
 ```
 
 **Duplicates that crept in:**
+
 ```
 YOUR_AGENT_core op:curator_detect_duplicates
 ```
 
 **Contradictions in the knowledge base:**
+
 ```
 YOUR_AGENT_core op:curator_contradictions
 ```
 
 **Curator health audit — overall quality:**
+
 ```
 YOUR_AGENT_core op:curator_health_audit
 ```
@@ -154,11 +168,13 @@ YOUR_AGENT_core op:capture_knowledge
 If the retrospective revealed quality issues, offer to fix them:
 
 **Consolidate vault (deduplicate, normalize, groom):**
+
 ```
 YOUR_AGENT_core op:curator_consolidate
 ```
 
 **Rebuild brain intelligence with fresh data:**
+
 ```
 YOUR_AGENT_core op:brain_build_intelligence
 ```
@@ -169,21 +185,21 @@ This feels like magic because the user says "sprint retro" and gets a data-drive
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `brain_stats` | Big picture metrics |
-| `brain_strengths` | Proven patterns |
-| `vault_recent` | What was captured recently |
-| `memory_topics` | Knowledge clusters |
-| `memory_stats` | Memory volume and health |
-| `plan_stats` | Plan completion rates |
-| `loop_history` | Iterative workflow outcomes |
-| `admin_search_insights` | Search miss analysis |
-| `admin_vault_analytics` | Knowledge quality metrics |
-| `vault_age_report` | Stale entries |
-| `curator_detect_duplicates` | Duplicate detection |
-| `curator_contradictions` | Knowledge conflicts |
-| `curator_health_audit` | Overall vault quality |
-| `capture_knowledge` | Persist the retrospective |
-| `curator_consolidate` | Post-retro cleanup |
-| `brain_build_intelligence` | Rebuild intelligence |
+| Op                          | When to Use                 |
+| --------------------------- | --------------------------- |
+| `brain_stats`               | Big picture metrics         |
+| `brain_strengths`           | Proven patterns             |
+| `vault_recent`              | What was captured recently  |
+| `memory_topics`             | Knowledge clusters          |
+| `memory_stats`              | Memory volume and health    |
+| `plan_stats`                | Plan completion rates       |
+| `loop_history`              | Iterative workflow outcomes |
+| `admin_search_insights`     | Search miss analysis        |
+| `admin_vault_analytics`     | Knowledge quality metrics   |
+| `vault_age_report`          | Stale entries               |
+| `curator_detect_duplicates` | Duplicate detection         |
+| `curator_contradictions`    | Knowledge conflicts         |
+| `curator_health_audit`      | Overall vault quality       |
+| `capture_knowledge`         | Persist the retrospective   |
+| `curator_consolidate`       | Post-retro cleanup          |
+| `brain_build_intelligence`  | Rebuild intelligence        |

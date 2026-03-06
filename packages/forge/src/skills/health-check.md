@@ -87,6 +87,7 @@ YOUR_AGENT_core op:vault_age_report
 ```
 
 Entries older than 30 days without updates are candidates for:
+
 - Refresh (still relevant, needs updating)
 - Archive (no longer relevant)
 - Delete (incorrect or superseded)
@@ -135,26 +136,31 @@ YOUR_AGENT_core op:governance_expire
 If the user approves, run the full cleanup:
 
 **Groom all entries — normalize tags, fix metadata:**
+
 ```
 YOUR_AGENT_core op:curator_groom_all
 ```
 
 **Full consolidation — deduplicate, normalize, quality-score:**
+
 ```
 YOUR_AGENT_core op:curator_consolidate
 ```
 
 **Prune stale memory:**
+
 ```
 YOUR_AGENT_core op:memory_prune
 ```
 
 **Rebuild brain intelligence with clean data:**
+
 ```
 YOUR_AGENT_core op:brain_build_intelligence
 ```
 
 **Reset caches to pick up changes:**
+
 ```
 YOUR_AGENT_core op:admin_reset_cache
 ```
@@ -200,26 +206,26 @@ This feels like magic because knowledge bases normally decay silently — duplic
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `admin_health` | System health check |
-| `admin_diagnostic` | Comprehensive system diagnostic |
-| `admin_vault_size` | Vault storage metrics |
-| `admin_vault_analytics` | Knowledge quality metrics |
-| `admin_search_insights` | Search miss analysis |
-| `admin_reset_cache` | Clear caches after cleanup |
-| `vault_domains` / `vault_tags` | Knowledge landscape |
-| `vault_age_report` | Stale entry detection |
-| `curator_health_audit` | Quality score and audit |
-| `curator_detect_duplicates` | Find duplicates |
-| `curator_contradictions` | Find conflicting entries |
-| `curator_resolve_contradiction` | Resolve conflicts |
-| `curator_groom_all` | Batch tag normalization |
-| `curator_consolidate` | Full cleanup pipeline |
-| `memory_stats` | Memory health |
-| `memory_deduplicate` | Remove duplicate memories |
-| `memory_prune` | Remove stale memories |
-| `governance_proposals` | Pending review queue |
-| `governance_stats` | Governance metrics |
-| `governance_expire` | Expire stale proposals |
-| `brain_build_intelligence` | Rebuild after cleanup |
+| Op                              | When to Use                     |
+| ------------------------------- | ------------------------------- |
+| `admin_health`                  | System health check             |
+| `admin_diagnostic`              | Comprehensive system diagnostic |
+| `admin_vault_size`              | Vault storage metrics           |
+| `admin_vault_analytics`         | Knowledge quality metrics       |
+| `admin_search_insights`         | Search miss analysis            |
+| `admin_reset_cache`             | Clear caches after cleanup      |
+| `vault_domains` / `vault_tags`  | Knowledge landscape             |
+| `vault_age_report`              | Stale entry detection           |
+| `curator_health_audit`          | Quality score and audit         |
+| `curator_detect_duplicates`     | Find duplicates                 |
+| `curator_contradictions`        | Find conflicting entries        |
+| `curator_resolve_contradiction` | Resolve conflicts               |
+| `curator_groom_all`             | Batch tag normalization         |
+| `curator_consolidate`           | Full cleanup pipeline           |
+| `memory_stats`                  | Memory health                   |
+| `memory_deduplicate`            | Remove duplicate memories       |
+| `memory_prune`                  | Remove stale memories           |
+| `governance_proposals`          | Pending review queue            |
+| `governance_stats`              | Governance metrics              |
+| `governance_expire`             | Expire stale proposals          |
+| `brain_build_intelligence`      | Rebuild after cleanup           |

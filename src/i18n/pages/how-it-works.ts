@@ -5,18 +5,20 @@ export const howItWorksContent = (locale: Locale) => content[locale];
 const content: Record<Locale, HowItWorksContent> = {
   en: {
     title: 'How It Works - Soleri',
-    description: 'Most assistants forget everything between sessions. Soleri\'s vault, brain, and transport architecture makes knowledge compound instead.',
+    description:
+      "Most assistants forget everything between sessions. Soleri's vault, brain, and transport architecture makes knowledge compound instead.",
     eyebrow: 'Most assistants forget everything between sessions',
-    heroTitle: 'Knowledge should compound. Here\'s how.',
-    heroSubtitle: 'Vault, brain, and transport layers run on a single engine. One process, zero lock-in \u2014 swap transports, plug in knowledge, switch providers.',
+    heroTitle: "Knowledge should compound. Here's how.",
+    heroSubtitle:
+      'Vault, brain, and transport layers run on a single engine. One process, zero lock-in \u2014 swap transports, plug in knowledge, switch providers.',
     archLayers: [
       {
         name: 'Agent',
-        desc: 'Your agent\'s config \u2014 <code>agent.yaml</code> defines identity, voice, domain wiring. Create in one command, customize anytime.',
+        desc: "Your agent's config \u2014 <code>agent.yaml</code> defines identity, voice, domain wiring. Create in one command, customize anytime.",
       },
       {
         name: 'Domains',
-        desc: 'Pluggable knowledge domains. The engine loads relevant domains based on your agent\'s vault structure.',
+        desc: "Pluggable knowledge domains. The engine loads relevant domains based on your agent's vault structure.",
       },
       {
         name: 'Engine',
@@ -29,7 +31,7 @@ const content: Record<Locale, HowItWorksContent> = {
     ],
     vault: {
       title: 'Knowledge that compounds',
-      text: 'Without a vault, every session starts from scratch. Soleri stores every pattern, anti-pattern, and decision in a searchable vault. Ask a question \u2014 get your team\'s answer, not a generic one.',
+      text: "Without a vault, every session starts from scratch. Soleri stores every pattern, anti-pattern, and decision in a searchable vault. Ask a question \u2014 get your team's answer, not a generic one.",
       keyPoint: 'Patterns, anti-patterns, and session memories \u2014 all searchable.',
       code1: `<span class="cmt"># Vault entry structure</span>
 <span class="key">id:</span> <span class="val">pattern-semantic-tokens</span>
@@ -50,7 +52,7 @@ const content: Record<Locale, HowItWorksContent> = {
     },
     brain: {
       title: 'Gets sharper with every session',
-      text: 'Manual knowledge curation doesn\'t scale. The brain tracks which patterns you apply, how often, and how successfully. Confidence grows automatically \u2014 no manual tagging needed.',
+      text: "Manual knowledge curation doesn't scale. The brain tracks which patterns you apply, how often, and how successfully. Confidence grows automatically \u2014 no manual tagging needed.",
       keyPoint: 'Automatic capture, no manual tagging.',
       code: `<span class="cmt"># Brain strengths output</span>
 <span class="prompt">$</span> <span class="cmd">soleri brain</span> <span class="arg">strengths</span>
@@ -65,12 +67,28 @@ const content: Record<Locale, HowItWorksContent> = {
     lifecycle: {
       title: 'Knowledge that grows \u2014 and stays sharp',
       text: 'Patterns flow through a four-step lifecycle. The engine watches your work, captures what sticks, and compounds it over time.',
-      keyPoint: 'Your vault doesn\'t decay \u2014 it sharpens. The brain tracks what works.',
+      keyPoint: "Your vault doesn't decay \u2014 it sharpens. The brain tracks what works.",
       steps: [
-        { label: 'Capture', desc: 'Engine notices repeated corrections, suggests patterns', color: 'amber' as const },
-        { label: 'Store', desc: 'Patterns, anti-patterns, session memories enter the vault', color: 'teal' as const },
-        { label: 'Strengthen', desc: 'Confidence scores track how often patterns succeed', color: 'green' as const },
-        { label: 'Compound', desc: 'High-confidence patterns surface first, weak ones flagged', color: 'amber' as const },
+        {
+          label: 'Capture',
+          desc: 'Engine notices repeated corrections, suggests patterns',
+          color: 'amber' as const,
+        },
+        {
+          label: 'Store',
+          desc: 'Patterns, anti-patterns, session memories enter the vault',
+          color: 'teal' as const,
+        },
+        {
+          label: 'Strengthen',
+          desc: 'Confidence scores track how often patterns succeed',
+          color: 'green' as const,
+        },
+        {
+          label: 'Compound',
+          desc: 'High-confidence patterns surface first, weak ones flagged',
+          color: 'amber' as const,
+        },
       ],
       code1: `<span class="cmt"># Session 3 \u2014 engine notices a pattern</span>
 <span class="warn">!</span> You've corrected <span class="val">bg-blue-500</span> \u2192 <span class="ok">bg-primary</span> 3 times.
@@ -91,7 +109,7 @@ const content: Record<Locale, HowItWorksContent> = {
     },
     transport: {
       title: 'Not locked to any editor',
-      text: 'Your knowledge shouldn\'t be trapped in one tool. The core engine has zero protocol dependencies. Transport adapters are separate files \u2014 swap or add them without touching the engine.',
+      text: "Your knowledge shouldn't be trapped in one tool. The core engine has zero protocol dependencies. Transport adapters are separate files \u2014 swap or add them without touching the engine.",
       keyPoint: 'Core has zero protocol deps.',
       code: `<span class="key">engine/transports/</span>  <span class="cmt"># one file per protocol</span>
 \u251C\u2500\u2500 <span class="ok">mcp.ts</span>         <span class="cmt"># Claude Code, Cursor \u2014 ships now</span>
@@ -105,7 +123,7 @@ const content: Record<Locale, HowItWorksContent> = {
     },
     llm: {
       title: 'Runs without API keys',
-      text: 'Knowledge infrastructure shouldn\'t require a subscription. Vault search, pattern matching, and Brain tracking all work locally. Add an LLM provider when you want AI-powered suggestions.',
+      text: "Knowledge infrastructure shouldn't require a subscription. Vault search, pattern matching, and Brain tracking all work locally. Add an LLM provider when you want AI-powered suggestions.",
       keyPoint: 'Core features work offline. LLM is optional.',
       code: `<span class="cmt"># agent.yaml \u2014 LLM config</span>
 <span class="key">llm:</span>
@@ -116,10 +134,14 @@ const content: Record<Locale, HowItWorksContent> = {
   },
   uk: {
     title: '\u042F\u043A \u0446\u0435 \u043F\u0440\u0430\u0446\u044E\u0454 - Soleri',
-    description: '\u0411\u0456\u043B\u044C\u0448\u0456\u0441\u0442\u044C \u043F\u043E\u043C\u0456\u0447\u043D\u0438\u043A\u0456\u0432 \u0437\u0430\u0431\u0443\u0432\u0430\u044E\u0442\u044C \u0432\u0441\u0435 \u043C\u0456\u0436 \u0441\u0435\u0441\u0456\u044F\u043C\u0438. \u0410\u0440\u0445\u0456\u0442\u0435\u043A\u0442\u0443\u0440\u0430 \u0441\u0445\u043E\u0432\u0438\u0449\u0430, \u043C\u043E\u0437\u043A\u0443 \u0442\u0430 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u0443 Soleri \u0440\u043E\u0431\u0438\u0442\u044C \u0437\u043D\u0430\u043D\u043D\u044F \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u0432\u0430\u043B\u044C\u043D\u0438\u043C\u0438.',
-    eyebrow: '\u0411\u0456\u043B\u044C\u0448\u0456\u0441\u0442\u044C \u043F\u043E\u043C\u0456\u0447\u043D\u0438\u043A\u0456\u0432 \u0437\u0430\u0431\u0443\u0432\u0430\u044E\u0442\u044C \u0432\u0441\u0435 \u043C\u0456\u0436 \u0441\u0435\u0441\u0456\u044F\u043C\u0438',
-    heroTitle: '\u0417\u043D\u0430\u043D\u043D\u044F \u043C\u0430\u044E\u0442\u044C \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u0432\u0430\u0442\u0438\u0441\u044F. \u041E\u0441\u044C \u044F\u043A.',
-    heroSubtitle: '\u0428\u0430\u0440\u0438 \u0441\u0445\u043E\u0432\u0438\u0449\u0430, \u043C\u043E\u0437\u043A\u0443 \u0442\u0430 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u0443 \u043F\u0440\u0430\u0446\u044E\u044E\u0442\u044C \u043D\u0430 \u043E\u0434\u043D\u043E\u043C\u0443 \u0440\u0443\u0448\u0456\u0457. \u041E\u0434\u0438\u043D \u043F\u0440\u043E\u0446\u0435\u0441, \u043D\u0443\u043B\u044C \u0437\u0430\u043B\u0435\u0436\u043D\u043E\u0441\u0442\u0435\u0439 \u2014 \u0437\u0430\u043C\u0456\u043D\u0438 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u0438, \u043F\u0456\u0434\u043A\u043B\u044E\u0447\u0430\u0439 \u0437\u043D\u0430\u043D\u043D\u044F, \u0437\u043C\u0456\u043D\u044E\u0439 \u043F\u0440\u043E\u0432\u0430\u0439\u0434\u0435\u0440\u0456\u0432.',
+    description:
+      '\u0411\u0456\u043B\u044C\u0448\u0456\u0441\u0442\u044C \u043F\u043E\u043C\u0456\u0447\u043D\u0438\u043A\u0456\u0432 \u0437\u0430\u0431\u0443\u0432\u0430\u044E\u0442\u044C \u0432\u0441\u0435 \u043C\u0456\u0436 \u0441\u0435\u0441\u0456\u044F\u043C\u0438. \u0410\u0440\u0445\u0456\u0442\u0435\u043A\u0442\u0443\u0440\u0430 \u0441\u0445\u043E\u0432\u0438\u0449\u0430, \u043C\u043E\u0437\u043A\u0443 \u0442\u0430 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u0443 Soleri \u0440\u043E\u0431\u0438\u0442\u044C \u0437\u043D\u0430\u043D\u043D\u044F \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u0432\u0430\u043B\u044C\u043D\u0438\u043C\u0438.',
+    eyebrow:
+      '\u0411\u0456\u043B\u044C\u0448\u0456\u0441\u0442\u044C \u043F\u043E\u043C\u0456\u0447\u043D\u0438\u043A\u0456\u0432 \u0437\u0430\u0431\u0443\u0432\u0430\u044E\u0442\u044C \u0432\u0441\u0435 \u043C\u0456\u0436 \u0441\u0435\u0441\u0456\u044F\u043C\u0438',
+    heroTitle:
+      '\u0417\u043D\u0430\u043D\u043D\u044F \u043C\u0430\u044E\u0442\u044C \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u0432\u0430\u0442\u0438\u0441\u044F. \u041E\u0441\u044C \u044F\u043A.',
+    heroSubtitle:
+      '\u0428\u0430\u0440\u0438 \u0441\u0445\u043E\u0432\u0438\u0449\u0430, \u043C\u043E\u0437\u043A\u0443 \u0442\u0430 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u0443 \u043F\u0440\u0430\u0446\u044E\u044E\u0442\u044C \u043D\u0430 \u043E\u0434\u043D\u043E\u043C\u0443 \u0440\u0443\u0448\u0456\u0457. \u041E\u0434\u0438\u043D \u043F\u0440\u043E\u0446\u0435\u0441, \u043D\u0443\u043B\u044C \u0437\u0430\u043B\u0435\u0436\u043D\u043E\u0441\u0442\u0435\u0439 \u2014 \u0437\u0430\u043C\u0456\u043D\u0438 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u0438, \u043F\u0456\u0434\u043A\u043B\u044E\u0447\u0430\u0439 \u0437\u043D\u0430\u043D\u043D\u044F, \u0437\u043C\u0456\u043D\u044E\u0439 \u043F\u0440\u043E\u0432\u0430\u0439\u0434\u0435\u0440\u0456\u0432.',
     archLayers: [
       {
         name: '\u0410\u0433\u0435\u043D\u0442',
@@ -139,9 +161,11 @@ const content: Record<Locale, HowItWorksContent> = {
       },
     ],
     vault: {
-      title: '\u0417\u043D\u0430\u043D\u043D\u044F, \u0449\u043E \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u044E\u0442\u044C\u0441\u044F',
+      title:
+        '\u0417\u043D\u0430\u043D\u043D\u044F, \u0449\u043E \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u044E\u0442\u044C\u0441\u044F',
       text: '\u0411\u0435\u0437 \u0441\u0445\u043E\u0432\u0438\u0449\u0430 \u043A\u043E\u0436\u043D\u0430 \u0441\u0435\u0441\u0456\u044F \u043F\u043E\u0447\u0438\u043D\u0430\u0454\u0442\u044C\u0441\u044F \u0437 \u043D\u0443\u043B\u044F. Soleri \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0454 \u043A\u043E\u0436\u0435\u043D \u043F\u0430\u0442\u0435\u0440\u043D, \u0430\u043D\u0442\u0438\u043F\u0430\u0442\u0435\u0440\u043D \u0456 \u0440\u0456\u0448\u0435\u043D\u043D\u044F \u0443 \u043F\u043E\u0448\u0443\u043A\u043E\u0432\u043E\u043C\u0443 \u0441\u0445\u043E\u0432\u0438\u0449\u0456. \u0417\u0430\u0434\u0430\u0439\u0442\u0435 \u043F\u0438\u0442\u0430\u043D\u043D\u044F \u2014 \u043E\u0442\u0440\u0438\u043C\u0430\u0439\u0442\u0435 \u0432\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u044C \u0432\u0456\u0434 \u0441\u0432\u043E\u0454\u0457 \u043A\u043E\u043C\u0430\u043D\u0434\u0438, \u043D\u0435 \u0437\u0430\u0433\u0430\u043B\u044C\u043D\u0443.',
-      keyPoint: '\u041F\u0430\u0442\u0435\u0440\u043D\u0438, \u0430\u043D\u0442\u0438\u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u0442\u0430 \u0441\u0435\u0441\u0456\u0439\u043D\u0456 \u0441\u043F\u043E\u0433\u0430\u0434\u0438 \u2014 \u0432\u0441\u0435 \u0446\u0435 \u0432 \u043F\u043E\u0448\u0443\u043A\u0443.',
+      keyPoint:
+        '\u041F\u0430\u0442\u0435\u0440\u043D\u0438, \u0430\u043D\u0442\u0438\u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u0442\u0430 \u0441\u0435\u0441\u0456\u0439\u043D\u0456 \u0441\u043F\u043E\u0433\u0430\u0434\u0438 \u2014 \u0432\u0441\u0435 \u0446\u0435 \u0432 \u043F\u043E\u0448\u0443\u043A\u0443.',
       code1: `<span class="cmt"># \u0421\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u0430 \u0437\u0430\u043F\u0438\u0441\u0443 \u0432 \u0441\u0445\u043E\u0432\u0438\u0449\u0435</span>
 <span class="key">id:</span> <span class="val">pattern-semantic-tokens</span>
 <span class="key">type:</span> <span class="val">pattern</span>
@@ -160,9 +184,11 @@ const content: Record<Locale, HowItWorksContent> = {
   <span class="val">anti-pattern-inline</span>     <span class="cmt">91% \u0432\u043F\u0435\u0432\u043D\u0435\u043D\u0456\u0441\u0442\u044C</span>`,
     },
     brain: {
-      title: '\u0417 \u043A\u043E\u0436\u043D\u043E\u044E \u0441\u0435\u0441\u0456\u0454\u044E \u0441\u0442\u0430\u0454 \u0442\u043E\u0447\u043D\u0456\u0448\u0438\u043C',
+      title:
+        '\u0417 \u043A\u043E\u0436\u043D\u043E\u044E \u0441\u0435\u0441\u0456\u0454\u044E \u0441\u0442\u0430\u0454 \u0442\u043E\u0447\u043D\u0456\u0448\u0438\u043C',
       text: '\u0420\u0443\u0447\u043D\u0430 \u043A\u0443\u0440\u0430\u0446\u0456\u044F \u0437\u043D\u0430\u043D\u044C \u043D\u0435 \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0443\u0454\u0442\u044C\u0441\u044F. \u041C\u043E\u0437\u043E\u043A \u0432\u0456\u0434\u0441\u0442\u0435\u0436\u0443\u0454, \u044F\u043A\u0456 \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u0432\u0438 \u0437\u0430\u0441\u0442\u043E\u0441\u043E\u0432\u0443\u0454\u0442\u0435, \u044F\u043A \u0447\u0430\u0441\u0442\u043E \u0456 \u043D\u0430\u0441\u043A\u0456\u043B\u044C\u043A\u0438 \u0443\u0441\u043F\u0456\u0448\u043D\u043E. \u0412\u043F\u0435\u0432\u043D\u0435\u043D\u0456\u0441\u0442\u044C \u0437\u0440\u043E\u0441\u0442\u0430\u0454 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u2014 \u0440\u0443\u0447\u043D\u0435 \u0442\u0435\u0433\u0443\u0432\u0430\u043D\u043D\u044F \u043D\u0435 \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u0435.',
-      keyPoint: '\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u0438\u0439 \u0437\u0430\u043F\u0438\u0441, \u0431\u0435\u0437 \u0440\u0443\u0447\u043D\u043E\u0433\u043E \u0442\u0435\u0433\u0443\u0432\u0430\u043D\u043D\u044F.',
+      keyPoint:
+        '\u0410\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u0438\u0439 \u0437\u0430\u043F\u0438\u0441, \u0431\u0435\u0437 \u0440\u0443\u0447\u043D\u043E\u0433\u043E \u0442\u0435\u0433\u0443\u0432\u0430\u043D\u043D\u044F.',
       code: `<span class="cmt"># \u0412\u0438\u0432\u0435\u0434\u0435\u043D\u043D\u044F \u0441\u0438\u043B\u044C\u043D\u0438\u0445 \u0441\u0442\u043E\u0440\u0456\u043D \u043C\u043E\u0437\u043A\u0443</span>
 <span class="prompt">$</span> <span class="cmd">soleri brain</span> <span class="arg">strengths</span>
 
@@ -174,14 +200,32 @@ const content: Record<Locale, HowItWorksContent> = {
   zustand-patterns   <span class="val">\u0441\u0438\u043B\u0430: 71</span>  <span class="cmt">4 \u0441\u0435\u0441\u0456\u0457</span>`,
     },
     lifecycle: {
-      title: '\u0417\u043D\u0430\u043D\u043D\u044F, \u0449\u043E \u0437\u0440\u043E\u0441\u0442\u0430\u044E\u0442\u044C \u2014 \u0456 \u0437\u0430\u043B\u0438\u0448\u0430\u044E\u0442\u044C\u0441\u044F \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u0438\u043C\u0438',
+      title:
+        '\u0417\u043D\u0430\u043D\u043D\u044F, \u0449\u043E \u0437\u0440\u043E\u0441\u0442\u0430\u044E\u0442\u044C \u2014 \u0456 \u0437\u0430\u043B\u0438\u0448\u0430\u044E\u0442\u044C\u0441\u044F \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u0438\u043C\u0438',
       text: '\u041F\u0430\u0442\u0435\u0440\u043D\u0438 \u043F\u0440\u043E\u0445\u043E\u0434\u044F\u0442\u044C \u043A\u0440\u0456\u0437\u044C \u0447\u043E\u0442\u0438\u0440\u0438\u0441\u0442\u0443\u043F\u0456\u043D\u0447\u0430\u0441\u0442\u0438\u0439 \u0436\u0438\u0442\u0442\u0454\u0432\u0438\u0439 \u0446\u0438\u043A\u043B. \u0420\u0443\u0448\u0456\u0439 \u0441\u0442\u0435\u0436\u0438\u0442\u044C \u0437\u0430 \u0442\u0432\u043E\u0454\u044E \u0440\u043E\u0431\u043E\u0442\u043E\u044E, \u0444\u0456\u043A\u0441\u0443\u0454, \u0449\u043E \u0441\u043F\u0440\u0430\u0446\u044C\u043E\u0432\u0443\u0454, \u0456 \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u0454 \u0446\u0435 \u0437 \u0447\u0430\u0441\u043E\u043C.',
-      keyPoint: '\u0412\u0430\u0448\u0435 \u0441\u0445\u043E\u0432\u0438\u0449\u0435 \u043D\u0435 \u0434\u0435\u0433\u0440\u0430\u0434\u0443\u0454 \u2014 \u0432\u043E\u043D\u043E \u0441\u0442\u0430\u0454 \u0442\u043E\u0447\u043D\u0456\u0448\u0438\u043C. \u041C\u043E\u0437\u043E\u043A \u0441\u0442\u0435\u0436\u0438\u0442\u044C \u0437\u0430 \u0442\u0438\u043C, \u0449\u043E \u043F\u0440\u0430\u0446\u044E\u0454.',
+      keyPoint:
+        '\u0412\u0430\u0448\u0435 \u0441\u0445\u043E\u0432\u0438\u0449\u0435 \u043D\u0435 \u0434\u0435\u0433\u0440\u0430\u0434\u0443\u0454 \u2014 \u0432\u043E\u043D\u043E \u0441\u0442\u0430\u0454 \u0442\u043E\u0447\u043D\u0456\u0448\u0438\u043C. \u041C\u043E\u0437\u043E\u043A \u0441\u0442\u0435\u0436\u0438\u0442\u044C \u0437\u0430 \u0442\u0438\u043C, \u0449\u043E \u043F\u0440\u0430\u0446\u044E\u0454.',
       steps: [
-        { label: '\u0424\u0456\u043A\u0441\u0430\u0446\u0456\u044F', desc: '\u0420\u0443\u0448\u0456\u0439 \u043F\u043E\u043C\u0456\u0447\u0430\u0454 \u043F\u043E\u0432\u0442\u043E\u0440\u044E\u0432\u0430\u043D\u0456 \u0432\u0438\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044F, \u043F\u0440\u043E\u043F\u043E\u043D\u0443\u0454 \u043F\u0430\u0442\u0435\u0440\u043D\u0438', color: 'amber' as const },
-        { label: '\u0417\u0431\u0435\u0440\u0456\u0433\u0430\u043D\u043D\u044F', desc: '\u041F\u0430\u0442\u0435\u0440\u043D\u0438, \u0430\u043D\u0442\u0438\u043F\u0430\u0442\u0435\u0440\u043D\u0438, \u0441\u0435\u0441\u0456\u0439\u043D\u0456 \u0441\u043F\u043E\u0433\u0430\u0434\u0438 \u043F\u043E\u0442\u0440\u0430\u043F\u043B\u044F\u044E\u0442\u044C \u0443 \u0441\u0445\u043E\u0432\u0438\u0449\u0435', color: 'teal' as const },
-        { label: '\u041F\u043E\u0441\u0438\u043B\u0435\u043D\u043D\u044F', desc: '\u041E\u0446\u0456\u043D\u043A\u0438 \u0432\u043F\u0435\u0432\u043D\u0435\u043D\u043E\u0441\u0442\u0456 \u0432\u0456\u0434\u0441\u043B\u0456\u0434\u043A\u043E\u0432\u0443\u044E\u0442\u044C, \u044F\u043A \u0447\u0430\u0441\u0442\u043E \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u0432\u0434\u0430\u044E\u0442\u044C\u0441\u044F', color: 'green' as const },
-        { label: '\u041D\u0430\u043A\u043E\u043F\u0438\u0447\u0435\u043D\u043D\u044F', desc: '\u041F\u0430\u0442\u0435\u0440\u043D\u0438 \u0437 \u0432\u0438\u0441\u043E\u043A\u043E\u044E \u0432\u043F\u0435\u0432\u043D\u0435\u043D\u0456\u0441\u0442\u044E \u0437\u2019\u044F\u0432\u043B\u044F\u044E\u0442\u044C\u0441\u044F \u043F\u0435\u0440\u0448\u0438\u043C\u0438, \u0441\u043B\u0430\u0431\u043A\u0456 \u043F\u043E\u0437\u043D\u0430\u0447\u0435\u043D\u0456', color: 'amber' as const },
+        {
+          label: '\u0424\u0456\u043A\u0441\u0430\u0446\u0456\u044F',
+          desc: '\u0420\u0443\u0448\u0456\u0439 \u043F\u043E\u043C\u0456\u0447\u0430\u0454 \u043F\u043E\u0432\u0442\u043E\u0440\u044E\u0432\u0430\u043D\u0456 \u0432\u0438\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u043D\u044F, \u043F\u0440\u043E\u043F\u043E\u043D\u0443\u0454 \u043F\u0430\u0442\u0435\u0440\u043D\u0438',
+          color: 'amber' as const,
+        },
+        {
+          label: '\u0417\u0431\u0435\u0440\u0456\u0433\u0430\u043D\u043D\u044F',
+          desc: '\u041F\u0430\u0442\u0435\u0440\u043D\u0438, \u0430\u043D\u0442\u0438\u043F\u0430\u0442\u0435\u0440\u043D\u0438, \u0441\u0435\u0441\u0456\u0439\u043D\u0456 \u0441\u043F\u043E\u0433\u0430\u0434\u0438 \u043F\u043E\u0442\u0440\u0430\u043F\u043B\u044F\u044E\u0442\u044C \u0443 \u0441\u0445\u043E\u0432\u0438\u0449\u0435',
+          color: 'teal' as const,
+        },
+        {
+          label: '\u041F\u043E\u0441\u0438\u043B\u0435\u043D\u043D\u044F',
+          desc: '\u041E\u0446\u0456\u043D\u043A\u0438 \u0432\u043F\u0435\u0432\u043D\u0435\u043D\u043E\u0441\u0442\u0456 \u0432\u0456\u0434\u0441\u043B\u0456\u0434\u043A\u043E\u0432\u0443\u044E\u0442\u044C, \u044F\u043A \u0447\u0430\u0441\u0442\u043E \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u0432\u0434\u0430\u044E\u0442\u044C\u0441\u044F',
+          color: 'green' as const,
+        },
+        {
+          label: '\u041D\u0430\u043A\u043E\u043F\u0438\u0447\u0435\u043D\u043D\u044F',
+          desc: '\u041F\u0430\u0442\u0435\u0440\u043D\u0438 \u0437 \u0432\u0438\u0441\u043E\u043A\u043E\u044E \u0432\u043F\u0435\u0432\u043D\u0435\u043D\u0456\u0441\u0442\u044E \u0437\u2019\u044F\u0432\u043B\u044F\u044E\u0442\u044C\u0441\u044F \u043F\u0435\u0440\u0448\u0438\u043C\u0438, \u0441\u043B\u0430\u0431\u043A\u0456 \u043F\u043E\u0437\u043D\u0430\u0447\u0435\u043D\u0456',
+          color: 'amber' as const,
+        },
       ],
       code1: `<span class="cmt"># \u0421\u0435\u0441\u0456\u044F 3 \u2014 \u0440\u0443\u0448\u0456\u0439 \u043F\u043E\u043C\u0456\u0447\u0430\u0454 \u043F\u0430\u0442\u0435\u0440\u043D</span>
 <span class="warn">!</span> \u0412\u0438 \u0432\u0438\u043F\u0440\u0430\u0432\u0438\u043B\u0438 <span class="val">bg-blue-500</span> \u2192 <span class="ok">bg-primary</span> 3 \u0440\u0430\u0437\u0438.
@@ -201,9 +245,11 @@ const content: Record<Locale, HowItWorksContent> = {
 <span class="key">status:</span> <span class="ok">\u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u0454\u0442\u044C\u0441\u044F</span>      <span class="cmt"># \u0437\u2019\u044F\u0432\u043B\u044F\u0454\u0442\u044C\u0441\u044F \u043F\u0435\u0440\u0448\u0438\u043C \u0443 \u043F\u043E\u0448\u0443\u043A\u0443</span>`,
     },
     transport: {
-      title: '\u041D\u0435 \u043F\u0440\u0438\u0432\u2019\u044F\u0437\u0430\u043D\u043E \u0434\u043E \u0436\u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0435\u0434\u0430\u043A\u0442\u043E\u0440\u0430',
+      title:
+        '\u041D\u0435 \u043F\u0440\u0438\u0432\u2019\u044F\u0437\u0430\u043D\u043E \u0434\u043E \u0436\u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0435\u0434\u0430\u043A\u0442\u043E\u0440\u0430',
       text: '\u0422\u0432\u043E\u0457 \u0437\u043D\u0430\u043D\u043D\u044F \u043D\u0435 \u043C\u0430\u044E\u0442\u044C \u0431\u0443\u0442\u0438 \u0437\u0430\u043C\u043A\u043D\u0435\u043D\u0456 \u0432 \u043E\u0434\u043D\u043E\u043C\u0443 \u0456\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u0456. \u042F\u0434\u0440\u043E \u0440\u0443\u0448\u0456\u044F \u043D\u0435 \u043C\u0430\u0454 \u0437\u0430\u043B\u0435\u0436\u043D\u043E\u0441\u0442\u0435\u0439 \u0432\u0456\u0434 \u043F\u0440\u043E\u0442\u043E\u043A\u043E\u043B\u0456\u0432. \u0410\u0434\u0430\u043F\u0442\u0435\u0440\u0438 \u0442\u0440\u0430\u043D\u0441\u043F\u043E\u0440\u0442\u0443 \u2014 \u0446\u0435 \u043E\u043A\u0440\u0435\u043C\u0456 \u0444\u0430\u0439\u043B\u0438 \u2014 \u0437\u043C\u0456\u043D\u044E\u0439 \u0430\u0431\u043E \u0434\u043E\u0434\u0430\u0432\u0430\u0439\u0442\u0435 \u0457\u0445, \u043D\u0435 \u0442\u043E\u0440\u043A\u0430\u044E\u0447\u0438\u0441\u044C \u044F\u0434\u0440\u0430.',
-      keyPoint: '\u042F\u0434\u0440\u043E \u043D\u0435 \u043C\u0430\u0454 \u0437\u0430\u043B\u0435\u0436\u043D\u043E\u0441\u0442\u0435\u0439 \u0432\u0456\u0434 \u043F\u0440\u043E\u0442\u043E\u043A\u043E\u043B\u0456\u0432.',
+      keyPoint:
+        '\u042F\u0434\u0440\u043E \u043D\u0435 \u043C\u0430\u0454 \u0437\u0430\u043B\u0435\u0436\u043D\u043E\u0441\u0442\u0435\u0439 \u0432\u0456\u0434 \u043F\u0440\u043E\u0442\u043E\u043A\u043E\u043B\u0456\u0432.',
       code: `<span class="key">engine/transports/</span>  <span class="cmt"># \u043E\u0434\u0438\u043D \u0444\u0430\u0439\u043B \u043D\u0430 \u043F\u0440\u043E\u0442\u043E\u043A\u043E\u043B</span>
 \u251C\u2500\u2500 <span class="ok">mcp.ts</span>         <span class="cmt"># Claude Code, Cursor \u2014 \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0456 \u0437\u0430\u0440\u0430\u0437</span>
 \u251C\u2500\u2500 rest.ts        <span class="cmt"># \u043F\u0430\u043D\u0435\u043B\u0456, \u043A\u043E\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0446\u044C\u043A\u0456 API</span>
@@ -215,9 +261,11 @@ const content: Record<Locale, HowItWorksContent> = {
 \u2514\u2500\u2500 memory.ts`,
     },
     llm: {
-      title: '\u041F\u0440\u0430\u0446\u044E\u0454 \u0431\u0435\u0437 \u043A\u043B\u044E\u0447\u0456\u0432 API',
+      title:
+        '\u041F\u0440\u0430\u0446\u044E\u0454 \u0431\u0435\u0437 \u043A\u043B\u044E\u0447\u0456\u0432 API',
       text: '\u0406\u043D\u0444\u0440\u0430\u0441\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u0430 \u0437\u043D\u0430\u043D\u044C \u043D\u0435 \u043F\u043E\u0432\u0438\u043D\u043D\u0430 \u0432\u0438\u043C\u0430\u0433\u0430\u0442\u0438 \u043F\u0456\u0434\u043F\u0438\u0441\u043A\u0438. \u041F\u043E\u0448\u0443\u043A \u0443 \u0441\u0445\u043E\u0432\u0438\u0449\u0456, \u0432\u0456\u0434\u043F\u043E\u0432\u0456\u0434\u043D\u0456\u0441\u0442\u044C \u043F\u0430\u0442\u0435\u0440\u043D\u0430\u043C \u0442\u0430 \u0432\u0456\u0434\u0441\u0442\u0435\u0436\u0435\u043D\u043D\u044F \u043F\u0440\u0430\u0446\u044E\u044E\u0442\u044C \u043B\u043E\u043A\u0430\u043B\u044C\u043D\u043E. \u041F\u0440\u043E\u0432\u0430\u0439\u0434\u0435\u0440 LLM \u043D\u0435 \u043E\u0431\u043E\u0432\u2019\u044F\u0437\u043A\u043E\u0432\u0438\u0439 \u2014 \u043F\u0456\u0434\u043A\u043B\u044E\u0447\u0456\u0442\u044C, \u043A\u043E\u043B\u0438 \u043F\u043E\u0442\u0440\u0456\u0431\u043D\u0456 AI-\u043F\u0456\u0434\u043A\u0430\u0437\u043A\u0438.',
-      keyPoint: '\u0411\u0430\u0437\u043E\u0432\u0430 \u0444\u0443\u043D\u043A\u0446\u0456\u043E\u043D\u0430\u043B\u044C\u043D\u0456\u0441\u0442\u044C \u0437\u0430\u0431\u0435\u0437\u043F\u0435\u0447\u0435\u043D\u0430 \u0431\u0435\u0437 \u043A\u043B\u044E\u0447\u0456\u0432.',
+      keyPoint:
+        '\u0411\u0430\u0437\u043E\u0432\u0430 \u0444\u0443\u043D\u043A\u0446\u0456\u043E\u043D\u0430\u043B\u044C\u043D\u0456\u0441\u0442\u044C \u0437\u0430\u0431\u0435\u0437\u043F\u0435\u0447\u0435\u043D\u0430 \u0431\u0435\u0437 \u043A\u043B\u044E\u0447\u0456\u0432.',
       code: `<span class="cmt"># agent.yaml \u2014 \u043A\u043E\u043D\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u044F LLM</span>
 <span class="key">llm:</span>
   <span class="key">provider:</span> <span class="val">anthropic</span>    <span class="cmt"># \u0430\u0431\u043E: openai, ollama, \u0436\u043E\u0434\u043D\u043E\u0433\u043E</span>
@@ -227,10 +275,12 @@ const content: Record<Locale, HowItWorksContent> = {
   },
   it: {
     title: 'Come funziona - Soleri',
-    description: 'La maggior parte degli assistenti dimentica tutto tra una sessione e l\'altra. L\'architettura Vault, Cervello e Trasporti di Soleri fa sì che la conoscenza si accumuli.',
+    description:
+      "La maggior parte degli assistenti dimentica tutto tra una sessione e l'altra. L'architettura Vault, Cervello e Trasporti di Soleri fa sì che la conoscenza si accumuli.",
     eyebrow: 'La maggior parte degli assistenti dimentica tutto tra le sessioni',
     heroTitle: 'La conoscenza dovrebbe accumularsi. Ecco come.',
-    heroSubtitle: 'Livelli di Vault, cervello e trasporto funzionano su un unico motore. Un processo, zero lock-in \u2014 cambia trasporti, aggiungi conoscenza, scegli il provider.',
+    heroSubtitle:
+      'Livelli di Vault, cervello e trasporto funzionano su un unico motore. Un processo, zero lock-in \u2014 cambia trasporti, aggiungi conoscenza, scegli il provider.',
     archLayers: [
       {
         name: 'Agente',
@@ -287,12 +337,29 @@ const content: Record<Locale, HowItWorksContent> = {
     lifecycle: {
       title: 'Conoscenza che cresce \u2014 e rimane precisa',
       text: 'I pattern fluiscono attraverso un ciclo di vita in quattro fasi. Il motore osserva il tuo lavoro, cattura ci\u00F2 che rimane e lo accumula nel tempo.',
-      keyPoint: 'Il tuo Vault non decade \u2014 si perfeziona. Il cervello traccia ci\u00F2 che funziona.',
+      keyPoint:
+        'Il tuo Vault non decade \u2014 si perfeziona. Il cervello traccia ci\u00F2 che funziona.',
       steps: [
-        { label: 'Cattura', desc: 'Il motore nota correzioni ripetute, suggerisce pattern', color: 'amber' as const },
-        { label: 'Conserva', desc: 'Pattern, antipattern e memorie delle sessioni entrano nel Vault', color: 'teal' as const },
-        { label: 'Rafforza', desc: 'I punteggi di fiducia tracciano quanto spesso i pattern hanno successo', color: 'green' as const },
-        { label: 'Componi', desc: 'I pattern ad alta fiducia emergono per primi, quelli deboli sono segnalati', color: 'amber' as const },
+        {
+          label: 'Cattura',
+          desc: 'Il motore nota correzioni ripetute, suggerisce pattern',
+          color: 'amber' as const,
+        },
+        {
+          label: 'Conserva',
+          desc: 'Pattern, antipattern e memorie delle sessioni entrano nel Vault',
+          color: 'teal' as const,
+        },
+        {
+          label: 'Rafforza',
+          desc: 'I punteggi di fiducia tracciano quanto spesso i pattern hanno successo',
+          color: 'green' as const,
+        },
+        {
+          label: 'Componi',
+          desc: 'I pattern ad alta fiducia emergono per primi, quelli deboli sono segnalati',
+          color: 'amber' as const,
+        },
       ],
       code1: `<span class="cmt"># Sessione 3 \u2014 il motore nota un pattern</span>
 <span class="warn">!</span> Hai corretto <span class="val">bg-blue-500</span> \u2192 <span class="ok">bg-primary</span> 3 volte.
@@ -327,7 +394,7 @@ const content: Record<Locale, HowItWorksContent> = {
     },
     llm: {
       title: 'Funziona senza chiavi API',
-      text: 'L\'infrastruttura della conoscenza non dovrebbe richiedere un abbonamento. La ricerca nel Vault, il pattern matching e il tracciamento del cervello funzionano localmente. Il provider LLM \u00E8 opzionale \u2014 aggiungine uno quando desideri suggerimenti AI.',
+      text: "L'infrastruttura della conoscenza non dovrebbe richiedere un abbonamento. La ricerca nel Vault, il pattern matching e il tracciamento del cervello funzionano localmente. Il provider LLM \u00E8 opzionale \u2014 aggiungine uno quando desideri suggerimenti AI.",
       keyPoint: 'Funzionalit\u00E0 di base garantita senza chiavi.',
       code: `<span class="cmt"># agent.yaml \u2014 Configurazione LLM</span>
 <span class="key">llm:</span>

@@ -29,17 +29,20 @@ YOUR_AGENT_core op:route_intent
 ### Step 2: Search All Knowledge Sources (in order)
 
 **Vault — has this been decided before?**
+
 ```
 YOUR_AGENT_core op:search_intelligent
   params: { query: "<the decision or options being considered>" }
 ```
 
 Look specifically for:
+
 - Previous decisions on this topic (type: "decision")
 - Patterns that favor one approach
 - Anti-patterns that warn against an approach
 
 **Brain — what's proven to work?**
+
 ```
 YOUR_AGENT_core op:brain_strengths
 ```
@@ -50,12 +53,14 @@ YOUR_AGENT_core op:brain_recommend
 ```
 
 **Cross-project — what did other projects choose?**
+
 ```
 YOUR_AGENT_core op:memory_cross_project_search
   params: { query: "<the decision topic>", crossProject: true }
 ```
 
 **Memory — any relevant context from past sessions?**
+
 ```
 YOUR_AGENT_core op:memory_search
   params: { query: "<decision topic>" }
@@ -63,6 +68,7 @@ YOUR_AGENT_core op:memory_search
 
 **Web — what does the broader community say?**
 Search the web for:
+
 - Comparison articles (X vs Y for [use case])
 - Benchmarks and performance data
 - Community consensus on best practices
@@ -120,6 +126,7 @@ This is critical — the next person who faces the same decision will find it in
 ## The Magic
 
 This feels like magic because the user asks "should I use X?" and instead of a generic AI opinion, they get:
+
 1. What their own project decided before (vault)
 2. What's proven to work across projects (brain)
 3. What other linked projects chose (cross-project)
@@ -131,12 +138,12 @@ It's like having a senior architect who remembers every decision ever made.
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `route_intent` | Classify the decision type |
-| `search_intelligent` | Find previous decisions and patterns |
-| `brain_strengths` | Proven approaches |
-| `brain_recommend` | Project-specific recommendations |
-| `memory_cross_project_search` | What other projects decided |
-| `memory_search` | Session context for this decision |
-| `capture_knowledge` | Persist the final decision |
+| Op                            | When to Use                          |
+| ----------------------------- | ------------------------------------ |
+| `route_intent`                | Classify the decision type           |
+| `search_intelligent`          | Find previous decisions and patterns |
+| `brain_strengths`             | Proven approaches                    |
+| `brain_recommend`             | Project-specific recommendations     |
+| `memory_cross_project_search` | What other projects decided          |
+| `memory_search`               | Session context for this decision    |
+| `capture_knowledge`           | Persist the final decision           |

@@ -2,7 +2,7 @@
  * DARK THEME — deep, bioluminescent
  * Pure token references — zero raw hex or RGB.
  * ============================================ */
-[data-theme="dark"] {
+[data-theme='dark'] {
   --bg: var(--color-neutral-950);
   --bg-warm: var(--color-neutral-940);
   --surface: rgb(var(--color-neutral-800-rgb) / 0.7);

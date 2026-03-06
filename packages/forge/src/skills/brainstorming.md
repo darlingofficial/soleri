@@ -1,6 +1,6 @@
 ---
 name: brainstorming
-description: "You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation."
+description: 'You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.'
 ---
 
 <!-- Adapted from superpowers (MIT License) -->
@@ -52,12 +52,14 @@ This returns the intent type (BUILD, FIX, VALIDATE, DESIGN, IMPROVE, DELIVER) an
 **BEFORE asking any questions or exploring code**, search for existing knowledge. Follow this order:
 
 ### Vault First
+
 ```
 YOUR_AGENT_core op:search_intelligent
   params: { query: "<the feature or idea the user described>" }
 ```
 
 Look for:
+
 - **Previous designs** — was this discussed or attempted before?
 - **Architectural decisions** — are there constraints from past decisions?
 - **Patterns** — established approaches in this codebase
@@ -84,18 +86,22 @@ YOUR_AGENT_core op:memory_cross_project_search
 ```
 
 ### Web Search Second
+
 If the vault doesn't have prior art, search the web for:
+
 - **Existing libraries/tools** that solve this problem (don't build what exists)
 - **Reference implementations** in similar projects
 - **Best practices** and established patterns for this type of feature
 - **Known pitfalls** that others have documented
 
 ### Present Findings
+
 Present vault + web findings to the user: "Before we design this, here's what I found..." This informs the design conversation and prevents reinventing solutions.
 
 ## The Process
 
 **Understanding the idea:**
+
 - Check out the current project state first (files, docs, recent commits)
 - Ask questions one at a time to refine the idea
 - Prefer multiple choice questions when possible, but open-ended is fine too
@@ -103,6 +109,7 @@ Present vault + web findings to the user: "Before we design this, here's what I 
 - Focus on understanding: purpose, constraints, success criteria
 
 **Exploring approaches:**
+
 - Propose 2-3 different approaches with trade-offs
 - Present options conversationally with your recommendation and reasoning
 - Lead with your recommended option and explain why
@@ -110,6 +117,7 @@ Present vault + web findings to the user: "Before we design this, here's what I 
 - **Reference web findings** — if an existing library solves this, recommend it over custom code
 
 **Presenting the design:**
+
 - Once you understand what you're building, present the design
 - Scale each section to its complexity
 - Ask after each section whether it looks right so far
@@ -133,10 +141,12 @@ YOUR_AGENT_core op:capture_knowledge
 This ensures future brainstorming sessions can reference what was decided and why.
 
 **Documentation:**
+
 - Write the validated design to `docs/plans/YYYY-MM-DD-<topic>-design.md`
 - Commit the design document to git
 
 **Implementation:**
+
 - Invoke the writing-plans skill to create a detailed implementation plan
 - Do NOT invoke any other skill. writing-plans is the next step.
 
@@ -160,11 +170,11 @@ This ensures future brainstorming sessions can reference what was decided and wh
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `route_intent` | Classify the type of work (BUILD, FIX, etc.) |
-| `search_intelligent` | Search vault for prior art |
-| `vault_tags` / `vault_domains` | Browse knowledge landscape |
-| `brain_strengths` | Check proven patterns |
-| `memory_cross_project_search` | Check if other projects solved this |
-| `capture_knowledge` | Persist design decision to vault |
+| Op                             | When to Use                                  |
+| ------------------------------ | -------------------------------------------- |
+| `route_intent`                 | Classify the type of work (BUILD, FIX, etc.) |
+| `search_intelligent`           | Search vault for prior art                   |
+| `vault_tags` / `vault_domains` | Browse knowledge landscape                   |
+| `brain_strengths`              | Check proven patterns                        |
+| `memory_cross_project_search`  | Check if other projects solved this          |
+| `capture_knowledge`            | Persist design decision to vault             |

@@ -34,6 +34,7 @@ YOUR_AGENT_core op:plan_list_tasks
 ```
 
 Present:
+
 - Plan objective and current status
 - Which tasks are completed, in progress, or pending
 - What's next to do
@@ -66,6 +67,7 @@ YOUR_AGENT_core op:loop_is_active
 ```
 
 If active:
+
 ```
 YOUR_AGENT_core op:loop_status
 ```
@@ -119,6 +121,7 @@ Format as a concise standup:
 ## The Magic
 
 This feels like magic because the user just says "catch me up" and the agent:
+
 1. Knows what plans are active and where they stand
 2. Remembers what happened last session (even across context compactions)
 3. Shows what knowledge was recently captured
@@ -129,15 +132,15 @@ No other tool does this — the agent has genuine persistent memory.
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `plan_stats` | Find active plans |
-| `get_plan` | Load plan details |
+| Op                | When to Use                 |
+| ----------------- | --------------------------- |
+| `plan_stats`      | Find active plans           |
+| `get_plan`        | Load plan details           |
 | `plan_list_tasks` | See task status within plan |
-| `memory_search` | Find session summaries |
-| `memory_list` | Browse recent memories |
-| `vault_recent` | Recently captured knowledge |
-| `loop_is_active` | Check for in-flight loops |
-| `loop_status` | Get loop details |
-| `brain_strengths` | Relevant proven patterns |
-| `admin_health` | System health check |
+| `memory_search`   | Find session summaries      |
+| `memory_list`     | Browse recent memories      |
+| `vault_recent`    | Recently captured knowledge |
+| `loop_is_active`  | Check for in-flight loops   |
+| `loop_status`     | Get loop details            |
+| `brain_strengths` | Relevant proven patterns    |
+| `admin_health`    | System health check         |

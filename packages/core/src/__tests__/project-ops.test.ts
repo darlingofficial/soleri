@@ -143,7 +143,10 @@ describe('createProjectOps', () => {
         category: 'behavior',
         text: 'Always use semantic tokens',
         priority: 10,
-      })) as { added: boolean; rule: { id: string; category: string; text: string; priority: number } };
+      })) as {
+        added: boolean;
+        rule: { id: string; category: string; text: string; priority: number };
+      };
 
       expect(addResult.added).toBe(true);
       expect(addResult.rule.category).toBe('behavior');
@@ -197,8 +200,16 @@ describe('createProjectOps', () => {
       const p1 = runtime.projectRegistry.register('/tmp/p1', 'P1');
       const p2 = runtime.projectRegistry.register('/tmp/p2', 'P2');
       runtime.projectRegistry.addRule(p1.id, { category: 'behavior', text: 'Rule A', priority: 0 });
-      runtime.projectRegistry.addRule(p1.id, { category: 'convention', text: 'Rule B', priority: 1 });
-      runtime.projectRegistry.addRule(p2.id, { category: 'preference', text: 'Rule C', priority: 0 });
+      runtime.projectRegistry.addRule(p1.id, {
+        category: 'convention',
+        text: 'Rule B',
+        priority: 1,
+      });
+      runtime.projectRegistry.addRule(p2.id, {
+        category: 'preference',
+        text: 'Rule C',
+        priority: 0,
+      });
 
       const result = (await findOp('project_list_rules').handler({})) as {
         count: number;
@@ -225,7 +236,10 @@ describe('createProjectOps', () => {
         sourceId: p1.id,
         targetId: p2.id,
         linkType: 'related',
-      })) as { linked: boolean; link: { sourceProjectId: string; targetProjectId: string; linkType: string } };
+      })) as {
+        linked: boolean;
+        link: { sourceProjectId: string; targetProjectId: string; linkType: string };
+      };
 
       expect(linkResult.linked).toBe(true);
       expect(linkResult.link.sourceProjectId).toBe(p1.id);

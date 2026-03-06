@@ -14,12 +14,12 @@ Salvador MCP is the reference implementation for Soleri. Every engine-level feat
 
 Every new core feature requires changes in all 4 template files:
 
-| File | What to add |
-|------|-------------|
-| `packages/core/src/` | Implementation (new module or extend existing) |
-| `packages/forge/src/templates/core-facade.ts` | Facade ops with Zod schemas |
-| `packages/forge/src/templates/test-facades.ts` | Tests for every new op |
-| `packages/forge/src/templates/entry-point.ts` | Initialization if the feature needs setup |
+| File                                           | What to add                                    |
+| ---------------------------------------------- | ---------------------------------------------- |
+| `packages/core/src/`                           | Implementation (new module or extend existing) |
+| `packages/forge/src/templates/core-facade.ts`  | Facade ops with Zod schemas                    |
+| `packages/forge/src/templates/test-facades.ts` | Tests for every new op                         |
+| `packages/forge/src/templates/entry-point.ts`  | Initialization if the feature needs setup      |
 
 If any of the 4 are missed, the generated agent ships incomplete.
 
@@ -29,12 +29,12 @@ Currently generated agents have ~36 ops across 2 facades. Salvador has 181+ ops 
 
 ### Package Architecture
 
-| Package | Role | Key files |
-|---------|------|-----------|
-| `@soleri/core` | Engine — vault, brain, planner, cognee, LLM utils, facades | `packages/core/src/` |
-| `@soleri/forge` | Scaffold — generates agent projects from config | `packages/forge/src/templates/` |
-| `@soleri/cli` | Developer CLI — create, list, add-domain, dev, doctor, hooks | `packages/cli/src/` |
-| `create-soleri` | npm create shorthand | `packages/create-soleri/` |
+| Package         | Role                                                         | Key files                       |
+| --------------- | ------------------------------------------------------------ | ------------------------------- |
+| `@soleri/core`  | Engine — vault, brain, planner, cognee, LLM utils, facades   | `packages/core/src/`            |
+| `@soleri/forge` | Scaffold — generates agent projects from config              | `packages/forge/src/templates/` |
+| `@soleri/cli`   | Developer CLI — create, list, add-domain, dev, doctor, hooks | `packages/cli/src/`             |
+| `create-soleri` | npm create shorthand                                         | `packages/create-soleri/`       |
 
 ### Testing Protocol
 

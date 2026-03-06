@@ -16,33 +16,43 @@ When the user wants to understand what patterns have proven valuable, what anti-
 ### "What have I learned?" (General debrief)
 
 1. Get the big picture:
+
    ```
    YOUR_AGENT_core op:brain_stats
    ```
+
    Total sessions, patterns captured, quality scores, coverage gaps.
 
 2. Get patterns ranked by proven strength:
+
    ```
    YOUR_AGENT_core op:brain_strengths
    ```
+
    Focus on strength >= 70 and successRate >= 0.7.
 
 3. Check memory landscape:
+
    ```
    YOUR_AGENT_core op:memory_topics
    ```
+
    Shows how knowledge clusters by topic.
 
 4. Check for stale knowledge:
+
    ```
    YOUR_AGENT_core op:vault_age_report
    ```
+
    Find entries that haven't been updated recently — candidates for review.
 
 5. Run a curator health audit:
+
    ```
    YOUR_AGENT_core op:curator_health_audit
    ```
+
    Vault quality score, tag normalization status, duplicate density.
 
 6. Present: top 5 strongest patterns, top 3 recurring anti-patterns, stale entries needing refresh, and coverage gaps.
@@ -50,22 +60,26 @@ When the user wants to understand what patterns have proven valuable, what anti-
 ### "What's working across projects?" (Cross-project intelligence)
 
 1. Get patterns promoted to the global pool:
+
    ```
    YOUR_AGENT_core op:brain_global_patterns
    ```
 
 2. Get recommendations based on project similarity:
+
    ```
    YOUR_AGENT_core op:brain_recommend
      params: { projectName: "<current project>" }
    ```
 
 3. Check linked projects:
+
    ```
    YOUR_AGENT_core op:project_linked_projects
    ```
 
 4. Search across all projects for relevant patterns:
+
    ```
    YOUR_AGENT_core op:memory_cross_project_search
      params: { query: "<topic>", crossProject: true }
@@ -76,28 +90,33 @@ When the user wants to understand what patterns have proven valuable, what anti-
 ### "Am I getting smarter?" (Learning velocity)
 
 1. Recent stats:
+
    ```
    YOUR_AGENT_core op:brain_stats
      params: { since: "<7 days ago>" }
    ```
 
 2. Longer period for comparison:
+
    ```
    YOUR_AGENT_core op:brain_stats
      params: { since: "<30 days ago>" }
    ```
 
 3. Memory stats:
+
    ```
    YOUR_AGENT_core op:memory_stats
    ```
 
 4. Vault analytics:
+
    ```
    YOUR_AGENT_core op:admin_vault_analytics
    ```
 
 5. Search insights — what queries are people running, what's missing:
+
    ```
    YOUR_AGENT_core op:admin_search_insights
    ```
@@ -107,17 +126,21 @@ When the user wants to understand what patterns have proven valuable, what anti-
 ### "Build fresh intelligence" (Rebuild)
 
 1. Run the full pipeline:
+
    ```
    YOUR_AGENT_core op:brain_build_intelligence
    ```
+
    Compute strengths, update global registry, refresh project profiles.
 
 2. Consolidate vault (curator cleanup):
+
    ```
    YOUR_AGENT_core op:curator_consolidate
    ```
 
 3. Show updated metrics:
+
    ```
    YOUR_AGENT_core op:brain_stats
    ```
@@ -127,21 +150,25 @@ When the user wants to understand what patterns have proven valuable, what anti-
 ### "Export what I know" (Portability)
 
 Export brain intelligence:
+
 ```
 YOUR_AGENT_core op:brain_export
 ```
 
 Export memory:
+
 ```
 YOUR_AGENT_core op:memory_export
 ```
 
 Export vault as backup:
+
 ```
 YOUR_AGENT_core op:vault_backup
 ```
 
 These can be imported into another vault:
+
 ```
 YOUR_AGENT_core op:brain_import
 YOUR_AGENT_core op:memory_import
@@ -151,6 +178,7 @@ YOUR_AGENT_core op:vault_import
 ## Presenting Intelligence
 
 Format as a report:
+
 - **Strengths**: Top patterns with strength scores and domains
 - **Risks**: Recurring anti-patterns that keep appearing
 - **Gaps**: Domains with low coverage or stale knowledge
@@ -165,22 +193,22 @@ Debrief is complete when the user's specific question has been answered with dat
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `brain_stats` | Aggregate metrics — sessions, patterns, quality |
-| `brain_strengths` | Patterns ranked by proven strength |
-| `brain_global_patterns` | Cross-project promoted patterns |
-| `brain_recommend` | Project-similarity recommendations |
-| `brain_build_intelligence` | Rebuild full intelligence pipeline |
-| `brain_export` / `brain_import` | Portable intelligence transfer |
-| `memory_topics` | Knowledge clusters by topic |
-| `memory_stats` | Memory statistics |
-| `memory_export` / `memory_import` | Memory portability |
-| `memory_cross_project_search` | Search across linked projects |
-| `vault_age_report` | Find stale entries needing refresh |
-| `vault_backup` / `vault_import` | Vault backup and restore |
-| `curator_health_audit` | Vault quality score and status |
-| `curator_consolidate` | Full vault cleanup pipeline |
-| `admin_vault_analytics` | Overall knowledge quality metrics |
-| `admin_search_insights` | Search miss analysis — what's not found |
-| `project_linked_projects` | See connected projects |
+| Op                                | When to Use                                     |
+| --------------------------------- | ----------------------------------------------- |
+| `brain_stats`                     | Aggregate metrics — sessions, patterns, quality |
+| `brain_strengths`                 | Patterns ranked by proven strength              |
+| `brain_global_patterns`           | Cross-project promoted patterns                 |
+| `brain_recommend`                 | Project-similarity recommendations              |
+| `brain_build_intelligence`        | Rebuild full intelligence pipeline              |
+| `brain_export` / `brain_import`   | Portable intelligence transfer                  |
+| `memory_topics`                   | Knowledge clusters by topic                     |
+| `memory_stats`                    | Memory statistics                               |
+| `memory_export` / `memory_import` | Memory portability                              |
+| `memory_cross_project_search`     | Search across linked projects                   |
+| `vault_age_report`                | Find stale entries needing refresh              |
+| `vault_backup` / `vault_import`   | Vault backup and restore                        |
+| `curator_health_audit`            | Vault quality score and status                  |
+| `curator_consolidate`             | Full vault cleanup pipeline                     |
+| `admin_vault_analytics`           | Overall knowledge quality metrics               |
+| `admin_search_insights`           | Search miss analysis — what's not found         |
+| `project_linked_projects`         | See connected projects                          |

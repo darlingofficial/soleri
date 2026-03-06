@@ -2,7 +2,13 @@
   "name": "@soleri/tokens",
   "version": "1.0.0",
   "description": "Solarpunk design tokens — primitives, semantic themes, and Tailwind preset for the Soleri design system.",
-  "keywords": ["design-tokens", "solarpunk", "tailwind", "css", "theme"],
+  "keywords": [
+    "css",
+    "design-tokens",
+    "solarpunk",
+    "tailwind",
+    "theme"
+  ],
   "homepage": "https://soleri.dev",
   "license": "Apache-2.0",
   "author": "adrozdenko",
@@ -11,6 +17,10 @@
     "url": "https://github.com/adrozdenko/soleri.git",
     "directory": "packages/tokens"
   },
+  "files": [
+    "dist",
+    "src/css"
+  ],
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -29,7 +39,6 @@
     "./css/light": "./src/css/light.css",
     "./css/dark": "./src/css/dark.css"
   },
-  "files": ["dist", "src/css"],
   "publishConfig": {
     "access": "public"
   },

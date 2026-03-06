@@ -14,6 +14,7 @@ npx @soleri/cli add-domain security
 ```
 
 This:
+
 1. Creates a domain facade registered with the MCP server
 2. Adds the domain to your agent's configuration
 3. Rebuilds the facade registry
@@ -53,6 +54,7 @@ npx @soleri/cli install-knowledge <path-or-package>
 ```
 
 Packs can be:
+
 - A local directory with JSON/markdown knowledge entries
 - An npm package following the Soleri knowledge pack format
 
@@ -71,10 +73,10 @@ my-pack/
 
 ### Available Tiers
 
-| Tier | Source | Cost |
-|------|--------|------|
-| **Starter** | Ships with every agent | Free |
-| **Community** | npm registry | Free |
+| Tier          | Source                 | Cost |
+| ------------- | ---------------------- | ---- |
+| **Starter**   | Ships with every agent | Free |
+| **Community** | npm registry           | Free |
 
 ## Hook Packs
 
@@ -88,16 +90,16 @@ npx @soleri/cli hooks add-pack full
 
 ### Available Hooks
 
-| Hook | What it catches |
-|------|----------------|
-| `no-console-log` | Leftover debug statements |
-| `no-any-types` | TypeScript `any` usage |
-| `no-important` | CSS `!important` declarations |
-| `no-inline-styles` | Inline `style=` attributes |
-| `semantic-html` | Non-semantic HTML elements |
+| Hook                  | What it catches                   |
+| --------------------- | --------------------------------- |
+| `no-console-log`      | Leftover debug statements         |
+| `no-any-types`        | TypeScript `any` usage            |
+| `no-important`        | CSS `!important` declarations     |
+| `no-inline-styles`    | Inline `style=` attributes        |
+| `semantic-html`       | Non-semantic HTML elements        |
 | `focus-ring-required` | Missing keyboard focus indicators |
-| `ux-touch-targets` | Touch targets smaller than 44px |
-| `no-ai-attribution` | AI attribution in commit messages |
+| `ux-touch-targets`    | Touch targets smaller than 44px   |
+| `no-ai-attribution`   | AI attribution in commit messages |
 
 ### Editor Integration
 
@@ -152,6 +154,7 @@ npx @soleri/cli governance --show
 ```
 
 Governance controls:
+
 - **Quotas** — max entries per domain, per type
 - **Retention** — how long unused entries survive before decay
 - **Auto-capture** — which severity levels auto-approve
@@ -167,11 +170,11 @@ Link related projects to share knowledge across them:
 
 Link types:
 
-| Type | Meaning | Direction |
-|------|---------|-----------|
-| `related` | Same domain | Bidirectional |
-| `parent` | Derives from another | Unidirectional |
-| `child` | Another derives from this | Unidirectional |
-| `fork` | Code fork | Unidirectional |
+| Type      | Meaning                   | Direction      |
+| --------- | ------------------------- | -------------- |
+| `related` | Same domain               | Bidirectional  |
+| `parent`  | Derives from another      | Unidirectional |
+| `child`   | Another derives from this | Unidirectional |
+| `fork`    | Code fork                 | Unidirectional |
 
 Linked projects are included in cross-project searches with weighted relevance.

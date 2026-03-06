@@ -91,7 +91,9 @@ export function createProjectOps(runtime: AgentRuntime): OpDefinition[] {
       auth: 'write',
       schema: z.object({
         projectId: z.string().describe('Project ID to add the rule to'),
-        category: z.enum(['behavior', 'preference', 'restriction', 'convention']).describe('Rule category'),
+        category: z
+          .enum(['behavior', 'preference', 'restriction', 'convention'])
+          .describe('Rule category'),
         text: z.string().describe('Rule text'),
         priority: z.number().default(0).describe('Priority (higher = more important)'),
       }),
@@ -143,7 +145,10 @@ export function createProjectOps(runtime: AgentRuntime): OpDefinition[] {
       schema: z.object({
         sourceId: z.string().describe('Source project ID'),
         targetId: z.string().describe('Target project ID'),
-        linkType: z.enum(['related', 'parent', 'child', 'fork']).optional().describe('Specific link type to remove'),
+        linkType: z
+          .enum(['related', 'parent', 'child', 'fork'])
+          .optional()
+          .describe('Specific link type to remove'),
       }),
       handler: async (params) => {
         const count = projectRegistry.unlink(
@@ -168,7 +173,8 @@ export function createProjectOps(runtime: AgentRuntime): OpDefinition[] {
     },
     {
       name: 'project_linked_projects',
-      description: 'Get linked projects with full details — project info, link type, and direction.',
+      description:
+        'Get linked projects with full details — project info, link type, and direction.',
       auth: 'read',
       schema: z.object({
         projectId: z.string().describe('Project ID'),

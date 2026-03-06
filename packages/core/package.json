@@ -49,8 +49,8 @@
     "@vitest/coverage-v8": "^4.0.18"
   },
   "peerDependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1",
-    "@anthropic-ai/sdk": ">=0.30.0"
+    "@anthropic-ai/sdk": ">=0.30.0",
+    "@modelcontextprotocol/sdk": "^1.12.1"
   },
   "peerDependenciesMeta": {
     "@modelcontextprotocol/sdk": {

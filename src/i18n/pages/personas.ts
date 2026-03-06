@@ -5,10 +5,12 @@ export const personasContent = (locale: Locale) => content[locale];
 const content: Record<Locale, PersonasContent> = {
   en: {
     title: 'Your Agent - Soleri',
-    description: 'Flat files and keyword search don\'t scale. Soleri gives your agent a domain-separated, graph-connected vault that compounds intelligence over time.',
-    heroEyebrow: 'Flat files and keyword search don\'t scale',
-    heroTitle: 'Your agent\'s intelligence should compound. Knowledge soup doesn\'t.',
-    heroSubtitle: 'One vault, domain-separated, vectorized, and graph-connected. Knowledge that organizes itself and stays sharp.',
+    description:
+      "Flat files and keyword search don't scale. Soleri gives your agent a domain-separated, graph-connected vault that compounds intelligence over time.",
+    heroEyebrow: "Flat files and keyword search don't scale",
+    heroTitle: "Your agent's intelligence should compound. Knowledge soup doesn't.",
+    heroSubtitle:
+      'One vault, domain-separated, vectorized, and graph-connected. Knowledge that organizes itself and stays sharp.',
 
     // Section 1: Create and configure
     section1Title: 'Create and configure',
@@ -40,14 +42,17 @@ const content: Record<Locale, PersonasContent> = {
   <span class="key">auto_capture:</span> <span class="val">true</span>
   <span class="key">min_confidence:</span> <span class="val">0.7</span>`,
     section1ContentTitle: 'Configuration as code',
-    section1ContentP1: 'The <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">create</code> command generates an <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">agent.yaml</code> with sensible defaults. It initializes a vault with starter knowledge, scans your project for patterns, and vectorizes everything.',
-    section1ContentP2: 'Voice, domains, vault backends, and brain settings — all declarative, all version-controlled.',
+    section1ContentP1:
+      'The <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">create</code> command generates an <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">agent.yaml</code> with sensible defaults. It initializes a vault with starter knowledge, scans your project for patterns, and vectorizes everything.',
+    section1ContentP2:
+      'Voice, domains, vault backends, and brain settings — all declarative, all version-controlled.',
     section1KeyPoint: 'One vault. All your knowledge. No coordination overhead.',
 
     // Section 2: Structured vault
     section2Title: 'Structured vault, not knowledge soup',
     section2ContentTitle: 'Domain-separated knowledge',
-    section2ContentP1: 'When everything lives in one flat folder, searching for "button" returns database migration notes alongside CSS patterns. The vault organizes knowledge into domains automatically. Ask about buttons — it searches frontend knowledge first. Ask about databases — it pulls from backend.',
+    section2ContentP1:
+      'When everything lives in one flat folder, searching for "button" returns database migration notes alongside CSS patterns. The vault organizes knowledge into domains automatically. Ask about buttons — it searches frontend knowledge first. Ask about databases — it pulls from backend.',
     section2ContentP2: 'One vault. Automatic routing.',
     section2KeyPoint: 'Buttons \u2192 frontend/. Databases \u2192 backend/. Routing is automatic.',
     vaultNodeFrontend: 'React patterns, design tokens, component review, accessibility',
@@ -104,8 +109,10 @@ const content: Record<Locale, PersonasContent> = {
 
 <span class="cmt">4 connections found via Cognee knowledge graph</span>`,
     section3ContentTitle: 'Vectorized, graph-connected, searchable',
-    section3ContentP1: 'Keyword search misses relationships between ideas. Every vault entry is vectorized for semantic search and connected via Cognee\'s knowledge graph. The system understands how patterns relate — not just what they are.',
-    section3ContentP2: 'Query semantic tokens, and the graph surfaces related button patterns, theme switching rules, and backend error color conventions. Cross-domain connections emerge automatically.',
+    section3ContentP1:
+      "Keyword search misses relationships between ideas. Every vault entry is vectorized for semantic search and connected via Cognee's knowledge graph. The system understands how patterns relate — not just what they are.",
+    section3ContentP2:
+      'Query semantic tokens, and the graph surfaces related button patterns, theme switching rules, and backend error color conventions. Cross-domain connections emerge automatically.',
     section3KeyPoint: 'Relationships between patterns — not just the patterns themselves.',
     graphStep1Title: 'Vectorize',
     graphStep1Desc: 'Every entry gets an embedding for semantic search',
@@ -117,9 +124,11 @@ const content: Record<Locale, PersonasContent> = {
     // Section 4: Vault self-maintenance
     section4Title: 'Vault keeps itself clean',
     section4ContentTitle: 'Auto-maintained knowledge',
-    section4ContentP1: 'Knowledge bases rot when nobody maintains them. The vault doesn\'t just store knowledge — it curates it. Deduplication catches redundant entries. Decay detection flags stale patterns. Confidence tracking surfaces what works and hides what doesn\'t.',
-    section4ContentP2: 'No manual cleanup. No knowledge rot. The vault stays sharp as your project evolves.',
-    section4KeyPoint: 'The vault doesn\'t just store knowledge — it curates it.',
+    section4ContentP1:
+      "Knowledge bases rot when nobody maintains them. The vault doesn't just store knowledge — it curates it. Deduplication catches redundant entries. Decay detection flags stale patterns. Confidence tracking surfaces what works and hides what doesn't.",
+    section4ContentP2:
+      'No manual cleanup. No knowledge rot. The vault stays sharp as your project evolves.',
+    section4KeyPoint: "The vault doesn't just store knowledge — it curates it.",
     section4Code1: `<span class="cmt"># Vault maintenance report</span>
 <span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">maintain</span>
 
@@ -146,13 +155,18 @@ const content: Record<Locale, PersonasContent> = {
 
   uk: {
     title: '\u0422\u0432\u0456\u0439 \u0430\u0433\u0435\u043D\u0442 \u2014 Soleri',
-    description: '\u041F\u043B\u0430\u0441\u043A\u0456 \u0444\u0430\u0439\u043B\u0438 \u0442\u0430 \u043F\u043E\u0448\u0443\u043A \u0437\u0430 \u043A\u043B\u044E\u0447\u043E\u0432\u0438\u043C\u0438 \u0441\u043B\u043E\u0432\u0430\u043C\u0438 \u043D\u0435 \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0443\u044E\u0442\u044C\u0441\u044F. Soleri \u0434\u0430\u0454 \u0432\u0430\u0448\u043E\u043C\u0443 \u0430\u0433\u0435\u043D\u0442\u0443 \u0434\u043E\u043C\u0435\u043D\u043D\u043E-\u0440\u043E\u0437\u0434\u0456\u043B\u0435\u043D\u0435, \u0433\u0440\u0430\u0444\u043E\u043C \u0437\u2019\u0454\u0434\u043D\u0430\u043D\u0435 \u0441\u0445\u043E\u0432\u0438\u0449\u0435, \u0449\u043E \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u0454 \u0456\u043D\u0442\u0435\u043B\u0435\u043A\u0442 \u0437 \u0447\u0430\u0441\u043E\u043C.',
-    heroEyebrow: '\u041F\u043B\u0430\u0441\u043A\u0456 \u0444\u0430\u0439\u043B\u0438 \u0442\u0430 \u043F\u043E\u0448\u0443\u043A \u0437\u0430 \u043A\u043B\u044E\u0447\u043E\u0432\u0438\u043C\u0438 \u0441\u043B\u043E\u0432\u0430\u043C\u0438 \u043D\u0435 \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0443\u044E\u0442\u044C\u0441\u044F',
-    heroTitle: '\u0406\u043D\u0442\u0435\u043B\u0435\u043A\u0442 \u0442\u0432\u043E\u0433\u043E \u0430\u0433\u0435\u043D\u0442\u0430 \u043C\u0430\u0454 \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u0432\u0430\u0442\u0438\u0441\u044F. \u041A\u0430\u0448\u0430 \u0437\u0456 \u0437\u043D\u0430\u043D\u044C \u2014 \u043D\u0456.',
-    heroSubtitle: '\u0404\u0434\u0438\u043D\u0435 \u0441\u0445\u043E\u0432\u0438\u0449\u0435, \u0440\u043E\u0437\u0434\u0456\u043B\u0435\u043D\u0435 \u0437\u0430 \u0434\u043E\u043C\u0435\u043D\u0430\u043C\u0438, \u0432\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u043D\u0435 \u0442\u0430 \u0437\u2019\u0454\u0434\u043D\u0430\u043D\u0435 \u0433\u0440\u0430\u0444\u043E\u043C. \u0417\u043D\u0430\u043D\u043D\u044F, \u044F\u043A\u0456 \u0441\u0430\u043C\u043E\u043E\u0440\u0433\u0430\u043D\u0456\u0437\u043E\u0432\u0443\u044E\u0442\u044C\u0441\u044F \u0439 \u0437\u0430\u043B\u0438\u0448\u0430\u044E\u0442\u044C\u0441\u044F \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u0438\u043C\u0438.',
+    description:
+      '\u041F\u043B\u0430\u0441\u043A\u0456 \u0444\u0430\u0439\u043B\u0438 \u0442\u0430 \u043F\u043E\u0448\u0443\u043A \u0437\u0430 \u043A\u043B\u044E\u0447\u043E\u0432\u0438\u043C\u0438 \u0441\u043B\u043E\u0432\u0430\u043C\u0438 \u043D\u0435 \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0443\u044E\u0442\u044C\u0441\u044F. Soleri \u0434\u0430\u0454 \u0432\u0430\u0448\u043E\u043C\u0443 \u0430\u0433\u0435\u043D\u0442\u0443 \u0434\u043E\u043C\u0435\u043D\u043D\u043E-\u0440\u043E\u0437\u0434\u0456\u043B\u0435\u043D\u0435, \u0433\u0440\u0430\u0444\u043E\u043C \u0437\u2019\u0454\u0434\u043D\u0430\u043D\u0435 \u0441\u0445\u043E\u0432\u0438\u0449\u0435, \u0449\u043E \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u0454 \u0456\u043D\u0442\u0435\u043B\u0435\u043A\u0442 \u0437 \u0447\u0430\u0441\u043E\u043C.',
+    heroEyebrow:
+      '\u041F\u043B\u0430\u0441\u043A\u0456 \u0444\u0430\u0439\u043B\u0438 \u0442\u0430 \u043F\u043E\u0448\u0443\u043A \u0437\u0430 \u043A\u043B\u044E\u0447\u043E\u0432\u0438\u043C\u0438 \u0441\u043B\u043E\u0432\u0430\u043C\u0438 \u043D\u0435 \u043C\u0430\u0441\u0448\u0442\u0430\u0431\u0443\u044E\u0442\u044C\u0441\u044F',
+    heroTitle:
+      '\u0406\u043D\u0442\u0435\u043B\u0435\u043A\u0442 \u0442\u0432\u043E\u0433\u043E \u0430\u0433\u0435\u043D\u0442\u0430 \u043C\u0430\u0454 \u043D\u0430\u043A\u043E\u043F\u0438\u0447\u0443\u0432\u0430\u0442\u0438\u0441\u044F. \u041A\u0430\u0448\u0430 \u0437\u0456 \u0437\u043D\u0430\u043D\u044C \u2014 \u043D\u0456.',
+    heroSubtitle:
+      '\u0404\u0434\u0438\u043D\u0435 \u0441\u0445\u043E\u0432\u0438\u0449\u0435, \u0440\u043E\u0437\u0434\u0456\u043B\u0435\u043D\u0435 \u0437\u0430 \u0434\u043E\u043C\u0435\u043D\u0430\u043C\u0438, \u0432\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u043D\u0435 \u0442\u0430 \u0437\u2019\u0454\u0434\u043D\u0430\u043D\u0435 \u0433\u0440\u0430\u0444\u043E\u043C. \u0417\u043D\u0430\u043D\u043D\u044F, \u044F\u043A\u0456 \u0441\u0430\u043C\u043E\u043E\u0440\u0433\u0430\u043D\u0456\u0437\u043E\u0432\u0443\u044E\u0442\u044C\u0441\u044F \u0439 \u0437\u0430\u043B\u0438\u0448\u0430\u044E\u0442\u044C\u0441\u044F \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u0438\u043C\u0438.',
 
     // Section 1
-    section1Title: '\u0421\u0442\u0432\u043E\u0440\u0456\u0442\u044C \u0456 \u043D\u0430\u043B\u0430\u0448\u0442\u0443\u0439\u0442\u0435',
+    section1Title:
+      '\u0421\u0442\u0432\u043E\u0440\u0456\u0442\u044C \u0456 \u043D\u0430\u043B\u0430\u0448\u0442\u0443\u0439\u0442\u0435',
     section1Code1: `<span class="cmt"># \u0421\u0442\u0432\u043E\u0440\u0456\u0442\u044C \u0441\u0432\u043E\u0433\u043E \u0430\u0433\u0435\u043D\u0442\u0430</span>
 <span class="prompt">$</span> <span class="cmd">soleri create</span> <span class="arg">my-agent</span>
 
@@ -180,20 +194,32 @@ const content: Record<Locale, PersonasContent> = {
 <span class="key">brain:</span>
   <span class="key">auto_capture:</span> <span class="val">true</span>
   <span class="key">min_confidence:</span> <span class="val">0.7</span>`,
-    section1ContentTitle: '\u041A\u043E\u043D\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u044F \u044F\u043A \u043A\u043E\u0434',
-    section1ContentP1: '\u041A\u043E\u043C\u0430\u043D\u0434\u0430 <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">create</code> \u0433\u0435\u043D\u0435\u0440\u0443\u0454 <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">agent.yaml</code> \u0456\u0437 \u0440\u043E\u0437\u0443\u043C\u043D\u0438\u043C\u0438 \u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F\u043C\u0438 \u0437\u0430 \u0437\u0430\u043C\u043E\u0432\u0447\u0443\u0432\u0430\u043D\u043D\u044F\u043C. \u0412\u043E\u043D\u0430 \u0456\u043D\u0456\u0446\u0456\u0430\u043B\u0456\u0437\u0443\u0454 \u0441\u0445\u043E\u0432\u0438\u0449\u0435 \u0437 \u043F\u043E\u0447\u0430\u0442\u043A\u043E\u0432\u0438\u043C\u0438 \u0437\u043D\u0430\u043D\u043D\u044F\u043C\u0438, \u0441\u043A\u0430\u043D\u0443\u0454 \u0432\u0430\u0448 \u043F\u0440\u043E\u0454\u043A\u0442 \u043D\u0430 \u043D\u0430\u044F\u0432\u043D\u0456\u0441\u0442\u044C \u043F\u0430\u0442\u0435\u0440\u043D\u0456\u0432 \u0456 \u0432\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u0443\u0454 \u0432\u0441\u0435.',
-    section1ContentP2: '\u0413\u043E\u043B\u043E\u0441, \u0434\u043E\u043C\u0435\u043D\u0438, \u0431\u0435\u043A\u0435\u043D\u0434\u0438 \u0441\u0445\u043E\u0432\u0438\u0449\u0430 \u0442\u0430 \u043D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u043D\u044F \u043C\u043E\u0437\u043A\u0443 \u2014 \u0443\u0441\u0435 \u0434\u0435\u043A\u043B\u0430\u0440\u0430\u0442\u0438\u0432\u043D\u0435, \u0443\u0441\u0435 \u043F\u0456\u0434 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435\u043C \u0432\u0435\u0440\u0441\u0456\u0439.',
-    section1KeyPoint: '\u0404\u0434\u0438\u043D\u0435 \u0441\u0445\u043E\u0432\u0438\u0449\u0435. \u0423\u0441\u0456 \u0432\u0430\u0448\u0456 \u0437\u043D\u0430\u043D\u043D\u044F. \u0416\u043E\u0434\u043D\u0438\u0445 \u043D\u0430\u043A\u043B\u0430\u0434\u043D\u0438\u0445 \u0432\u0438\u0442\u0440\u0430\u0442 \u043D\u0430 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0446\u0456\u044E.',
+    section1ContentTitle:
+      '\u041A\u043E\u043D\u0444\u0456\u0433\u0443\u0440\u0430\u0446\u0456\u044F \u044F\u043A \u043A\u043E\u0434',
+    section1ContentP1:
+      '\u041A\u043E\u043C\u0430\u043D\u0434\u0430 <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">create</code> \u0433\u0435\u043D\u0435\u0440\u0443\u0454 <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">agent.yaml</code> \u0456\u0437 \u0440\u043E\u0437\u0443\u043C\u043D\u0438\u043C\u0438 \u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044F\u043C\u0438 \u0437\u0430 \u0437\u0430\u043C\u043E\u0432\u0447\u0443\u0432\u0430\u043D\u043D\u044F\u043C. \u0412\u043E\u043D\u0430 \u0456\u043D\u0456\u0446\u0456\u0430\u043B\u0456\u0437\u0443\u0454 \u0441\u0445\u043E\u0432\u0438\u0449\u0435 \u0437 \u043F\u043E\u0447\u0430\u0442\u043A\u043E\u0432\u0438\u043C\u0438 \u0437\u043D\u0430\u043D\u043D\u044F\u043C\u0438, \u0441\u043A\u0430\u043D\u0443\u0454 \u0432\u0430\u0448 \u043F\u0440\u043E\u0454\u043A\u0442 \u043D\u0430 \u043D\u0430\u044F\u0432\u043D\u0456\u0441\u0442\u044C \u043F\u0430\u0442\u0435\u0440\u043D\u0456\u0432 \u0456 \u0432\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u0443\u0454 \u0432\u0441\u0435.',
+    section1ContentP2:
+      '\u0413\u043E\u043B\u043E\u0441, \u0434\u043E\u043C\u0435\u043D\u0438, \u0431\u0435\u043A\u0435\u043D\u0434\u0438 \u0441\u0445\u043E\u0432\u0438\u0449\u0430 \u0442\u0430 \u043D\u0430\u043B\u0430\u0448\u0442\u0443\u0432\u0430\u043D\u043D\u044F \u043C\u043E\u0437\u043A\u0443 \u2014 \u0443\u0441\u0435 \u0434\u0435\u043A\u043B\u0430\u0440\u0430\u0442\u0438\u0432\u043D\u0435, \u0443\u0441\u0435 \u043F\u0456\u0434 \u043A\u043E\u043D\u0442\u0440\u043E\u043B\u0435\u043C \u0432\u0435\u0440\u0441\u0456\u0439.',
+    section1KeyPoint:
+      '\u0404\u0434\u0438\u043D\u0435 \u0441\u0445\u043E\u0432\u0438\u0449\u0435. \u0423\u0441\u0456 \u0432\u0430\u0448\u0456 \u0437\u043D\u0430\u043D\u043D\u044F. \u0416\u043E\u0434\u043D\u0438\u0445 \u043D\u0430\u043A\u043B\u0430\u0434\u043D\u0438\u0445 \u0432\u0438\u0442\u0440\u0430\u0442 \u043D\u0430 \u043A\u043E\u043E\u0440\u0434\u0438\u043D\u0430\u0446\u0456\u044E.',
 
     // Section 2
-    section2Title: '\u0421\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u043E\u0432\u0430\u043D\u0435 \u0441\u0445\u043E\u0432\u0438\u0449\u0435, \u0430 \u043D\u0435 \u043A\u0430\u0448\u0430 \u0437\u0456 \u0437\u043D\u0430\u043D\u044C',
-    section2ContentTitle: '\u0417\u043D\u0430\u043D\u043D\u044F, \u0440\u043E\u0437\u0434\u0456\u043B\u0435\u043D\u0456 \u0437\u0430 \u0434\u043E\u043C\u0435\u043D\u0430\u043C\u0438',
-    section2ContentP1: '\u041A\u043E\u043B\u0438 \u0432\u0441\u0435 \u043B\u0435\u0436\u0438\u0442\u044C \u0432 \u043E\u0434\u043D\u0456\u0439 \u043F\u043B\u0430\u0441\u043A\u0456\u0439 \u0442\u0435\u0446\u0456, \u043F\u043E\u0448\u0443\u043A \u00AB\u043A\u043D\u043E\u043F\u043A\u0430\u00BB \u043F\u043E\u0432\u0435\u0440\u0442\u0430\u0454 \u043D\u043E\u0442\u0430\u0442\u043A\u0438 \u043F\u0440\u043E \u043C\u0456\u0433\u0440\u0430\u0446\u0456\u0457 \u0431\u0430\u0437 \u0434\u0430\u043D\u0438\u0445 \u043F\u043E\u0440\u0443\u0447 \u0437 CSS-\u043F\u0430\u0442\u0435\u0440\u043D\u0430\u043C\u0438. \u0421\u0445\u043E\u0432\u0438\u0449\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u0432\u043F\u043E\u0440\u044F\u0434\u043A\u043E\u0432\u0443\u0454 \u0437\u043D\u0430\u043D\u043D\u044F \u0437\u0430 \u0434\u043E\u043C\u0435\u043D\u0430\u043C\u0438. \u0417\u0430\u043F\u0438\u0442\u0430\u0439\u0442\u0435 \u043F\u0440\u043E \u043A\u043D\u043E\u043F\u043A\u0438 \u2014 \u0441\u043F\u0435\u0440\u0448\u0443 \u0432\u043E\u043D\u043E \u0448\u0443\u043A\u0430\u0454 \u0443 frontend. \u0417\u0430\u043F\u0438\u0442\u0430\u0439\u0442\u0435 \u043F\u0440\u043E \u0431\u0430\u0437\u0438 \u0434\u0430\u043D\u0438\u0445 \u2014 \u0432\u043E\u043D\u043E \u0434\u0456\u0441\u0442\u0430\u0454 \u0437 backend.',
-    section2ContentP2: '\u0421\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u0430 \u043A\u0440\u0430\u0449\u0430 \u0437\u0430 \u0440\u043E\u0437\u0434\u0456\u043B\u0435\u043D\u043D\u044F.',
-    section2KeyPoint: '\u041A\u043D\u043E\u043F\u043A\u0438 \u2192 frontend/. \u0411\u0430\u0437\u0438 \u0434\u0430\u043D\u0438\u0445 \u2192 backend/. \u041C\u0430\u0440\u0448\u0440\u0443\u0442\u0438\u0437\u0430\u0446\u0456\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u0430.',
-    vaultNodeFrontend: '\u041F\u0430\u0442\u0435\u0440\u043D\u0438 React, \u0434\u0438\u0437\u0430\u0439\u043D-\u0442\u043E\u043A\u0435\u043D\u0438, \u0440\u0435\u0432\u2019\u044E \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u0456\u0432, \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0456\u0441\u0442\u044C',
-    vaultNodeBackend: '\u041A\u043E\u043D\u0432\u0435\u043D\u0446\u0456\u0457 API, \u0441\u0445\u0435\u043C\u0438 \u0431\u0430\u0437 \u0434\u0430\u043D\u0438\u0445, \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u0430\u0432\u0442\u0435\u043D\u0442\u0438\u0444\u0456\u043A\u0430\u0446\u0456\u0457, \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u0438\u0432\u043D\u0456\u0441\u0442\u044C',
-    vaultNodeCrosscut: 'Git-\u0432\u043E\u0440\u043A\u0444\u043B\u043E\u0443, \u0440\u0435\u0432\u2019\u044E \u043A\u043E\u0434\u0443, \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0456\u0457 \u0442\u0435\u0441\u0442\u0443\u0432\u0430\u043D\u043D\u044F, \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u0446\u0456\u044F',
+    section2Title:
+      '\u0421\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u043E\u0432\u0430\u043D\u0435 \u0441\u0445\u043E\u0432\u0438\u0449\u0435, \u0430 \u043D\u0435 \u043A\u0430\u0448\u0430 \u0437\u0456 \u0437\u043D\u0430\u043D\u044C',
+    section2ContentTitle:
+      '\u0417\u043D\u0430\u043D\u043D\u044F, \u0440\u043E\u0437\u0434\u0456\u043B\u0435\u043D\u0456 \u0437\u0430 \u0434\u043E\u043C\u0435\u043D\u0430\u043C\u0438',
+    section2ContentP1:
+      '\u041A\u043E\u043B\u0438 \u0432\u0441\u0435 \u043B\u0435\u0436\u0438\u0442\u044C \u0432 \u043E\u0434\u043D\u0456\u0439 \u043F\u043B\u0430\u0441\u043A\u0456\u0439 \u0442\u0435\u0446\u0456, \u043F\u043E\u0448\u0443\u043A \u00AB\u043A\u043D\u043E\u043F\u043A\u0430\u00BB \u043F\u043E\u0432\u0435\u0440\u0442\u0430\u0454 \u043D\u043E\u0442\u0430\u0442\u043A\u0438 \u043F\u0440\u043E \u043C\u0456\u0433\u0440\u0430\u0446\u0456\u0457 \u0431\u0430\u0437 \u0434\u0430\u043D\u0438\u0445 \u043F\u043E\u0440\u0443\u0447 \u0437 CSS-\u043F\u0430\u0442\u0435\u0440\u043D\u0430\u043C\u0438. \u0421\u0445\u043E\u0432\u0438\u0449\u0435 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E \u0432\u043F\u043E\u0440\u044F\u0434\u043A\u043E\u0432\u0443\u0454 \u0437\u043D\u0430\u043D\u043D\u044F \u0437\u0430 \u0434\u043E\u043C\u0435\u043D\u0430\u043C\u0438. \u0417\u0430\u043F\u0438\u0442\u0430\u0439\u0442\u0435 \u043F\u0440\u043E \u043A\u043D\u043E\u043F\u043A\u0438 \u2014 \u0441\u043F\u0435\u0440\u0448\u0443 \u0432\u043E\u043D\u043E \u0448\u0443\u043A\u0430\u0454 \u0443 frontend. \u0417\u0430\u043F\u0438\u0442\u0430\u0439\u0442\u0435 \u043F\u0440\u043E \u0431\u0430\u0437\u0438 \u0434\u0430\u043D\u0438\u0445 \u2014 \u0432\u043E\u043D\u043E \u0434\u0456\u0441\u0442\u0430\u0454 \u0437 backend.',
+    section2ContentP2:
+      '\u0421\u0442\u0440\u0443\u043A\u0442\u0443\u0440\u0430 \u043A\u0440\u0430\u0449\u0430 \u0437\u0430 \u0440\u043E\u0437\u0434\u0456\u043B\u0435\u043D\u043D\u044F.',
+    section2KeyPoint:
+      '\u041A\u043D\u043E\u043F\u043A\u0438 \u2192 frontend/. \u0411\u0430\u0437\u0438 \u0434\u0430\u043D\u0438\u0445 \u2192 backend/. \u041C\u0430\u0440\u0448\u0440\u0443\u0442\u0438\u0437\u0430\u0446\u0456\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u0430.',
+    vaultNodeFrontend:
+      '\u041F\u0430\u0442\u0435\u0440\u043D\u0438 React, \u0434\u0438\u0437\u0430\u0439\u043D-\u0442\u043E\u043A\u0435\u043D\u0438, \u0440\u0435\u0432\u2019\u044E \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u0456\u0432, \u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0456\u0441\u0442\u044C',
+    vaultNodeBackend:
+      '\u041A\u043E\u043D\u0432\u0435\u043D\u0446\u0456\u0457 API, \u0441\u0445\u0435\u043C\u0438 \u0431\u0430\u0437 \u0434\u0430\u043D\u0438\u0445, \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u0430\u0432\u0442\u0435\u043D\u0442\u0438\u0444\u0456\u043A\u0430\u0446\u0456\u0457, \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u0438\u0432\u043D\u0456\u0441\u0442\u044C',
+    vaultNodeCrosscut:
+      'Git-\u0432\u043E\u0440\u043A\u0444\u043B\u043E\u0443, \u0440\u0435\u0432\u2019\u044E \u043A\u043E\u0434\u0443, \u0441\u0442\u0440\u0430\u0442\u0435\u0433\u0456\u0457 \u0442\u0435\u0441\u0442\u0443\u0432\u0430\u043D\u043D\u044F, \u0434\u043E\u043A\u0443\u043C\u0435\u043D\u0442\u0430\u0446\u0456\u044F',
     vaultNodeCrosscutLabel: 'Cross-cutting',
     section2Code1: `<span class="cmt"># \u041F\u043E\u0448\u0443\u043A \u0443 \u0441\u0445\u043E\u0432\u0438\u0449\u0456 \u0437 \u0443\u0440\u0430\u0445\u0443\u0432\u0430\u043D\u043D\u044F\u043C \u0434\u043E\u043C\u0435\u043D\u0443</span>
 <span class="prompt">$</span> <span class="cmd">soleri vault search</span> <span class="arg">"button styling"</span>
@@ -223,7 +249,8 @@ const content: Record<Locale, PersonasContent> = {
 \u2514\u2500\u2500 <span class="key">index.vec</span>              <span class="cmt">\u0432\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u043D\u0438\u0439 \u043F\u043E\u0448\u0443\u043A\u043E\u0432\u0438\u0439 \u0456\u043D\u0434\u0435\u043A\u0441</span>`,
 
     // Section 3
-    section3Title: '\u0413\u0440\u0430\u0444 \u0437\u043D\u0430\u043D\u044C, \u0430 \u043D\u0435 \u043F\u043B\u0430\u0441\u043A\u0456 \u0444\u0430\u0439\u043B\u0438',
+    section3Title:
+      '\u0413\u0440\u0430\u0444 \u0437\u043D\u0430\u043D\u044C, \u0430 \u043D\u0435 \u043F\u043B\u0430\u0441\u043A\u0456 \u0444\u0430\u0439\u043B\u0438',
     section3Code1: `<span class="cmt"># \u0421\u0442\u0430\u0442\u0443\u0441 \u0441\u0445\u043E\u0432\u0438\u0449\u0430 \u2014 \u0432\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u043D\u043E + \u0437\u2019\u0454\u0434\u043D\u0430\u043D\u043E \u0433\u0440\u0430\u0444\u043E\u043C</span>
 <span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">status</span>
 
@@ -244,23 +271,36 @@ const content: Record<Locale, PersonasContent> = {
   <span class="val">pattern-api-error-colors</span>     <span class="cmt">backend/   \u2014 \u043A\u0440\u043E\u0441\u0434\u043E\u043C\u0435\u043D\u043D\u0435 \u043F\u043E\u0441\u0438\u043B\u0430\u043D\u043D\u044F</span>
 
 <span class="cmt">4 \u0437\u0432\u2019\u044F\u0437\u043A\u0438 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E \u0447\u0435\u0440\u0435\u0437 \u0433\u0440\u0430\u0444 \u0437\u043D\u0430\u043D\u044C Cognee</span>`,
-    section3ContentTitle: '\u0412\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u043D\u0435, \u0437\u2019\u0454\u0434\u043D\u0430\u043D\u0435 \u0433\u0440\u0430\u0444\u043E\u043C, \u043F\u0440\u0438\u0434\u0430\u0442\u043D\u0435 \u0434\u043E \u043F\u043E\u0448\u0443\u043A\u0443',
-    section3ContentP1: '\u041F\u043E\u0448\u0443\u043A \u0437\u0430 \u043A\u043B\u044E\u0447\u043E\u0432\u0438\u043C\u0438 \u0441\u043B\u043E\u0432\u0430\u043C\u0438 \u043F\u0440\u043E\u043F\u0443\u0441\u043A\u0430\u0454 \u0437\u0432\u2019\u044F\u0437\u043A\u0438 \u043C\u0456\u0436 \u0456\u0434\u0435\u044F\u043C\u0438. \u041A\u043E\u0436\u0435\u043D \u0437\u0430\u043F\u0438\u0441 \u0443 \u0441\u0445\u043E\u0432\u0438\u0449\u0456 \u0432\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u0443\u0454\u0442\u044C\u0441\u044F \u0434\u043B\u044F \u0441\u0435\u043C\u0430\u043D\u0442\u0438\u0447\u043D\u043E\u0433\u043E \u043F\u043E\u0448\u0443\u043A\u0443 \u0442\u0430 \u0437\u2019\u0454\u0434\u043D\u0443\u0454\u0442\u044C\u0441\u044F \u0447\u0435\u0440\u0435\u0437 \u0433\u0440\u0430\u0444 \u0437\u043D\u0430\u043D\u044C Cognee. \u0421\u0438\u0441\u0442\u0435\u043C\u0430 \u0440\u043E\u0437\u0443\u043C\u0456\u0454, \u044F\u043A \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u043F\u043E\u0432\u2019\u044F\u0437\u0430\u043D\u0456 \u043C\u0456\u0436 \u0441\u043E\u0431\u043E\u044E \u2014 \u043D\u0435 \u043B\u0438\u0448\u0435 \u0449\u043E \u0446\u0435 \u0442\u0430\u043A\u0435.',
-    section3ContentP2: '\u0417\u0430\u043F\u0438\u0442\u0430\u0439\u0442\u0435 \u043F\u0440\u043E \u0441\u0435\u043C\u0430\u043D\u0442\u0438\u0447\u043D\u0456 \u0442\u043E\u043A\u0435\u043D\u0438 \u2014 \u0456 \u0433\u0440\u0430\u0444 \u043F\u0456\u0434\u0441\u0432\u0456\u0442\u0438\u0442\u044C \u043F\u043E\u0432\u2019\u044F\u0437\u0430\u043D\u0456 \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u043A\u043D\u043E\u043F\u043E\u043A, \u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u043F\u0435\u0440\u0435\u043C\u0438\u043A\u0430\u043D\u043D\u044F \u0442\u0435\u043C \u0456 \u0431\u0435\u043A\u0435\u043D\u0434-\u043A\u043E\u043D\u0432\u0435\u043D\u0446\u0456\u0457 \u043A\u043E\u043B\u044C\u043E\u0440\u0456\u0432 \u043F\u043E\u043C\u0438\u043B\u043E\u043A. \u041A\u0440\u043E\u0441\u0434\u043E\u043C\u0435\u043D\u043D\u0456 \u0437\u0432\u2019\u044F\u0437\u043A\u0438 \u0437\u2019\u044F\u0432\u043B\u044F\u044E\u0442\u044C\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E.',
-    section3KeyPoint: '\u0417\u0432\u2019\u044F\u0437\u043A\u0438 \u043C\u0456\u0436 \u043F\u0430\u0442\u0435\u0440\u043D\u0430\u043C\u0438 \u2014 \u043D\u0435 \u043B\u0438\u0448\u0435 \u0441\u0430\u043C\u0456 \u043F\u0430\u0442\u0435\u0440\u043D\u0438.',
+    section3ContentTitle:
+      '\u0412\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u043E\u0432\u0430\u043D\u0435, \u0437\u2019\u0454\u0434\u043D\u0430\u043D\u0435 \u0433\u0440\u0430\u0444\u043E\u043C, \u043F\u0440\u0438\u0434\u0430\u0442\u043D\u0435 \u0434\u043E \u043F\u043E\u0448\u0443\u043A\u0443',
+    section3ContentP1:
+      '\u041F\u043E\u0448\u0443\u043A \u0437\u0430 \u043A\u043B\u044E\u0447\u043E\u0432\u0438\u043C\u0438 \u0441\u043B\u043E\u0432\u0430\u043C\u0438 \u043F\u0440\u043E\u043F\u0443\u0441\u043A\u0430\u0454 \u0437\u0432\u2019\u044F\u0437\u043A\u0438 \u043C\u0456\u0436 \u0456\u0434\u0435\u044F\u043C\u0438. \u041A\u043E\u0436\u0435\u043D \u0437\u0430\u043F\u0438\u0441 \u0443 \u0441\u0445\u043E\u0432\u0438\u0449\u0456 \u0432\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u0443\u0454\u0442\u044C\u0441\u044F \u0434\u043B\u044F \u0441\u0435\u043C\u0430\u043D\u0442\u0438\u0447\u043D\u043E\u0433\u043E \u043F\u043E\u0448\u0443\u043A\u0443 \u0442\u0430 \u0437\u2019\u0454\u0434\u043D\u0443\u0454\u0442\u044C\u0441\u044F \u0447\u0435\u0440\u0435\u0437 \u0433\u0440\u0430\u0444 \u0437\u043D\u0430\u043D\u044C Cognee. \u0421\u0438\u0441\u0442\u0435\u043C\u0430 \u0440\u043E\u0437\u0443\u043C\u0456\u0454, \u044F\u043A \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u043F\u043E\u0432\u2019\u044F\u0437\u0430\u043D\u0456 \u043C\u0456\u0436 \u0441\u043E\u0431\u043E\u044E \u2014 \u043D\u0435 \u043B\u0438\u0448\u0435 \u0449\u043E \u0446\u0435 \u0442\u0430\u043A\u0435.',
+    section3ContentP2:
+      '\u0417\u0430\u043F\u0438\u0442\u0430\u0439\u0442\u0435 \u043F\u0440\u043E \u0441\u0435\u043C\u0430\u043D\u0442\u0438\u0447\u043D\u0456 \u0442\u043E\u043A\u0435\u043D\u0438 \u2014 \u0456 \u0433\u0440\u0430\u0444 \u043F\u0456\u0434\u0441\u0432\u0456\u0442\u0438\u0442\u044C \u043F\u043E\u0432\u2019\u044F\u0437\u0430\u043D\u0456 \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u043A\u043D\u043E\u043F\u043E\u043A, \u043F\u0440\u0430\u0432\u0438\u043B\u0430 \u043F\u0435\u0440\u0435\u043C\u0438\u043A\u0430\u043D\u043D\u044F \u0442\u0435\u043C \u0456 \u0431\u0435\u043A\u0435\u043D\u0434-\u043A\u043E\u043D\u0432\u0435\u043D\u0446\u0456\u0457 \u043A\u043E\u043B\u044C\u043E\u0440\u0456\u0432 \u043F\u043E\u043C\u0438\u043B\u043E\u043A. \u041A\u0440\u043E\u0441\u0434\u043E\u043C\u0435\u043D\u043D\u0456 \u0437\u0432\u2019\u044F\u0437\u043A\u0438 \u0437\u2019\u044F\u0432\u043B\u044F\u044E\u0442\u044C\u0441\u044F \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u043E.',
+    section3KeyPoint:
+      '\u0417\u0432\u2019\u044F\u0437\u043A\u0438 \u043C\u0456\u0436 \u043F\u0430\u0442\u0435\u0440\u043D\u0430\u043C\u0438 \u2014 \u043D\u0435 \u043B\u0438\u0448\u0435 \u0441\u0430\u043C\u0456 \u043F\u0430\u0442\u0435\u0440\u043D\u0438.',
     graphStep1Title: '\u0412\u0435\u043A\u0442\u043E\u0440\u0438\u0437\u0430\u0446\u0456\u044F',
-    graphStep1Desc: '\u041A\u043E\u0436\u0435\u043D \u0437\u0430\u043F\u0438\u0441 \u043E\u0442\u0440\u0438\u043C\u0443\u0454 \u0432\u0431\u0443\u0434\u043E\u0432\u0443\u0432\u0430\u043D\u043D\u044F \u0434\u043B\u044F \u0441\u0435\u043C\u0430\u043D\u0442\u0438\u0447\u043D\u043E\u0433\u043E \u043F\u043E\u0448\u0443\u043A\u0443',
+    graphStep1Desc:
+      '\u041A\u043E\u0436\u0435\u043D \u0437\u0430\u043F\u0438\u0441 \u043E\u0442\u0440\u0438\u043C\u0443\u0454 \u0432\u0431\u0443\u0434\u043E\u0432\u0443\u0432\u0430\u043D\u043D\u044F \u0434\u043B\u044F \u0441\u0435\u043C\u0430\u043D\u0442\u0438\u0447\u043D\u043E\u0433\u043E \u043F\u043E\u0448\u0443\u043A\u0443',
     graphStep2Title: '\u0417\u2019\u0454\u0434\u043D\u0430\u043D\u043D\u044F',
-    graphStep2Desc: 'Cognee \u0431\u0443\u0434\u0443\u0454 \u0433\u0440\u0430\u0444 \u0437\u043D\u0430\u043D\u044C \u043C\u0456\u0436 \u0437\u0430\u043F\u0438\u0441\u0430\u043C\u0438',
-    graphStep3Title: '\u041F\u0456\u0434\u0441\u0432\u0456\u0447\u0443\u0432\u0430\u043D\u043D\u044F',
-    graphStep3Desc: '\u041F\u043E\u0448\u0443\u043A \u043F\u043E\u0432\u0435\u0440\u0442\u0430\u0454 \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u0442\u0430 \u0457\u0445\u043D\u0456 \u0437\u0432\u2019\u044F\u0437\u043A\u0438',
+    graphStep2Desc:
+      'Cognee \u0431\u0443\u0434\u0443\u0454 \u0433\u0440\u0430\u0444 \u0437\u043D\u0430\u043D\u044C \u043C\u0456\u0436 \u0437\u0430\u043F\u0438\u0441\u0430\u043C\u0438',
+    graphStep3Title:
+      '\u041F\u0456\u0434\u0441\u0432\u0456\u0447\u0443\u0432\u0430\u043D\u043D\u044F',
+    graphStep3Desc:
+      '\u041F\u043E\u0448\u0443\u043A \u043F\u043E\u0432\u0435\u0440\u0442\u0430\u0454 \u043F\u0430\u0442\u0435\u0440\u043D\u0438 \u0442\u0430 \u0457\u0445\u043D\u0456 \u0437\u0432\u2019\u044F\u0437\u043A\u0438',
 
     // Section 4
-    section4Title: '\u0421\u0445\u043E\u0432\u0438\u0449\u0435 \u0432\u043F\u043E\u0440\u044F\u0434\u043A\u043E\u0432\u0443\u0454 \u0441\u0435\u0431\u0435 \u0441\u0430\u043C\u043E',
-    section4ContentTitle: '\u0417\u043D\u0430\u043D\u043D\u044F \u0437 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u0438\u043C \u0441\u0443\u043F\u0440\u043E\u0432\u043E\u0434\u043E\u043C',
-    section4ContentP1: '\u0411\u0430\u0437\u0438 \u0437\u043D\u0430\u043D\u044C \u0433\u043D\u0438\u044E\u0442\u044C, \u043A\u043E\u043B\u0438 \u0457\u0445 \u043D\u0456\u0445\u0442\u043E \u043D\u0435 \u043F\u0456\u0434\u0442\u0440\u0438\u043C\u0443\u0454. \u0421\u0445\u043E\u0432\u0438\u0449\u0435 \u043D\u0435 \u043F\u0440\u043E\u0441\u0442\u043E \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0454 \u0437\u043D\u0430\u043D\u043D\u044F \u2014 \u0432\u043E\u043D\u043E \u0457\u0445 \u043A\u0443\u0440\u0443\u0454. \u0414\u0435\u0434\u0443\u043F\u043B\u0456\u043A\u0430\u0446\u0456\u044F \u0432\u0438\u044F\u0432\u043B\u044F\u0454 \u043F\u043E\u0432\u0442\u043E\u0440\u0438. \u0412\u0438\u044F\u0432\u043B\u0435\u043D\u043D\u044F \u0434\u0435\u0433\u0440\u0430\u0434\u0430\u0446\u0456\u0457 \u043F\u043E\u0437\u043D\u0430\u0447\u0430\u0454 \u0437\u0430\u0441\u0442\u0430\u0440\u0456\u043B\u0456 \u043F\u0430\u0442\u0435\u0440\u043D\u0438. \u0412\u0456\u0434\u0441\u0442\u0435\u0436\u0435\u043D\u043D\u044F \u0432\u043F\u0435\u0432\u043D\u0435\u043D\u043E\u0441\u0442\u0456 \u043F\u0456\u0434\u0441\u0432\u0456\u0447\u0443\u0454 \u0442\u0435, \u0449\u043E \u043F\u0440\u0430\u0446\u044E\u0454, \u0456 \u043F\u0440\u0438\u0445\u043E\u0432\u0443\u0454 \u0442\u0435, \u0449\u043E \u043D\u0456.',
-    section4ContentP2: '\u0416\u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0443\u0447\u043D\u043E\u0433\u043E \u043F\u0440\u0438\u0431\u0438\u0440\u0430\u043D\u043D\u044F. \u0416\u043E\u0434\u043D\u043E\u0433\u043E \u0433\u043D\u0438\u0442\u0442\u044F \u0437\u043D\u0430\u043D\u044C. \u0421\u0445\u043E\u0432\u0438\u0449\u0435 \u0437\u0430\u043B\u0438\u0448\u0430\u0454\u0442\u044C\u0441\u044F \u0442\u043E\u0447\u043D\u0438\u043C \u0456 \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u0438\u043C \u0443 \u043C\u0456\u0440\u0443 \u0440\u043E\u0437\u0432\u0438\u0442\u043A\u0443 \u0432\u0430\u0448\u043E\u0433\u043E \u043F\u0440\u043E\u0454\u043A\u0442\u0443.',
-    section4KeyPoint: '\u0421\u0445\u043E\u0432\u0438\u0449\u0435 \u043D\u0435 \u043F\u0440\u043E\u0441\u0442\u043E \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0454 \u0437\u043D\u0430\u043D\u043D\u044F \u2014 \u0432\u043E\u043D\u043E \u0457\u0445 \u043A\u0443\u0440\u0443\u0454.',
+    section4Title:
+      '\u0421\u0445\u043E\u0432\u0438\u0449\u0435 \u0432\u043F\u043E\u0440\u044F\u0434\u043A\u043E\u0432\u0443\u0454 \u0441\u0435\u0431\u0435 \u0441\u0430\u043C\u043E',
+    section4ContentTitle:
+      '\u0417\u043D\u0430\u043D\u043D\u044F \u0437 \u0430\u0432\u0442\u043E\u043C\u0430\u0442\u0438\u0447\u043D\u0438\u043C \u0441\u0443\u043F\u0440\u043E\u0432\u043E\u0434\u043E\u043C',
+    section4ContentP1:
+      '\u0411\u0430\u0437\u0438 \u0437\u043D\u0430\u043D\u044C \u0433\u043D\u0438\u044E\u0442\u044C, \u043A\u043E\u043B\u0438 \u0457\u0445 \u043D\u0456\u0445\u0442\u043E \u043D\u0435 \u043F\u0456\u0434\u0442\u0440\u0438\u043C\u0443\u0454. \u0421\u0445\u043E\u0432\u0438\u0449\u0435 \u043D\u0435 \u043F\u0440\u043E\u0441\u0442\u043E \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0454 \u0437\u043D\u0430\u043D\u043D\u044F \u2014 \u0432\u043E\u043D\u043E \u0457\u0445 \u043A\u0443\u0440\u0443\u0454. \u0414\u0435\u0434\u0443\u043F\u043B\u0456\u043A\u0430\u0446\u0456\u044F \u0432\u0438\u044F\u0432\u043B\u044F\u0454 \u043F\u043E\u0432\u0442\u043E\u0440\u0438. \u0412\u0438\u044F\u0432\u043B\u0435\u043D\u043D\u044F \u0434\u0435\u0433\u0440\u0430\u0434\u0430\u0446\u0456\u0457 \u043F\u043E\u0437\u043D\u0430\u0447\u0430\u0454 \u0437\u0430\u0441\u0442\u0430\u0440\u0456\u043B\u0456 \u043F\u0430\u0442\u0435\u0440\u043D\u0438. \u0412\u0456\u0434\u0441\u0442\u0435\u0436\u0435\u043D\u043D\u044F \u0432\u043F\u0435\u0432\u043D\u0435\u043D\u043E\u0441\u0442\u0456 \u043F\u0456\u0434\u0441\u0432\u0456\u0447\u0443\u0454 \u0442\u0435, \u0449\u043E \u043F\u0440\u0430\u0446\u044E\u0454, \u0456 \u043F\u0440\u0438\u0445\u043E\u0432\u0443\u0454 \u0442\u0435, \u0449\u043E \u043D\u0456.',
+    section4ContentP2:
+      '\u0416\u043E\u0434\u043D\u043E\u0433\u043E \u0440\u0443\u0447\u043D\u043E\u0433\u043E \u043F\u0440\u0438\u0431\u0438\u0440\u0430\u043D\u043D\u044F. \u0416\u043E\u0434\u043D\u043E\u0433\u043E \u0433\u043D\u0438\u0442\u0442\u044F \u0437\u043D\u0430\u043D\u044C. \u0421\u0445\u043E\u0432\u0438\u0449\u0435 \u0437\u0430\u043B\u0438\u0448\u0430\u0454\u0442\u044C\u0441\u044F \u0442\u043E\u0447\u043D\u0438\u043C \u0456 \u0430\u043A\u0442\u0443\u0430\u043B\u044C\u043D\u0438\u043C \u0443 \u043C\u0456\u0440\u0443 \u0440\u043E\u0437\u0432\u0438\u0442\u043A\u0443 \u0432\u0430\u0448\u043E\u0433\u043E \u043F\u0440\u043E\u0454\u043A\u0442\u0443.',
+    section4KeyPoint:
+      '\u0421\u0445\u043E\u0432\u0438\u0449\u0435 \u043D\u0435 \u043F\u0440\u043E\u0441\u0442\u043E \u0437\u0431\u0435\u0440\u0456\u0433\u0430\u0454 \u0437\u043D\u0430\u043D\u043D\u044F \u2014 \u0432\u043E\u043D\u043E \u0457\u0445 \u043A\u0443\u0440\u0443\u0454.',
     section4Code1: `<span class="cmt"># \u0417\u0432\u0456\u0442 \u0437 \u043E\u0431\u0441\u043B\u0443\u0433\u043E\u0432\u0443\u0432\u0430\u043D\u043D\u044F \u0441\u0445\u043E\u0432\u0438\u0449\u0430</span>
 <span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">maintain</span>
 
@@ -287,10 +327,12 @@ const content: Record<Locale, PersonasContent> = {
 
   it: {
     title: 'Il tuo agente - Soleri',
-    description: 'I file piatti e la ricerca per parole chiave non scalano. Soleri d\u00E0 al tuo agente un vault separato per dominio e connesso tramite grafo che accumula intelligenza nel tempo.',
+    description:
+      'I file piatti e la ricerca per parole chiave non scalano. Soleri d\u00E0 al tuo agente un vault separato per dominio e connesso tramite grafo che accumula intelligenza nel tempo.',
     heroEyebrow: 'I file piatti e la ricerca per parole chiave non scalano',
-    heroTitle: 'L\'intelligenza del tuo agente dovrebbe accumularsi. L\'accumulo disordinato no.',
-    heroSubtitle: 'Un Vault unico, separato per dominio, vettorializzato e connesso a grafo. Conoscenza che si organizza da sola e resta sempre aggiornata.',
+    heroTitle: "L'intelligenza del tuo agente dovrebbe accumularsi. L'accumulo disordinato no.",
+    heroSubtitle:
+      'Un Vault unico, separato per dominio, vettorializzato e connesso a grafo. Conoscenza che si organizza da sola e resta sempre aggiornata.',
 
     // Section 1
     section1Title: 'Crea e configura',
@@ -322,16 +364,20 @@ const content: Record<Locale, PersonasContent> = {
   <span class="key">auto_capture:</span> <span class="val">true</span>
   <span class="key">min_confidence:</span> <span class="val">0.7</span>`,
     section1ContentTitle: 'Configurazione come codice',
-    section1ContentP1: 'Il comando <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">create</code> genera un <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">agent.yaml</code> con impostazioni predefinite sensate. Inizializza un vault con conoscenza iniziale, analizza il tuo progetto alla ricerca di pattern e vettorializza tutto.',
-    section1ContentP2: 'Voce, domini, backend del vault e impostazioni del brain — tutto dichiarativo, tutto sotto controllo versione.',
+    section1ContentP1:
+      'Il comando <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">create</code> genera un <code style="font-family:\'JetBrains Mono\',monospace; font-size:12px; padding:2px 6px; border-radius:4px; background:rgba(35,157,195,0.08); color:var(--foreground-strong);">agent.yaml</code> con impostazioni predefinite sensate. Inizializza un vault con conoscenza iniziale, analizza il tuo progetto alla ricerca di pattern e vettorializza tutto.',
+    section1ContentP2:
+      'Voce, domini, backend del vault e impostazioni del brain — tutto dichiarativo, tutto sotto controllo versione.',
     section1KeyPoint: 'Un vault. Tutta la tua conoscenza. Nessun overhead di coordinamento.',
 
     // Section 2
     section2Title: 'Vault strutturato, non accumulo disordinato',
     section2ContentTitle: 'Conoscenza separata per dominio',
-    section2ContentP1: 'Quando tutto vive in una cartella piatta, cercare \u00ABpulsante\u00BB restituisce note di migrazione del database accanto a pattern CSS. Il vault organizza automaticamente la conoscenza in domini. Chiedi dei pulsanti \u2014 cerca prima nella conoscenza frontend. Chiedi dei database \u2014 attinge dal backend.',
+    section2ContentP1:
+      'Quando tutto vive in una cartella piatta, cercare \u00ABpulsante\u00BB restituisce note di migrazione del database accanto a pattern CSS. Il vault organizza automaticamente la conoscenza in domini. Chiedi dei pulsanti \u2014 cerca prima nella conoscenza frontend. Chiedi dei database \u2014 attinge dal backend.',
     section2ContentP2: 'Un vault. Routing automatico.',
-    section2KeyPoint: 'Pulsanti \u2192 frontend/. Database \u2192 backend/. Il routing \u00E8 automatico.',
+    section2KeyPoint:
+      'Pulsanti \u2192 frontend/. Database \u2192 backend/. Il routing \u00E8 automatico.',
     vaultNodeFrontend: 'Pattern React, design token, revisione componenti, accessibilit\u00E0',
     vaultNodeBackend: 'Convenzioni API, schemi database, pattern di autenticazione, prestazioni',
     vaultNodeCrosscut: 'Workflow Git, code review, strategie di test, documentazione',
@@ -386,8 +432,10 @@ const content: Record<Locale, PersonasContent> = {
 
 <span class="cmt">4 connections found via Cognee knowledge graph</span>`,
     section3ContentTitle: 'Vettorializzato, connesso a grafo, ricercabile',
-    section3ContentP1: 'La ricerca per parole chiave perde le relazioni tra le idee. Ogni voce del vault \u00E8 vettorializzata per la ricerca semantica e connessa tramite il grafo della conoscenza di Cognee. Il sistema comprende come i pattern si relazionano \u2014 non solo cosa sono.',
-    section3ContentP2: 'Interroga i token semantici e il grafo fa emergere pattern correlati sui pulsanti, regole di cambio tema e convenzioni backend per i colori degli errori. Le connessioni tra domini emergono automaticamente.',
+    section3ContentP1:
+      'La ricerca per parole chiave perde le relazioni tra le idee. Ogni voce del vault \u00E8 vettorializzata per la ricerca semantica e connessa tramite il grafo della conoscenza di Cognee. Il sistema comprende come i pattern si relazionano \u2014 non solo cosa sono.',
+    section3ContentP2:
+      'Interroga i token semantici e il grafo fa emergere pattern correlati sui pulsanti, regole di cambio tema e convenzioni backend per i colori degli errori. Le connessioni tra domini emergono automaticamente.',
     section3KeyPoint: 'Relazioni tra pattern \u2014 non solo i pattern stessi.',
     graphStep1Title: 'Vettorializza',
     graphStep1Desc: 'Ogni voce ottiene un embedding per la ricerca semantica',
@@ -399,8 +447,10 @@ const content: Record<Locale, PersonasContent> = {
     // Section 4
     section4Title: 'Il vault si mantiene pulito da solo',
     section4ContentTitle: 'Conoscenza mantenuta automaticamente',
-    section4ContentP1: 'Le basi di conoscenza si degradano quando nessuno le mantiene. Il vault non si limita a memorizzare la conoscenza \u2014 la cura. La deduplicazione intercetta le voci ridondanti. Il rilevamento del decadimento segnala i pattern obsoleti. Il tracciamento della confidenza fa emergere ci\u00F2 che funziona e nasconde ci\u00F2 che non funziona.',
-    section4ContentP2: 'Nessuna pulizia manuale. Nessuna degradazione della conoscenza. Il Vault resta preciso e aggiornato mentre il tuo progetto evolve.',
+    section4ContentP1:
+      'Le basi di conoscenza si degradano quando nessuno le mantiene. Il vault non si limita a memorizzare la conoscenza \u2014 la cura. La deduplicazione intercetta le voci ridondanti. Il rilevamento del decadimento segnala i pattern obsoleti. Il tracciamento della confidenza fa emergere ci\u00F2 che funziona e nasconde ci\u00F2 che non funziona.',
+    section4ContentP2:
+      'Nessuna pulizia manuale. Nessuna degradazione della conoscenza. Il Vault resta preciso e aggiornato mentre il tuo progetto evolve.',
     section4KeyPoint: 'Il vault non si limita a memorizzare la conoscenza \u2014 la cura.',
     section4Code1: `<span class="cmt"># Vault maintenance report</span>
 <span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">maintain</span>

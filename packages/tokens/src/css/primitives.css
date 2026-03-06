@@ -4,62 +4,62 @@
  * ============================================ */
 :root {
   /* Primary (Amber/Gold) */
-  --color-primary-25: #FBF6ED;
-  --color-primary-50: #F9EAD6;
-  --color-primary-100: #FADFBD;
-  --color-primary-200: #F6D09D;
-  --color-primary-300: #EFBC75;
-  --color-primary-400: #E8A847;
-  --color-primary-500: #C88F37;
-  --color-primary-600: #6D4300;
-  --color-primary-700: #5E3D03;
-  --color-primary-800: #4F3816;
-  --color-primary-900: #41321F;
+  --color-primary-25: #fbf6ed;
+  --color-primary-50: #f9ead6;
+  --color-primary-100: #fadfbd;
+  --color-primary-200: #f6d09d;
+  --color-primary-300: #efbc75;
+  --color-primary-400: #e8a847;
+  --color-primary-500: #c88f37;
+  --color-primary-600: #6d4300;
+  --color-primary-700: #5e3d03;
+  --color-primary-800: #4f3816;
+  --color-primary-900: #41321f;
 
   /* Secondary (Teal/Cyan) */
-  --color-secondary-50: #D7E2E7;
-  --color-secondary-100: #C1DDE9;
-  --color-secondary-200: #A3D4E7;
-  --color-secondary-300: #78C4E1;
-  --color-secondary-400: #50B1D3;
-  --color-secondary-500: #239DC3;
+  --color-secondary-50: #d7e2e7;
+  --color-secondary-100: #c1dde9;
+  --color-secondary-200: #a3d4e7;
+  --color-secondary-300: #78c4e1;
+  --color-secondary-400: #50b1d3;
+  --color-secondary-500: #239dc3;
   --color-secondary-600: #005774;
-  --color-secondary-700: #004A62;
-  --color-secondary-800: #023E50;
-  --color-secondary-900: #0F323F;
+  --color-secondary-700: #004a62;
+  --color-secondary-800: #023e50;
+  --color-secondary-900: #0f323f;
 
   /* Tertiary (Green/Leaf) */
-  --color-tertiary-50: #E4F1DD;
-  --color-tertiary-100: #D5EDC9;
-  --color-tertiary-200: #C1E3AF;
-  --color-tertiary-300: #A9D68F;
-  --color-tertiary-400: #91C96E;
-  --color-tertiary-500: #7AAC5B;
+  --color-tertiary-50: #e4f1dd;
+  --color-tertiary-100: #d5edc9;
+  --color-tertiary-200: #c1e3af;
+  --color-tertiary-300: #a9d68f;
+  --color-tertiary-400: #91c96e;
+  --color-tertiary-500: #7aac5b;
   --color-tertiary-600: #345918;
-  --color-tertiary-700: #324E1F;
+  --color-tertiary-700: #324e1f;
   --color-tertiary-800: #304423;
-  --color-tertiary-900: #2D3A26;
+  --color-tertiary-900: #2d3a26;
 
   /* Neutral (Slate/Steel) */
-  --color-neutral-50: #D9DCDF;
-  --color-neutral-100: #CED4DB;
-  --color-neutral-200: #BFC7D3;
-  --color-neutral-300: #A9B4C5;
-  --color-neutral-400: #919EB2;
-  --color-neutral-500: #7A899F;
-  --color-neutral-550: #5C6B7F;
-  --color-neutral-600: #3F4E63;
+  --color-neutral-50: #d9dcdf;
+  --color-neutral-100: #ced4db;
+  --color-neutral-200: #bfc7d3;
+  --color-neutral-300: #a9b4c5;
+  --color-neutral-400: #919eb2;
+  --color-neutral-500: #7a899f;
+  --color-neutral-550: #5c6b7f;
+  --color-neutral-600: #3f4e63;
   --color-neutral-700: #374253;
-  --color-neutral-800: #2E3744;
-  --color-neutral-900: #252C36;
-  --color-neutral-950: #1A1F26;
-  --color-neutral-975: #151A21;
+  --color-neutral-800: #2e3744;
+  --color-neutral-900: #252c36;
+  --color-neutral-950: #1a1f26;
+  --color-neutral-975: #151a21;
 
   /* Neutral extended */
-  --color-neutral-940: #1E2530;
+  --color-neutral-940: #1e2530;
 
   /* Absolutes */
-  --color-white: #FFFFFF;
+  --color-white: #ffffff;
   --color-black: #000000;
 
   /* Toggle (Zinc scale) */
@@ -70,8 +70,8 @@
   --color-zinc-950: #09090b;
 
   /* Status */
-  --color-error-500: #FF5F57;
-  --color-error-600: #C05050;
+  --color-error-500: #ff5f57;
+  --color-error-600: #c05050;
 
   /* RGB channels — for alpha compositing: rgb(var(--x-rgb) / alpha) */
   --color-primary-400-rgb: 232 168 71;

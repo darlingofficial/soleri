@@ -8,6 +8,7 @@ The Soleri mark is **not a traditional logo**.
 It is a **conceptual mark** — an architectural symbol that represents a worldview rather than a brand.
 
 This document exists to:
+
 - prevent misuse
 - preserve intent
 - provide clear internal guidance
@@ -44,6 +45,7 @@ The Soleri mark is **not**:
 - A decorative divider without meaning
 
 It should never be treated as:
+
 - marketing material
 - visual flair
 - an icon competing for attention
@@ -81,6 +83,7 @@ The Soleri mark aligns with the following principles:
 - Calm confidence over hype
 
 It visually reinforces the core thesis:
+
 > What you prevent matters as much as what you enable.
 
 ---
@@ -88,11 +91,13 @@ It visually reinforces the core thesis:
 ## Visual Specification
 
 ### Form
+
 - Single horizontal line
 - Identical stroke weight on both sides
 - Centered micro-gap (2–4% of total width)
 
 ### Style
+
 - Flat
 - No gradients
 - No shadows
@@ -100,6 +105,7 @@ It visually reinforces the core thesis:
 - No animation
 
 ### Color
+
 - Black on white
 - White on black
 - No additional colors
@@ -109,12 +115,14 @@ It visually reinforces the core thesis:
 ## Usage Guidelines
 
 ### Appropriate Use
+
 - As a subtle divider above article titles
 - In the header or footer of GitHub Pages
 - As a quiet section boundary within long-form writing
 - As a small mark indicating canonical artifacts
 
 ### Inappropriate Use
+
 - As a dominant visual element
 - As a call-to-action
 - As a clickable button
@@ -137,11 +145,13 @@ The mark must feel **inevitable, not expressive**.
 ## Naming & Language
 
 Publicly:
+
 - Do not name the mark
 - Do not explain it
 - Do not reference it as a “logo”
 
 Internally:
+
 - It may be referred to as “the Soleri mark”
 - Or simply “the boundary mark”
 
@@ -154,11 +164,13 @@ Meaning should be inferred, not declared.
 The Soleri mark is intentionally minimal to allow longevity.
 
 It should only evolve if:
+
 - the body of work expands significantly
 - the philosophy stabilizes further
 - external recognition creates semantic load
 
 Until then:
+
 > Stability is more important than refinement.
 
 ---

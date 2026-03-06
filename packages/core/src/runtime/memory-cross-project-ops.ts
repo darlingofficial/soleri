@@ -183,8 +183,7 @@ export function createMemoryCrossProjectOps(runtime: AgentRuntime): OpDefinition
           memories: weightedResults,
           globalEntries,
           linkedMemories: dedupedLinked,
-          totalResults:
-            weightedResults.length + globalEntries.length + dedupedLinked.length,
+          totalResults: weightedResults.length + globalEntries.length + dedupedLinked.length,
         };
       },
     },

@@ -66,6 +66,7 @@ If vault returns a match with high confidence — **use it**. Don't re-investiga
 ### Step 3: Search the Web
 
 If the vault has no answer, search for existing solutions before investigating from scratch:
+
 - Known issues in the library/framework
 - Stack Overflow answers for the exact error
 - GitHub issues on relevant repos
@@ -85,6 +86,7 @@ YOUR_AGENT_core op:loop_start
 ### Step 5: Diagnose and Fix
 
 Only if Steps 2-3 didn't produce a solution, apply the systematic debugging approach (use systematic-debugging skill):
+
 1. Reproduce the issue
 2. Isolate the root cause
 3. **Plan the fix before writing code** — even a one-line mental plan
@@ -123,6 +125,7 @@ YOUR_AGENT_core op:capture_knowledge
 ```
 
 For quick captures:
+
 ```
 YOUR_AGENT_core op:capture_quick
   params: { title: "<bug>", description: "<root cause and fix>" }
@@ -148,17 +151,17 @@ Fix is complete when: the bug is resolved, tests pass (Step 6), and the root cau
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `route_intent` | Classify as FIX intent |
-| `search_intelligent` | Check vault for known bugs |
-| `memory_search` | Search across session memories |
-| `memory_topics` | See if bugs cluster in an area |
-| `memory_stats` | Understand debugging landscape |
-| `loop_start` | Begin iterative fix cycle |
-| `loop_iterate` | Track each fix attempt |
-| `loop_complete` | Finish fix cycle |
-| `capture_knowledge` | Full anti-pattern capture |
-| `capture_quick` | Fast capture |
-| `curator_detect_duplicates` | Prevent redundant entries |
-| `admin_health` | Verify system health |
+| Op                          | When to Use                    |
+| --------------------------- | ------------------------------ |
+| `route_intent`              | Classify as FIX intent         |
+| `search_intelligent`        | Check vault for known bugs     |
+| `memory_search`             | Search across session memories |
+| `memory_topics`             | See if bugs cluster in an area |
+| `memory_stats`              | Understand debugging landscape |
+| `loop_start`                | Begin iterative fix cycle      |
+| `loop_iterate`              | Track each fix attempt         |
+| `loop_complete`             | Finish fix cycle               |
+| `capture_knowledge`         | Full anti-pattern capture      |
+| `capture_quick`             | Fast capture                   |
+| `curator_detect_duplicates` | Prevent redundant entries      |
+| `admin_health`              | Verify system health           |

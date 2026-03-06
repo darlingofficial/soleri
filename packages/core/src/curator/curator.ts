@@ -667,9 +667,7 @@ export class Curator {
     return { recorded: true, historyId: Number(result.lastInsertRowid) };
   }
 
-  getVersionHistory(
-    entryId: string,
-  ): Array<{
+  getVersionHistory(entryId: string): Array<{
     historyId: number;
     entryId: string;
     snapshot: IntelligenceEntry;
@@ -762,9 +760,10 @@ export class Curator {
 
   // ─── Metadata Enrichment ──────────────────────────────────────
 
-  enrichMetadata(
-    entryId: string,
-  ): { enriched: boolean; changes: Array<{ field: string; before: string; after: string }> } {
+  enrichMetadata(entryId: string): {
+    enriched: boolean;
+    changes: Array<{ field: string; before: string; after: string }>;
+  } {
     const entry = this.vault.get(entryId);
     if (!entry) return { enriched: false, changes: [] };
 

@@ -75,13 +75,13 @@ YOUR_AGENT_core op:brain_strengths
 
 With vault patterns loaded, review the code checking for:
 
-| Check | Source | Severity |
-|-------|--------|----------|
-| Violates a critical rule | `search (severity: critical)` | Must fix |
-| Matches a known anti-pattern | `search (type: anti-pattern)` | Must fix |
-| Doesn't follow a proven pattern | `brain_strengths` | Should fix |
-| Breaks project conventions | `project_list_rules` | Should fix |
-| Misses an opportunity to use a pattern | `search_intelligent` | Could improve |
+| Check                                  | Source                        | Severity      |
+| -------------------------------------- | ----------------------------- | ------------- |
+| Violates a critical rule               | `search (severity: critical)` | Must fix      |
+| Matches a known anti-pattern           | `search (type: anti-pattern)` | Must fix      |
+| Doesn't follow a proven pattern        | `brain_strengths`             | Should fix    |
+| Breaks project conventions             | `project_list_rules`          | Should fix    |
+| Misses an opportunity to use a pattern | `search_intelligent`          | Could improve |
 
 ### Step 4: Present the Review
 
@@ -146,6 +146,7 @@ YOUR_AGENT_core op:search_intelligent
 ```
 
 Check system health:
+
 ```
 YOUR_AGENT_core op:admin_health
 ```
@@ -153,6 +154,7 @@ YOUR_AGENT_core op:admin_health
 ## The Magic
 
 This feels like magic because:
+
 1. It's not ESLint — it catches things like "we decided not to use inheritance here" or "this API pattern caused production issues last month"
 2. The rules come from YOUR team's experience, not a generic config file
 3. It gets smarter over time — every captured pattern becomes a new check
@@ -162,15 +164,15 @@ A linter checks syntax. Code patrol checks wisdom.
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `route_intent` | Classify the code's domain |
-| `vault_domains` | See which domains are relevant |
-| `search_intelligent` | Find relevant patterns for this code |
-| `search` | Find anti-patterns and critical rules |
-| `project_list_rules` | Project-specific conventions |
-| `get_behavior_rules` | Behavioral rules |
-| `brain_strengths` | Proven patterns to check against |
-| `capture_quick` | Capture new patterns discovered during review |
-| `capture_knowledge` | Capture new conventions |
-| `admin_health` | Post-review health check |
+| Op                   | When to Use                                   |
+| -------------------- | --------------------------------------------- |
+| `route_intent`       | Classify the code's domain                    |
+| `vault_domains`      | See which domains are relevant                |
+| `search_intelligent` | Find relevant patterns for this code          |
+| `search`             | Find anti-patterns and critical rules         |
+| `project_list_rules` | Project-specific conventions                  |
+| `get_behavior_rules` | Behavioral rules                              |
+| `brain_strengths`    | Proven patterns to check against              |
+| `capture_quick`      | Capture new patterns discovered during review |
+| `capture_knowledge`  | Capture new conventions                       |
+| `admin_health`       | Post-review health check                      |

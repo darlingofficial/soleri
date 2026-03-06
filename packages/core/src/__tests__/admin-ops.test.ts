@@ -148,8 +148,8 @@ describe('createAdminOps', () => {
       expect(typeof result.uptimeMs).toBe('number');
       expect(typeof result.uptimeSec).toBe('number');
       expect(typeof result.uptimeHuman).toBe('string');
-      expect((result.uptimeMs as number)).toBeGreaterThanOrEqual(0);
-      expect((result.uptimeMs as number)).toBeLessThan(5000); // should be nearly instant
+      expect(result.uptimeMs as number).toBeGreaterThanOrEqual(0);
+      expect(result.uptimeMs as number).toBeLessThan(5000); // should be nearly instant
     });
 
     it('should have valid ISO date in createdAt', async () => {

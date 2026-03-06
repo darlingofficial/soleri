@@ -22,6 +22,7 @@ Assume they are a skilled developer, but know almost nothing about our toolset o
 **Never write a plan from scratch.** Always search for existing knowledge first.
 
 ### 1. Vault First
+
 Check the vault for relevant implementation patterns:
 
 ```
@@ -30,6 +31,7 @@ YOUR_AGENT_core op:search_intelligent
 ```
 
 Look for:
+
 - **Implementation patterns** — proven approaches for similar features
 - **Anti-patterns** — approaches that failed and should be avoided
 - **Testing patterns** — how similar features were tested
@@ -48,13 +50,16 @@ YOUR_AGENT_core op:vault_tags
 ```
 
 ### 2. Web Search Second
+
 If the vault doesn't have implementation guidance, search the web:
+
 - **Libraries and tools** — is there a package that does this already?
 - **Reference implementations** — how did other projects solve this?
 - **API documentation** — official docs for libraries you'll use
 - **Known issues** — pitfalls others ran into
 
 ### 3. Then Write the Plan
+
 Incorporate vault insights and web findings into the plan. Reference specific vault entries and documentation links when they inform a step. A plan informed by existing knowledge is dramatically better than one written from first principles.
 
 ## Create a Tracked Plan
@@ -123,6 +128,7 @@ This generates individual tasks from the plan steps, ready for execution trackin
 ## Bite-Sized Task Granularity
 
 **Each step is one action (2-5 minutes):**
+
 - "Write the failing test" - step
 - "Run it to make sure it fails" - step
 - "Implement the minimal code to make the test pass" - step
@@ -150,6 +156,7 @@ This generates individual tasks from the plan steps, ready for execution trackin
 ## Task Structure
 
 Each task uses this format:
+
 - Files: Create / Modify / Test paths
 - Step 1: Write the failing test (with code)
 - Step 2: Run test to verify it fails (with expected output)
@@ -158,6 +165,7 @@ Each task uses this format:
 - Step 5: Commit (with exact git commands)
 
 ## Remember
+
 - Exact file paths always
 - Complete code in plan (not "add validation")
 - Exact commands with expected output
@@ -192,16 +200,16 @@ Which approach?"
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `search_intelligent` | Find relevant patterns before planning |
-| `brain_strengths` | Check proven approaches |
-| `vault_domains` / `vault_tags` | Browse knowledge landscape |
-| `create_plan` | Create tracked, persistent plan |
-| `plan_grade` | Grade plan quality |
-| `plan_auto_improve` | Auto-fix plan weaknesses |
-| `plan_meets_grade` | Verify grade target reached |
-| `plan_iterate` | Iterate on draft with feedback |
-| `plan_split` | Split plan into trackable tasks |
-| `approve_plan` | Lock in approved plan |
-| `plan_stats` | Overview of plan metrics |
+| Op                             | When to Use                            |
+| ------------------------------ | -------------------------------------- |
+| `search_intelligent`           | Find relevant patterns before planning |
+| `brain_strengths`              | Check proven approaches                |
+| `vault_domains` / `vault_tags` | Browse knowledge landscape             |
+| `create_plan`                  | Create tracked, persistent plan        |
+| `plan_grade`                   | Grade plan quality                     |
+| `plan_auto_improve`            | Auto-fix plan weaknesses               |
+| `plan_meets_grade`             | Verify grade target reached            |
+| `plan_iterate`                 | Iterate on draft with feedback         |
+| `plan_split`                   | Split plan into trackable tasks        |
+| `approve_plan`                 | Lock in approved plan                  |
+| `plan_stats`                   | Overview of plan metrics               |

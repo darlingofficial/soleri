@@ -16,7 +16,8 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Soleri',
-      description: 'Documentation for the Soleri agent forge — build AI assistants that learn, remember, and grow.',
+      description:
+        'Documentation for the Soleri agent forge — build AI assistants that learn, remember, and grow.',
       defaultLocale: 'root',
       locales: {
         root: { label: 'English', lang: 'en' },
@@ -31,17 +32,12 @@ export default defineConfig({
         {
           label: 'Start Here',
           translations: { uk: 'Почніть тут', it: 'Inizia qui' },
-          items: [
-            { slug: 'docs/getting-started' },
-            { slug: 'docs/your-agent' },
-          ],
+          items: [{ slug: 'docs/getting-started' }, { slug: 'docs/your-agent' }],
         },
         {
           label: 'Guides',
           translations: { uk: 'Посібники', it: 'Guide' },
-          items: [
-            { slug: 'docs/guides/dashboard' },
-          ],
+          items: [{ slug: 'docs/guides/dashboard' }],
         },
         {
           label: 'Reference',
@@ -55,9 +51,7 @@ export default defineConfig({
         {
           label: 'Advanced',
           translations: { uk: 'Додатково', it: 'Avanzato' },
-          items: [
-            { slug: 'docs/extending' },
-          ],
+          items: [{ slug: 'docs/extending' }],
         },
       ],
       customCss: ['./src/styles/docs-custom.css'],

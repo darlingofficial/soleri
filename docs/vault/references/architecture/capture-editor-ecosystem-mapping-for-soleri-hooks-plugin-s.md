@@ -35,9 +35,11 @@ Captured during development session on 2026-03-03
 Mapping of AI coding editor ecosystems and their configuration capabilities for the `soleri hooks add <editor>` plugin system.
 
 **Full hook support (event-driven lifecycle):**
+
 - Claude Code — .claude/settings.json — PreToolUse, PostToolUse, Stop, SessionStart, UserPromptSubmit, PreCompact. Richest hook system, supports runtime enforcement.
 
 **Rules files only (static instructions, no lifecycle hooks):**
+
 - Cursor — .cursorrules
 - Windsurf — .windsurfrules
 - GitHub Copilot — .github/copilot-instructions.md
@@ -48,6 +50,7 @@ Mapping of AI coding editor ecosystems and their configuration capabilities for 
 **Universal connector:** MCP transport works across all editors that support it (Claude Code, Cursor, Windsurf, Cline, Continue). The MCP connection is universal; hooks are the editor-specific glue on top.
 
 **What `soleri hooks add` generates per editor:**
+
 - claude-code → .claude/settings.json (full lifecycle hooks)
 - cursor → .cursorrules (instructions only)
 - windsurf → .windsurfrules (instructions only)

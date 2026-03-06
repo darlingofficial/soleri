@@ -7,10 +7,5 @@
   "useTabs": false,
   "organizeImports": true,
   "sortPackageJson": true,
-  "ignorePatterns": [
-    "dist/",
-    "node_modules/",
-    "coverage/",
-    "website/"
-  ]
+  "ignorePatterns": ["dist/", "node_modules/", "coverage/", "website/"],
 }

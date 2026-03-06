@@ -25,8 +25,8 @@ npx @soleri/cli create [name]
 
 **Options:**
 
-| Flag | Description |
-|------|-------------|
+| Flag     | Description                      |
+| -------- | -------------------------------- |
 | `[name]` | Agent name (prompted if omitted) |
 
 **Interactive wizard prompts for:** agent name, role, domains, persona voice.
@@ -75,10 +75,10 @@ npx @soleri/cli test [options]
 
 **Options:**
 
-| Flag | Description |
-|------|-------------|
-| `--watch` | Re-run tests on file changes |
-| `--coverage` | Generate coverage report |
+| Flag         | Description                  |
+| ------------ | ---------------------------- |
+| `--watch`    | Re-run tests on file changes |
+| `--coverage` | Generate coverage report     |
 
 Runs vitest under the hood.
 
@@ -130,6 +130,7 @@ npx @soleri/cli doctor
 ```
 
 Reports:
+
 - Node.js version compatibility
 - npm status
 - Agent context (detected project)
@@ -154,9 +155,9 @@ npx @soleri/cli hooks add-pack <pack>
 
 **Hook Packs:**
 
-| Pack | Hooks included |
-|------|---------------|
-| `full` | All 8 quality gates |
+| Pack      | Hooks included         |
+| --------- | ---------------------- |
+| `full`    | All 8 quality gates    |
 | `minimal` | Core safety hooks only |
 
 **Quality gate hooks:** no-console-log, no-any-types, no-important, no-inline-styles, semantic-html, focus-ring-required, ux-touch-targets, no-ai-attribution.
@@ -173,10 +174,10 @@ npx @soleri/cli governance [options]
 
 **Options:**
 
-| Flag | Description |
-|------|-------------|
+| Flag              | Description                                        |
+| ----------------- | -------------------------------------------------- |
 | `--preset <name>` | Apply a preset: `strict`, `moderate`, `permissive` |
-| `--show` | Display current governance settings |
+| `--show`          | Display current governance settings                |
 
 ---
 
@@ -190,6 +191,6 @@ npx @soleri/cli upgrade [options]
 
 **Options:**
 
-| Flag | Description |
-|------|-------------|
+| Flag      | Description                          |
+| --------- | ------------------------------------ |
 | `--check` | Check for updates without installing |

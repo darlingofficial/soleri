@@ -101,20 +101,27 @@ const content: Record<Locale, TeamsContent> = {
   en: {
     meta: {
       title: 'Teams & Ops - Soleri',
-      description: "Tribal knowledge doesn't scale. Soleri connects team vaults, knowledge packs, and playbooks so codified knowledge compounds across projects.",
+      description:
+        "Tribal knowledge doesn't scale. Soleri connects team vaults, knowledge packs, and playbooks so codified knowledge compounds across projects.",
     },
     hero: {
       eyebrow: "Tribal knowledge doesn't scale. Codified knowledge does.",
       title: "When knowledge lives in people's heads, it leaves with them.",
-      subtitle: 'Connected vaults, knowledge packs, and playbooks turn team expertise into compounding infrastructure.',
+      subtitle:
+        'Connected vaults, knowledge packs, and playbooks turn team expertise into compounding infrastructure.',
     },
     vaults: {
       sectionTitle: 'Connect once, share everything',
       heading: 'Three-tier vault model',
-      description: "When projects hoard knowledge independently, teams re-learn the same lessons every time. The three-tier model fixes this: your agent keeps domain-organized knowledge in its vault. A shared project vault holds cross-cutting conventions. Connect a team vault to share across projects.",
+      description:
+        'When projects hoard knowledge independently, teams re-learn the same lessons every time. The three-tier model fixes this: your agent keeps domain-organized knowledge in its vault. A shared project vault holds cross-cutting conventions. Connect a team vault to share across projects.',
       keyPoint: 'Search priority: agent vault \u2192 project vault \u2192 team vault.',
       flowSteps: [
-        { num: '1', color: 'amber', text: 'Agent vault \u2014 frontend, backend, cross-cutting domains' },
+        {
+          num: '1',
+          color: 'amber',
+          text: 'Agent vault \u2014 frontend, backend, cross-cutting domains',
+        },
         { num: '2', color: 'teal', text: 'Project vault \u2014 team conventions, decisions' },
         { num: '3', color: 'green', text: 'Team vault \u2014 shared across all projects' },
       ],
@@ -134,7 +141,8 @@ const content: Record<Locale, TeamsContent> = {
     crossProject: {
       sectionTitle: 'Patterns compound across projects',
       heading: 'Link projects, share patterns',
-      description: 'Link projects as related, parent/child, or fork. When you search your vault, linked projects are included automatically with weighted relevance.',
+      description:
+        'Link projects as related, parent/child, or fork. When you search your vault, linked projects are included automatically with weighted relevance.',
       keyPoint: 'Patterns learned in project A are available in project B.',
       code1Comment: '# Link related projects',
       code1Output: `<span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">link /project-a /project-b \\
@@ -155,7 +163,8 @@ const content: Record<Locale, TeamsContent> = {
     packs: {
       sectionTitle: 'Install expertise in one command',
       heading: 'Three tiers of knowledge packs',
-      description: 'Packs are npm packages you snap into any agent. They add patterns, anti-patterns, and domain rules to your vault instantly.',
+      description:
+        'Packs are npm packages you snap into any agent. They add patterns, anti-patterns, and domain rules to your vault instantly.',
       tableHeaders: ['Tier', 'Source', 'Price'],
       rows: [
         { tierLabel: 'Starter', tierClass: 'free', source: 'Ships with each agent', price: 'Free' },
@@ -178,8 +187,10 @@ const content: Record<Locale, TeamsContent> = {
     playbooks: {
       sectionTitle: "Codify your team's workflows",
       heading: 'Patterns tell you what. Playbooks tell you how.',
-      description1: "Playbooks are validated multi-step procedures stored in your vault. They capture the full workflow \u2014 not just a rule, but the sequence, the expected outcomes, and the validation criteria.",
-      description2: 'Examples: migrating tokens across a codebase, setting up a new component from scratch, debugging a contrast failure. Each step includes what to check and when you\'re done.',
+      description1:
+        'Playbooks are validated multi-step procedures stored in your vault. They capture the full workflow \u2014 not just a rule, but the sequence, the expected outcomes, and the validation criteria.',
+      description2:
+        "Examples: migrating tokens across a codebase, setting up a new component from scratch, debugging a contrast failure. Each step includes what to check and when you're done.",
       keyPoint: 'Repeatable workflows, not tribal knowledge.',
       code1Comment: '# List available playbooks',
       code1Output: `<span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">list-playbooks --category design</span>
@@ -235,16 +246,29 @@ const content: Record<Locale, TeamsContent> = {
     telegram: {
       sectionTitle: 'Manage your infrastructure from a chat',
       heading: 'Telegram bot for ops',
-      description: 'Monitor vault health, query the knowledge graph, check event logs, and manage infrastructure \u2014 all from Telegram. Works with any LLM provider.',
+      description:
+        'Monitor vault health, query the knowledge graph, check event logs, and manage infrastructure \u2014 all from Telegram. Works with any LLM provider.',
       keyPoint: 'Works with OpenAI, Anthropic, Ollama, or no LLM at all.',
       chatMessages: [
         { role: 'user', html: "how's the vault doing?" },
-        { role: 'bot', html: 'Looking good \u2014 <code>284</code> entries, synced 2 min ago. Everything\'s healthy.' },
+        {
+          role: 'bot',
+          html: "Looking good \u2014 <code>284</code> entries, synced 2 min ago. Everything's healthy.",
+        },
         { role: 'user', html: 'what patterns are working best this week?' },
-        { role: 'bot', html: 'Your top 3 right now:<br>1. semantic-tokens \u2014 <code>94</code> strength<br>2. component-structure \u2014 <code>87</code><br>3. error-boundaries \u2014 <code>82</code><br>Tokens are really clicking for the team.' },
-        { role: 'bot', html: "Hey \u2014 you still have 3 ideas from yesterday's brainstorm that haven't been processed. Want to go through them?" },
+        {
+          role: 'bot',
+          html: 'Your top 3 right now:<br>1. semantic-tokens \u2014 <code>94</code> strength<br>2. component-structure \u2014 <code>87</code><br>3. error-boundaries \u2014 <code>82</code><br>Tokens are really clicking for the team.',
+        },
+        {
+          role: 'bot',
+          html: "Hey \u2014 you still have 3 ideas from yesterday's brainstorm that haven't been processed. Want to go through them?",
+        },
         { role: 'user', html: "sure, what's the first one?" },
-        { role: 'bot', html: "Auto-detect stale vault entries older than 90 days. I think this one's solid \u2014 could become a roadmap item for the cleanup pipeline. Want me to write it up?" },
+        {
+          role: 'bot',
+          html: "Auto-detect stale vault entries older than 90 days. I think this one's solid \u2014 could become a roadmap item for the cleanup pipeline. Want me to write it up?",
+        },
       ],
       codeComment: '# Structured event queries (JSONL)',
       codeOutput: `<span class="prompt">$</span> grep <span class="val">'"tool_call"'</span> events-*.jsonl \\
@@ -258,20 +282,27 @@ const content: Record<Locale, TeamsContent> = {
   uk: {
     meta: {
       title: 'Команди та операції \u2014 Soleri',
-      description: "Неформалізовані знання не масштабуються. Soleri з'єднує командні сховища, пакети знань та плейбуки, щоб кодифіковані знання накопичувалися між проєктами.",
+      description:
+        "Неформалізовані знання не масштабуються. Soleri з'єднує командні сховища, пакети знань та плейбуки, щоб кодифіковані знання накопичувалися між проєктами.",
     },
     hero: {
       eyebrow: 'Неформалізовані знання не масштабуються. Кодифіковані \u2014 так.',
       title: 'Коли знання живуть у головах людей, вони йдуть разом із ними.',
-      subtitle: 'Підключені сховища, пакети знань та плейбуки перетворюють експертизу команди на накопичувальну інфраструктуру.',
+      subtitle:
+        'Підключені сховища, пакети знань та плейбуки перетворюють експертизу команди на накопичувальну інфраструктуру.',
     },
     vaults: {
       sectionTitle: 'Підключіть один раз \u2014 діліться всім',
       heading: 'Трирівнева модель сховища',
-      description: "Коли проєкти накопичують знання незалежно, команди переучують одні й ті ж уроки щоразу. Трирівнева модель це виправляє: Твій агент зберігає знання, упорядковані за доменами, у своєму сховищі. Спільне сховище проєкту містить наскрізні домовленості. Підключіть командне сховище, щоб ділитися між проєктами.",
+      description:
+        'Коли проєкти накопичують знання незалежно, команди переучують одні й ті ж уроки щоразу. Трирівнева модель це виправляє: Твій агент зберігає знання, упорядковані за доменами, у своєму сховищі. Спільне сховище проєкту містить наскрізні домовленості. Підключіть командне сховище, щоб ділитися між проєктами.',
       keyPoint: 'Пріоритет пошуку: сховище агента \u2192 сховище проєкту \u2192 командне сховище.',
       flowSteps: [
-        { num: '1', color: 'amber', text: 'Сховище агента \u2014 фронтенд, бекенд, наскрізні домени' },
+        {
+          num: '1',
+          color: 'amber',
+          text: 'Сховище агента \u2014 фронтенд, бекенд, наскрізні домени',
+        },
         { num: '2', color: 'teal', text: 'Сховище проєкту \u2014 командні домовленості, рішення' },
         { num: '3', color: 'green', text: 'Командне сховище \u2014 спільне для всіх проєктів' },
       ],
@@ -291,7 +322,8 @@ const content: Record<Locale, TeamsContent> = {
     crossProject: {
       sectionTitle: 'Патерни накопичуються між проєктами',
       heading: "Пов'язуйте проєкти, діліться патернами",
-      description: "Пов'язуйте проєкти як споріднені, батьківський/дочірній або форк. Коли ви шукаєте у своєму сховищі, пов'язані проєкти включаються автоматично із зваженою відповідністю.",
+      description:
+        "Пов'язуйте проєкти як споріднені, батьківський/дочірній або форк. Коли ви шукаєте у своєму сховищі, пов'язані проєкти включаються автоматично із зваженою відповідністю.",
       keyPoint: 'Патерни, засвоєні у проєкті A, доступні у проєкті B.',
       code1Comment: "# Пов'язати споріднені проєкти",
       code1Output: `<span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">link /project-a /project-b \\
@@ -312,10 +344,16 @@ const content: Record<Locale, TeamsContent> = {
     packs: {
       sectionTitle: 'Встановіть експертизу однією командою',
       heading: 'Три рівні пакетів знань',
-      description: "Пакети \u2014 це npm-пакунки, які ви під'єднуєте до будь-якого агента. Вони миттєво додають патерни, антипатерни та доменні правила до вашого сховища.",
+      description:
+        "Пакети \u2014 це npm-пакунки, які ви під'єднуєте до будь-якого агента. Вони миттєво додають патерни, антипатерни та доменні правила до вашого сховища.",
       tableHeaders: ['Рівень', 'Джерело', 'Ціна'],
       rows: [
-        { tierLabel: 'Початковий', tierClass: 'free', source: 'Постачається з кожним агентом', price: 'Безкоштовно' },
+        {
+          tierLabel: 'Початковий',
+          tierClass: 'free',
+          source: 'Постачається з кожним агентом',
+          price: 'Безкоштовно',
+        },
         { tierLabel: 'Спільнота', tierClass: 'free', source: 'реєстр npm', price: 'Безкоштовно' },
         { tierLabel: 'Преміум', tierClass: 'paid', source: 'Підписка', price: 'Платно' },
       ],
@@ -335,8 +373,10 @@ const content: Record<Locale, TeamsContent> = {
     playbooks: {
       sectionTitle: 'Кодифікуйте робочі процеси вашої команди',
       heading: 'Патерни кажуть, що робити. Плейбуки кажуть, як.',
-      description1: 'Плейбуки \u2014 це валідовані багатокрокові процедури, що зберігаються у твоєму сховищі. Вони фіксують повний робочий процес \u2014 не лише правило, а й послідовність, очікувані результати та критерії валідації.',
-      description2: 'Приклади: міграція токенів у кодовій базі, налаштування нового компонента з нуля, налагодження збою контрастності. Кожен крок містить, що перевірити і коли ви завершили.',
+      description1:
+        'Плейбуки \u2014 це валідовані багатокрокові процедури, що зберігаються у твоєму сховищі. Вони фіксують повний робочий процес \u2014 не лише правило, а й послідовність, очікувані результати та критерії валідації.',
+      description2:
+        'Приклади: міграція токенів у кодовій базі, налаштування нового компонента з нуля, налагодження збою контрастності. Кожен крок містить, що перевірити і коли ви завершили.',
       keyPoint: 'Повторювані процеси, а не знання в головах.',
       code1Comment: '# Перелік доступних плейбуків',
       code1Output: `<span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">list-playbooks --category design</span>
@@ -392,16 +432,29 @@ const content: Record<Locale, TeamsContent> = {
     telegram: {
       sectionTitle: 'Керуйте інфраструктурою з чату',
       heading: 'Telegram-бот для операцій',
-      description: 'Моніторте стан сховища, робіть запити до графа знань, перевіряйте журнали подій і керуйте інфраструктурою \u2014 усе з Telegram. Працює з будь-яким провайдером LLM.',
+      description:
+        'Моніторте стан сховища, робіть запити до графа знань, перевіряйте журнали подій і керуйте інфраструктурою \u2014 усе з Telegram. Працює з будь-яким провайдером LLM.',
       keyPoint: 'Працює з OpenAI, Anthropic, Ollama або взагалі без LLM.',
       chatMessages: [
         { role: 'user', html: 'як там сховище?' },
-        { role: 'bot', html: 'Усе добре \u2014 <code>284</code> entries, синхронізовано 2 хв тому. Усе здорове.' },
+        {
+          role: 'bot',
+          html: 'Усе добре \u2014 <code>284</code> entries, синхронізовано 2 хв тому. Усе здорове.',
+        },
         { role: 'user', html: 'які патерни найкраще працюють цього тижня?' },
-        { role: 'bot', html: 'Ваші топ-3 зараз:<br>1. semantic-tokens \u2014 <code>94</code> strength<br>2. component-structure \u2014 <code>87</code><br>3. error-boundaries \u2014 <code>82</code><br>Токени справді добре заходять команді.' },
-        { role: 'bot', html: 'Гей \u2014 у тебе досі є 3 ідеї з учорашнього брейншторму, які ще не оброблено. Хочеш пройтися по них?' },
+        {
+          role: 'bot',
+          html: 'Ваші топ-3 зараз:<br>1. semantic-tokens \u2014 <code>94</code> strength<br>2. component-structure \u2014 <code>87</code><br>3. error-boundaries \u2014 <code>82</code><br>Токени справді добре заходять команді.',
+        },
+        {
+          role: 'bot',
+          html: 'Гей \u2014 у тебе досі є 3 ідеї з учорашнього брейншторму, які ще не оброблено. Хочеш пройтися по них?',
+        },
         { role: 'user', html: 'так, яка перша?' },
-        { role: 'bot', html: 'Автовиявлення застарілих записів у сховищі старших за 90 днів. Думаю, це надійна ідея \u2014 може стати пунктом роадмапу для пайплайна очищення. Хочеш, щоб я оформив це письмово?' },
+        {
+          role: 'bot',
+          html: 'Автовиявлення застарілих записів у сховищі старших за 90 днів. Думаю, це надійна ідея \u2014 може стати пунктом роадмапу для пайплайна очищення. Хочеш, щоб я оформив це письмово?',
+        },
       ],
       codeComment: '# Структуровані запити подій (JSONL)',
       codeOutput: `<span class="prompt">$</span> grep <span class="val">'"tool_call"'</span> events-*.jsonl \\
@@ -415,20 +468,27 @@ const content: Record<Locale, TeamsContent> = {
   it: {
     meta: {
       title: 'Team e Operazioni - Soleri',
-      description: 'La conoscenza tacita non scala. Soleri connette Vault di team, pacchetti di conoscenza e playbook affinch\u00e9 la conoscenza codificata si accumuli tra i progetti.',
+      description:
+        'La conoscenza tacita non scala. Soleri connette Vault di team, pacchetti di conoscenza e playbook affinch\u00e9 la conoscenza codificata si accumuli tra i progetti.',
     },
     hero: {
       eyebrow: 'La conoscenza tacita non scala. Quella codificata s\u00ec.',
       title: 'Quando la conoscenza vive nella testa delle persone, se ne va con loro.',
-      subtitle: "Vault connessi, pacchetti di conoscenza e playbook trasformano l'expertise del team in infrastruttura che si accumula.",
+      subtitle:
+        "Vault connessi, pacchetti di conoscenza e playbook trasformano l'expertise del team in infrastruttura che si accumula.",
     },
     vaults: {
       sectionTitle: 'Connettiti una volta, condividi tutto',
       heading: 'Modello di vault a tre livelli',
-      description: 'Quando i progetti accumulano conoscenza indipendentemente, i team reimparano le stesse lezioni ogni volta. Il modello a tre livelli risolve questo: il tuo agente conserva la conoscenza organizzata per domini nel suo vault. Un vault di progetto condiviso detiene convenzioni trasversali. Collega un vault di team per condividere tra progetti.',
+      description:
+        'Quando i progetti accumulano conoscenza indipendentemente, i team reimparano le stesse lezioni ogni volta. Il modello a tre livelli risolve questo: il tuo agente conserva la conoscenza organizzata per domini nel suo vault. Un vault di progetto condiviso detiene convenzioni trasversali. Collega un vault di team per condividere tra progetti.',
       keyPoint: 'Priorit\u00e0 di ricerca: vault agente \u2192 vault progetto \u2192 vault team.',
       flowSteps: [
-        { num: '1', color: 'amber', text: 'Vault agente \u2014 frontend, backend, domini trasversali' },
+        {
+          num: '1',
+          color: 'amber',
+          text: 'Vault agente \u2014 frontend, backend, domini trasversali',
+        },
         { num: '2', color: 'teal', text: 'Vault progetto \u2014 convenzioni di team, decisioni' },
         { num: '3', color: 'green', text: 'Vault team \u2014 condiviso tra tutti i progetti' },
       ],
@@ -448,7 +508,8 @@ const content: Record<Locale, TeamsContent> = {
     crossProject: {
       sectionTitle: 'Pattern si accumulano tra i progetti',
       heading: 'Collega progetti, condividi pattern',
-      description: 'Collega i progetti come correlati, padre/figlio o fork. Quando cerchi nel tuo vault, i progetti collegati sono inclusi automaticamente con rilevanza ponderata.',
+      description:
+        'Collega i progetti come correlati, padre/figlio o fork. Quando cerchi nel tuo vault, i progetti collegati sono inclusi automaticamente con rilevanza ponderata.',
       keyPoint: 'I pattern appresi nel progetto A sono disponibili nel progetto B.',
       code1Comment: '# Collega progetti correlati',
       code1Output: `<span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">link /project-a /project-b \\
@@ -469,10 +530,16 @@ const content: Record<Locale, TeamsContent> = {
     packs: {
       sectionTitle: 'Installa competenze in un solo comando',
       heading: 'Tre livelli di pacchetti di conoscenza',
-      description: 'I pacchetti sono npm package che inserisci in qualsiasi agente. Aggiungono pattern, anti-pattern e regole di dominio al tuo vault istantaneamente.',
+      description:
+        'I pacchetti sono npm package che inserisci in qualsiasi agente. Aggiungono pattern, anti-pattern e regole di dominio al tuo vault istantaneamente.',
       tableHeaders: ['Livello', 'Sorgente', 'Prezzo'],
       rows: [
-        { tierLabel: 'Starter', tierClass: 'free', source: 'Incluso con ogni agente', price: 'Gratuito' },
+        {
+          tierLabel: 'Starter',
+          tierClass: 'free',
+          source: 'Incluso con ogni agente',
+          price: 'Gratuito',
+        },
         { tierLabel: 'Community', tierClass: 'free', source: 'Registro npm', price: 'Gratuito' },
         { tierLabel: 'Premium', tierClass: 'paid', source: 'Abbonamento', price: 'A pagamento' },
       ],
@@ -492,8 +559,10 @@ const content: Record<Locale, TeamsContent> = {
     playbooks: {
       sectionTitle: 'Codifica i flussi di lavoro del tuo team',
       heading: 'I pattern ti dicono cosa fare. I playbook ti dicono come farlo.',
-      description1: "I playbook sono procedure con pi\u00f9 passaggi memorizzate nel tuo vault. Catturano l'intero flusso di lavoro \u2014 non solo una regola, ma la sequenza, i risultati attesi e i criteri di validazione.",
-      description2: 'Esempi: migrazione di token in un codice, impostazione di un nuovo componente da zero, debug di un errore di contrasto. Ogni passaggio include cosa controllare e quando \u00e8 terminato.',
+      description1:
+        "I playbook sono procedure con pi\u00f9 passaggi memorizzate nel tuo vault. Catturano l'intero flusso di lavoro \u2014 non solo una regola, ma la sequenza, i risultati attesi e i criteri di validazione.",
+      description2:
+        'Esempi: migrazione di token in un codice, impostazione di un nuovo componente da zero, debug di un errore di contrasto. Ogni passaggio include cosa controllare e quando \u00e8 terminato.',
       keyPoint: 'Flussi di lavoro ripetibili, non conoscenza nella testa delle persone.',
       code1Comment: '# Elenca i playbook disponibili',
       code1Output: `<span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">list-playbooks --category design</span>
@@ -534,7 +603,8 @@ const content: Record<Locale, TeamsContent> = {
         { layer: 'Agente', command: 'soleri update', scope: 'Unione config' },
         { layer: 'Pacchetti', command: 'soleri packs sync', scope: 'Per pacchetto' },
       ],
-      footnote: 'La conoscenza del vault non viene mai aggiornata automaticamente \u2014 ne sei il proprietario.',
+      footnote:
+        'La conoscenza del vault non viene mai aggiornata automaticamente \u2014 ne sei il proprietario.',
       codeComment: '# Controllo di salute',
       codeOutput: `<span class="prompt">$</span> <span class="cmd">soleri</span> <span class="arg">doctor</span>
 
@@ -549,16 +619,29 @@ const content: Record<Locale, TeamsContent> = {
     telegram: {
       sectionTitle: 'Gestisci la tua infrastruttura da una chat',
       heading: 'Bot Telegram per operazioni',
-      description: "Monitora la salute del vault, interroga il grafo della conoscenza, controlla i log degli eventi e gestisci l'infrastruttura \u2014 tutto da Telegram. Funziona con qualsiasi provider LLM.",
+      description:
+        "Monitora la salute del vault, interroga il grafo della conoscenza, controlla i log degli eventi e gestisci l'infrastruttura \u2014 tutto da Telegram. Funziona con qualsiasi provider LLM.",
       keyPoint: 'Compatibile con OpenAI, Anthropic, Ollama o senza LLM.',
       chatMessages: [
         { role: 'user', html: 'come va il vault?' },
-        { role: 'bot', html: 'Tutto bene \u2014 <code>284</code> voci, sincronizzato 2 min fa. Tutto \u00e8 sano.' },
+        {
+          role: 'bot',
+          html: 'Tutto bene \u2014 <code>284</code> voci, sincronizzato 2 min fa. Tutto \u00e8 sano.',
+        },
         { role: 'user', html: 'quali pattern stanno funzionando meglio questa settimana?' },
-        { role: 'bot', html: 'I tuoi 3 migliori al momento:<br>1. semantic-tokens \u2014 <code>94</code> forza<br>2. component-structure \u2014 <code>87</code><br>3. error-boundaries \u2014 <code>82</code><br>I token stanno davvero funzionando per il team.' },
-        { role: 'bot', html: "Ehi \u2014 hai ancora 3 idee dal brainstorming di ieri che non sono state elaborate. Vuoi passarle in rassegna?" },
+        {
+          role: 'bot',
+          html: 'I tuoi 3 migliori al momento:<br>1. semantic-tokens \u2014 <code>94</code> forza<br>2. component-structure \u2014 <code>87</code><br>3. error-boundaries \u2014 <code>82</code><br>I token stanno davvero funzionando per il team.',
+        },
+        {
+          role: 'bot',
+          html: 'Ehi \u2014 hai ancora 3 idee dal brainstorming di ieri che non sono state elaborate. Vuoi passarle in rassegna?',
+        },
         { role: 'user', html: 's\u00ec, qual \u00e8 la prima?' },
-        { role: 'bot', html: "Rileva automaticamente voci del vault stantie pi\u00f9 vecchie di 90 giorni. Penso che questa sia solida \u2014 potrebbe diventare un elemento della roadmap per il pipeline di pulizia. Vuoi che la scriva?" },
+        {
+          role: 'bot',
+          html: 'Rileva automaticamente voci del vault stantie pi\u00f9 vecchie di 90 giorni. Penso che questa sia solida \u2014 potrebbe diventare un elemento della roadmap per il pipeline di pulizia. Vuoi che la scriva?',
+        },
       ],
       codeComment: '# Query strutturate degli eventi (JSONL)',
       codeOutput: `<span class="prompt">$</span> grep <span class="val">'"tool_call"'</span> events-*.jsonl \\

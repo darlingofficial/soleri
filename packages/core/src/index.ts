@@ -272,3 +272,26 @@ export { createCuratorExtraOps } from './runtime/curator-extra-ops.js';
 export { createProjectOps } from './runtime/project-ops.js';
 export { createMemoryCrossProjectOps } from './runtime/memory-cross-project-ops.js';
 export type { AgentRuntimeConfig, AgentRuntime } from './runtime/types.js';
+
+// ─── Errors ────────────────────────────────────────────────────────────
+export {
+  SoleriErrorCode,
+  SoleriError,
+  ok,
+  err,
+  isOk,
+  isErr,
+  classifyError,
+  retryWithPreset,
+  shouldRetry,
+  getRetryDelay,
+  RETRY_PRESETS,
+} from './errors/index.js';
+export type {
+  ErrorClassification,
+  Result,
+  SoleriErrorOptions,
+  RetryPreset,
+  RetryConfig,
+  RetryOptions,
+} from './errors/index.js';

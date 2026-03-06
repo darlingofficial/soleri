@@ -2,7 +2,7 @@
  * LIGHT THEME — warm, sunlit solarpunk
  * Pure token references — zero raw hex or RGB.
  * ============================================ */
-[data-theme="light"] {
+[data-theme='light'] {
   --bg: var(--color-white);
   --bg-warm: var(--color-primary-25);
   --surface: color-mix(in srgb, var(--color-white) 92%, var(--color-secondary-300) 8%);

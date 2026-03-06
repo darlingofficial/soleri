@@ -33,10 +33,11 @@ Editor-specific hooks (Claude Code, Cursor, VS Code) should be managed as instal
 ## Example
 
 # Add editor hooks to existing agent
-soleri hooks add claude-code    # installs .claude/settings.json with vault-capture, session capture, routing
-soleri hooks add cursor          # future
-soleri hooks remove claude-code  # clean removal
-soleri hooks list                # show installed hook sets
+
+soleri hooks add claude-code # installs .claude/settings.json with vault-capture, session capture, routing
+soleri hooks add cursor # future
+soleri hooks remove claude-code # clean removal
+soleri hooks list # show installed hook sets
 
 ## Why
 

@@ -49,15 +49,16 @@ This tells you what the vault already covers — focus extraction on gaps.
 
 Read through the source material and identify:
 
-| Type | What to Look For |
-|------|-----------------|
-| **pattern** | "We always do X because Y" — repeatable approaches |
-| **anti-pattern** | "Don't do X because Y" — known mistakes |
-| **decision** | "We chose X over Y because Z" — architectural choices |
-| **principle** | "We believe X" — guiding rules |
-| **workflow** | "The process for X is: step 1, step 2..." — procedures |
+| Type             | What to Look For                                       |
+| ---------------- | ------------------------------------------------------ |
+| **pattern**      | "We always do X because Y" — repeatable approaches     |
+| **anti-pattern** | "Don't do X because Y" — known mistakes                |
+| **decision**     | "We chose X over Y because Z" — architectural choices  |
+| **principle**    | "We believe X" — guiding rules                         |
+| **workflow**     | "The process for X is: step 1, step 2..." — procedures |
 
 For each extracted item, determine:
+
 - **Category**: Which domain it belongs to
 - **Severity**: critical / warning / suggestion
 - **Tags**: Searchable keywords
@@ -81,6 +82,7 @@ YOUR_AGENT_core op:capture_knowledge
 ```
 
 Present each capture to the user as you go:
+
 ```
 Captured: api-auth-jwt (pattern, critical)
   → "Use short-lived JWTs for authentication"
@@ -92,22 +94,26 @@ Captured: api-auth-jwt (pattern, critical)
 After all items captured, run quality checks:
 
 **Detect any duplicates created during harvest:**
+
 ```
 YOUR_AGENT_core op:curator_detect_duplicates
 ```
 
 **Groom all new entries — normalize tags, fix metadata:**
+
 ```
 YOUR_AGENT_core op:curator_groom_all
 ```
 
 **Enrich entries with additional context:**
+
 ```
 YOUR_AGENT_core op:curator_enrich
   params: { entryId: "<id>" }
 ```
 
 **Check for contradictions with existing knowledge:**
+
 ```
 YOUR_AGENT_core op:curator_contradictions
 ```
@@ -125,6 +131,7 @@ YOUR_AGENT_core op:admin_vault_analytics
 ```
 
 Present a summary:
+
 ```
 ## Harvest Complete
 
@@ -163,16 +170,16 @@ This feels like magic because the user points at a 50-page architecture doc and 
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `route_intent` | Classify the source material |
-| `search_intelligent` | Check for existing knowledge |
-| `vault_tags` / `vault_domains` | See what's already covered |
-| `capture_knowledge` | Capture each extracted item |
-| `curator_detect_duplicates` | Find duplicates post-harvest |
-| `curator_groom_all` | Normalize all new entries |
-| `curator_enrich` | LLM-enrich entries |
-| `curator_contradictions` | Find conflicts with existing knowledge |
-| `memory_promote_to_global` | Share universal patterns cross-project |
-| `admin_health` | Post-harvest health check |
-| `admin_vault_analytics` | Knowledge quality metrics |
+| Op                             | When to Use                            |
+| ------------------------------ | -------------------------------------- |
+| `route_intent`                 | Classify the source material           |
+| `search_intelligent`           | Check for existing knowledge           |
+| `vault_tags` / `vault_domains` | See what's already covered             |
+| `capture_knowledge`            | Capture each extracted item            |
+| `curator_detect_duplicates`    | Find duplicates post-harvest           |
+| `curator_groom_all`            | Normalize all new entries              |
+| `curator_enrich`               | LLM-enrich entries                     |
+| `curator_contradictions`       | Find conflicts with existing knowledge |
+| `memory_promote_to_global`     | Share universal patterns cross-project |
+| `admin_health`                 | Post-harvest health check              |
+| `admin_vault_analytics`        | Knowledge quality metrics              |

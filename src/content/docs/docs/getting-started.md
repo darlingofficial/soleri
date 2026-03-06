@@ -19,12 +19,12 @@ npm create soleri my-agent
 
 The interactive wizard asks for:
 
-| Prompt | What it means |
-|--------|---------------|
-| **Agent name** | Your agent's identity (e.g., "sentinel", "architect") |
-| **Role** | One-line description of what it does |
-| **Domains** | Knowledge areas — `frontend`, `backend`, `security`, or custom |
-| **Persona voice** | How the agent communicates — professional, casual, technical |
+| Prompt            | What it means                                                  |
+| ----------------- | -------------------------------------------------------------- |
+| **Agent name**    | Your agent's identity (e.g., "sentinel", "architect")          |
+| **Role**          | One-line description of what it does                           |
+| **Domains**       | Knowledge areas — `frontend`, `backend`, `security`, or custom |
+| **Persona voice** | How the agent communicates — professional, casual, technical   |
 
 This generates a complete project:
 

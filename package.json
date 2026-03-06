@@ -1,35 +1,32 @@
 {
   "name": "soleri-monorepo",
-  "private": true,
   "version": "4.0.0",
+  "private": true,
   "description": "An open-source framework for building AI assistants that learn, remember, and grow with you.",
   "keywords": [
     "ai",
     "assistant",
+    "brain",
+    "claude",
     "framework",
     "knowledge",
-    "vault",
-    "brain",
+    "learning",
+    "mcp",
     "memory",
     "personas",
-    "mcp",
-    "claude",
-    "learning"
+    "vault"
   ],
   "homepage": "https://soleri.dev",
+  "license": "Apache-2.0",
+  "author": "adrozdenko",
   "repository": {
     "type": "git",
     "url": "https://github.com/adrozdenko/soleri.git"
   },
-  "author": "adrozdenko",
-  "license": "Apache-2.0",
-  "type": "module",
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "workspaces": [
     "packages/*"
   ],
+  "type": "module",
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "build:web": "astro build",
@@ -49,17 +46,6 @@
     "deadcode:knip": "knip",
     "deadcode:ts-prune": "ts-prune",
     "prepare": "husky"
-  },
-  "lint-staged": {
-    "packages/*/src/**/*.ts": [
-      "oxfmt --config .oxfmtrc.jsonc",
-      "oxlint --fix",
-      "secretlint"
-    ],
-    "*.md": [
-      "markdownlint-cli2 --no-globs",
-      "cspell --no-must-find-files --no-progress"
-    ]
   },
   "dependencies": {
     "@astrojs/starlight": "^0.37.6",
@@ -93,5 +79,19 @@
     "tsx": "^4.19.2",
     "typescript": "^5.7.3",
     "vitest": "^3.0.5"
+  },
+  "lint-staged": {
+    "packages/*/src/**/*.ts": [
+      "oxfmt --config .oxfmtrc.jsonc",
+      "oxlint --fix",
+      "secretlint"
+    ],
+    "*.md": [
+      "markdownlint-cli2 --no-globs",
+      "cspell --no-must-find-files --no-progress"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

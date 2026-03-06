@@ -8,11 +8,14 @@
   },
   "rules": {
     "no-explicit-any": "error",
-    "no-unused-vars": ["error", {
-      "argsIgnorePattern": "^_",
-      "varsIgnorePattern": "^_",
-      "caughtErrorsIgnorePattern": "^_"
-    }],
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
     "prefer-const": "error",
     "no-var": "error",
     "eqeqeq": ["error", "always"],
@@ -34,11 +37,14 @@
       "files": ["packages/*/src/__tests__/**/*.ts"],
       "rules": {
         "no-explicit-any": "off",
-        "no-unused-vars": ["warn", {
-          "argsIgnorePattern": "^_",
-          "varsIgnorePattern": "^_",
-          "caughtErrorsIgnorePattern": "^_"
-        }],
+        "no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "caughtErrorsIgnorePattern": "^_"
+          }
+        ],
         "no-await-in-loop": "off",
         "no-shadow": "off",
         "no-unsafe-optional-chaining": "off",
@@ -48,7 +54,14 @@
       }
     }
   ],
-  "ignorePatterns": ["dist/**", "node_modules/**", "coverage/**", "*.config.js", "*.config.ts", "scripts/**"],
+  "ignorePatterns": [
+    "dist/**",
+    "node_modules/**",
+    "coverage/**",
+    "*.config.js",
+    "*.config.ts",
+    "scripts/**"
+  ],
   "settings": { "vitest": { "typecheck": false } },
   "env": { "builtin": true }
 }

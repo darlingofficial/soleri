@@ -1,139 +1,154 @@
-      /* Aurora — warm amber, personal identity */
-      .page {
-        --glow-color-1: var(--color-primary-400);
-        --glow-color-2: var(--color-primary-300);
-        --glow-color-3: var(--color-secondary-400);
-      }
+/* Aurora — warm amber, personal identity */
+.page {
+  --glow-color-1: var(--color-primary-400);
+  --glow-color-2: var(--color-primary-300);
+  --glow-color-3: var(--color-secondary-400);
+}
 
-      .agent-section {
-        margin-top: 72px;
-      }
+.agent-section {
+  margin-top: 72px;
+}
 
-      .agent-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        align-items: start;
-      }
+.agent-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
 
-      .agent-content h3 {
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--foreground-strong);
-        margin-bottom: 8px;
-      }
+.agent-content h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--foreground-strong);
+  margin-bottom: 8px;
+}
 
-      .agent-content p {
-        font-size: 14px;
-        line-height: 1.7;
-        color: var(--muted);
-        margin-bottom: 12px;
-      }
+.agent-content p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
 
-      .agent-content .key-point {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--accent-teal);
-      }
+.agent-content .key-point {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-teal);
+}
 
-      .vault-tree {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-top: 16px;
-      }
+.vault-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
 
-      .vault-node {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 16px;
-        border-radius: var(--radius-md);
-        border: 1px solid var(--border);
-        background: var(--surface);
-        font-size: 13px;
-        color: var(--foreground);
-      }
+.vault-node {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--foreground);
+}
 
-      .vault-node-label {
-        font-weight: 700;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        min-width: 100px;
-      }
+.vault-node-label {
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  min-width: 100px;
+}
 
-      .vault-node.frontend .vault-node-label { color: var(--color-primary-400); }
-      .vault-node.backend .vault-node-label { color: var(--color-secondary-400); }
-      .vault-node.crosscut .vault-node-label { color: var(--color-tertiary-400); }
+.vault-node.frontend .vault-node-label {
+  color: var(--color-primary-400);
+}
+.vault-node.backend .vault-node-label {
+  color: var(--color-secondary-400);
+}
+.vault-node.crosscut .vault-node-label {
+  color: var(--color-tertiary-400);
+}
 
-      .vault-node-arrow {
-        text-align: center;
-        color: var(--muted);
-        font-size: 11px;
-      }
+.vault-node-arrow {
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+}
 
-      .graph-stat {
-        display: flex;
-        align-items: start;
-        gap: 12px;
-        padding: 10px 14px;
-        border-radius: var(--radius-md);
-        border: 1px solid var(--border);
-        background: var(--surface);
-        font-size: 13px;
-        color: var(--foreground);
-      }
+.graph-stat {
+  display: flex;
+  align-items: start;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--foreground);
+}
 
-      .graph-stat-text {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        padding-top: 2px;
-      }
+.graph-stat-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 2px;
+}
 
-      .graph-stat-text strong {
-        white-space: nowrap;
-      }
+.graph-stat-text strong {
+  white-space: nowrap;
+}
 
-      .graph-stat-desc {
-        color: var(--muted);
-        font-size: 12px;
-        line-height: 1.5;
-      }
+.graph-stat-desc {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
 
-      .graph-stat-num {
-        font-weight: 700;
-        font-size: 11px;
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-      }
+.graph-stat-num {
+  font-weight: 700;
+  font-size: 11px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
 
-      .graph-stat-num.amber { background: var(--accent-primary-15); color: var(--color-primary-400); }
-      .graph-stat-num.teal { background: var(--accent-teal-15); color: var(--color-secondary-400); }
-      .graph-stat-num.green { background: var(--accent-green-15); color: var(--color-tertiary-400); }
+.graph-stat-num.amber {
+  background: var(--accent-primary-15);
+  color: var(--color-primary-400);
+}
+.graph-stat-num.teal {
+  background: var(--accent-teal-15);
+  color: var(--color-secondary-400);
+}
+.graph-stat-num.green {
+  background: var(--accent-green-15);
+  color: var(--color-tertiary-400);
+}
 
-      .graph-stats {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        margin-top: 16px;
-      }
+.graph-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 16px;
+}
 
-      .graph-arrow {
-        text-align: center;
-        color: var(--muted);
-        font-size: 11px;
-      }
+.graph-arrow {
+  text-align: center;
+  color: var(--muted);
+  font-size: 11px;
+}
 
-      @media (max-width: 820px) {
-        .agent-grid {
-          grid-template-columns: 1fr;
-          gap: 16px;
-        }
-      }
+@media (max-width: 820px) {
+  .agent-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

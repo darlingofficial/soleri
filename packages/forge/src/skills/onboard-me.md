@@ -169,6 +169,7 @@ Use `/second-opinion` before making any architectural decision.
 ## The Magic
 
 This feels like magic because a new team member says "onboard me" and instantly gets:
+
 1. Every critical rule they must follow
 2. Every architectural decision and why it was made
 3. Proven patterns to follow
@@ -180,18 +181,18 @@ No other onboarding tool does this — it's not a static wiki, it's a living kno
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `identity` | Project persona and description |
-| `project_get` | Project registration details |
-| `project_list_rules` | Project-specific rules |
-| `get_behavior_rules` | Behavioral conventions |
-| `vault_domains` / `vault_tags` | Knowledge landscape |
-| `admin_vault_size` | How much knowledge exists |
-| `search` | Find critical entries and anti-patterns |
-| `search_intelligent` | Find decisions and patterns |
-| `brain_strengths` | Proven approaches |
-| `brain_global_patterns` | Cross-project patterns |
-| `project_linked_projects` | Related projects |
-| `admin_search_insights` | What's not in the vault |
-| `vault_age_report` | Stale knowledge areas |
+| Op                             | When to Use                             |
+| ------------------------------ | --------------------------------------- |
+| `identity`                     | Project persona and description         |
+| `project_get`                  | Project registration details            |
+| `project_list_rules`           | Project-specific rules                  |
+| `get_behavior_rules`           | Behavioral conventions                  |
+| `vault_domains` / `vault_tags` | Knowledge landscape                     |
+| `admin_vault_size`             | How much knowledge exists               |
+| `search`                       | Find critical entries and anti-patterns |
+| `search_intelligent`           | Find decisions and patterns             |
+| `brain_strengths`              | Proven approaches                       |
+| `brain_global_patterns`        | Cross-project patterns                  |
+| `project_linked_projects`      | Related projects                        |
+| `admin_search_insights`        | What's not in the vault                 |
+| `vault_age_report`             | Stale knowledge areas                   |

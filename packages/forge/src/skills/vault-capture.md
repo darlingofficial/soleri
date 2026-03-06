@@ -14,6 +14,7 @@ After discovering something worth remembering: a solution that worked, a mistake
 ## Orchestration Sequence
 
 ### Step 1: Check for Duplicates
+
 Call `YOUR_AGENT_core op:search_intelligent` with the knowledge title or description. If a similar entry exists, consider updating it instead of creating a duplicate.
 
 ```
@@ -30,7 +31,9 @@ YOUR_AGENT_core op:curator_detect_duplicates
 If duplicates are found, decide: update the existing entry or merge them.
 
 ### Step 2: Classify the Knowledge
+
 Determine the entry type:
+
 - **pattern** — Something that works and should be repeated
 - **anti-pattern** — Something that fails and should be avoided
 - **workflow** — A sequence of steps for a specific task
@@ -45,8 +48,10 @@ YOUR_AGENT_core op:route_intent
 ```
 
 ### Step 3: Capture
+
 For quick, single-entry captures:
 Call `YOUR_AGENT_core op:capture_knowledge` with:
+
 - **title**: Clear, searchable name
 - **description**: What it is and when it applies
 - **type**: From Step 2 classification
@@ -69,6 +74,7 @@ YOUR_AGENT_core op:capture_knowledge
 ```
 
 For quick captures:
+
 ```
 YOUR_AGENT_core op:capture_quick
   params: { title: "<name>", description: "<details>" }
@@ -79,29 +85,34 @@ YOUR_AGENT_core op:capture_quick
 After capturing, run the curator to ensure quality:
 
 **Groom the entry** — normalize tags, fix metadata:
+
 ```
 YOUR_AGENT_core op:curator_groom
   params: { entryId: "<captured entry id>" }
 ```
 
 **Enrich the entry** — use LLM to add context, improve description:
+
 ```
 YOUR_AGENT_core op:curator_enrich
   params: { entryId: "<captured entry id>" }
 ```
 
 **Check for contradictions** — does this conflict with existing knowledge?
+
 ```
 YOUR_AGENT_core op:curator_contradictions
 ```
 
 If contradictions found, resolve them:
+
 ```
 YOUR_AGENT_core op:curator_resolve_contradiction
   params: { contradictionId: "<id>" }
 ```
 
 ### Step 5: Handle Governance (if enabled)
+
 If governance policy requires review, the capture returns a `proposalId`. The entry is queued for approval.
 
 ```
@@ -112,7 +123,9 @@ YOUR_AGENT_core op:governance_proposals
 Present pending proposals to the user for approval.
 
 ### Step 6: Promote to Global (Optional)
+
 If the knowledge applies across projects (not project-specific):
+
 ```
 YOUR_AGENT_core op:memory_promote_to_global
   params: { entryId: "<entry id>" }
@@ -121,12 +134,15 @@ YOUR_AGENT_core op:memory_promote_to_global
 This makes it available in cross-project searches and brain recommendations.
 
 ### Step 7: Verify Health
+
 Confirm the capture was stored and vault health is maintained:
+
 ```
 YOUR_AGENT_core op:admin_health
 ```
 
 Check vault analytics for overall knowledge quality:
+
 ```
 YOUR_AGENT_core op:admin_vault_analytics
 ```
@@ -137,18 +153,18 @@ Capture is complete when: the entry is stored (or queued for review), categorize
 
 ## Agent Tools Reference
 
-| Op | When to Use |
-|----|-------------|
-| `search_intelligent` | Check for duplicates before capture |
-| `curator_detect_duplicates` | Explicit duplicate detection |
-| `route_intent` | Help classify knowledge type |
-| `capture_knowledge` | Full-metadata capture |
-| `capture_quick` | Fast capture for simple entries |
-| `curator_groom` | Normalize tags and metadata |
-| `curator_enrich` | LLM-powered metadata enrichment |
-| `curator_contradictions` | Find conflicting entries |
-| `curator_resolve_contradiction` | Resolve conflicts |
-| `governance_proposals` | Check/manage approval queue |
-| `memory_promote_to_global` | Share across projects |
-| `admin_health` | Verify system health |
-| `admin_vault_analytics` | Overall knowledge quality metrics |
+| Op                              | When to Use                         |
+| ------------------------------- | ----------------------------------- |
+| `search_intelligent`            | Check for duplicates before capture |
+| `curator_detect_duplicates`     | Explicit duplicate detection        |
+| `route_intent`                  | Help classify knowledge type        |
+| `capture_knowledge`             | Full-metadata capture               |
+| `capture_quick`                 | Fast capture for simple entries     |
+| `curator_groom`                 | Normalize tags and metadata         |
+| `curator_enrich`                | LLM-powered metadata enrichment     |
+| `curator_contradictions`        | Find conflicting entries            |
+| `curator_resolve_contradiction` | Resolve conflicts                   |
+| `governance_proposals`          | Check/manage approval queue         |
+| `memory_promote_to_global`      | Share across projects               |
+| `admin_health`                  | Verify system health                |
+| `admin_vault_analytics`         | Overall knowledge quality metrics   |

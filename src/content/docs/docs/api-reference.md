@@ -44,90 +44,90 @@ The core facade contains all engine operations. Accessible as `<agent_id>_core`.
 
 Search across all knowledge domains.
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `query` | string | yes | Search query text |
-| `domain` | string | no | Restrict to a specific domain |
-| `type` | enum | no | `pattern`, `anti-pattern`, `rule`, `playbook` |
-| `severity` | enum | no | `critical`, `warning`, `suggestion` |
-| `tags` | string[] | no | Filter by tags |
-| `limit` | number | no | Max results (default: 10) |
+| Param      | Type     | Required | Description                                   |
+| ---------- | -------- | -------- | --------------------------------------------- |
+| `query`    | string   | yes      | Search query text                             |
+| `domain`   | string   | no       | Restrict to a specific domain                 |
+| `type`     | enum     | no       | `pattern`, `anti-pattern`, `rule`, `playbook` |
+| `severity` | enum     | no       | `critical`, `warning`, `suggestion`           |
+| `tags`     | string[] | no       | Filter by tags                                |
+| `limit`    | number   | no       | Max results (default: 10)                     |
 
 ### capture_quick
 
 Quick-capture a knowledge entry with minimal input.
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `title` | string | yes | Entry title |
-| `description` | string | yes | What this pattern/anti-pattern is about |
-| `type` | enum | no | Default: `pattern` |
-| `domain` | string | no | Knowledge domain |
-| `severity` | enum | no | Default: `suggestion` |
-| `tags` | string[] | no | Free-form tags |
+| Param         | Type     | Required | Description                             |
+| ------------- | -------- | -------- | --------------------------------------- |
+| `title`       | string   | yes      | Entry title                             |
+| `description` | string   | yes      | What this pattern/anti-pattern is about |
+| `type`        | enum     | no       | Default: `pattern`                      |
+| `domain`      | string   | no       | Knowledge domain                        |
+| `severity`    | enum     | no       | Default: `suggestion`                   |
+| `tags`        | string[] | no       | Free-form tags                          |
 
 ### capture_knowledge
 
 Full knowledge capture with all metadata.
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `title` | string | yes | Entry title |
-| `description` | string | yes | Full description |
-| `type` | enum | yes | Entry type |
-| `domain` | string | no | Knowledge domain |
-| `severity` | enum | no | Severity level |
-| `tags` | string[] | no | Tags |
-| `category` | string | no | Category grouping |
-| `example` | string | no | Code example |
-| `why` | string | no | Rationale |
-| `context` | string | no | When this applies |
+| Param         | Type     | Required | Description       |
+| ------------- | -------- | -------- | ----------------- |
+| `title`       | string   | yes      | Entry title       |
+| `description` | string   | yes      | Full description  |
+| `type`        | enum     | yes      | Entry type        |
+| `domain`      | string   | no       | Knowledge domain  |
+| `severity`    | enum     | no       | Severity level    |
+| `tags`        | string[] | no       | Tags              |
+| `category`    | string   | no       | Category grouping |
+| `example`     | string   | no       | Code example      |
+| `why`         | string   | no       | Rationale         |
+| `context`     | string   | no       | When this applies |
 
 ### search_intelligent
 
 Semantic search with 6-dimension scoring.
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `query` | string | yes | Search query |
-| `options` | object | no | Filter options (domain, type, severity, limit) |
+| Param     | Type   | Required | Description                                    |
+| --------- | ------ | -------- | ---------------------------------------------- |
+| `query`   | string | yes      | Search query                                   |
+| `options` | object | no       | Filter options (domain, type, severity, limit) |
 
 ### create_plan
 
 Create a multi-step execution plan.
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `title` | string | yes | Plan title |
-| `objective` | string | yes | What this plan achieves |
-| `tasks` | array | yes | `[{ title: string, description: string }]` |
+| Param       | Type   | Required | Description                                |
+| ----------- | ------ | -------- | ------------------------------------------ |
+| `title`     | string | yes      | Plan title                                 |
+| `objective` | string | yes      | What this plan achieves                    |
+| `tasks`     | array  | yes      | `[{ title: string, description: string }]` |
 
 ### brain_recommend
 
 Get context-aware recommendations.
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `context` | string | no | Current task context |
-| `limit` | number | no | Max recommendations (default: 5) |
+| Param     | Type   | Required | Description                      |
+| --------- | ------ | -------- | -------------------------------- |
+| `context` | string | no       | Current task context             |
+| `limit`   | number | no       | Max recommendations (default: 5) |
 
 ### orchestrate_plan
 
 Create an orchestrated plan with vault + brain context.
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `prompt` | string | yes | What needs to be done |
-| `projectPath` | string | yes | Project directory path |
+| Param         | Type   | Required | Description            |
+| ------------- | ------ | -------- | ---------------------- |
+| `prompt`      | string | yes      | What needs to be done  |
+| `projectPath` | string | yes      | Project directory path |
 
 ### playbook_list
 
 List available playbooks.
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `category` | string | no | Filter by category |
-| `tag` | string | no | Filter by tag |
+| Param      | Type   | Required | Description        |
+| ---------- | ------ | -------- | ------------------ |
+| `category` | string | no       | Filter by category |
+| `tag`      | string | no       | Filter by tag      |
 
 ### admin_health
 
@@ -145,40 +145,40 @@ Each domain gets its own facade: `<agent_id>_<domain>`.
 
 ### get_patterns
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `tags` | string[] | no | Filter by tags |
-| `severity` | enum | no | Filter by severity |
-| `limit` | number | no | Max results |
+| Param      | Type     | Required | Description        |
+| ---------- | -------- | -------- | ------------------ |
+| `tags`     | string[] | no       | Filter by tags     |
+| `severity` | enum     | no       | Filter by severity |
+| `limit`    | number   | no       | Max results        |
 
 ### search
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `query` | string | yes | Search query |
-| `limit` | number | no | Max results |
+| Param   | Type   | Required | Description  |
+| ------- | ------ | -------- | ------------ |
+| `query` | string | yes      | Search query |
+| `limit` | number | no       | Max results  |
 
 ### get_entry
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | string | yes | Entry ID |
+| Param | Type   | Required | Description |
+| ----- | ------ | -------- | ----------- |
+| `id`  | string | yes      | Entry ID    |
 
 ### capture
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `title` | string | yes | Entry title |
-| `description` | string | yes | Entry description |
-| `type` | enum | no | Entry type (default: `pattern`) |
-| `severity` | enum | no | Severity level |
-| `tags` | string[] | no | Tags |
+| Param         | Type     | Required | Description                     |
+| ------------- | -------- | -------- | ------------------------------- |
+| `title`       | string   | yes      | Entry title                     |
+| `description` | string   | yes      | Entry description               |
+| `type`        | enum     | no       | Entry type (default: `pattern`) |
+| `severity`    | enum     | no       | Severity level                  |
+| `tags`        | string[] | no       | Tags                            |
 
 ### remove
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `id` | string | yes | Entry ID to remove |
+| Param | Type   | Required | Description        |
+| ----- | ------ | -------- | ------------------ |
+| `id`  | string | yes      | Entry ID to remove |
 
 Auth: `admin`
 
@@ -198,9 +198,9 @@ No parameters. Returns persona details (name, role, voice).
 
 ### activate
 
-| Param | Type | Required | Description |
-|-------|------|----------|-------------|
-| `projectPath` | string | yes | Project to activate in |
+| Param         | Type   | Required | Description            |
+| ------------- | ------ | -------- | ---------------------- |
+| `projectPath` | string | yes      | Project to activate in |
 
 ### setup
 

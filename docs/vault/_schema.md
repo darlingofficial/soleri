@@ -8,7 +8,7 @@ Each pattern/anti-pattern is a Markdown file with YAML frontmatter:
 ---
 id: pattern-{category}-{name}
 title: Human Readable Title
-category: {category}
+category: { category }
 severity: critical|warning|suggestion
 tags: [searchable, keywords]
 applies_to: [packages/affected]
@@ -19,14 +19,18 @@ related_pattern: anti-pattern-xxx
 # Title
 
 ## Context
+
 When/why this applies.
 
 ## Pattern (or Anti-Pattern)
+
 Description.
 
 ## Example
+
 Code example.
 
 ## Why (or Why It's Wrong)
+
 Explanation.
 ```

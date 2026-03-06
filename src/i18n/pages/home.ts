@@ -4,7 +4,8 @@ export const homeContent = (locale: Locale) => content[locale];
 
 const content: Record<Locale, HomeContent> = {
   en: {
-    heroTitle: 'What you <span class="accent-amber">teach</span> it <span class="accent-teal">stays</span>. What it <span class="accent-green">learns</span> compounds.',
+    heroTitle:
+      'What you <span class="accent-amber">teach</span> it <span class="accent-teal">stays</span>. What it <span class="accent-green">learns</span> compounds.',
     heroText: 'Persistent memory. Structured knowledge. Context that carries across every session.',
     principleTitle: 'Knowledge should compound — not evaporate.',
     compareBeforeLabel: 'Without memory',
@@ -31,7 +32,8 @@ const content: Record<Locale, HomeContent> = {
       <span class="ok">✓ Pattern applied from vault</span>
       <span class="ok">✓ Brain strength: 94% (12 sessions)</span>`,
     howTitle: 'One engine.<br/>One vault.<br/>No coordination overhead.',
-    howText: 'A <strong>Vault</strong> for knowledge, a <strong>Brain</strong> that learns, <strong>Memory</strong> that persists. Single process. Feed it knowledge — it organizes, vectorizes, and learns.',
+    howText:
+      'A <strong>Vault</strong> for knowledge, a <strong>Brain</strong> that learns, <strong>Memory</strong> that persists. Single process. Feed it knowledge — it organizes, vectorizes, and learns.',
     engineTags: ['Vault', 'Brain', 'Memory'],
     features: [
       {
@@ -84,9 +86,27 @@ const content: Record<Locale, HomeContent> = {
     ],
     cardsTitle: 'One vault. Many domains.',
     cards: [
-      { title: 'Frontend', domain: 'Domain', cls: 'salvador', capabilities: ['React patterns', 'Design tokens', 'Component review', 'Accessibility'], ships: 'Ask about buttons — the vault searches here first.' },
-      { title: 'Backend', domain: 'Domain', cls: 'gaudi', capabilities: ['API conventions', 'Database schemas', 'Auth patterns', 'Performance'], ships: 'Ask about queries or API design — the vault pulls from here.' },
-      { title: 'Cross-cutting', domain: 'Domain', cls: 'sentinel', capabilities: ['Git workflows', 'Code review', 'Testing strategies', 'Documentation'], ships: 'Patterns that span domains. The graph finds connections automatically.' },
+      {
+        title: 'Frontend',
+        domain: 'Domain',
+        cls: 'salvador',
+        capabilities: ['React patterns', 'Design tokens', 'Component review', 'Accessibility'],
+        ships: 'Ask about buttons — the vault searches here first.',
+      },
+      {
+        title: 'Backend',
+        domain: 'Domain',
+        cls: 'gaudi',
+        capabilities: ['API conventions', 'Database schemas', 'Auth patterns', 'Performance'],
+        ships: 'Ask about queries or API design — the vault pulls from here.',
+      },
+      {
+        title: 'Cross-cutting',
+        domain: 'Domain',
+        cls: 'sentinel',
+        capabilities: ['Git workflows', 'Code review', 'Testing strategies', 'Documentation'],
+        ships: 'Patterns that span domains. The graph finds connections automatically.',
+      },
     ],
     terminalTitle: 'Terminal',
     terminalCode: `<span class="comment"># Install and create</span>
@@ -103,19 +123,34 @@ const content: Record<Locale, HomeContent> = {
 <span class="prompt">$</span> <span class="cmd">soleri packs</span> <span class="arg">install community/react-patterns</span>
 <span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">connect git@github.com:team/vault.git</span>`,
     archTitle: 'Layered like living systems',
-    archSubtitle: 'Each layer grows independently. Swap transports, plug in knowledge, customize your agent — the engine stays the same.',
+    archSubtitle:
+      'Each layer grows independently. Swap transports, plug in knowledge, customize your agent — the engine stays the same.',
     layers: [
-      { label: 'Agents', text: 'Your agent\'s config (<code>agent.yaml</code>): identity, voice, domain wiring. Create in one command, customize anytime.' },
-      { label: 'Domains', text: 'Pluggable knowledge domains. The engine loads relevant domains based on your agent\'s vault structure.' },
-      { label: 'Engine', text: 'Single MCP server process. Vault (knowledge), Brain (learning), Memory (context), Planning (workflows). Your agent runs on it. Updates via <code>npm update</code>.' },
-      { label: 'Transports', text: 'Protocol adapters isolated from core: <code>mcp.ts</code> ships now, <code>rest.ts</code> and <code>lsp.ts</code> ready for VS Code, Cursor, Zed, and custom dashboards. Adding a transport = one adapter file.' },
+      {
+        label: 'Agents',
+        text: "Your agent's config (<code>agent.yaml</code>): identity, voice, domain wiring. Create in one command, customize anytime.",
+      },
+      {
+        label: 'Domains',
+        text: "Pluggable knowledge domains. The engine loads relevant domains based on your agent's vault structure.",
+      },
+      {
+        label: 'Engine',
+        text: 'Single MCP server process. Vault (knowledge), Brain (learning), Memory (context), Planning (workflows). Your agent runs on it. Updates via <code>npm update</code>.',
+      },
+      {
+        label: 'Transports',
+        text: 'Protocol adapters isolated from core: <code>mcp.ts</code> ships now, <code>rest.ts</code> and <code>lsp.ts</code> ready for VS Code, Cursor, Zed, and custom dashboards. Adding a transport = one adapter file.',
+      },
     ],
   },
   uk: {
-    heroTitle: '<span class="accent-amber">Навчиш</span> — <span class="accent-teal">лишиться</span>. <span class="accent-green">Навчиться</span> — примножиться.',
-    heroText: 'Постійна пам\'ять. Структуровані знання. Контекст, що зберігається між усіма сесіями.',
+    heroTitle:
+      '<span class="accent-amber">Навчиш</span> — <span class="accent-teal">лишиться</span>. <span class="accent-green">Навчиться</span> — примножиться.',
+    heroText:
+      "Постійна пам'ять. Структуровані знання. Контекст, що зберігається між усіма сесіями.",
     principleTitle: 'Знання мають накопичуватися — а не випаровуватися.',
-    compareBeforeLabel: 'Без пам\'яті',
+    compareBeforeLabel: "Без пам'яті",
     compareAfterLabel: 'Із Soleri',
     compareBefore: `<span class="dim">// Сесія 1</span>
 <span class="warn">Ти:</span> Ми використовуємо Tailwind із семантичними токенами,
@@ -139,7 +174,8 @@ const content: Record<Locale, HomeContent> = {
       <span class="ok">✓ Шаблон застосовано зі сховища</span>
       <span class="ok">✓ Brain strength: 94% (12 сесій)</span>`,
     howTitle: 'Один рушій.<br/>Одне сховище.<br/>Жодної зайвої координації.',
-    howText: '<strong>Сховище</strong> для знань, <strong>Brain</strong> для навчання, <strong>Memory</strong> для контексту. Один процес. Знання автоматично організуються, векторизуються й накопичуються.',
+    howText:
+      '<strong>Сховище</strong> для знань, <strong>Brain</strong> для навчання, <strong>Memory</strong> для контексту. Один процес. Знання автоматично організуються, векторизуються й накопичуються.',
     engineTags: ['сховище', 'Brain', 'Memory'],
     features: [
       {
@@ -192,9 +228,32 @@ const content: Record<Locale, HomeContent> = {
     ],
     cardsTitle: 'Одне сховище. Багато доменів.',
     cards: [
-      { title: 'Фронтенд', domain: 'Домен', cls: 'salvador', capabilities: ['Патерни React', 'Токени дизайну', 'Рев\'ю компонентів', 'Доступність'], ships: 'Запитай про кнопки — сховище спершу шукає тут.' },
-      { title: 'Бекенд', domain: 'Домен', cls: 'gaudi', capabilities: ['Конвенції API', 'Схеми бази даних', 'Патерни автентифікації', 'Продуктивність'], ships: 'Запитай про запити чи дизайн API — сховище підтягує звідси.' },
-      { title: 'Наскрізні', domain: 'Домен', cls: 'sentinel', capabilities: ['Робочі процеси Git', 'Код-рев\'ю', 'Стратегії тестування', 'Документація'], ships: 'Патерни, що охоплюють домени. Граф автоматично знаходить зв\'язки.' },
+      {
+        title: 'Фронтенд',
+        domain: 'Домен',
+        cls: 'salvador',
+        capabilities: ['Патерни React', 'Токени дизайну', "Рев'ю компонентів", 'Доступність'],
+        ships: 'Запитай про кнопки — сховище спершу шукає тут.',
+      },
+      {
+        title: 'Бекенд',
+        domain: 'Домен',
+        cls: 'gaudi',
+        capabilities: [
+          'Конвенції API',
+          'Схеми бази даних',
+          'Патерни автентифікації',
+          'Продуктивність',
+        ],
+        ships: 'Запитай про запити чи дизайн API — сховище підтягує звідси.',
+      },
+      {
+        title: 'Наскрізні',
+        domain: 'Домен',
+        cls: 'sentinel',
+        capabilities: ['Робочі процеси Git', "Код-рев'ю", 'Стратегії тестування', 'Документація'],
+        ships: "Патерни, що охоплюють домени. Граф автоматично знаходить зв'язки.",
+      },
     ],
     terminalTitle: 'Термінал',
     terminalCode: `<span class="comment"># Встановлення та створення</span>
@@ -211,17 +270,32 @@ const content: Record<Locale, HomeContent> = {
 <span class="prompt">$</span> <span class="cmd">soleri packs</span> <span class="arg">install community/react-patterns</span>
 <span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">connect git@github.com:team/vault.git</span>`,
     archTitle: 'Багатошаровий, як живі системи',
-    archSubtitle: 'Кожен шар зростає незалежно. Заміни транспорти, підключай знання, налаштовуй агента — рушій лишається тим самим.',
+    archSubtitle:
+      'Кожен шар зростає незалежно. Заміни транспорти, підключай знання, налаштовуй агента — рушій лишається тим самим.',
     layers: [
-      { label: 'Агенти', text: 'Конфіг твого агента (<code>agent.yaml</code>): ідентичність, голос, прив\'язка доменів. Створи однією командою, налаштовуй будь-коли.' },
-      { label: 'Домени', text: 'Підключувані домени знань. Рушій завантажує відповідні домени за структурою сховища твого агента.' },
-      { label: 'Рушій', text: 'Один процес сервера MCP. Сховище (знання), Brain (навчання), Memory (контекст), Planning (робочі процеси). Твій агент працює на ньому. Оновлюй через <code>npm update</code>.' },
-      { label: 'Транспорти', text: 'Адаптери протоколів ізольовані від ядра: <code>mcp.ts</code> постачається вже зараз, <code>rest.ts</code> і <code>lsp.ts</code> готові для VS Code, Cursor, Zed і кастомних дашбордів. Додати транспорт = один файл адаптера.' },
+      {
+        label: 'Агенти',
+        text: "Конфіг твого агента (<code>agent.yaml</code>): ідентичність, голос, прив'язка доменів. Створи однією командою, налаштовуй будь-коли.",
+      },
+      {
+        label: 'Домени',
+        text: 'Підключувані домени знань. Рушій завантажує відповідні домени за структурою сховища твого агента.',
+      },
+      {
+        label: 'Рушій',
+        text: 'Один процес сервера MCP. Сховище (знання), Brain (навчання), Memory (контекст), Planning (робочі процеси). Твій агент працює на ньому. Оновлюй через <code>npm update</code>.',
+      },
+      {
+        label: 'Транспорти',
+        text: 'Адаптери протоколів ізольовані від ядра: <code>mcp.ts</code> постачається вже зараз, <code>rest.ts</code> і <code>lsp.ts</code> готові для VS Code, Cursor, Zed і кастомних дашбордів. Додати транспорт = один файл адаптера.',
+      },
     ],
   },
   it: {
-    heroTitle: 'Quello che <span class="accent-amber">insegni</span> resta. Quello che <span class="accent-teal">apprende</span> si accumula.',
-    heroText: 'Memoria persistente. Conoscenza strutturata. Contesto che si mantiene in ogni sessione.',
+    heroTitle:
+      'Quello che <span class="accent-amber">insegni</span> resta. Quello che <span class="accent-teal">apprende</span> si accumula.',
+    heroText:
+      'Memoria persistente. Conoscenza strutturata. Contesto che si mantiene in ogni sessione.',
     principleTitle: 'La conoscenza dovrebbe accumularsi, non evaporare.',
     compareBeforeLabel: 'Senza memoria',
     compareAfterLabel: 'Con Soleri',
@@ -244,7 +318,8 @@ const content: Record<Locale, HomeContent> = {
       <span class="ok">✓ Pattern applicato dal Vault</span>
       <span class="ok">✓ Brain strength: 94% (12 sessioni)</span>`,
     howTitle: 'Un motore.<br/>Un vault.<br/>Nessun sovraccarico di coordinamento.',
-    howText: 'Un <strong>Vault</strong> per la conoscenza, un <strong>Cervello</strong> che apprende, una <strong>Memoria</strong> che persiste. Un unico processo. Dagli conoscenza — la organizza, la vettorializza e impara.',
+    howText:
+      'Un <strong>Vault</strong> per la conoscenza, un <strong>Cervello</strong> che apprende, una <strong>Memoria</strong> che persiste. Un unico processo. Dagli conoscenza — la organizza, la vettorializza e impara.',
     engineTags: ['Vault', 'Cervello', 'Memoria'],
     features: [
       {
@@ -283,7 +358,7 @@ const content: Record<Locale, HomeContent> = {
       },
       {
         title: 'Avvio a freddo, non una lavagna vuota',
-        text: 'Conoscenza iniziale alla creazione. Scansione del progetto al primo avvio. Poi ti guida nell\'onboarding.',
+        text: "Conoscenza iniziale alla creazione. Scansione del progetto al primo avvio. Poi ti guida nell'onboarding.",
         code: `<span class="cmt">$ soleri create my-agent</span>
 <span class="ok">✓</span> Conoscenza iniziale installata  <span class="val">34 pattern</span>
 <span class="ok">✓</span> Progetto scansionato              <span class="val">React + TS</span>
@@ -297,9 +372,37 @@ const content: Record<Locale, HomeContent> = {
     ],
     cardsTitle: 'Un vault. Molti domini.',
     cards: [
-      { title: 'Frontend', domain: 'Dominio', cls: 'salvador', capabilities: ['Pattern React', 'Token di design', 'Revisione componenti', 'Accessibilità'], ships: 'Chiedi dei pulsanti — il vault cerca qui per primo.' },
-      { title: 'Backend', domain: 'Dominio', cls: 'gaudi', capabilities: ['Convenzioni API', 'Schemi database', 'Pattern di autenticazione', 'Prestazioni'], ships: 'Chiedi di query o API design — il vault attinge da qui.' },
-      { title: 'Trasversali', domain: 'Dominio', cls: 'sentinel', capabilities: ['Flussi di lavoro Git', 'Revisione del codice', 'Strategie di test', 'Documentazione'], ships: 'Pattern che attraversano i domini. Il grafo trova connessioni automaticamente.' },
+      {
+        title: 'Frontend',
+        domain: 'Dominio',
+        cls: 'salvador',
+        capabilities: ['Pattern React', 'Token di design', 'Revisione componenti', 'Accessibilità'],
+        ships: 'Chiedi dei pulsanti — il vault cerca qui per primo.',
+      },
+      {
+        title: 'Backend',
+        domain: 'Dominio',
+        cls: 'gaudi',
+        capabilities: [
+          'Convenzioni API',
+          'Schemi database',
+          'Pattern di autenticazione',
+          'Prestazioni',
+        ],
+        ships: 'Chiedi di query o API design — il vault attinge da qui.',
+      },
+      {
+        title: 'Trasversali',
+        domain: 'Dominio',
+        cls: 'sentinel',
+        capabilities: [
+          'Flussi di lavoro Git',
+          'Revisione del codice',
+          'Strategie di test',
+          'Documentazione',
+        ],
+        ships: 'Pattern che attraversano i domini. Il grafo trova connessioni automaticamente.',
+      },
     ],
     terminalTitle: 'Terminale',
     terminalCode: `<span class="comment"># Installa e crea</span>
@@ -316,12 +419,25 @@ const content: Record<Locale, HomeContent> = {
 <span class="prompt">$</span> <span class="cmd">soleri packs</span> <span class="arg">install community/react-patterns</span>
 <span class="prompt">$</span> <span class="cmd">soleri vault</span> <span class="arg">connect git@github.com:team/vault.git</span>`,
     archTitle: 'Stratificato come un sistema vivente',
-    archSubtitle: 'Ogni livello cresce indipendentemente. Sostituisci trasporti, inserisci conoscenza, personalizza il tuo agente — il motore rimane lo stesso.',
+    archSubtitle:
+      'Ogni livello cresce indipendentemente. Sostituisci trasporti, inserisci conoscenza, personalizza il tuo agente — il motore rimane lo stesso.',
     layers: [
-      { label: 'Agenti', text: 'La configurazione del tuo agente (<code>agent.yaml</code>): identità, voce, collegamento dei domini. Crea con un comando, personalizza in qualsiasi momento.' },
-      { label: 'Domini', text: 'Domini di conoscenza modulari. Il motore carica i domini rilevanti in base alla struttura del vault del tuo agente.' },
-      { label: 'Motore', text: 'Un unico processo MCP server. Vault (conoscenza), Cervello (apprendimento), Memoria (contesto), Pianificazione (flussi di lavoro). Il tuo agente ci gira sopra. Si aggiorna con <code>npm update</code>.' },
-      { label: 'Trasporti', text: 'Adattatori di protocollo isolati dal core: <code>mcp.ts</code> disponibile ora, <code>rest.ts</code> e <code>lsp.ts</code> pronti per VS Code, Cursor, Zed e dashboard personalizzate. Aggiungi un trasporto = un file adattatore.' },
+      {
+        label: 'Agenti',
+        text: 'La configurazione del tuo agente (<code>agent.yaml</code>): identità, voce, collegamento dei domini. Crea con un comando, personalizza in qualsiasi momento.',
+      },
+      {
+        label: 'Domini',
+        text: 'Domini di conoscenza modulari. Il motore carica i domini rilevanti in base alla struttura del vault del tuo agente.',
+      },
+      {
+        label: 'Motore',
+        text: 'Un unico processo MCP server. Vault (conoscenza), Cervello (apprendimento), Memoria (contesto), Pianificazione (flussi di lavoro). Il tuo agente ci gira sopra. Si aggiorna con <code>npm update</code>.',
+      },
+      {
+        label: 'Trasporti',
+        text: 'Adattatori di protocollo isolati dal core: <code>mcp.ts</code> disponibile ora, <code>rest.ts</code> e <code>lsp.ts</code> pronti per VS Code, Cursor, Zed e dashboard personalizzate. Aggiungi un trasporto = un file adattatore.',
+      },
     ],
   },
 };
