@@ -1,10 +1,77 @@
 /* ============================================
- * Soleri Docs — Starlight Theme Override
- * Maps @soleri/tokens to Starlight --sl-* vars
+ * Soleri Docs — Full Website Design Parity
+ * Maps @soleri/tokens + website semantic vars
+ * to Starlight --sl-* custom properties
  * ============================================ */
 
 /* Import Soleri design tokens */
 @import '@soleri/tokens/css';
+
+/* ============================================
+ * SEMANTIC TOKENS (same as website base.css)
+ * ============================================ */
+:root {
+  /* Website semantic layer — dark mode */
+  --bg: var(--color-neutral-950);
+  --bg-warm: var(--color-neutral-940);
+  --surface: rgb(46 55 68 / 0.7); /* --color-neutral-800 @ 0.7 */
+  --surface-glass: rgb(46 55 68 / 0.55);
+  --surface-elevated: var(--color-neutral-800);
+  --foreground: var(--color-neutral-100);
+  --foreground-strong: var(--color-neutral-50);
+  --muted: var(--color-neutral-400);
+  --border: rgb(55 66 83 / 0.8); /* --color-neutral-700 @ 0.8 */
+  --border-subtle: rgb(55 66 83 / 0.5);
+  --accent-primary: var(--color-primary-400);
+  --accent-teal: var(--color-secondary-400);
+  --accent-green: var(--color-tertiary-400);
+  --ring: var(--color-secondary-400);
+
+  /* Code */
+  --code-bg: var(--color-neutral-975);
+  --code-fg: var(--color-neutral-100);
+  --code-border: rgb(55 66 83 / 0.5);
+
+  /* Toggle */
+  --toggle-track-bg: var(--color-zinc-950);
+  --toggle-track-border: var(--color-zinc-800);
+  --toggle-thumb-bg: var(--color-zinc-800);
+  --toggle-icon-fg: var(--color-white);
+  --toggle-bg-icon: var(--color-zinc-600);
+}
+
+:root[data-theme='light'] {
+  --bg: var(--color-white);
+  --bg-warm: var(--color-primary-25);
+  --surface: color-mix(in srgb, var(--color-white) 92%, var(--color-secondary-300) 8%);
+  --surface-glass: rgb(255 255 255 / 0.78);
+  --surface-elevated: var(--color-white);
+  --foreground: var(--color-primary-700);
+  --foreground-strong: var(--color-primary-800);
+  --muted: var(--color-neutral-550);
+  --border: var(--color-neutral-200);
+  --border-subtle: rgb(191 199 211 / 0.4);
+  --accent-primary: var(--color-primary-400);
+  --accent-teal: var(--color-secondary-600);
+  --accent-green: var(--color-tertiary-600);
+  --ring: var(--color-secondary-500);
+
+  /* Code */
+  --code-bg: color-mix(in srgb, var(--color-primary-50) 60%, var(--color-white) 40%);
+  --code-fg: var(--color-neutral-800);
+  --code-border: var(--border);
+
+  /* Toggle */
+  --toggle-track-bg: var(--color-white);
+  --toggle-track-border: var(--color-zinc-200);
+  --toggle-thumb-bg: var(--color-zinc-200);
+  --toggle-icon-fg: var(--color-zinc-700);
+  --toggle-bg-icon: var(--color-zinc-600);
+}
+
+/* ============================================
+ * MAP SEMANTIC → STARLIGHT --sl-*
+ * ============================================ */
 
 /* ── Dark mode (Starlight default = :root) ── */
 :root {
@@ -40,9 +107,14 @@
 
   /* Font — match website */
   --sl-font: "Sora", "Segoe UI", system-ui, sans-serif;
+  --sl-font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   /* Nav header bg */
   --sl-color-bg-nav: var(--color-neutral-950);
+  --sl-color-bg-sidebar: transparent;
+
+  /* Code blocks */
+  --sl-color-bg-inline-code: var(--color-neutral-800);
 }
 
 /* ── Light mode ── */
@@ -71,27 +143,34 @@
   --sl-color-orange-high: var(--color-primary-700);
 
   --sl-color-bg-nav: var(--color-white);
-}
-
-/* ── Code blocks ── */
-:root {
-  --sl-color-bg-inline-code: var(--color-neutral-800);
-}
-:root[data-theme='light'] {
+  --sl-color-bg-sidebar: transparent;
   --sl-color-bg-inline-code: color-mix(in srgb, var(--color-primary-50) 60%, var(--color-white) 40%);
 }
 
 /* ============================================
- * CUSTOM HEADER — matches website nav
+ * GLOBAL STYLES — match website body
  * ============================================ */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-/* Hide Starlight's default ThemeSelect & LanguageSelect (we replaced them) */
+/* ============================================
+ * Hide Starlight defaults we replaced
+ * ============================================ */
 starlight-theme-select,
 starlight-lang-select {
   display: none !important;
 }
 
-/* Header layout */
+/* Hide Starlight's default social icons (we have our own GitHub link) */
+.social-icons {
+  display: none !important;
+}
+
+/* ============================================
+ * HEADER — matches website nav exactly
+ * ============================================ */
 .sl-header {
   display: flex;
   align-items: center;
@@ -99,7 +178,6 @@ starlight-lang-select {
   height: 100%;
 }
 
-/* Brand */
 .sl-brand-link {
   text-decoration: none;
   color: inherit;
@@ -110,7 +188,7 @@ starlight-lang-select {
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--sl-color-white);
+  color: var(--foreground-strong);
 }
 
 /* Nav links */
@@ -128,23 +206,24 @@ starlight-lang-select {
 }
 
 .sl-nav-link {
-  color: var(--sl-color-gray-3);
+  color: var(--muted);
   text-decoration: none;
   font-size: 13px;
   font-weight: 500;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm, 8px);
   transition: color 0.15s ease, background 0.15s ease;
   white-space: nowrap;
 }
 
 .sl-nav-link:hover {
-  color: var(--sl-color-white);
-  background: var(--sl-color-gray-6);
+  color: var(--foreground-strong);
+  background: var(--surface);
 }
 
 .sl-nav-link.active {
-  color: var(--sl-color-white);
+  color: var(--foreground-strong);
+  background: var(--surface);
   font-weight: 600;
 }
 
@@ -160,12 +239,12 @@ starlight-lang-select {
 .sl-github-link {
   display: flex;
   align-items: center;
-  color: var(--sl-color-gray-3);
+  color: var(--muted);
   transition: color 0.15s ease;
 }
 
 .sl-github-link:hover {
-  color: var(--sl-color-white);
+  color: var(--foreground-strong);
 }
 
 /* Language switcher */
@@ -184,7 +263,7 @@ starlight-lang-select {
   font-size: 11px;
   font-weight: 500;
   text-decoration: none;
-  color: var(--sl-color-gray-4);
+  color: var(--border);
   padding: 4px 6px;
   transition: color 0.15s ease;
   text-transform: uppercase;
@@ -192,14 +271,16 @@ starlight-lang-select {
 }
 
 .sl-lang-switcher a:hover {
-  color: var(--sl-color-white);
+  color: var(--foreground);
 }
 
 .sl-lang-switcher a.active {
-  color: var(--sl-color-gray-3);
+  color: var(--muted);
 }
 
-/* ── Pill-shaped theme toggle (matches website) ── */
+/* ============================================
+ * PILL THEME TOGGLE — matches website exactly
+ * ============================================ */
 .sl-theme-toggle {
   border: none;
   background: transparent;
@@ -215,12 +296,11 @@ starlight-lang-select {
   padding: 2px;
   border-radius: 9999px;
   position: relative;
-  background: var(--toggle-track-bg, var(--color-neutral-800));
-  border: 1px solid var(--toggle-track-border, var(--color-neutral-700));
+  background: var(--toggle-track-bg);
+  border: 1px solid var(--toggle-track-border);
   transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-/* Sliding thumb */
 .sl-toggle-thumb {
   display: flex;
   align-items: center;
@@ -228,7 +308,7 @@ starlight-lang-select {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--toggle-thumb-bg, var(--color-neutral-700));
+  background: var(--toggle-thumb-bg);
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -241,7 +321,6 @@ starlight-lang-select {
   left: 2px;
 }
 
-/* Icons inside thumb */
 .sl-icon {
   width: 12px;
   height: 12px;
@@ -253,10 +332,9 @@ starlight-lang-select {
   transition: opacity 0.2s ease;
 }
 
-:root[data-theme='dark'] .sl-icon-moon { opacity: 1; color: var(--color-white); }
-:root[data-theme='light'] .sl-icon-sun { opacity: 1; color: var(--sl-color-gray-2); }
+:root[data-theme='dark'] .sl-icon-moon { opacity: 1; color: var(--toggle-icon-fg); }
+:root[data-theme='light'] .sl-icon-sun { opacity: 1; color: var(--toggle-icon-fg); }
 
-/* Background icons (static) */
 .sl-toggle-bg {
   display: flex;
   align-items: center;
@@ -276,12 +354,12 @@ starlight-lang-select {
 
 .sl-toggle-bg-sun {
   right: 3px;
-  color: var(--sl-color-gray-4);
+  color: var(--toggle-bg-icon);
 }
 
 .sl-toggle-bg-moon {
   left: 3px;
-  color: var(--sl-color-gray-4);
+  color: var(--toggle-bg-icon);
 }
 
 :root[data-theme='dark'] .sl-toggle-bg-moon { opacity: 0; }
@@ -289,14 +367,547 @@ starlight-lang-select {
 :root[data-theme='light'] .sl-toggle-bg-moon { opacity: 1; }
 :root[data-theme='light'] .sl-toggle-bg-sun  { opacity: 0; }
 
-/* ── Search modal — collapse empty space below input ── */
+/* ============================================
+ * PAGE BACKGROUND — match website atmosphere
+ * ============================================ */
+
+/* Page background color */
+.page {
+  background: var(--bg) !important;
+}
+
+/* Aurora glow orbs (subtle, non-animated for docs) */
+.page::before,
+.page::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.06;
+}
+
+:root[data-theme='light'] .page::before,
+:root[data-theme='light'] .page::after {
+  opacity: 0.12;
+}
+
+.page::before {
+  width: 500px;
+  height: 500px;
+  top: -100px;
+  left: 30%;
+  background: radial-gradient(circle, var(--color-secondary-400) 0%, transparent 70%);
+}
+
+.page::after {
+  width: 400px;
+  height: 400px;
+  bottom: 10%;
+  right: -5%;
+  background: radial-gradient(circle, var(--color-primary-400) 0%, transparent 70%);
+}
+
+/* Main content frame inherits bg */
+.main-frame {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+ * SIDEBAR — website surface/card treatment
+ * ============================================ */
+
+/* Sidebar container */
+nav.sidebar {
+  border-right: 1px solid var(--border) !important;
+}
+
+/* Sidebar content area */
+.sidebar-content {
+  padding: 1rem 0.75rem !important;
+}
+
+/* Sidebar navigation links */
+nav.sidebar a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  border-radius: var(--radius-sm, 8px);
+  padding: 6px 10px;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+nav.sidebar a:hover {
+  color: var(--foreground-strong);
+  background: var(--surface);
+}
+
+nav.sidebar a[aria-current="page"] {
+  color: var(--foreground-strong);
+  background: var(--surface);
+  font-weight: 600;
+}
+
+/* Sidebar group headings */
+nav.sidebar .top-level > li > details > summary,
+nav.sidebar .top-level > li > a {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-teal);
+  padding: 8px 10px;
+}
+
+/* Sidebar group expand icon */
+nav.sidebar summary svg {
+  color: var(--muted);
+}
+
+/* ============================================
+ * CONTENT AREA — typography & spacing
+ * ============================================ */
+
+/* Content panel */
+.content-panel {
+  border-top: none !important;
+}
+
+.content-panel + .content-panel {
+  border-top: 1px solid var(--border-subtle) !important;
+}
+
+/* Headings */
+.sl-markdown-content h1 {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--foreground-strong);
+}
+
+.sl-markdown-content h2 {
+  font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--foreground-strong);
+  margin-top: 2.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sl-markdown-content h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--foreground-strong);
+}
+
+.sl-markdown-content h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--foreground-strong);
+}
+
+/* Body text */
+.sl-markdown-content p,
+.sl-markdown-content li {
+  color: var(--foreground);
+  line-height: 1.7;
+  font-size: 15px;
+}
+
+/* Links in content */
+.sl-markdown-content a:not(.sl-nav-link):not([class]) {
+  color: var(--accent-teal);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s ease;
+}
+
+.sl-markdown-content a:not(.sl-nav-link):not([class]):hover {
+  color: var(--color-secondary-300);
+}
+
+:root[data-theme='light'] .sl-markdown-content a:not(.sl-nav-link):not([class]):hover {
+  color: var(--color-secondary-700);
+}
+
+/* Strong text */
+.sl-markdown-content strong {
+  color: var(--foreground-strong);
+  font-weight: 600;
+}
+
+/* Inline code */
+.sl-markdown-content code:not(pre code) {
+  font-family: var(--sl-font-mono);
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--code-bg);
+  color: var(--foreground-strong);
+  border: 1px solid var(--code-border);
+}
+
+/* Code blocks */
+.sl-markdown-content pre {
+  font-family: var(--sl-font-mono);
+  font-size: 13px;
+  line-height: 1.8;
+  border-radius: var(--radius-lg, 16px);
+  border: 1px solid var(--code-border);
+  background: var(--code-bg) !important;
+}
+
+/* Blockquotes */
+.sl-markdown-content blockquote {
+  border-left: 3px solid var(--accent-teal);
+  padding-left: 1rem;
+  margin-left: 0;
+  color: var(--muted);
+  font-style: normal;
+}
+
+/* Tables */
+.sl-markdown-content table {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md, 12px);
+  overflow: hidden;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.sl-markdown-content th {
+  background: var(--surface);
+  color: var(--foreground-strong);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 16px;
+  text-align: left;
+}
+
+.sl-markdown-content td {
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--foreground);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.sl-markdown-content tr:hover td {
+  background: var(--surface);
+}
+
+/* Horizontal rules */
+.sl-markdown-content hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 2rem 0;
+}
+
+/* Lists */
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+  padding-left: 1.25rem;
+}
+
+.sl-markdown-content li::marker {
+  color: var(--muted);
+}
+
+/* ============================================
+ * STARLIGHT ASIDES / CALLOUTS — website card style
+ * ============================================ */
+.starlight-aside {
+  border-radius: var(--radius-lg, 16px) !important;
+  border: 1px solid var(--border) !important;
+  background: var(--surface) !important;
+  padding: 1rem 1.25rem !important;
+}
+
+.starlight-aside--note {
+  border-left: 3px solid var(--accent-teal) !important;
+}
+
+.starlight-aside--tip {
+  border-left: 3px solid var(--accent-green) !important;
+}
+
+.starlight-aside--caution {
+  border-left: 3px solid var(--accent-primary) !important;
+}
+
+.starlight-aside--danger {
+  border-left: 3px solid var(--color-error-500) !important;
+}
+
+.starlight-aside .starlight-aside__title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ============================================
+ * TABLE OF CONTENTS — hidden on desktop,
+ * content gets full width (2-column layout)
+ * ============================================ */
+
+/* Hide the right sidebar column on desktop — TOC stays as mobile dropdown */
+@media (min-width: 72rem) {
+  .right-sidebar-container {
+    display: none !important;
+  }
+
+  /* Content takes full width when TOC column is hidden */
+  [data-has-sidebar][data-has-toc] .main-pane {
+    width: 100% !important;
+  }
+}
+
+starlight-toc a {
+  font-size: 13px;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+
+starlight-toc a:hover {
+  color: var(--foreground-strong);
+}
+
+starlight-toc a[aria-current="true"] {
+  color: var(--accent-teal);
+  font-weight: 600;
+}
+
+/* ============================================
+ * PAGE TITLE
+ * ============================================ */
+.page-title {
+  font-size: clamp(28px, 4vw, 40px) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  color: var(--foreground-strong) !important;
+}
+
+/* ============================================
+ * PAGINATION — website card style
+ * ============================================ */
+.sl-pagination {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.sl-pagination-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg, 16px);
+  background: var(--surface);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.15s ease;
+}
+
+.sl-pagination-link:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-teal);
+  box-shadow: var(--shadow-sm);
+}
+
+.sl-pagination-link svg {
+  flex-shrink: 0;
+  color: var(--muted);
+}
+
+.sl-prev {
+  grid-column: 1;
+}
+
+.sl-next {
+  grid-column: 2;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.sl-pagination-label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin-bottom: 2px;
+}
+
+.sl-pagination-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--foreground-strong);
+}
+
+/* ============================================
+ * FOOTER — matches website footer
+ * ============================================ */
+.sl-footer {
+  padding: 0 1rem 2rem;
+}
+
+.sl-footer-bar {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sl-footer-tagline {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sl-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.sl-footer-links a {
+  color: var(--muted);
+  font-size: 12px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.sl-footer-links a:hover {
+  color: var(--accent-teal);
+}
+
+/* ============================================
+ * SEARCH MODAL — compact, no empty space
+ * ============================================ */
 site-search dialog {
   height: max-content;
   min-height: 0;
   max-height: calc(100% - 2rem);
+  border-radius: var(--radius-xl, 20px) !important;
+  border: 1px solid var(--border) !important;
 }
+
 @media (min-width: 50rem) {
   site-search dialog {
     max-height: calc(100% - 8rem);
+  }
+}
+
+/* ============================================
+ * HEADER BAR — website nav bg treatment
+ * ============================================ */
+header.header {
+  background: var(--bg) !important;
+  border-bottom: 1px solid var(--border) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ============================================
+ * MOBILE SIDEBAR TOGGLE
+ * ============================================ */
+starlight-menu-button button {
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 8px);
+  background: var(--surface);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+starlight-menu-button button:hover {
+  color: var(--foreground-strong);
+  border-color: var(--accent-teal);
+}
+
+/* Mobile sidebar overlay */
+@media (max-width: 50rem) {
+  nav.sidebar {
+    background: var(--bg) !important;
+  }
+}
+
+/* ============================================
+ * MISC REFINEMENTS
+ * ============================================ */
+
+/* Remove default Starlight footer kudos link */
+a.kudos {
+  display: none !important;
+}
+
+/* Smooth color transitions */
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 0s;
+}
+
+/* Card-like expressive Starlight components */
+.card-grid > .card {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg, 16px) !important;
+}
+
+/* Steps component */
+.sl-steps > li::before {
+  background: var(--accent-teal) !important;
+  color: var(--color-white) !important;
+}
+
+/* Badge component */
+[data-badge] {
+  border-radius: var(--radius-full, 9999px);
+}
+
+/* ============================================
+ * RESPONSIVE
+ * ============================================ */
+@media (max-width: 50rem) {
+  .sl-pagination {
+    grid-template-columns: 1fr;
+  }
+
+  .sl-next {
+    grid-column: 1;
+    text-align: left;
+    justify-content: flex-start;
+    flex-direction: row-reverse;
+  }
+
+  .sl-footer-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+/* ============================================
+ * REDUCED MOTION
+ * ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .page::before,
+  .page::after {
+    display: none;
   }
 }

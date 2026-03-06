@@ -1,0 +1,20 @@
+---
+/**
+ * Custom Starlight Footer — pagination + branded footer matching website.
+ * Replaces Starlight's default footer (edit link, kudos).
+ */
+import Pagination from 'virtual:starlight/components/Pagination';
+---
+
+<footer class="sl-footer">
+  <Pagination />
+
+  <div class="sl-footer-bar">
+    <p class="sl-footer-tagline">Soleri — Executable standards for agentic systems</p>
+    <nav class="sl-footer-links" aria-label="Footer links">
+      <a href="https://github.com/adrozdenko/soleri" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.npmjs.com/package/soleri" target="_blank" rel="noreferrer">npm</a>
+      <a href="https://soleri.ai" target="_blank" rel="noreferrer">soleri.ai</a>
+    </nav>
+  </div>
+</footer>
