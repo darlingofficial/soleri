@@ -70,13 +70,31 @@
   --sl-color-orange-high: var(--color-primary-700);
 }
 
-/* ── Global refinements ── */
+/* ============================================
+ * LAYOUT — constrain to website width (1120px)
+ * ============================================ */
 
-/* Softer nav/sidebar border to match Soleri's subtle borders */
-starlight-menu-button + nav,
-.sidebar-content {
-  border-color: var(--sl-color-gray-5);
+/* Header bar — constrain inner content, keep full-width bg */
+.header {
+  padding-inline: 24px !important;
 }
+
+/* The main page frame — constrain total width */
+.page {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* Sidebar: narrower to match website proportions */
+:root {
+  --sl-sidebar-width: 14rem;
+  --sl-content-width: 42rem;
+  --sl-nav-pad-x: 24px;
+}
+
+/* ============================================
+ * GLOBAL REFINEMENTS
+ * ============================================ */
 
 /* Code blocks: match website terminal aesthetic */
 :root {
@@ -84,13 +102,6 @@ starlight-menu-button + nav,
 }
 :root[data-theme='light'] {
   --sl-color-bg-inline-code: color-mix(in srgb, var(--color-primary-50) 60%, var(--color-white) 40%);
-}
-
-/* Site title — match Soleri brand weight */
-.site-title {
-  font-weight: 700 !important;
-  letter-spacing: 0.12em !important;
-  text-transform: uppercase !important;
 }
 
 /* Sidebar active link — teal accent glow */
@@ -113,7 +124,12 @@ th {
   letter-spacing: 0.01em;
 }
 
-/* Heading anchor links — use accent color */
+/* Heading styling — match website typographic feel */
+.sl-markdown-content h1 {
+  letter-spacing: -0.025em;
+  font-weight: 800;
+}
+
 .sl-markdown-content h2,
 .sl-markdown-content h3 {
   letter-spacing: -0.015em;
@@ -127,4 +143,10 @@ th {
 /* Search dialog — match Soleri glass surface */
 dialog {
   border-radius: var(--radius-xl) !important;
+}
+
+/* Header background — match website feel */
+header.header {
+  background-color: var(--sl-color-bg) !important;
+  border-bottom: 1px solid var(--sl-color-gray-5) !important;
 }
