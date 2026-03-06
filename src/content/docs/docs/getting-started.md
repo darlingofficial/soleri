@@ -110,6 +110,6 @@ Reports Node version, npm status, agent context, vault health, and CLAUDE.md sta
 
 ## What's Next
 
-- **[Your Agent](/docs/your-agent/)** — learn how the vault, brain, and memory work day-to-day
-- **[Capabilities](/docs/capabilities/)** — see everything your agent can do
-- **[Extending](/docs/extending/)** — add domains, knowledge packs, and hooks
+- **[The Development Workflow](/docs/guides/workflow/)** — learn the five-step rhythm: Search → Plan → Work → Capture → Complete
+- **[Your First 10 Minutes](/docs/guides/first-10-minutes/)** — a hands-on tutorial to see your agent in action
+- **[Your Agent](/docs/your-agent/)** — reference for vault, brain, memory, and playbooks

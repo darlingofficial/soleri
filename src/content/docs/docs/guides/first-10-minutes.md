@@ -94,8 +94,8 @@ In 10 minutes, you:
 - Searched and found it instantly
 - Closed the session and it still remembered
 
-This is the foundation. Every tutorial from here builds on this — capturing more knowledge, organizing it, and using it to catch mistakes before they ship.
+This is the foundation. Now that you've seen the basics, learn the workflow that ties it all together.
 
 ---
 
-_Next: [Building a Knowledge Base](/docs/guides/knowledge-base/) — learn what to capture, how to organize it, and how to make your agent genuinely useful._
+_Next: [The Development Workflow](/docs/guides/workflow/) — the five-step rhythm for working with your agent: Search → Plan → Work → Capture → Complete. Then dive into [Building a Knowledge Base](/docs/guides/knowledge-base/) to learn what to capture and how to organize it._
