@@ -248,6 +248,119 @@ describe('Scaffolder', () => {
     });
   });
 
+  describe('skills', () => {
+    it('should create skills directory with 10 SKILL.md files', () => {
+      scaffold(testConfig);
+      const skillsDir = join(tempDir, 'atlas', 'skills');
+
+      expect(existsSync(skillsDir)).toBe(true);
+
+      const skillDirs = readdirSync(skillsDir, { withFileTypes: true })
+        .filter((e) => e.isDirectory())
+        .map((e) => e.name);
+
+      expect(skillDirs).toHaveLength(17);
+
+      // Verify each skill dir has a SKILL.md
+      for (const dir of skillDirs) {
+        expect(existsSync(join(skillsDir, dir, 'SKILL.md'))).toBe(true);
+      }
+    });
+
+    it('should include all expected skill names', () => {
+      scaffold(testConfig);
+      const skillsDir = join(tempDir, 'atlas', 'skills');
+      const skillDirs = readdirSync(skillsDir).sort();
+
+      expect(skillDirs).toEqual([
+        'brain-debrief',
+        'brainstorming',
+        'code-patrol',
+        'context-resume',
+        'executing-plans',
+        'fix-and-learn',
+        'health-check',
+        'knowledge-harvest',
+        'onboard-me',
+        'retrospective',
+        'second-opinion',
+        'systematic-debugging',
+        'test-driven-development',
+        'vault-capture',
+        'vault-navigator',
+        'verification-before-completion',
+        'writing-plans',
+      ]);
+    });
+
+    it('should have YAML frontmatter in all skills', () => {
+      scaffold(testConfig);
+      const skillsDir = join(tempDir, 'atlas', 'skills');
+      const skillDirs = readdirSync(skillsDir);
+
+      for (const dir of skillDirs) {
+        const content = readFileSync(join(skillsDir, dir, 'SKILL.md'), 'utf-8');
+        expect(content).toMatch(/^---\nname: /);
+        expect(content).toContain('description:');
+      }
+    });
+
+    it('should substitute YOUR_AGENT_core with agent ID in all skills', () => {
+      scaffold(testConfig);
+      const skillsDir = join(tempDir, 'atlas', 'skills');
+      const allSkills = readdirSync(skillsDir);
+
+      for (const name of allSkills) {
+        const content = readFileSync(join(skillsDir, name, 'SKILL.md'), 'utf-8');
+        expect(content).not.toContain('YOUR_AGENT_core');
+        // All skills that reference agent ops should have atlas_core
+        if (content.includes('_core')) {
+          expect(content).toContain('atlas_core');
+        }
+      }
+    });
+
+    it('should include MIT attribution in superpowers-adapted skills', () => {
+      scaffold(testConfig);
+      const skillsDir = join(tempDir, 'atlas', 'skills');
+      const superpowersSkills = [
+        'test-driven-development',
+        'systematic-debugging',
+        'verification-before-completion',
+        'brainstorming',
+        'writing-plans',
+        'executing-plans',
+      ];
+
+      for (const name of superpowersSkills) {
+        const content = readFileSync(join(skillsDir, name, 'SKILL.md'), 'utf-8');
+        expect(content).toContain('MIT License');
+      }
+    });
+
+    it('should have no YOUR_AGENT_core placeholder remaining in any skill', () => {
+      scaffold(testConfig);
+      const skillsDir = join(tempDir, 'atlas', 'skills');
+      const allSkills = readdirSync(skillsDir);
+
+      for (const name of allSkills) {
+        const content = readFileSync(join(skillsDir, name, 'SKILL.md'), 'utf-8');
+        expect(content).not.toContain('YOUR_AGENT_core');
+      }
+    });
+
+    it('should include skills in preview', () => {
+      const preview = previewScaffold(testConfig);
+      const paths = preview.files.map((f) => f.path);
+      expect(paths).toContain('skills/');
+    });
+
+    it('should mention skills in scaffold summary', () => {
+      const result = scaffold(testConfig);
+      expect(result.summary).toContain('built-in skills');
+    });
+  });
+
   describe('listAgents', () => {
     it('should list scaffolded agents', () => {
       scaffold(testConfig);

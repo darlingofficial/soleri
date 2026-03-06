@@ -6,7 +6,7 @@ import {
   readdirSync,
   readFileSync,
 } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
 import { homedir } from 'node:os';
 import type { AgentConfig, ScaffoldResult, ScaffoldPreview, AgentInfo } from './types.js';
 
@@ -21,6 +21,7 @@ import { generateInjectClaudeMd } from './templates/inject-claude-md.js';
 import { generateActivate } from './templates/activate.js';
 import { generateReadme } from './templates/readme.js';
 import { generateSetupScript } from './templates/setup-script.js';
+import { generateSkills } from './templates/skills.js';
 
 /**
  * Preview what scaffold will create without writing anything.
@@ -74,6 +75,11 @@ export function previewScaffold(config: AgentConfig): ScaffoldPreview {
     {
       path: 'scripts/setup.sh',
       description: 'Automated setup — Node.js check, build, Claude Code MCP registration',
+    },
+    {
+      path: 'skills/',
+      description:
+        '17 built-in skills — TDD, debugging, planning, vault, brain, code patrol, retrospective, onboarding',
     },
   ];
 
@@ -295,6 +301,7 @@ export function scaffold(config: AgentConfig): ScaffoldResult {
   const dirs = [
     '',
     'scripts',
+    'skills',
     'src',
     'src/intelligence',
     'src/intelligence/data',
@@ -358,6 +365,15 @@ export function scaffold(config: AgentConfig): ScaffoldResult {
     filesCreated.push(path);
   }
 
+  // Generate skill files
+  const skillFiles = generateSkills(config);
+  for (const [path, content] of skillFiles) {
+    const skillDir = join(agentDir, dirname(path));
+    mkdirSync(skillDir, { recursive: true });
+    writeFileSync(join(agentDir, path), content, 'utf-8');
+    filesCreated.push(path);
+  }
+
   const totalOps = config.domains.length * 5 + 61; // 5 per domain + 56 core (from createCoreOps) + 5 agent-specific
 
   // Register the agent as an MCP server in ~/.claude.json
@@ -370,6 +386,7 @@ export function scaffold(config: AgentConfig): ScaffoldResult {
     `Intelligence layer (Brain) — TF-IDF scoring, auto-tagging, duplicate detection`,
     `Activation system included — say "Hello, ${config.name}!" to activate`,
     `1 test suite — facades (vault, brain, planner, llm tests provided by @soleri/core)`,
+    `${skillFiles.length} built-in skills (TDD, debugging, planning, vault, brain debrief)`,
   ];
 
   if (config.hookPacks?.length) {

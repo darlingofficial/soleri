@@ -101,6 +101,32 @@ else
   fi
 fi
 
+# Install skills to ~/.claude/commands/
+SKILLS_DIR="$AGENT_DIR/skills"
+COMMANDS_DIR="$HOME/.claude/commands"
+
+if [ -d "$SKILLS_DIR" ]; then
+  echo ""
+  echo "Installing skills..."
+  mkdir -p "$COMMANDS_DIR"
+  skill_installed=0
+  skill_skipped=0
+  for skill_dir in "$SKILLS_DIR"/*/; do
+    [ -d "$skill_dir" ] || continue
+    skill_file="$skill_dir/SKILL.md"
+    [ -f "$skill_file" ] || continue
+    skill_name="$(basename "$skill_dir")"
+    dest="$COMMANDS_DIR/$skill_name.md"
+    if [ -f "$dest" ]; then
+      skill_skipped=$((skill_skipped + 1))
+    else
+      cp "$skill_file" "$dest"
+      skill_installed=$((skill_installed + 1))
+    fi
+  done
+  echo "[ok] Skills: $skill_installed installed, $skill_skipped already present"
+fi
+
 ${
   config.hookPacks?.length
     ? `# Install hook packs to global ~/.claude/

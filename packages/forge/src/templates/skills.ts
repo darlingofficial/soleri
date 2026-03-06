@@ -1,0 +1,82 @@
+import { readFileSync, readdirSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import type { AgentConfig } from '../types.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const SKILLS_DIR = join(__dirname, '..', 'skills');
+
+/** Skills that use YOUR_AGENT_core placeholder and need agent-specific substitution. */
+const AGENT_SPECIFIC_SKILLS = new Set([
+  'brain-debrief',
+  'brainstorming',
+  'code-patrol',
+  'context-resume',
+  'executing-plans',
+  'fix-and-learn',
+  'health-check',
+  'knowledge-harvest',
+  'onboard-me',
+  'retrospective',
+  'second-opinion',
+  'systematic-debugging',
+  'test-driven-development',
+  'vault-capture',
+  'vault-navigator',
+  'verification-before-completion',
+  'writing-plans',
+]);
+
+/**
+ * Generate skill files for the scaffolded agent.
+ * Returns [relativePath, content] tuples for each skill.
+ *
+ * - Superpowers-adapted skills (MIT): copied as-is
+ * - Engine-adapted skills: YOUR_AGENT_core → {config.id}_core
+ */
+export function generateSkills(config: AgentConfig): Array<[string, string]> {
+  const files: Array<[string, string]> = [];
+  let skillFiles: string[];
+
+  try {
+    skillFiles = readdirSync(SKILLS_DIR).filter((f) => f.endsWith('.md'));
+  } catch {
+    return files;
+  }
+
+  for (const file of skillFiles) {
+    const skillName = file.replace('.md', '');
+    let content = readFileSync(join(SKILLS_DIR, file), 'utf-8');
+
+    if (AGENT_SPECIFIC_SKILLS.has(skillName)) {
+      content = content.replace(/YOUR_AGENT_core/g, `${config.id}_core`);
+    }
+
+    files.push([`skills/${skillName}/SKILL.md`, content]);
+  }
+
+  return files;
+}
+
+/**
+ * List all bundled skill names with their descriptions (from YAML frontmatter).
+ */
+export function listSkillDescriptions(): Array<{ name: string; description: string }> {
+  let skillFiles: string[];
+
+  try {
+    skillFiles = readdirSync(SKILLS_DIR).filter((f) => f.endsWith('.md'));
+  } catch {
+    return [];
+  }
+
+  return skillFiles.map((file) => {
+    const content = readFileSync(join(SKILLS_DIR, file), 'utf-8');
+    const nameMatch = content.match(/^name:\s*(.+)$/m);
+    const descMatch = content.match(/^description:\s*"?(.+?)"?\s*$/m);
+    return {
+      name: nameMatch?.[1]?.trim() ?? file.replace('.md', ''),
+      description: descMatch?.[1]?.trim() ?? '',
+    };
+  });
+}

@@ -84,6 +84,44 @@ ${domainRows}
 
 ${principleLines}
 
+## Built-in Skills
+
+${config.name} ships with 17 structured workflow skills, invocable via \`/<skill-name>\` in Claude Code:
+
+**Development Workflows:**
+
+| Skill | Description |
+|-------|-------------|
+| \`/test-driven-development\` | Red-green-refactor TDD workflow with vault-informed test patterns |
+| \`/systematic-debugging\` | Root cause investigation — vault search, web search, then diagnose |
+| \`/verification-before-completion\` | Evidence-based completion claims with system diagnostics |
+| \`/brainstorming\` | Collaborative design exploration with vault + web research first |
+| \`/writing-plans\` | Implementation plans with quality grading and auto-improvement |
+| \`/executing-plans\` | Batch execution with loop tracking and plan reconciliation |
+| \`/fix-and-learn\` | Fix bugs and capture root cause — vault search before any fix |
+| \`/code-patrol\` | Review code against YOUR vault patterns, not generic lint rules |
+
+**Knowledge Management:**
+
+| Skill | Description |
+|-------|-------------|
+| \`/vault-navigator\` | Intelligent vault search — tags, domains, age reports, cross-project |
+| \`/vault-capture\` | Persist knowledge with curator grooming and governance |
+| \`/knowledge-harvest\` | Point at any doc/code — auto-extract patterns into vault |
+| \`/brain-debrief\` | Intelligence report — strengths, gaps, cross-project insights |
+
+**Magic UX:**
+
+| Skill | Description |
+|-------|-------------|
+| \`/context-resume\` | "What was I working on?" — full context reconstruction |
+| \`/second-opinion\` | Decision support from vault + brain + web combined |
+| \`/retrospective\` | Data-driven sprint/week retro from actual metrics |
+| \`/onboard-me\` | Instant project knowledge tour for newcomers |
+| \`/health-check\` | Vault maintenance — duplicates, contradictions, stale entries |
+
+Skills are installed to \`~/.claude/commands/\` during setup. Run \`./scripts/setup.sh\` to install or reinstall.
+
 ## Features
 
 ### Knowledge Vault
