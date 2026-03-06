@@ -887,13 +887,66 @@ nav.sidebar summary svg {
   border-radius: 0 0 8px 8px !important;
 }
 
-/* Blockquotes */
+/* Blockquotes — Terminal chat UI */
 .sl-markdown-content blockquote {
-  border-left: 3px solid var(--accent-teal);
-  padding-left: 1rem;
-  margin-left: 0;
+  position: relative;
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 12px;
+  padding: 2rem 1.25rem 1.25rem;
+  margin: 1.5rem 0;
+  border-left: none;
+  font-style: normal;
+  color: var(--code-fg);
+  font-family: var(--sl-font-mono);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* Terminal dots header */
+.sl-markdown-content blockquote::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-error-500, #ef4444);
+  box-shadow:
+    16px 0 0 var(--color-primary-400, #facc15),
+    32px 0 0 var(--color-tertiary-400, #4ade80);
+}
+
+/* You: label — teal/accent color */
+.sl-markdown-content blockquote strong {
+  color: var(--accent-teal);
+}
+
+/* Agent: italic responses — slightly muted */
+.sl-markdown-content blockquote em {
   color: var(--muted);
   font-style: normal;
+}
+
+/* Tighten paragraph spacing inside blockquotes */
+.sl-markdown-content blockquote p {
+  margin-bottom: 0.5rem;
+}
+
+.sl-markdown-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Numbered lists inside blockquotes (agent results) */
+.sl-markdown-content blockquote ol,
+.sl-markdown-content blockquote ul {
+  margin: 0.25rem 0 0.5rem;
+  padding-left: 1.5rem;
+}
+
+.sl-markdown-content blockquote li {
+  margin-bottom: 0.15rem;
 }
 
 /* Tables */
