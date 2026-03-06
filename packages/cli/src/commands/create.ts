@@ -44,6 +44,18 @@ export function registerCreate(program: Command): void {
         let selectedPacks: string[] = [];
         if (config.hookPacks && config.hookPacks.length > 0) {
           selectedPacks = config.hookPacks;
+
+          // Validate pack names against registry — warn and skip unknown
+          const available = listPacks().map((pk) => pk.name);
+          const unknown = selectedPacks.filter((pk) => !available.includes(pk));
+          if (unknown.length > 0) {
+            for (const name of unknown) {
+              p.log.warn(
+                `Unknown hook pack "${name}" — skipping. Available: ${available.join(', ')}`,
+              );
+            }
+            selectedPacks = selectedPacks.filter((pk) => available.includes(pk));
+          }
         } else if (!opts?.config) {
           const packs = listPacks();
           const packChoices = packs.map((pk) => ({

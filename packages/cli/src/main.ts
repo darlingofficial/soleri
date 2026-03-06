@@ -9,13 +9,15 @@ import { registerDev } from './commands/dev.js';
 import { registerDoctor } from './commands/doctor.js';
 import { registerHooks } from './commands/hooks.js';
 import { registerGovernance } from './commands/governance.js';
+import { registerTest } from './commands/test.js';
+import { registerUpgrade } from './commands/upgrade.js';
 
 const program = new Command();
 
 program
   .name('soleri')
   .description('Developer CLI for creating and managing Soleri AI agents')
-  .version('1.4.0');
+  .version('1.5.0');
 
 registerCreate(program);
 registerList(program);
@@ -25,5 +27,7 @@ registerDev(program);
 registerDoctor(program);
 registerHooks(program);
 registerGovernance(program);
+registerTest(program);
+registerUpgrade(program);
 
 program.parse();
