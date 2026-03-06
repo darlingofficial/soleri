@@ -98,11 +98,121 @@
   color: var(--muted);
 }
 
+/* ─── Announcements ──────────────────────────────────────────────── */
+
+.announcements-section {
+  margin-top: 72px;
+}
+
+.announcements-section h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--foreground-strong);
+  margin-bottom: 8px;
+}
+
+.announcements-section > p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+.announcements-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.announcement-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.15s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.announcement-card:hover {
+  border-color: var(--accent-teal);
+}
+
+.announcement-date {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.announcement-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--foreground-strong);
+  line-height: 1.35;
+}
+
+.announcement-excerpt {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.announcement-labels {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+
+.announcement-label {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  line-height: 1.6;
+}
+
+.announcement-read {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-teal);
+  margin-top: auto;
+}
+
+.announcements-loading,
+.announcements-empty {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  padding: 48px 0;
+}
+
+.announcements-all {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-teal);
+  text-decoration: none;
+}
+
+.announcements-all:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 700px) {
   .channels {
     grid-template-columns: 1fr;
   }
   .ways-grid {
+    grid-template-columns: 1fr;
+  }
+  .announcements-grid {
     grid-template-columns: 1fr;
   }
 }
