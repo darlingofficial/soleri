@@ -71,6 +71,19 @@ Next time you build a component, run it:
 
 Your agent just ran a design review using your team's exact standards. Not generic rules from the internet — your rules, built from your experience.
 
+## How reviews use your knowledge
+
+When you ask the agent to review code, here's what actually happens:
+
+1. **Claude Code calls the agent's search tool** with your code context as the query
+2. **The agent searches your vault** — patterns, anti-patterns, and rules that match the code you're reviewing
+3. **Results come back ranked** — critical issues first, then warnings, then suggestions
+4. **Claude Code applies those results** to your specific code, pointing out violations
+
+The agent doesn't have opinions of its own. It checks your code against your rules — the ones you captured because they matter to your project. This is why building a good knowledge base makes reviews better over time. More patterns in the vault means more things the agent can catch.
+
+Playbooks take this further. When you run a playbook, each step triggers its own search against the vault. Step 1 might pull up color-related patterns, step 2 pulls up accessibility patterns, and so on. The playbook is the structure; the vault provides the intelligence.
+
 ## What you've built
 
 You now have:
@@ -83,4 +96,4 @@ Every pattern you capture makes reviews smarter. Every playbook you create saves
 
 ---
 
-_Want to go deeper? See [Capabilities](/docs/capabilities/) for the full list of things your agent can do, or [Extending](/docs/extending/) to add more domains and knowledge packs._
+_Next: [Planning with Your Agent](/docs/guides/planning/) — learn how your agent creates structured plans, tracks execution, and learns from outcomes._

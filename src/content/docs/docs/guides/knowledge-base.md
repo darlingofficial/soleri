@@ -73,6 +73,31 @@ See how your knowledge base is growing:
 > **You:** "Show me vault stats"
 > **Agent:** You have **12 patterns** and **4 anti-patterns** across 3 domains: frontend, security, infrastructure. 16 entries total.
 
+## How knowledge comes back to you
+
+Capturing is only half the story. Here's what happens when you search — or when Claude Code searches on your behalf.
+
+Your agent uses a multi-signal ranking system. When you search for "security patterns," the agent doesn't just do a keyword match. It combines:
+
+- **Text relevance** — TF-IDF scoring against your query
+- **Severity weight** — critical entries rank higher than suggestions
+- **Domain match** — entries in the matching domain get a boost
+- **Usage history** — patterns you've referenced before rank higher over time
+
+This is why severity and domains matter — they're not just labels. They directly affect which results surface first when you or Claude Code search.
+
+The agent also has a brain — an intelligence layer that tracks pattern usage across sessions. Every time a pattern is used in a plan or referenced in a review, its strength increases. A pattern with high strength gets recommended proactively when the agent creates plans for related work.
+
+> **You:** "Search for patterns about database migrations"
+> **Agent:** _Found 4 entries (ranked by relevance):_
+>
+> 1. **Always Set K8s Resource Limits** (critical, infrastructure) — score: 0.92
+> 2. **Run Migrations in Transactions** (warning, infrastructure) — score: 0.87
+> 3. **Test Rollback Before Deploy** (warning, infrastructure) — score: 0.71
+> 4. **Use Descriptive Migration Names** (suggestion, infrastructure) — score: 0.45
+
+The scores reflect combined signals — not just text match, but severity, domain relevance, and how often each pattern has proven useful.
+
 ## The habit that matters
 
 The best time to capture knowledge is right when you learn it — when you fix a bug, make a decision, or discover a better approach. Don't save it for later. Later never comes.

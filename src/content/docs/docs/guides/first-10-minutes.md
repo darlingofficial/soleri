@@ -77,6 +77,14 @@ Here's where it clicks. Close Claude Code completely. Open it again. Ask the sam
 
 It remembered. Not because it has a conversation history — because the knowledge lives in the vault, permanently. Next week, next month, it'll still know this.
 
+## How it works under the hood
+
+Your agent is an MCP tool server — it exposes tools that Claude Code can call. When you said "capture this pattern," Claude Code called the agent's `capture_knowledge` tool. When you searched, it called `search_intelligent`.
+
+The agent doesn't proactively surface knowledge on its own. Instead, Claude Code decides when to call the agent's search tools based on your conversation. When you ask about API errors, Claude Code recognizes this is relevant to your knowledge base and calls the search tool. The agent returns ranked results, and Claude Code uses them in its response.
+
+This is why the vault is powerful — it's not a passive document. It's a searchable, ranked knowledge store that Claude Code consults whenever your conversation touches a relevant topic.
+
 ## What just happened
 
 In 10 minutes, you:
