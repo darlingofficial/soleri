@@ -385,20 +385,18 @@ html {
   position: relative;
 }
 
-/* Header: constrained to same max-width, centered */
-@media (min-width: 50rem) {
-  header.header {
-    max-width: var(--docs-max-width, 1320px) !important;
-    left: 50% !important;
-    right: auto !important;
-    transform: translateX(-50%) !important;
-    width: 100% !important;
-  }
+/* Header: full viewport width (not constrained to container) */
 
-  /* Fixed sidebar: reposition to align with centered container */
+/* Fixed sidebar: reposition to align with centered container */
+@media (min-width: 50rem) {
   .sidebar-pane {
     left: max(0px, calc((100vw - var(--docs-max-width, 1320px)) / 2)) !important;
     width: var(--sl-sidebar-width) !important;
+  }
+
+  /* Widen content to fill available space (no TOC = no need for narrow column) */
+  .sl-container {
+    max-width: 100% !important;
   }
 }
 
