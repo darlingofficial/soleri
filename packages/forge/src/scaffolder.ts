@@ -98,7 +98,7 @@ export function previewScaffold(config: AgentConfig): ScaffoldPreview {
     {
       name: `${config.id}_core`,
       ops: [
-        // From createCoreOps() — 144 generic ops
+        // From createCoreOps() — 149 generic ops
         'search',
         'vault_stats',
         'list_all',
@@ -261,6 +261,9 @@ export function previewScaffold(config: AgentConfig): ScaffoldPreview {
         'memory_promote_to_global',
         'memory_configure',
         'memory_cross_project_search',
+        // Playbook ops — 2
+        'playbook_list',
+        'playbook_get',
         // Agent-specific ops — 5
         'health',
         'identity',

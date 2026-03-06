@@ -11,7 +11,7 @@ import type { AgentRuntime } from './types.js';
 
 const entrySchema = z.object({
   id: z.string(),
-  type: z.enum(['pattern', 'anti-pattern', 'rule']),
+  type: z.enum(['pattern', 'anti-pattern', 'rule', 'playbook']),
   domain: z.string(),
   title: z.string(),
   severity: z.enum(['critical', 'warning', 'suggestion']),
@@ -56,7 +56,7 @@ export function createVaultExtraOps(runtime: AgentRuntime): OpDefinition[] {
         tags: z.array(z.string()).optional(),
         appliesTo: z.array(z.string()).optional(),
         severity: z.enum(['critical', 'warning', 'suggestion']).optional(),
-        type: z.enum(['pattern', 'anti-pattern', 'rule']).optional(),
+        type: z.enum(['pattern', 'anti-pattern', 'rule', 'playbook']).optional(),
         domain: z.string().optional(),
       }),
       handler: async (params) => {

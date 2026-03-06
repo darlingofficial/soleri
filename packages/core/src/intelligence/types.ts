@@ -1,6 +1,6 @@
 export interface IntelligenceEntry {
   id: string;
-  type: 'pattern' | 'anti-pattern' | 'rule';
+  type: 'pattern' | 'anti-pattern' | 'rule' | 'playbook';
   domain: string;
   title: string;
   severity: 'critical' | 'warning' | 'suggestion';

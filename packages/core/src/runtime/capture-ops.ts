@@ -30,7 +30,15 @@ export function createCaptureOps(runtime: AgentRuntime): OpDefinition[] {
           z.object({
             id: z.string().optional(),
             type: z
-              .enum(['pattern', 'anti-pattern', 'rule', 'workflow', 'principle', 'reference'])
+              .enum([
+                'pattern',
+                'anti-pattern',
+                'rule',
+                'playbook',
+                'workflow',
+                'principle',
+                'reference',
+              ])
               .describe('Entry type'),
             domain: z.string(),
             title: z.string(),
@@ -66,7 +74,8 @@ export function createCaptureOps(runtime: AgentRuntime): OpDefinition[] {
         const results: Array<{ id: string; action: string; reason?: string }> = [];
 
         for (const entry of entries) {
-          const entryId = entry.id ?? `${entry.domain}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+          const entryId =
+            entry.id ?? `${entry.domain}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
           const mappedSeverity = mapSeverity(entry.severity);
           const mappedType = mapType(entry.type);
 
@@ -82,7 +91,7 @@ export function createCaptureOps(runtime: AgentRuntime): OpDefinition[] {
                 try {
                   brain.enrichAndCapture({
                     id: entryId,
-                    type: mappedType as 'pattern' | 'anti-pattern' | 'rule',
+                    type: mappedType as 'pattern' | 'anti-pattern' | 'rule' | 'playbook',
                     domain: entry.domain,
                     title: entry.title,
                     severity: mappedSeverity,
@@ -166,7 +175,15 @@ export function createCaptureOps(runtime: AgentRuntime): OpDefinition[] {
       schema: z.object({
         projectPath: z.string().optional().default('.'),
         type: z
-          .enum(['pattern', 'anti-pattern', 'rule', 'workflow', 'principle', 'reference'])
+          .enum([
+            'pattern',
+            'anti-pattern',
+            'rule',
+            'playbook',
+            'workflow',
+            'principle',
+            'reference',
+          ])
           .describe('Entry type'),
         domain: z.string(),
         title: z.string(),
@@ -197,7 +214,7 @@ export function createCaptureOps(runtime: AgentRuntime): OpDefinition[] {
               try {
                 brain.enrichAndCapture({
                   id,
-                  type: mappedType as 'pattern' | 'anti-pattern' | 'rule',
+                  type: mappedType as 'pattern' | 'anti-pattern' | 'rule' | 'playbook',
                   domain,
                   title,
                   severity: mapSeverity(mappedSeverity),
@@ -369,12 +386,14 @@ function mapSeverity(severity: string | undefined): 'critical' | 'warning' | 'su
  * Map extended type values to IntelligenceEntry-compatible types.
  * 'workflow', 'principle', 'reference' map to 'rule' (the closest existing type).
  */
-function mapType(type: string): 'pattern' | 'anti-pattern' | 'rule' {
+function mapType(type: string): 'pattern' | 'anti-pattern' | 'rule' | 'playbook' {
   switch (type) {
     case 'pattern':
       return 'pattern';
     case 'anti-pattern':
       return 'anti-pattern';
+    case 'playbook':
+      return 'playbook';
     case 'rule':
     case 'workflow':
     case 'principle':

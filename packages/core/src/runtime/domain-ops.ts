@@ -36,7 +36,7 @@ export function createDomainFacade(
       schema: z.object({
         tags: z.array(z.string()).optional(),
         severity: z.enum(['critical', 'warning', 'suggestion']).optional(),
-        type: z.enum(['pattern', 'anti-pattern', 'rule']).optional(),
+        type: z.enum(['pattern', 'anti-pattern', 'rule', 'playbook']).optional(),
         limit: z.number().optional(),
       }),
       handler: async (params) => {
@@ -83,7 +83,7 @@ export function createDomainFacade(
       auth: 'write',
       schema: z.object({
         id: z.string(),
-        type: z.enum(['pattern', 'anti-pattern', 'rule']),
+        type: z.enum(['pattern', 'anti-pattern', 'rule', 'playbook']),
         title: z.string(),
         severity: z.enum(['critical', 'warning', 'suggestion']),
         description: z.string(),

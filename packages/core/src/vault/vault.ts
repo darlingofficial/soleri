@@ -53,7 +53,7 @@ export class Vault {
     this.db.exec(`
       CREATE TABLE IF NOT EXISTS entries (
         id TEXT PRIMARY KEY,
-        type TEXT NOT NULL CHECK(type IN ('pattern', 'anti-pattern', 'rule')),
+        type TEXT NOT NULL CHECK(type IN ('pattern', 'anti-pattern', 'rule', 'playbook')),
         domain TEXT NOT NULL,
         title TEXT NOT NULL,
         severity TEXT NOT NULL CHECK(severity IN ('critical', 'warning', 'suggestion')),
@@ -409,9 +409,9 @@ export class Vault {
    * Export the entire vault as a JSON-serializable bundle.
    */
   exportAll(): { entries: IntelligenceEntry[]; exportedAt: number; count: number } {
-    const rows = this.db
-      .prepare('SELECT * FROM entries ORDER BY domain, title')
-      .all() as Array<Record<string, unknown>>;
+    const rows = this.db.prepare('SELECT * FROM entries ORDER BY domain, title').all() as Array<
+      Record<string, unknown>
+    >;
     const entries = rows.map(rowToEntry);
     return { entries, exportedAt: Math.floor(Date.now() / 1000), count: entries.length };
   }
@@ -425,9 +425,10 @@ export class Vault {
     oldestTimestamp: number | null;
     newestTimestamp: number | null;
   } {
-    const rows = this.db
-      .prepare('SELECT created_at, updated_at FROM entries')
-      .all() as Array<{ created_at: number; updated_at: number }>;
+    const rows = this.db.prepare('SELECT created_at, updated_at FROM entries').all() as Array<{
+      created_at: number;
+      updated_at: number;
+    }>;
     const now = Math.floor(Date.now() / 1000);
     const bucketDefs = [
       { label: 'today', minDays: 0, maxDays: 1 },
@@ -603,7 +604,6 @@ export class Vault {
     return row ? rowToMemory(row) : null;
   }
 
-
   deleteMemory(id: string): boolean {
     return this.db.prepare('DELETE FROM memories WHERE id = ?').run(id).changes > 0;
   }
@@ -631,13 +631,17 @@ export class Vault {
 
     const total = (
       this.db
-        .prepare(`SELECT COUNT(*) as count FROM memories ${wc}${wc ? ' AND' : ' WHERE'} archived_at IS NULL`)
+        .prepare(
+          `SELECT COUNT(*) as count FROM memories ${wc}${wc ? ' AND' : ' WHERE'} archived_at IS NULL`,
+        )
         .get(params) as { count: number }
     ).count;
 
     const archivedCount = (
       this.db
-        .prepare(`SELECT COUNT(*) as count FROM memories ${wc}${wc ? ' AND' : ' WHERE'} archived_at IS NOT NULL`)
+        .prepare(
+          `SELECT COUNT(*) as count FROM memories ${wc}${wc ? ' AND' : ' WHERE'} archived_at IS NOT NULL`,
+        )
         .get(params) as { count: number }
     ).count;
 

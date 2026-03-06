@@ -5,6 +5,8 @@ export { loadIntelligenceData } from './intelligence/loader.js';
 // ─── Vault ───────────────────────────────────────────────────────────
 export { Vault } from './vault/vault.js';
 export type { SearchResult, VaultStats, ProjectInfo, Memory, MemoryStats } from './vault/vault.js';
+export { validatePlaybook, parsePlaybookFromEntry } from './vault/playbook.js';
+export type { Playbook, PlaybookStep, PlaybookValidationResult } from './vault/playbook.js';
 
 // ─── Text Utilities ─────────────────────────────────────────────────
 export {
@@ -129,13 +131,7 @@ export type { GapSeverity, GapCategory, PlanGap } from './planning/gap-types.js'
 
 // ─── Loop ────────────────────────────────────────────────────────────
 export { LoopManager } from './loop/loop-manager.js';
-export type {
-  LoopMode,
-  LoopConfig,
-  LoopIteration,
-  LoopStatus,
-  LoopState,
-} from './loop/types.js';
+export type { LoopMode, LoopConfig, LoopIteration, LoopStatus, LoopState } from './loop/types.js';
 
 // ─── LLM Types ───────────────────────────────────────────────────────
 export { SecretString, LLMError } from './llm/types.js';

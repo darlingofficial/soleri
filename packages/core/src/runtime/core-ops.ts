@@ -25,13 +25,15 @@ import { createCaptureOps } from './capture-ops.js';
 import { createCuratorExtraOps } from './curator-extra-ops.js';
 import { createProjectOps } from './project-ops.js';
 import { createMemoryCrossProjectOps } from './memory-cross-project-ops.js';
+import { parsePlaybookFromEntry } from '../vault/playbook.js';
 
 /**
- * Create the 147 generic core operations for an agent runtime.
+ * Create the 149 generic core operations for an agent runtime.
  *
  * Groups: search/vault (4), memory (4), export (1), planning (5),
  *         brain (7), brain intelligence (11), cognee (5),
  *         llm (2), curator (8), control (8), governance (5),
+ *         playbook (2),
  *         planning-extra (9), memory-extra (8), vault-extra (12),
  *         admin (8), admin-extra (10), loop (7), orchestrate (5),
  *         grading (5), capture (4), curator-extra (4), project (12).
@@ -61,7 +63,7 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
       schema: z.object({
         query: z.string(),
         domain: z.string().optional(),
-        type: z.enum(['pattern', 'anti-pattern', 'rule']).optional(),
+        type: z.enum(['pattern', 'anti-pattern', 'rule', 'playbook']).optional(),
         severity: z.enum(['critical', 'warning', 'suggestion']).optional(),
         tags: z.array(z.string()).optional(),
         limit: z.number().optional(),
@@ -88,7 +90,7 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
       auth: 'read',
       schema: z.object({
         domain: z.string().optional(),
-        type: z.enum(['pattern', 'anti-pattern', 'rule']).optional(),
+        type: z.enum(['pattern', 'anti-pattern', 'rule', 'playbook']).optional(),
         severity: z.enum(['critical', 'warning', 'suggestion']).optional(),
         tags: z.array(z.string()).optional(),
         limit: z.number().optional(),
@@ -1173,6 +1175,40 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
       }),
       handler: async (params) => {
         return governance.getDashboard(params.projectPath as string);
+      },
+    },
+
+    // ─── Playbook ────────────────────────────────────────────────────
+    {
+      name: 'playbook_list',
+      description: 'List playbooks stored in the vault, optionally filtered by domain.',
+      auth: 'read',
+      schema: z.object({
+        domain: z.string().optional(),
+        limit: z.number().optional(),
+      }),
+      handler: async (params) => {
+        const entries = vault.list({
+          type: 'playbook',
+          domain: params.domain as string | undefined,
+          limit: (params.limit as number) ?? 50,
+        });
+        const playbooks = entries.map((e) => parsePlaybookFromEntry(e)).filter((p) => p !== null);
+        return { playbooks, count: playbooks.length };
+      },
+    },
+    {
+      name: 'playbook_get',
+      description: 'Get a single playbook by ID, parsed into structured steps.',
+      auth: 'read',
+      schema: z.object({ id: z.string() }),
+      handler: async (params) => {
+        const entry = vault.get(params.id as string);
+        if (!entry) return { error: 'Playbook not found: ' + params.id };
+        if (entry.type !== 'playbook') return { error: 'Entry is not a playbook: ' + params.id };
+        const playbook = parsePlaybookFromEntry(entry);
+        if (!playbook) return { error: 'Failed to parse playbook context: ' + params.id };
+        return playbook;
       },
     },
 
