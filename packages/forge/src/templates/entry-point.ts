@@ -22,6 +22,7 @@ import {
   createCoreOps,
   createDomainFacades,
   registerAllFacades,
+  seedDefaultPlaybooks,
 } from '@soleri/core';
 import type { OpDefinition } from '@soleri/core';
 import { z } from 'zod';
@@ -39,6 +40,13 @@ async function main(): Promise<void> {
   });
 
   const tag = PERSONA.name.toLowerCase();
+
+  // Seed built-in playbooks (idempotent)
+  const seedResult = seedDefaultPlaybooks(runtime.vault);
+  if (seedResult.seeded > 0) {
+    console.error(\`[\${tag}] Seeded \${seedResult.seeded} built-in playbooks\`);
+  }
+
   const stats = runtime.vault.stats();
   console.error(\`[\${tag}] Vault: \${stats.totalEntries} entries, Brain: \${runtime.brain.getVocabularySize()} terms\`);
 

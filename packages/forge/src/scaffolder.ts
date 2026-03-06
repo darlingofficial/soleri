@@ -261,10 +261,12 @@ export function previewScaffold(config: AgentConfig): ScaffoldPreview {
         'memory_promote_to_global',
         'memory_configure',
         'memory_cross_project_search',
-        // Playbook ops — 3
+        // Playbook ops — 5
         'playbook_list',
         'playbook_get',
         'playbook_create',
+        'playbook_match',
+        'playbook_seed',
         // Agent-specific ops — 5
         'health',
         'identity',

@@ -280,3 +280,110 @@ describe('playbook_create op', () => {
     expect(result.id).toBe('my-custom-id');
   });
 });
+
+describe('playbook_match op', () => {
+  let runtime: AgentRuntime;
+  let ops: OpDefinition[];
+  let plannerDir: string;
+
+  function findOp(name: string): OpDefinition {
+    const op = ops.find((o) => o.name === name);
+    if (!op) throw new Error(`Op "${name}" not found`);
+    return op;
+  }
+
+  beforeEach(() => {
+    plannerDir = join(tmpdir(), 'playbook-match-test-' + Date.now());
+    mkdirSync(plannerDir, { recursive: true });
+    runtime = createAgentRuntime({
+      agentId: 'test',
+      vaultPath: ':memory:',
+      plansPath: join(plannerDir, 'plans.json'),
+    });
+    ops = createCoreOps(runtime);
+  });
+
+  afterEach(() => {
+    runtime.close();
+    rmSync(plannerDir, { recursive: true, force: true });
+  });
+
+  it('should match TDD playbook for BUILD intent', async () => {
+    const result = (await findOp('playbook_match').handler({
+      intent: 'BUILD',
+      text: 'implement a new feature',
+    })) as { playbook: { label: string } | null; genericMatch?: { id: string } };
+
+    expect(result.playbook).not.toBeNull();
+    expect(result.genericMatch?.id).toBe('generic-tdd');
+  });
+
+  it('should match debugging playbook for FIX intent', async () => {
+    const result = (await findOp('playbook_match').handler({
+      intent: 'FIX',
+      text: 'fix the broken bug',
+    })) as { playbook: { label: string } | null; genericMatch?: { id: string } };
+
+    expect(result.playbook).not.toBeNull();
+    expect(result.genericMatch?.id).toBe('generic-systematic-debugging');
+  });
+
+  it('should return null playbook for unrelated text', async () => {
+    const result = (await findOp('playbook_match').handler({
+      text: 'random unrelated xyz',
+    })) as { playbook: null };
+
+    expect(result.playbook).toBeNull();
+  });
+});
+
+describe('playbook_seed op', () => {
+  let runtime: AgentRuntime;
+  let ops: OpDefinition[];
+  let plannerDir: string;
+
+  function findOp(name: string): OpDefinition {
+    const op = ops.find((o) => o.name === name);
+    if (!op) throw new Error(`Op "${name}" not found`);
+    return op;
+  }
+
+  beforeEach(() => {
+    plannerDir = join(tmpdir(), 'playbook-seed-test-' + Date.now());
+    mkdirSync(plannerDir, { recursive: true });
+    runtime = createAgentRuntime({
+      agentId: 'test',
+      vaultPath: ':memory:',
+      plansPath: join(plannerDir, 'plans.json'),
+    });
+    ops = createCoreOps(runtime);
+  });
+
+  afterEach(() => {
+    runtime.close();
+    rmSync(plannerDir, { recursive: true, force: true });
+  });
+
+  it('should seed built-in playbooks', async () => {
+    const result = (await findOp('playbook_seed').handler({})) as {
+      seeded: number;
+      skipped: number;
+      errors: number;
+    };
+
+    expect(result.seeded).toBe(6);
+    expect(result.skipped).toBe(0);
+    expect(result.errors).toBe(0);
+  });
+
+  it('should be idempotent', async () => {
+    await findOp('playbook_seed').handler({});
+    const result = (await findOp('playbook_seed').handler({})) as {
+      seeded: number;
+      skipped: number;
+    };
+
+    expect(result.seeded).toBe(0);
+    expect(result.skipped).toBe(6);
+  });
+});

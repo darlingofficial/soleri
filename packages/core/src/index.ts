@@ -8,6 +8,29 @@ export type { SearchResult, VaultStats, ProjectInfo, Memory, MemoryStats } from 
 export { validatePlaybook, parsePlaybookFromEntry } from './vault/playbook.js';
 export type { Playbook, PlaybookStep, PlaybookValidationResult } from './vault/playbook.js';
 
+// ─── Playbook System (registry, matching, seeding) ─────────────────
+export {
+  getBuiltinPlaybook,
+  getAllBuiltinPlaybooks,
+  scorePlaybook,
+  mergePlaybooks,
+  matchPlaybooks,
+  seedDefaultPlaybooks,
+  playbookDefinitionToEntry,
+  entryToPlaybookDefinition,
+} from './playbooks/index.js';
+export type {
+  PlaybookTier,
+  PlaybookIntent,
+  BrainstormSection,
+  PlaybookGate,
+  PlaybookTaskTemplate,
+  PlaybookDefinition,
+  MergedPlaybook,
+  PlaybookMatchResult,
+} from './playbooks/index.js';
+export { createPlaybookOps } from './runtime/playbook-ops.js';
+
 // ─── Text Utilities ─────────────────────────────────────────────────
 export {
   tokenize,

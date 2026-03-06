@@ -1,5 +1,5 @@
 /**
- * Generic core operations factory — 147 ops that every agent gets.
+ * Generic core operations factory — 152 ops that every agent gets.
  *
  * These ops are agent-agnostic (no persona, no activation).
  * The 5 agent-specific ops (health, identity, activate, inject_claude_md, setup)
@@ -25,15 +25,15 @@ import { createCaptureOps } from './capture-ops.js';
 import { createCuratorExtraOps } from './curator-extra-ops.js';
 import { createProjectOps } from './project-ops.js';
 import { createMemoryCrossProjectOps } from './memory-cross-project-ops.js';
-import { parsePlaybookFromEntry, validatePlaybook } from '../vault/playbook.js';
+import { createPlaybookOps } from './playbook-ops.js';
 
 /**
- * Create the 150 generic core operations for an agent runtime.
+ * Create the 152 generic core operations for an agent runtime.
  *
  * Groups: search/vault (4), memory (4), export (1), planning (5),
  *         brain (7), brain intelligence (11), cognee (5),
  *         llm (2), curator (8), control (8), governance (5),
- *         playbook (3),
+ *         playbook (5),
  *         planning-extra (9), memory-extra (8), vault-extra (12),
  *         admin (8), admin-extra (10), loop (7), orchestrate (5),
  *         grading (5), capture (4), curator-extra (4), project (12).
@@ -1178,105 +1178,8 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
       },
     },
 
-    // ─── Playbook ────────────────────────────────────────────────────
-    {
-      name: 'playbook_list',
-      description: 'List playbooks stored in the vault, optionally filtered by domain.',
-      auth: 'read',
-      schema: z.object({
-        domain: z.string().optional(),
-        limit: z.number().optional(),
-      }),
-      handler: async (params) => {
-        const entries = vault.list({
-          type: 'playbook',
-          domain: params.domain as string | undefined,
-          limit: (params.limit as number) ?? 50,
-        });
-        const playbooks = entries.map((e) => parsePlaybookFromEntry(e)).filter((p) => p !== null);
-        return { playbooks, count: playbooks.length };
-      },
-    },
-    {
-      name: 'playbook_get',
-      description: 'Get a single playbook by ID, parsed into structured steps.',
-      auth: 'read',
-      schema: z.object({ id: z.string() }),
-      handler: async (params) => {
-        const entry = vault.get(params.id as string);
-        if (!entry) return { error: 'Playbook not found: ' + params.id };
-        if (entry.type !== 'playbook') return { error: 'Entry is not a playbook: ' + params.id };
-        const playbook = parsePlaybookFromEntry(entry);
-        if (!playbook) return { error: 'Failed to parse playbook context: ' + params.id };
-        return playbook;
-      },
-    },
-    {
-      name: 'playbook_create',
-      description:
-        'Create a playbook with structured steps. Validates step ordering and builds vault entry automatically.',
-      auth: 'write',
-      schema: z.object({
-        id: z.string().optional(),
-        title: z.string(),
-        domain: z.string(),
-        description: z.string(),
-        steps: z.array(
-          z.object({
-            title: z.string(),
-            description: z.string(),
-            validation: z.string().optional(),
-          }),
-        ),
-        tags: z.array(z.string()).optional().default([]),
-        severity: z.enum(['critical', 'warning', 'suggestion']).optional().default('suggestion'),
-      }),
-      handler: async (params) => {
-        const title = params.title as string;
-        const domain = params.domain as string;
-        const rawSteps = params.steps as Array<{
-          title: string;
-          description: string;
-          validation?: string;
-        }>;
-
-        // Auto-assign sequential order numbers
-        const steps = rawSteps.map((s, i) => ({ ...s, order: i + 1 }));
-        const id =
-          (params.id as string | undefined) ??
-          `playbook-${domain}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-
-        const playbook = {
-          id,
-          title,
-          domain,
-          description: params.description as string,
-          steps,
-          tags: params.tags as string[],
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
-        };
-
-        const validation = validatePlaybook(playbook);
-        if (!validation.valid) {
-          return { created: false, id, errors: validation.errors };
-        }
-
-        vault.add({
-          id,
-          type: 'playbook',
-          domain,
-          title,
-          severity:
-            (params.severity as 'critical' | 'warning' | 'suggestion' | undefined) ?? 'suggestion',
-          description: params.description as string,
-          context: JSON.stringify({ steps }),
-          tags: params.tags as string[],
-        });
-
-        return { created: true, id, steps: steps.length };
-      },
-    },
+    // ─── Playbook ops (from dedicated module) ─────────────────────────
+    ...createPlaybookOps(runtime),
 
     // ─── Extra Ops (from dedicated modules) ─────────────────────────
     ...createPlanningExtraOps(runtime),

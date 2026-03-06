@@ -103,6 +103,12 @@ export interface Plan {
   latestCheck?: PlanCheck;
   /** All check history. */
   checks: PlanCheck[];
+  /** Matched playbook info (set by orchestration layer via playbook_match). */
+  playbookMatch?: {
+    label: string;
+    genericId?: string;
+    domainId?: string;
+  };
   createdAt: number;
   updatedAt: number;
 }
@@ -357,7 +363,8 @@ export class Planner {
     const driftItems = report.driftItems ?? [];
     const totalTasks = plan.tasks.length;
     const driftCount = driftItems.length;
-    const accuracy = totalTasks > 0 ? Math.round(((totalTasks - driftCount) / totalTasks) * 100) : 100;
+    const accuracy =
+      totalTasks > 0 ? Math.round(((totalTasks - driftCount) / totalTasks) * 100) : 100;
 
     plan.reconciliation = {
       planId,
@@ -466,7 +473,12 @@ export class Planner {
     tasksByStatus: Record<TaskStatus, number>;
   } {
     const plans = this.store.plans;
-    const byStatus: Record<PlanStatus, number> = { draft: 0, approved: 0, executing: 0, completed: 0 };
+    const byStatus: Record<PlanStatus, number> = {
+      draft: 0,
+      approved: 0,
+      executing: 0,
+      completed: 0,
+    };
     const tasksByStatus: Record<TaskStatus, number> = {
       pending: 0,
       in_progress: 0,
@@ -590,12 +602,18 @@ export class Planner {
 
   private gradeToMinScore(grade: PlanGrade): number {
     switch (grade) {
-      case 'A+': return 95;
-      case 'A': return 90;
-      case 'B': return 80;
-      case 'C': return 70;
-      case 'D': return 60;
-      case 'F': return 0;
+      case 'A+':
+        return 95;
+      case 'A':
+        return 90;
+      case 'B':
+        return 80;
+      case 'C':
+        return 70;
+      case 'D':
+        return 60;
+      case 'F':
+        return 0;
     }
   }
 

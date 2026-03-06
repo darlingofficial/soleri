@@ -329,12 +329,14 @@ ${domainDescribes}
       expect(opNames).toContain('memory_promote_to_global');
       expect(opNames).toContain('memory_configure');
       expect(opNames).toContain('memory_cross_project_search');
-      // Playbook ops (3)
+      // Playbook ops (5)
       expect(opNames).toContain('playbook_list');
       expect(opNames).toContain('playbook_get');
       expect(opNames).toContain('playbook_create');
-      // Total: 155 (150 core + 5 agent-specific)
-      expect(facade.ops.length).toBe(155);
+      expect(opNames).toContain('playbook_match');
+      expect(opNames).toContain('playbook_seed');
+      // Total: 157 (152 core + 5 agent-specific)
+      expect(facade.ops.length).toBe(157);
     });
 
     it('search should query across all domains with ranked results', async () => {
