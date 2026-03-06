@@ -23,7 +23,7 @@ const brandHref = isRoot ? 'en/' : 'index.html';
   </div>
   <nav class="nav-links" aria-label="Main navigation">
     {navLinks.map(link => (
-      <a href={isRoot ? link.href.slice(1) : link.href.split('/').pop()}>{link.label}</a>
+      <a href={link.href.startsWith('/docs') ? link.href : (isRoot ? link.href.slice(1) : link.href.split('/').pop())}>{link.label}</a>
     ))}
   </nav>
   <div class="nav-actions">
