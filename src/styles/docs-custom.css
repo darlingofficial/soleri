@@ -678,21 +678,8 @@ nav.sidebar summary svg {
 }
 
 /* ============================================
- * TABLE OF CONTENTS — hidden on desktop,
- * content gets full width (2-column layout)
+ * TABLE OF CONTENTS — right sidebar
  * ============================================ */
-
-/* Hide the right sidebar column on desktop — TOC stays as mobile dropdown */
-@media (min-width: 72rem) {
-  .right-sidebar-container {
-    display: none !important;
-  }
-
-  /* Content takes full width when TOC column is hidden */
-  [data-has-sidebar][data-has-toc] .main-pane {
-    width: 100% !important;
-  }
-}
 
 starlight-toc a {
   font-size: 13px;
