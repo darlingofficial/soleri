@@ -14,9 +14,7 @@ const content: Record<Locale, GettingStartedContent> = {
       {
         title: 'Install',
         text: "One global npm package. That's it.",
-        code: `<span class="prompt">$</span>
-                <span class="cmd">npm install</span>
-                <span class="arg">-g soleri</span>`,
+        code: `<span class="prompt">$</span> <span class="cmd">npm install</span> <span class="arg">-g soleri</span>`,
         isInstallCmd: true,
       },
       {
@@ -112,9 +110,7 @@ const content: Record<Locale, GettingStartedContent> = {
       {
         title: 'Встановіть',
         text: 'Один глобальний пакет npm. І все.',
-        code: `<span class="prompt">$</span>
-                <span class="cmd">npm install</span>
-                <span class="arg">-g soleri</span>`,
+        code: `<span class="prompt">$</span> <span class="cmd">npm install</span> <span class="arg">-g soleri</span>`,
         isInstallCmd: true,
       },
       {
@@ -211,9 +207,7 @@ const content: Record<Locale, GettingStartedContent> = {
       {
         title: 'Installa',
         text: 'Un solo pacchetto global npm. Tutto qui.',
-        code: `<span class="prompt">$</span>
-                <span class="cmd">npm install</span>
-                <span class="arg">-g soleri</span>`,
+        code: `<span class="prompt">$</span> <span class="cmd">npm install</span> <span class="arg">-g soleri</span>`,
         isInstallCmd: true,
       },
       {

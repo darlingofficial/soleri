@@ -53,6 +53,7 @@
   align-items: center;
   gap: 10px;
   padding: 12px 20px;
+  padding-right: 48px;
   border-radius: var(--radius-md);
   background: var(--code-bg);
   color: var(--code-fg);
@@ -60,7 +61,6 @@
   font-size: 14px;
   font-weight: 500;
   border: 1px solid var(--neutral-700-60);
-  margin-bottom: 12px;
   max-width: 100%;
   overflow-x: auto;
 }
@@ -75,6 +75,64 @@
 
 .install-cmd .arg {
   color: var(--color-primary-300);
+}
+
+/* Code block wrapper with copy button */
+.code-block {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.code-block .feature-code {
+  padding-right: 48px;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.code-block:hover .copy-btn {
+  opacity: 1;
+}
+
+.copy-btn:hover {
+  color: var(--foreground-strong);
+  border-color: var(--accent-teal);
+}
+
+.copy-btn .check-icon {
+  display: none;
+}
+
+.copy-btn.copied .copy-icon {
+  display: none;
+}
+
+.copy-btn.copied .check-icon {
+  display: block;
+  color: var(--color-tertiary-400);
+}
+
+.copy-btn.copied {
+  opacity: 1;
+  border-color: var(--color-tertiary-400);
 }
 
 .next-links {
