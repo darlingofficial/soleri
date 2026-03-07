@@ -22,6 +22,8 @@ import { IntentRouter } from '../control/intent-router.js';
 import { KeyPool, loadKeyPoolConfig } from '../llm/key-pool.js';
 import { loadIntelligenceData } from '../intelligence/loader.js';
 import { LLMClient } from '../llm/llm-client.js';
+import { CogneeSyncManager } from '../cognee/sync-manager.js';
+import { IntakePipeline } from '../intake/intake-pipeline.js';
 import { Telemetry } from '../telemetry/telemetry.js';
 import { ProjectRegistry } from '../project/project-registry.js';
 import { TemplateManager } from '../prompts/template-manager.js';
@@ -107,6 +109,17 @@ export function createAgentRuntime(config: AgentRuntimeConfig): AgentRuntime {
   const anthropicKeyPool = new KeyPool(keyPoolFiles.anthropic);
   const llmClient = new LLMClient(openaiKeyPool, anthropicKeyPool, agentId);
 
+  // Cognee Sync Manager — queue-based dirty tracking with offline resilience
+  const syncManager = new CogneeSyncManager(
+    vault.getProvider(),
+    cognee,
+    cogneePartial.dataset ?? agentId,
+  );
+  vault.setSyncManager(syncManager);
+
+  // Intake Pipeline — PDF/book ingestion with LLM classification
+  const intakePipeline = new IntakePipeline(vault.getProvider(), vault, llmClient);
+
   return {
     config,
     logger,
@@ -125,8 +138,11 @@ export function createAgentRuntime(config: AgentRuntimeConfig): AgentRuntime {
     telemetry,
     projectRegistry,
     templateManager,
+    syncManager,
+    intakePipeline,
     createdAt: Date.now(),
     close: () => {
+      syncManager.close();
       cognee.resetPendingCognify();
       vault.close();
     },

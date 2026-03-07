@@ -254,6 +254,24 @@ export class CogneeClient {
     return this.healthCache?.status ?? null;
   }
 
+  // ─── Delete ──────────────────────────────────────────────────────
+
+  async deleteEntries(entryIds: string[]): Promise<{ deleted: number }> {
+    if (!this.isAvailable || entryIds.length === 0) return { deleted: 0 };
+
+    try {
+      const res = await this.post('/api/v1/delete', {
+        datasetName: this.config.dataset,
+        entryIds,
+      });
+
+      if (!res.ok) return { deleted: 0 };
+      return { deleted: entryIds.length };
+    } catch {
+      return { deleted: 0 };
+    }
+  }
+
   // ─── Auth ──────────────────────────────────────────────────────
   // Auto-register + login pattern from Salvador MCP.
   // Tries login first (account may already exist), falls back to register.

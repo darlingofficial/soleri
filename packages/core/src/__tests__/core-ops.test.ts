@@ -34,8 +34,8 @@ describe('createCoreOps', () => {
     return op;
   }
 
-  it('should return 196 ops', () => {
-    expect(ops.length).toBe(196);
+  it('should return 203 ops', () => {
+    expect(ops.length).toBe(203);
   });
 
   it('should have all expected op names', () => {
@@ -223,6 +223,15 @@ describe('createCoreOps', () => {
     // Prompt templates
     expect(names).toContain('render_prompt');
     expect(names).toContain('list_templates');
+    // Cognee Sync ops
+    expect(names).toContain('cognee_sync_status');
+    expect(names).toContain('cognee_sync_drain');
+    expect(names).toContain('cognee_sync_reconcile');
+    // Intake ops
+    expect(names).toContain('intake_ingest_book');
+    expect(names).toContain('intake_process');
+    expect(names).toContain('intake_status');
+    expect(names).toContain('intake_preview');
   });
 
   it('register should include governance summary', async () => {

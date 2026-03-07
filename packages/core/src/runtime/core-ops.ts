@@ -26,9 +26,11 @@ import { createCuratorExtraOps } from './curator-extra-ops.js';
 import { createProjectOps } from './project-ops.js';
 import { createMemoryCrossProjectOps } from './memory-cross-project-ops.js';
 import { createPlaybookOps } from './playbook-ops.js';
+import { createCogneeSyncOps } from './cognee-sync-ops.js';
+import { createIntakeOps } from './intake-ops.js';
 
 /**
- * Create the 196 generic core operations for an agent runtime.
+ * Create the 203 generic core operations for an agent runtime.
  *
  * Groups: search/vault (4), memory (4), export (1), planning (5),
  *         brain (8), brain intelligence (11), cognee (5),
@@ -36,7 +38,8 @@ import { createPlaybookOps } from './playbook-ops.js';
  *         playbook (5), prompt templates (2),
  *         planning-extra (22), memory-extra (8), vault-extra (20),
  *         admin (8), admin-extra (23), loop (9), orchestrate (5),
- *         grading (5), capture (4), curator-extra (5), project (12).
+ *         grading (5), capture (4), curator-extra (5), project (12),
+ *         cognee-sync (3), intake (4).
  */
 export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
   const {
@@ -51,6 +54,8 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
     intentRouter,
     llmClient,
     keyPool,
+    syncManager,
+    intakePipeline,
   } = runtime;
 
   return [
@@ -1399,6 +1404,12 @@ export function createCoreOps(runtime: AgentRuntime): OpDefinition[] {
     ...createCuratorExtraOps(runtime),
     ...createProjectOps(runtime),
     ...createMemoryCrossProjectOps(runtime),
+
+    // ─── Cognee Sync ──────────────────────────────────────────────
+    ...createCogneeSyncOps(syncManager),
+
+    // ─── Intake Pipeline ──────────────────────────────────────────
+    ...createIntakeOps(intakePipeline),
 
     // ─── Prompt Templates ─────────────────────────────────────────
     {

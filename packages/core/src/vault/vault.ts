@@ -40,6 +40,7 @@ export interface MemoryStats {
 export class Vault {
   private provider: PersistenceProvider;
   private sqliteProvider: SQLitePersistenceProvider | null;
+  private syncManager: import('../cognee/sync-manager.js').CogneeSyncManager | null = null;
 
   /**
    * Create a Vault with a PersistenceProvider or a SQLite path (backward compat).
@@ -58,6 +59,10 @@ export class Vault {
         providerOrPath instanceof SQLitePersistenceProvider ? providerOrPath : null;
     }
     this.initialize();
+  }
+
+  setSyncManager(mgr: import('../cognee/sync-manager.js').CogneeSyncManager): void {
+    this.syncManager = mgr;
   }
 
   /** Backward-compatible factory. */
@@ -234,6 +239,9 @@ export class Vault {
           validUntil: entry.validUntil ?? null,
         });
         count++;
+        if (this.syncManager) {
+          this.syncManager.enqueue('ingest', entry.id, entry);
+        }
       }
       return count;
     });
@@ -349,7 +357,11 @@ export class Vault {
     this.seed([entry]);
   }
   remove(id: string): boolean {
-    return this.provider.run('DELETE FROM entries WHERE id = ?', [id]).changes > 0;
+    const deleted = this.provider.run('DELETE FROM entries WHERE id = ?', [id]).changes > 0;
+    if (deleted && this.syncManager) {
+      this.syncManager.enqueue('delete', id);
+    }
+    return deleted;
   }
 
   update(
@@ -422,6 +434,9 @@ export class Vault {
       let count = 0;
       for (const id of ids) {
         count += this.provider.run('DELETE FROM entries WHERE id = ?', [id]).changes;
+        if (this.syncManager) {
+          this.syncManager.enqueue('delete', id);
+        }
       }
       return count;
     });

@@ -349,8 +349,17 @@ ${domainDescribes}
       expect(opNames).toContain('playbook_create');
       expect(opNames).toContain('playbook_match');
       expect(opNames).toContain('playbook_seed');
-      // Total: 201 (196 core + 5 agent-specific)
-      expect(facade.ops.length).toBe(201);
+      // Cognee Sync ops (3)
+      expect(opNames).toContain('cognee_sync_status');
+      expect(opNames).toContain('cognee_sync_drain');
+      expect(opNames).toContain('cognee_sync_reconcile');
+      // Intake ops (4)
+      expect(opNames).toContain('intake_ingest_book');
+      expect(opNames).toContain('intake_process');
+      expect(opNames).toContain('intake_status');
+      expect(opNames).toContain('intake_preview');
+      // Total: 208 (203 core + 5 agent-specific)
+      expect(facade.ops.length).toBe(208);
     });
 
     it('search should query across all domains with ranked results', async () => {

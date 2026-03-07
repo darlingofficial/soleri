@@ -270,6 +270,15 @@ export function previewScaffold(config: AgentConfig): ScaffoldPreview {
         'cognee_get_node',
         'cognee_graph_stats',
         'cognee_export_status',
+        // Cognee Sync ops — 3
+        'cognee_sync_status',
+        'cognee_sync_drain',
+        'cognee_sync_reconcile',
+        // Intake ops — 4
+        'intake_ingest_book',
+        'intake_process',
+        'intake_status',
+        'intake_preview',
         // Admin Extra ops — 23
         'admin_telemetry',
         'admin_telemetry_recent',

@@ -13,6 +13,8 @@ import type { LoopManager } from '../loop/loop-manager.js';
 import type { Telemetry } from '../telemetry/telemetry.js';
 import type { ProjectRegistry } from '../project/project-registry.js';
 import type { TemplateManager } from '../prompts/template-manager.js';
+import type { CogneeSyncManager } from '../cognee/sync-manager.js';
+import type { IntakePipeline } from '../intake/intake-pipeline.js';
 import type { Logger } from '../logging/logger.js';
 import type { LogLevel } from '../logging/types.js';
 
@@ -57,6 +59,8 @@ export interface AgentRuntime {
   telemetry: Telemetry;
   projectRegistry: ProjectRegistry;
   templateManager: TemplateManager;
+  syncManager: CogneeSyncManager;
+  intakePipeline: IntakePipeline;
   /** Timestamp (ms since epoch) when this runtime was created. */
   createdAt: number;
   /** Close the vault database connection. Call on shutdown. */

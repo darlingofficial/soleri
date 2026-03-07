@@ -124,6 +124,26 @@ export type {
   CogneeCognifyResult,
 } from './cognee/types.js';
 
+// ─── Cognee Sync ──────────────────────────────────────────────────────
+export { CogneeSyncManager } from './cognee/sync-manager.js';
+export type { SyncOp, SyncStatus, SyncQueueItem, SyncManagerStats } from './cognee/sync-manager.js';
+
+// ─── Intake Pipeline ──────────────────────────────────────────────────
+export { IntakePipeline } from './intake/intake-pipeline.js';
+export { classifyChunk, VALID_TYPES, CLASSIFICATION_PROMPT } from './intake/content-classifier.js';
+export { dedupItems, DEDUP_THRESHOLD } from './intake/dedup-gate.js';
+export type {
+  IntakeConfig,
+  IntakeChunk,
+  IntakeJobRecord,
+  IntakeJobStatus,
+  IntakeChunkStatus,
+  KnowledgeType,
+  ClassifiedItem,
+  IntakePreviewResult,
+} from './intake/types.js';
+export type { DedupResult } from './intake/dedup-gate.js';
+
 // ─── Planning ────────────────────────────────────────────────────────
 export {
   Planner,
@@ -279,6 +299,8 @@ export { createCaptureOps } from './runtime/capture-ops.js';
 export { createCuratorExtraOps } from './runtime/curator-extra-ops.js';
 export { createProjectOps } from './runtime/project-ops.js';
 export { createMemoryCrossProjectOps } from './runtime/memory-cross-project-ops.js';
+export { createCogneeSyncOps } from './runtime/cognee-sync-ops.js';
+export { createIntakeOps } from './runtime/intake-ops.js';
 export type { AgentRuntimeConfig, AgentRuntime } from './runtime/types.js';
 
 // ─── Errors ────────────────────────────────────────────────────────────

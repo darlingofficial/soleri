@@ -58,7 +58,9 @@
     "dedup",
     "vitest",
     "wcag",
-    "windsurfrules"
+    "windsurfrules",
+    "numpages",
+    "zeroblob"
   ],
   "dictionaries": ["typescript", "node", "npm", "softwareTerms"],
   "files": [
